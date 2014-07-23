@@ -69,8 +69,12 @@ class Principal extends CI_Controller {
 		// mapa
 		$data['estados'] 	= $this->defaultdata_model->getEstados();
 		$data['paises'] 	= $this->defaultdata_model->getPaises();
-		
-        
+
+        //paquetes
+		$data['paquetes'] = $this->defaultdata_model->getPaquetes();
+
+        //razas
+        $data['razas'] = $this->defaultdata_model->getRazas();
 		$this->load->view('index_view', $data);
 
 	}

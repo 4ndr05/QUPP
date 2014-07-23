@@ -66,6 +66,19 @@ class Defaultdata_model extends CI_Model {
         return $query -> result();
 
     }
+
+    function getPaquetes() {
+        $this->db->from('paquete p');
+        $this->db->join('detallepaquete dp', 'p.paqueteID=dp.paqueteID');
+
+        $resultSet = $this->db->get();
+
+        return $resultSet->result();
+    }
+
+    function getRazas(){
+        return $this->db->get($this->tablas['raza'])->result();
+    }
 	
 
 }
