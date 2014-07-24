@@ -9,7 +9,7 @@
                     "regex": "none",
                     "alertText": "* Este campo es obligatorio",
                     "alertTextCheckboxMultiple": "* Por favor seleccione una opción",
-                    "alertTextCheckboxe": "* Este checkbox es obligatorio"
+                    "alertTextCheckboxe": "* Por favor acepte nuestros Términos y Condiciones"
                 },
 				"terminos": { // Add your regex rules here, you can take telephone as an example
 				    "regex": "none",
@@ -29,7 +29,8 @@
                 },
 				"groupRequired": {
                     "regex": "none",
-                    "alertText": "* Debe de rellenar al menos uno de los siguientes campos"
+                    "alertText": "* Debe de rellenar al menos uno de los siguientes campos",
+					"alertTextCheckboxMultiple": "* Debe de rellenar al menos uno de los siguientes campos"
                 },
                 "maxSize": {
                     "regex": "none",
