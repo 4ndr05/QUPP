@@ -120,7 +120,7 @@
                     "alertTextOk": "* Usuario disponible"
                 },
                 "isthereemail": {
-                    "url": "registro/isthereemail",
+                    "url": "http://localhost:82/qup/registro/isthereemail",
                     "alertTextLoad": "* Validando, espere por favor",
                     "alertText": "* E-mail no disponible",
                     "alertTextOk": "* E-mail disponible"
