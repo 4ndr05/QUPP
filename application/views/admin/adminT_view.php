@@ -36,11 +36,13 @@ jQuery(document).ready(function(){
      });
 	 
 	  $("#addColor").click(function(e){
-        e.preventDefault();
+        e.preventDefault(); 
+        $('#colorP').removeClass('validate[required]');
 		var color = $('#colorP').val();
+		$('#colorP').val('');
 		var contador = 0; 
 
-		$('<p id="colorS"><input name="color[]" type="text" size="8" value="'+color+'" /> <a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a><br /></p>').appendTo('#colors');
+		$('<p id="colorS"><input name="color[]" type="text" size="8" value="'+color+'"  class="validate[required]"/> <a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a><br /></p>').appendTo('#colors');
 
 		contador++;
         
@@ -108,23 +110,23 @@ AGREGAR PRODUCTO
 </div>
 
 <div class="contendeor_inputs">
-<p><input type="text" style="min-width:153px; height:20px;" name="sku" id="sku" class="validate[required]"/></p>
+<p><input type="text" style="min-width:153px; height:20px;" name="sku" id="sku" class="validate[required,custom[onlyLetterNumber]]"/></p>
 <p><input name="nombre" type="text" class="validate[required],maxSize[20]" style="min-width:153px; height:20px;margin-top:10px;" maxlength="20" /></p
 ><p><input type="text" style="min-width:153px; height:20px;  margin-top:10px;" name="descripcion" class="validate[required],maxSize[200]" maxlength="200"/></p> 
 <p><input type="text" style="min-width:153px; height:20px;  margin-top:10px;" name="costo" class="validate[required,custom[number]"/></p>
 <p>
 <input type="hidden" name="talla[]" id="talla[]" value="0" />
-      <input type="checkbox" name="talla[]" value="Chica" id="talla1" />
+      <input type="checkbox" name="talla[]" value="Chica" id="talla1" class="validate[required,groupRequired[tallas]]"/>
       <label>Chica</label><br />
-      <input type="checkbox" name="talla[]" value="Mediana" id="talla2" />
+      <input type="checkbox" name="talla[]" value="Mediana" id="talla2" class="validate[required,groupRequired[tallas]]" />
       <label>Mediana</label><br />
-      <input type="checkbox" name="talla[]" value="Grande" id="talla3" />
+      <input type="checkbox" name="talla[]" value="Grande" id="talla3" class="validate[required,groupRequired[tallas]]"/>
       <label>Grande</label><br />
-      <input type="checkbox" name="talla[]" value="Unitalla" id="talla4" />
+      <input type="checkbox" name="talla[]" value="Unitalla" id="talla4" class="validate[required,groupRequired[tallas]]"/>
       <label>Unitalla</label><br />
     </p>
 <p id="colors"><input type="hidden" name="color[]" id="color[]" value="0" />
-   <input name="color[]" type="text" size="8" id="colorP" style="margin-top:10px;" onClick="this.value==''"/> <a href="#" id="addColor" class="addColor" style="color:#fff; font-size:9px; margin-top:8px;">Agregar</a><br />
+   <input name="color[]" type="text" size="8" id="colorP" style="margin-top:10px;" class="validate[required]"/> <a href="#" id="addColor" class="addColor" style="color:#fff; font-size:9px; margin-top:8px;">Agregar</a><br />
 </p>
 <p><input name="fotoproducto[]" type="file" id="fotoproducto" multiple="multiple" style="margin-top:13px;"/></p>
 </div>
@@ -212,7 +214,7 @@ Mensajes
 </ul>
 </li>
 <li>
-<a href="<?php echo base_url('admin/principal/anuncios'); ?>" style="color:#FFF;text-decoration:none;">Anuncios</a>
+Anuncios
 </li>
 <li>
 <a href="<?php echo base_url()?>admin/tiendaAdmin" style="color:#FFF;text-decoration:none;">Tienda</a></li>
@@ -336,7 +338,7 @@ Chica
 <?php if($detalleProducto != null){
 	  foreach($detalleProducto as $detalle){
 	  if($detalle->productoID == $producto->productoID && $detalle->detalle == 'talla'){ ?>
-<?php echo 'Talla: '.$detalle->valor.'<br>';?>
+<?php echo $detalle->valor.'<br>';?>
 <?php }
 }
 }?>
@@ -346,7 +348,7 @@ Chica
 <?php if($detalleProducto != null){
 	  foreach($detalleProducto as $detalle){
 	  if($detalle->productoID == $producto->productoID && $detalle->detalle == 'color'){ ?>
-<?php echo 'Color: '.$detalle->valor.'<br>';?>
+<?php echo $detalle->valor.'<br>';?>
 <?php }
 	  }
 }?>
