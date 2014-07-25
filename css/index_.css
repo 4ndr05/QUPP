@@ -386,7 +386,7 @@ body{
 	 }
 #mini_menu{
 	margin-left: 10px; 
-	margin-top:10 px; 
+	margin-top:10px;
 	position: fixed; 
 	z-index:2500; 
 	width:100%; 
@@ -596,7 +596,7 @@ body{
 	}
 .descipcion_pasos_mini{
 	width:840px;
-	height:500px;
+	height:auto;
 	background-color: #FFF;
 	border:2px solid #762EA4;
 	margin-top:70px;
@@ -641,7 +641,7 @@ body{
 	}
 .contenido_indicacion_mini{
 	width:840px;
-	height:325px;
+	height:auto;
 	color:#762EA4;
 	font-size:18px;
 	}
@@ -661,8 +661,8 @@ body{
 	float:left;
 	}
 .morado_mini li{
-	margin-left:700px;
-	margin-top:250px;
+	margin-left:0px;
+	margin-top:0px;
 	
 	width:134px;
 	height:42px;

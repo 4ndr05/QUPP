@@ -41,7 +41,7 @@
 	}
 .el_menu li ul {
 	display:block;
-	padding-left:none;
+	padding-left:0px;
 	-webkit-padding-start:2px;
 	text-align: left;
 	}
@@ -384,7 +384,7 @@ border: none;
 	list-style:none;
 	font-size:11px;
 	margin-top:10px;
-	margin-bottom::10px;
+	margin-bottom:0px;
 	}
 	
 .boton_naranja_dos li:hover{
@@ -398,7 +398,7 @@ border: none;
 	list-style:none;
 	cursor:pointer;
 	margin-top:10px;
-	margin-bottom::10px;
+	margin-bottom:0px;
 	}
 .boton_rojo_dos li{
 	padding-left:5px;
@@ -413,7 +413,7 @@ border: none;
 	list-style:none;
 	font-size:11px;
 	margin-top:10px;
-	margin-bottom::10px;
+	margin-bottom:0px;
 	}
 	
 .boton_rojo_dos li:hover{
@@ -427,7 +427,7 @@ border: none;
 	list-style:none;
 	cursor:pointer;
 	margin-top:10px;
-	margin-bottom::10px;
+	margin-bottom:0px;
 	}
 .consejos_advertencias{
 	width:648px;
@@ -458,7 +458,7 @@ border: none;
 	box-shadow: 2px 2px 7px #999;
 	list-style:none;
 	font-size:11px;
-	margin-bottom::10px;
+	margin-bottom:0px;
 	
 	}
 
