@@ -43,6 +43,7 @@ class Principal extends CI_Controller {
         $data['mapaSegundo'] = 'mapa_view';
         $data['usuariosT'] = count($this->defaultdata_model->getUsers());
         $data['anunciosT'] = count($this->defaultdata_model->getAnnounces());
+        $data['paquetes'] =
         
         
         // mapa
@@ -241,16 +242,62 @@ class Principal extends CI_Controller {
        $banner = $this->admin_model->insertBanner($data);
        redirect('admin/principal/getAdminP');
     }
-        
+
+    function anuncios() {
+
+        $data['zonageografica'] = $this->admin_model->getZonasG();
+        $data['count_sale_pets'] = $this->admin_model->getCountSalePets();
+        $data['count_cross_pets'] = $this->admin_model->getCountCrossPets();
+        $data['count_adoption_pets'] = $this->admin_model->getCountAdoptionPets();
+        $data['count_lost_pets'] = $this->admin_model->getCountLostPets();
+        $data['count_directory'] = $this->admin_model->getCountDirectory();
 
 
-    
+        $this->load->view("admin/anuncios_view", $data);
+    }
 
+    function anuncios_lista() {
+        $aprobado = $this->input->post('validacion_admin');
 
+        switch ($aprobado) {
+            case "e_aprobacion":
+                $aprobado = 0;
+                break;
+            case "aprobados":
+                $aprobado = 1;
+                break;
+            case "rechazados":
+                $aprobado = 2;
+                break;
+            default:
+                $aprobado = 0;
+        }
 
-    
+        $zonas = $this->input->post('zonas');
 
-   
+        if (empty($zonas) || $zonas == null) {
+            $zona = null;
+        }
+
+        $seccion = $this->input->post('seccion');
+
+        switch ($seccion) {
+            case "venta": $seccion = 2;
+                break;
+            case "cruza": $seccion = 3;
+                break;
+            case "adopcion": $seccion = 6;
+                break;
+            case "perdidos": $seccion = 7;
+                break;
+            case "directorio": $seccion = 4;
+                break;
+            default:
+                $seccion = 1;
+        }
+
+        echo json_encode($this->admin_model->getAnuncios($aprobado, $seccion, $zonas));
+    }
 
 
 }

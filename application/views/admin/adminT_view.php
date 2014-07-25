@@ -214,7 +214,7 @@ Mensajes
 </ul>
 </li>
 <li>
-Anuncios
+<a href="<?php echo base_url('admin/principal/anuncios'); ?>" style="color:#FFF;text-decoration:none;">Anuncios</a>
 </li>
 <li>
 <a href="<?php echo base_url()?>admin/tiendaAdmin" style="color:#FFF;text-decoration:none;">Tienda</a></li>
