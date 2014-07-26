@@ -223,6 +223,20 @@ class Admin_model extends CI_Model {
     }
 
 
+    function deleteDetalle($id,$detalle){
+        $this -> db -> where('productoID', $id);
+        $this -> db -> where('detalle',$detalle);
+        $this -> db -> delete($this -> tablas['productodetalle']);
+        return true;
+    }
+
+    function deleteFoto($id){
+        $this -> db -> where('productoID', $id);
+        $this -> db -> delete($this -> tablas['fotostienda']);
+        return true;
+    }
+
+
 
 }
 ?>
