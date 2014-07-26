@@ -76,7 +76,7 @@ class TiendaAdmin extends CI_Controller {
                 if( $color != null){
                     for($i=0;$i<=count($color)-1;$i++){
                         
-                        if($color[$i] != '0'){
+                        if($color[$i] != '0' && $color[$i] != ''){
                         $arrColor= array(
                             'productoID'   => $productoID,
                             'detalle' => 'color',
@@ -279,6 +279,95 @@ class TiendaAdmin extends CI_Controller {
        );
        $banner = $this->admin_model->insertBanner($data);
        redirect('admin/principal/getAdminP');
+    }
+
+    function editProduct(){
+        $productoID = $this->input->post('productoID');
+        $data = array(
+            'sku' => $this->input->post('sku'), 
+            'nombre' => $this->input->post('nombre'), 
+            'descripcion' => $this->input->post('descripcion'), 
+            'precio' => $this->input->post('costo')
+        );
+        $this->admin_model->updateItem('productoID',$productoID,$data,'catalogoproductos');
+
+        $talla = $this->input->post('talla');
+        $this->admin_model->deleteDetalle($productoID,'talla');
+                if( $talla != null){
+                    for($i=0;$i<=count($talla)-1;$i++){
+                        
+                        if($talla[$i] != '0'){
+                        $arrTalla= array(
+                            'productoID'   => $productoID,
+                            'detalle' => 'talla',
+                            'valor' =>$talla[$i]
+                        );
+                            $e = $this->admin_model->insertItem('productodetalle',$arrTalla);
+                            //var_dump($e);
+                        }
+                        $arrTalla = null;
+                    }
+                }
+
+         $color = $this->input->post('color');
+         $this->admin_model->deleteDetalle($productoID,'color');
+                if( $color != null){
+                    for($i=0;$i<=count($color)-1;$i++){
+                        
+                        if($color[$i] != '0' && $color[$i] != ''){
+                        $arrColor= array(
+                            'productoID'   => $productoID,
+                            'detalle' => 'color',
+                            'valor' =>$color[$i]
+                        );
+                            $e = $this->admin_model->insertItem('productodetalle',$arrColor);
+                            //var_dump($e);
+                        }
+                        $arrColor = null;
+                    }
+                }
+
+         $imagen = $this->input->post('imagen');
+         $this->admin_model->deleteFoto($productoID);
+                if( $imagen != null){
+                    for($i=0;$i<=count($imagen)-1;$i++){
+                        
+                        if($imagen[$i] != ''){
+                        $data = array(
+                            'foto' => $imagen[$i], 
+                            'productoID' => $productoID
+                        );
+
+                            $fotoID = $this->admin_model->insertItem('fotostienda',$data);
+                        }
+                    }
+                }
+
+
+        //REGISTRO FOTOS
+        $this->load->library('upload'); 
+
+      
+        $config['upload_path'] = 'images/productos';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '5120';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '768';
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_multi_upload("fotoproducto")) { 
+            $imagenes = $this->upload->get_multi_upload_data(); 
+            foreach ($imagenes as $imagen) {
+               $data = array(
+                    'foto' => $imagen['file_name'], 
+                    'productoID' => $productoID
+                );
+
+                $fotoID = $this->admin_model->insertItem('fotostienda',$data);
+            }
+        }
+
+        redirect('admin/tiendaAdmin');
     }
         
 
