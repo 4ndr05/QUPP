@@ -1,4 +1,4 @@
-<?php $this->load->view('general/header_view', array('title' => 'Anuncios', 'scripts' => array('/js/funciones_'))); ?>
+<?php $this->load->view('admin/menu_view'); ?>
 <body>
 <div class="contenedor_anuncio_detalle" id="contenedor_anuncio_detalle" style=" display:none;">
     <div class="contenedor_cerrar_anuncio">
@@ -108,7 +108,7 @@
         <br/>
     </div>
 </div>
-<?php $this->load->view('general/menu_view'); ?>
+
 <!-- fin wncabezado -->
 <div class="contenedor_central">
     <div class="titulo_seccion">
@@ -286,4 +286,4 @@
 
     });
 </script>
-<?php $this->load->view('general/footer_view') ?>
+<?php $this->load->view('admin/footer_view'); ?>

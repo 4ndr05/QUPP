@@ -1,18 +1,6 @@
+<?php $this -> load -> view('admin/menu_view.php') ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Administrador-Quierounperro.com</title>
-<link rel="shortcut icon" href="<?php echo base_url()?>images/ico.ico" />  
-<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/reset.css" media="screen"></link>
-<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/administrador.css" media="screen"></link>
-<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/general.css" media="screen"></link>
-<link rel="stylesheet" href="<?php echo base_url()?>css/validator/validationEngine.jquery.css" type="text/css"/>
-<script src="<?php echo base_url()?>js/funciones_.js" type="text/javascript"></script>
-<script type="text/javascript" src="<?php echo base_url()?>js/jquery-1.8.2.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url()?>js/validator/languages/jquery.validationEngine-es.js"></script>
-<script type="text/javascript" src="<?php echo base_url()?>js/validator/jquery.validationEngine.js"></script>
+
  
 <script>
 jQuery(document).ready(function(){
@@ -329,49 +317,7 @@ ELIMINAR PRODUCTO
 
 
 
-<div class="encabezado">
-<img  src="<?php echo base_url()?>images/logo_admin.png" width="258" height="88"  />
 
-<div class="menu_admin">
-<ul class="el_menu">
-<li>
-<a href="<?php echo base_url()?>admin/principal/getAdminP" style= "color:#FFF;text-decoration:none;"> Pantallas </a>
-
-</li>
-<li>
-Usuarios
-<ul>
-<li>
-<a href="#"> <img src="<?php echo base_url()?>images/ciculo.png" /> Altas</a>
-</li>
-<li>
-<a href="#"> <img src="<?php echo base_url()?>images/ciculo.png" /> Bajas</a>
-</li>
-<li>
-<a href="#"> <img src="<?php echo base_url()?>images/ciculo.png" /> Consultas</a>
-</li>
-</ul>
-</li>
-<li>
-Mensajes
-<ul>
-<li>
-<a href="#"> <img src="<?php echo base_url()?>images/ciculo.png" /> Redactar mensaje</a>
-</li>
-<li>
-<a href="#"> <img src="<?php echo base_url()?>images/ciculo.png" /> Enviar mensajes</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="<?php echo base_url('admin/principal/anuncios'); ?>" style="color:#FFF;text-decoration:none;">Anuncios</a>
-</li>
-<li>
-<a href="<?php echo base_url()?>admin/tiendaAdmin" style="color:#FFF;text-decoration:none;">Tienda</a></li>
-</ul>
-</div>
-
-</div> <!-- fin wncabezado -->
 
 <div class="contenedor_central">
 <div class="titulo_seccion">
@@ -531,4 +477,4 @@ Chica
 
 </div>
 
-</body>
+<?php $this -> load -> view('admin/footer_view.php') ?>
