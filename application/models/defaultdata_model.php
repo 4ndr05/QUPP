@@ -79,7 +79,11 @@ class Defaultdata_model extends CI_Model {
     function getRazas(){
         return $this->db->get($this->tablas['raza'])->result();
     }
-	
 
+    function getCupones(){
+        $this->db->from('cupon c');
+        $this->db->join('cupondetalle cd', 'c.cuponID=cd.cuponID');
+        return $this->db->get()->result();
+    }
 }
 ?>

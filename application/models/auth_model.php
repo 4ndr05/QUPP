@@ -168,6 +168,7 @@ class Auth_model extends CI_Model {
 
 	function iniciarsesion($result, $cookie) {
 		$authKey = $this->getNewAuthKey($result->correo, $this->authKeyLength);
+        /*TODO datos de sesion*/
 		$userdata = array(
 			'logged' => true, 
 			'idUsuario' => $result->idUsuario, 

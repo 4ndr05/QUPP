@@ -21,10 +21,10 @@ class Sesion extends CI_Controller {
 		$this->form_validation->set_message('required', 'El campo "%s" es requerido');
 		$this->form_validation->set_message('xss_clean', 'El campo "%s" contiene un posible ataque XSS');
 		$this->form_validation->set_error_delimiters('<span class="error">', '</span>');
-
 		// Ejecuto la validacion de campos de lado del servidor
 		if (!$this->form_validation->run()) {
 			//$this->session->set_flashdata('error', 'error_4');
+
 			redirect('registro/meh');
 			return false;
 		} else {						
@@ -32,7 +32,8 @@ class Sesion extends CI_Controller {
 			$correo = $this->input->post('correo');
 			$contrasena = $this->input->post('contrasena');
 			$recordarme = '';
-			
+
+
 			switch($this->auth_model->login($correo, $contrasena, $recordarme)) {
 				case 1:
 					if($query!=""){
@@ -40,6 +41,7 @@ class Sesion extends CI_Controller {
 						$redirect = substr($redirect, 0,(strlen($redirect)-12));
 					}
 					else{
+
 						if($this->session->userdata('tipoUsuario')==1){
                 			redirect('usuario/cuenta/activado');
                 		} 
@@ -52,25 +54,30 @@ class Sesion extends CI_Controller {
                 		if ($this->session->userdata('tipoUsuario')==0) {
                 		    redirect('admin');
 						}
+
 						redirect($redirect);
 					}
 					
 					
 				break;
 				case 9 :
-					$this->session->set_flashdata('error', 'infoIncorrect');					
+
+					$this->session->set_flashdata('error', 'infoIncorrect');
 					redirect($failredir);
 				break;
 				case 0 :
+
 					$this->session->set_flashdata('error', 'inactiveUser');
 					redirect($failredir);
 				break;
 				case -2 :
+
 					$this->session->set_flashdata('error', 'bannedUser');
 					redirect($failredir);
 				break;
 
 				case 3 :
+
 					if($query!=""){
 						$redirect = $redir.$query;
 						$redirect = substr($redirect, 0,(strlen($redirect)-12));

@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Directorio-Quierounperro.com</title>
 <link rel="shortcut icon" href="<?php echo base_url()?>images/ico.ico" />  
-<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/reset.css" media="screen"></link>
+<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/reset.css" media="screen"/>
  <link rel="stylesheet" href="<?php echo base_url()?>css/jPages.css">
 <script>
 if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
@@ -29,37 +29,6 @@ if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
 </head>
 
 <body>
-
-<div id="mini_menu" >
-<input type="hidden" id="efecto" value="corre"/>
-<img style="float:left;" id="bajar_menu" src="<?php echo base_url()?>images/bajar_menu_dos.png" onclick="oculta('bajar_menu'); muestra('menu_oculto');"/>
-<div id="menu_oculto" class="menu_principal" style=" display:none;">
-<div id="contenedor_menu_principal" class="contenedor_menu_principal"> 
-<ul class="principal">
-<li>
-<a href="index.html">
-Inicio
-</a>
-</li>
-<li>
-Venta
-</li>
-<li>
-Cruza
-</li>
-<li>
-Adopción
-</li>
-<li>
-Accesorios
-</li>
-<li>
-Directorio
-</li>
-</ul>
-</div>
-</div>
-</div>
 
 <div id="iconos_ocultos" class="iconos_ocultos">
 
@@ -718,30 +687,7 @@ Pagar
 </div> 
 <!-- Fin del contenedor publicar anucio fondo negro -->
 
-<div class="menu_principal" id="menu_principal" >
-<div id="contenedor_menu_principal" class="contenedor_menu_principal"> 
-<ul class="principal">
-<li>
-<a href="index.html">
-Inicio
-</a>
-</li>
-<li>
-<a href="venta.html"> Venta </a>
-</li>
-<li>
-Cruza
-</li>
-<li>
-Adopción
-</li>
-<li>Tienda</li>
-<li>
-Directorio
-</li>
-</ul>
-</div>
-</div>
+<?php $this->load->view('general/menu_view') ?>
 
 <div class="titulo_seccion">
 MI PERFIL

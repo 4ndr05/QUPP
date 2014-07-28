@@ -403,7 +403,7 @@ Bienvenido</td></tr>
 		$e->idUsuario;
 		$f = $this->usuario_model->myInfo(27);
 		$ddd = $this->usuario_model->miUbicacion(34);
-		var_dump($e,$f,$e->nombre,$ddd);
+
 	}
 
 	
