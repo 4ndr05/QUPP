@@ -1,119 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Quierounperro</title>
-<link rel="shortcut icon" href="<?php echo base_url()?>images/ico.ico" />
-<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/reset.css" media="screen"></link>
-
-<link rel="stylesheet" href="<?php echo base_url()?>css/nivo-slider.css" type="text/css" media="screen" /> 
-<link rel="stylesheet" href="<?php echo base_url()?>css/responsiveslides.css">
- <link href="<?php echo base_url()?>css/bootstrap.min.css" rel="stylesheet" type="text/css">
- 
- <link rel="stylesheet" href="<?php echo base_url()?>css/validator/validationEngine.jquery.css" type="text/css"/>
-
-<script type="text/javascript" src="<?php echo base_url()?>js/jquery-1.8.2.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url()?>js/validator/languages/jquery.validationEngine-es.js"></script>
-<script type="text/javascript" src="<?php echo base_url()?>js/validator/jquery.validationEngine.js"></script>
- 
- 
-<!--<script src="<?php echo base_url()?>js/jquery-latest.js" type="text/javascript"></script>-->
-<script src="<?php echo base_url()?>js/funciones_.js" type="text/javascript"></script>
-
-
-<script>
-if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
-
-  document.write('<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/index_.css" media="screen"></link> <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/general.css" media="screen"></link> ');
-  }
-if  (navigator.appName=="Microsoft Internet Explorer") {
-	
-	  document.write('<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/index_explorer.css" media="screen"></link>');}
-  </script>
-
-  <!-- [if lt IE ]>
-  <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/index_explorer.css" media="screen"></link>
-  <![endif]-->
-
- <!-- <script src="<?php echo base_url()?>js/jquery_1.4.js" type="text/javascript"></script>-->
-<!-- <script src="<?php echo base_url()?>js/jquery-1.10.2.js"></script>
- <script src="<?php echo base_url()?>js/jquery.validate.js" type="text/javascript"></script>-->
- <script src="<?php echo base_url()?>js/funciones_index.js" type="text/javascript"></script>
-<script src="<?php echo base_url()?>js/jquery.nivo.slider.js" type="text/javascript"></script>
- <script src="<?php echo base_url()?>js/responsiveslides.min.js"></script>
-   <script src="<?php echo base_url()?>js/jquery-ui.js"></script>
- <!-- include jQuery library -->
-
-<!-- include Cycle plugin -->
-<script type="text/javascript" src="<?php echo base_url()?>js/jquery.cycle.all.js"></script>  
-
-<script>
-
-
-function ajaxValidationCallback(status, form, json, options){
-  if (status === true) {
-        
-        var data = json;
-        console.log(data.response);
-        if(data.response == true){
-                               
-                              $("#confirm").prepend('<label>Tu usuario ha sido creado exitosamente, por favor activa tu cuenta atravez del e-mail que ha sido enviado a tu cuenta de correo electronico. Para poder anunciarte y publicar anuncios, deberás registrar tu información completa. Esto lo podrás hacer en cualquier momento entrando a tu perfil.</label>');
-                                muestra('contenedor_correcto'); 
-                                oculta('contenedor_registro');                                                                            
-          
-        }                                                                          
-  }
-}
-
-jQuery(document).ready(function(){
-			// binds form submission and fields to the validation engine
-			jQuery("#registerNow").validationEngine({
-				promptPosition           : "topRight",
-				scroll                   : false,
-				ajaxFormValidation       : true,
-				ajaxFormValidationMethod : 'post',
-        onAjaxFormComplete       : ajaxValidationCallback
-			});
-
-     
-});
-
-function showMap(){
-  var user =  $( "input:checked" ).val();
-    console.log(user);
-  if (user == 1){
-    $('#map-canvas').hide();
-  }else {
-    $('#map-canvas').show();
-   }
-
-}
-
-function hideMap(){
-  var user =  $( "input:checked" ).val();
-    console.log(user);
-   $('#map-canvas').hide();
-
-}
-
-    function updateDatabase(newLat, newLng){
-      // make an ajax request to a PHP file
-      // on our site that will update the database
-      // pass in our lat/lng as parameters
-      $("#newLat").val(newLat);
-      $("#newLng").val(newLng);
-      console.log(newLat,newLng);
-    }
-
-
-     
-
-
-
-</script>
-
-</head>
-<body>
+<?php $this->load->view('general/general_header_view')?>
 
 <script type="text/javascript">        
             jQuery(document).ready(function($) {                
@@ -849,7 +734,6 @@ Directorio
 <center>
 </br>
 <div id="contenedor_central">
-
 <div id="espacio_izquierda" class="seccion_izquierda">
 <ul class="iconos" id="iconos_grandes">
 <li onclick="window.location='<?=base_url()?>carrito';"> <img src="<?php echo base_url()?>images/compras.png"/></li>
@@ -859,6 +743,7 @@ Directorio
 </li>
 </ul>
 </div>
+
 <div id="banner_central">
        <div class="container" id="carousel_container">
     <div class="row">

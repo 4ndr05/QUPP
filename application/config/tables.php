@@ -40,5 +40,6 @@
  $config['tablas']['videos'] = 'videos';
  $config['tablas']['productodetalle'] = 'productodetalle';
  $config['tablas']['carritototal'] = 'carritototal';
+ $config['tablas']['seccion'] = 'seccion';
 
 ?>

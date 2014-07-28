@@ -81,7 +81,27 @@ class Principal extends CI_Controller {
          $data['zonageografica'] = $this->admin_model->getZonasG();
          $data['contenido'] = $this->admin_model->getBanner();
          //var_dump($data['contenido']);
-         $this->load->view('admin/adminIndex_view', $data);
+         $this->load->view('admin/pantalla_inicio_view', $data);
+
+    }
+
+    function getPantalla($seccion,$zona){
+         $data['zonageografica'] = $this->admin_model->getZonasG();
+         $data['contenido'] = $this->admin_model->getBanner();
+         $data['seccion'] = $seccion;
+         $data['zonaT'] = $zona;
+         $data['zonaNombre'] = $this->admin_model->getSingleItem('zonaID',$zona,'zonageografica');
+         $data['seccionNombre'] = $this->admin_model->getSingleItem('seccionID',$seccion,'seccion');
+         if($seccion == 1){
+           $this->load->view('admin/pantalla_inicio_view', $data); 
+         } elseif($seccion != 7 || $seccion != 8 || $seccion != 9 || $seccion != 10) {
+            $this->load->view('admin/pantalla_texto_view', $data); 
+         } else {
+            $this->load->view('admin/pantalla_articulo_view', $data); 
+         }
+         
+         //var_dump($data['contenido']);
+         //$this->load->view('admin/pantalla_inicio_view', $data);
 
     }
 
@@ -174,7 +194,7 @@ class Principal extends CI_Controller {
                 $banner = $this->admin_model->insertBanner($data);
             }
 
-         redirect('admin/principal/getAdminP');
+         redirect('admin/principal/getPantalla/'.$seccionID.'/'.$zonaID);
     }
 
 
@@ -199,7 +219,7 @@ class Principal extends CI_Controller {
 
         
         $this->admin_model->deleteContent($idContent,$idZona, $idSeccion,$posicion);
-        redirect('admin/principal/getAdminP');
+        redirect('admin/principal/getPantalla/'.$idSeccion.'/'.$idZona);
     }
 
     function updateBannerText(){
@@ -209,17 +229,16 @@ class Principal extends CI_Controller {
         );
         $idContent = $this->input->post('bannerIDContent');
         $this->admin_model->updateBannerText($idContent,$data);
-        redirect('admin/principal/getAdminP');
+        redirect('admin/principal/getPantalla/'.$this->input->post('seccionContent').'/'.$this->input->post('zonaContent'));
     }
 
     function deleteBannerText(){
-       
         $data = array(
             'texto' => $this->input->post('textoT'), 
         );
         $idContent = $this->input->post('bannerIDContentT');
         $this->admin_model->updateBannerText($idContent,$data);
-        redirect('admin/principal/getAdminP');
+        redirect('admin/principal/getPantalla/'.$this->input->post('seccionContentT').'/'.$this->input->post('zonaContentT'));
     }
 
     function deleteTextApoyo(){
@@ -227,7 +246,7 @@ class Principal extends CI_Controller {
         
         $idContent = $this->input->post('bannerIDContentT');
         $this->admin_model->deleteContent($idContent,null, null,null);
-        redirect('admin/principal/getAdminP');
+        redirect('admin/principal/getPantalla/'.$this->input->post('seccionContentT').'/'.$this->input->post('zonaContentT'));
     }
 
 
@@ -240,7 +259,7 @@ class Principal extends CI_Controller {
         'texto' => $this->input->post('textoContentN')
        );
        $banner = $this->admin_model->insertBanner($data);
-       redirect('admin/principal/getAdminP');
+       redirect('admin/principal/getPantalla/'.$this->input->post('seccionContentN').'/'.$this->input->post('zonaContentN'));
     }
 
     function anuncios() {
