@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-419">
 <head>
@@ -5,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Mi Perfil-Quierounperro.com</title>
 <link rel="shortcut icon" href="<?php echo base_url()?>images/ico.ico" />  
-<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/reset.css" media="screen"></link>
+<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/reset.css" media="screen"/>
  <link rel="stylesheet" href="<?php echo base_url()?>css/jPages.css">
 <script>
 if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
@@ -417,7 +418,6 @@ Continuar
    <div class="cantidades_detalle_paquete_premium"> 60 </div>
  <img src="<?php echo base_url()?>images/icono_calendario_premium.png" width="34" height="26"/>
  </li>
-
   <li>
    <div class="cantidades_detalle_paquete_premium"> 5 </div>
  <img src="<?php echo base_url()?>images/icono_ticket_premium.png" width="34" height="26" />
@@ -522,11 +522,11 @@ Descripción:<textarea  class="background_gris" cols="95" rows="3" > </textarea>
 <p class="margen_15_left">
 Link de video <input type="text" size="98"/><img src="<?php echo base_url()?>images/logo_youtube.png"/>
 </p>
-<p class="margen_15_left"> <a href="<?php echo base_url()?>#"> Tutorial para subir video a <img src="<?php echo base_url()?>images/logo_youtube.png" width="43" height="16"/> </a> </p>
+<p class="margen_15_left"> <a href="#"> Tutorial para subir video a <img src="<?php echo base_url()?>images/logo_youtube.png" width="43" height="16"/> </a> </p>
 </br>
 <p class="margen_15_left"> 
 
-<!-- <iframe src="<?php echo base_url()?>../subir_archivos/index.html" style="overflow:none;" scrolling="no" width="800" height="100"> </iframe> -->
+<!-- <iframe src="../subir_archivos/index.html" style="overflow:none;" scrolling="no" width="800" height="100"> </iframe> -->
  </p>
  
  <div style="width:800px; height:150px;"> 
@@ -644,7 +644,7 @@ Ver video
 VIDEO
 </div>
 
-<iframe class="youtube_video" src="<?php echo base_url()?>http://www.youtube.com/embed/YlmidIPuZ58"></iframe>
+<iframe class="youtube_video" src="http://www.youtube.com/embed/YlmidIPuZ58"></iframe>
 
 
 </div>
@@ -1289,7 +1289,6 @@ Contacto
 <li>- Tutorial</li>
 <li>- Publicidad </li>
 <li>- Soporte </li>
-
 <li>- Preguntas Frecuentes </li>
 </ul>
 </li>

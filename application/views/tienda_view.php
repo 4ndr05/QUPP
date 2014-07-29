@@ -1,56 +1,83 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Venta-Quierounperro.com</title>
-<link rel="shortcut icon" href="<?php echo base_url()?>images/ico.ico" />  
-<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/reset.css" media="screen"></link>
- <link rel="stylesheet" href="<?php echo base_url()?>css/jPages.css">
-   <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/general.css" media="screen"></link>
-   <link rel="stylesheet" href="<?php echo base_url()?>css/validator/validationEngine.jquery.css" type="text/css"/>
-<script type="text/javascript" src="<?php echo base_url()?>js/jquery-1.8.2.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url()?>js/validator/languages/jquery.validationEngine-es.js"></script>
-<script type="text/javascript" src="<?php echo base_url()?>js/validator/jquery.validationEngine.js"></script>
- 
-<script>
-if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Venta-Quierounperro.com</title>
+    <link rel="shortcut icon" href="<?php echo base_url() ?>images/ico.ico"/>
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url() ?>css/reset.css" media="screen"/>
+    <link rel="stylesheet" href="<?php echo base_url() ?>css/jPages.css">
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url() ?>css/general.css" media="screen"/>
+    <link rel="stylesheet" href="<?php echo base_url() ?>css/validator/validationEngine.jquery.css" type="text/css"/>
 
-  document.write('<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/general.css" media="screen"></link> <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/venta.css" media="screen"></link> <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/tienda.css" media="screen"></link>');
-  }
-  </script>
-   <script src="<?php echo base_url()?>js/jquery-1.10.2.js"></script>
-     <script src="<?php echo base_url()?>js/jPages.js"></script>
-     <script src="<?php echo base_url()?>js/funciones_venta.js"></script>
-     <script src="<?php echo base_url()?>js/funciones_tienda.js"></script>
-   <script src="<?php echo base_url()?>js/jquery-ui.js"></script>
-   <script type="text/javascript" src="<?php echo base_url()?>js/jquery.cycle.all.js"></script>
-   <script src="<?php echo base_url()?>js/funciones_.js" type="text/javascript"></script>
+    <script type="text/javascript" src="<?php echo base_url() ?>js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript"
+    src="<?php echo base_url() ?>js/validator/languages/jquery.validationEngine-es.js"></script>
+    <script type="text/javascript" src="<?php echo base_url() ?>js/validator/jquery.validationEngine.js"></script>
+
+    <script>
+        if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
+
+            document.write('<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/general.css" media="screen"></link> <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/venta.css" media="screen"></link> <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/tienda.css" media="screen"></link>');
+        }
+    </script>
+    <script src="<?php echo base_url() ?>js/jquery-1.10.2.js"></script>
+    <script src="<?php echo base_url() ?>js/jPages.js"></script>
+    <script src="<?php echo base_url() ?>js/funciones_venta.js"></script>
+    <script src="<?php echo base_url() ?>js/funciones_tienda.js"></script>
+    <script src="<?php echo base_url() ?>js/jquery-ui.js"></script>
+    <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.cycle.all.js"></script>
+    <script src="<?php echo base_url() ?>js/funciones_.js" type="text/javascript"></script>
 
 
-<script>
-jQuery(document).ready(function(){
-	
-	 
-	 $(".detalleProducto").click(function() {
-             var productoID =  $(this).attr('id');
-			 $('#productoDetallePop').load('<?php echo base_url()?>principal/getDetalleProducto/'+productoID);
-			
-				 
-			 
-     });
-	 
-	  
+    <script>
+        jQuery(document).ready(function () {
+
+
+            $(".detalleProducto").click(function () {
+                var productoID = $(this).attr('id');
+                $('#productoDetallePop').load('<?php echo base_url()?>principal/getDetalleProducto/' + productoID, function () {
+                    //
+                    $(document).scrollTop(0);
+                    $('.productoForm').submit(function (e) {
+                        e.preventDefault();
+                        var form = $(this);
+
+                        $.ajax({
+                            url: '<?= base_url() ?>carrito/addProducto_tienda',
+                            data: form.serialize(),
+                            dataType: 'html',
+                            type: 'post',
+                            beforeSend: function () {
+                                $('.loader').append('<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
+//show loader
+},
+success: function (data) {
+    $('.infouser', form).html(data);
+},
+error: function(data){
+    $("<div class='alert alert-warning'>No se ha agregado el producto al carrito. Vuelva a intentarlo o contacte al administrador del sitio.</div>").appendTo($('.infouser', form));
+},
+complete: function () {
+    $('.spinner', form).remove();
+}
 });
 
-// binds form submission and fields to the validation engine
-			jQuery("#productoForm").validationEngine({
-				promptPosition           : "topRight",
-				scroll                   : false,
-				ajaxFormValidation       : false,
-				ajaxFormValidationMethod : 'post'
-			});
+                    });
+                    //
+
+                });
+});
+});
+
+        // binds form submission and fields to the validation engine
+        //        jQuery(".productoForm").validationEngine({
+        //            promptPosition: "topRight",
+        //            scroll: false,
+        //            ajaxFormValidation: false,
+        //            ajaxFormValidationMethod: 'post'
+        //        });
 </script>
-  
 
 
 </head>
@@ -58,45 +85,11 @@ jQuery(document).ready(function(){
 <body>
 
 
-<div id="productoDetallePop">
+    <div id="productoDetallePop">
 
+    </div>
 
-</div>
-
-
-<div id="mini_menu" >
-<input type="hidden" id="efecto" value="corre"/>
-<img style="float:left;" id="bajar_menu" src="<?php echo base_url()?>images/bajar_menu_dos.png" onclick="oculta('bajar_menu'); muestra('menu_oculto');"/>
-<div id="menu_oculto" class="menu_principal" style=" display:none;">
-<div id="contenedor_menu_principal" class="contenedor_menu_principal"> 
-<ul class="principal">
-<li>
-<a href="<?php echo base_url()?>">
-Inicio
-</a>
-</li>
-<li>
-Venta
-</li>
-<li>
-Cruza
-</li>
-<li>
-Adopción
-</li>
-<li>
-Accesorios
-</li>
-<li>
-Directorio
-</li>
-</ul>
-</div>
-</div>
-</div>
-
-<div id="iconos_ocultos" class="iconos_ocultos">
-
+    <div id="iconos_ocultos" class="iconos_ocultos">
 
 <ul class="iconos_estatus">
 <li>
@@ -847,12 +840,16 @@ TIENDA
 </div>
 
 
-<div class="contenedor_central">
-</br>
-</br>
-      <!-- item container -->
-      <ul id="itemContainer">
-      <!-- Inicio FILA --> 
+    <div class="contenedor_central">
+        <br/>
+        <br/>
+        <?php if($this->session->flashdata('info')): ?>
+            <?php echo $this->session->flashdata('info'); ?>
+        <?php endif; ?>
+        <div><a href="<?php echo base_url('carrito') ?>">Ir al carrito</a></div>
+        <!-- item container -->
+        <ul id="itemContainer">
+            <!-- Inicio FILA -->
 
 <?php if($catalogo != null):
 	  foreach($catalogo as $item):?>
@@ -899,6 +896,7 @@ TIENDA
        </br>
       </br>
       </br>
+        <?php echo $this->pagination->create_links(); ?>
 
       <div style="margin: 0px auto; padding:10px; text-align:center;">
        <!-- navigation holder -->
@@ -939,58 +937,57 @@ TIENDA
 <div class="division_menu_inferior"> </div>
 <div class="contenedor_menu_inferior" align="center"> 
 
-<ul class="menu_inferior">
-<li>
-Acerca de Nosotros
-<ul>
-<li> - ¿Quiénes Somos? 
-</li>
-<li> - La comunidad QUP </li>
-</ul>
-</li>
-
-</ul>
-
-
-<ul class="menu_inferior">
-<li>
-Políticas
-<ul>
-<li> - Aviso de Privacidad </li>
-<li>  - Política de Provacidad </li>
-<li> - Términos y Condiciones </li>
-</ul>
-</li>
-
+    <ul class="menu_inferior">
+        <li>
+            Acerca de Nosotros
+            <ul>
+                <li> - ¿Quiénes Somos?
+                </li>
+                <li> - La comunidad QUP</li>
+            </ul>
+        </li>
 </ul>
 
+    <ul class="menu_inferior">
+        <li>
+            Políticas
+            <ul>
+                <li> - Aviso de Privacidad</li>
+                <li> - Política de Provacidad</li>
+                <li> - Términos y Condiciones</li>
+            </ul>
+        </li>
 
-<ul class="menu_inferior">
-<li>
-Contacto
-<ul>
-<li>- Tutorial</li>
-<li>- Publicidad </li>
-<li>- Soporte </li>
-<li>- Preguntas Frecuentes </li>
-</ul>
-</li>
+    </ul>
 
-</ul>
+
+    <ul class="menu_inferior">
+        <li>
+            Contacto
+            <ul>
+                <li>- Tutorial</li>
+                <li>- Publicidad</li>
+                <li>- Soporte</li>
+                <li>- Preguntas Frecuentes</li>
+            </ul>
+        </li>
+
+    </ul>
 </div>
-    
-    
+
+
 <div class="footer">
-<img src="<?php echo base_url()?>images/perro_final.png" width="46" height="42"/>
-<a href="<?php echo base_url()?>#" ><img  src="<?php echo base_url()?>images/ico_fb.png" width="32" height="32" style="margin-top:10px;"/></a>
-<a href="<?php echo base_url()?>#" class="margen"><img src="<?php echo base_url()?>images/ico_tw.png" width="32" height="32" style="margin-top:10px;"/></a>
-</div>
-<div class="division_final">
+    <img src="<?php echo base_url() ?>images/perro_final.png" width="46" height="42"/>
+    <a href="<?php echo base_url() ?>#"><img src="<?php echo base_url() ?>images/ico_fb.png" width="32" height="32"
+       style="margin-top:10px;"/></a>
+       <a href="<?php echo base_url() ?>#" class="margen"><img src="<?php echo base_url() ?>images/ico_tw.png" width="32"
+        height="32" style="margin-top:10px;"/></a>
+    </div>
+    <div class="division_final">
 
-</div>
-<div class="pie_pagina">
-Copyright © 2014 QuieroUnPerro.com
-</div>
-<?php echo $this->pagination->create_links();?>
+    </div>
+    <div class="pie_pagina">
+        Copyright © 2014 QuieroUnPerro.com
+    </div>
 </body>
 </html>

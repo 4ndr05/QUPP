@@ -1,9 +1,10 @@
 <?php
-$keyUser = $this->session->userdata('tipoUsuario');
+$keyUser = $this->session->userdata('idUsuario');
+$tipoUsuario = $this->session->userdata('tipoUsuario');
 
-if ($keyUser != 0 || is_null($keyUser)):
+if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)):
     ?>
-    <div id="mini_menu">
+    <div id="mini_menu" class="menu">
         <input type="hidden" id="efecto" value="corre"/>
         <img src="<?php echo base_url() ?>images/bajar_menu_dos.png" id="bajar_menu" style="float:left; margin-left:10px;"
              onclick="oculta('bajar_menu');
@@ -31,10 +32,40 @@ if ($keyUser != 0 || is_null($keyUser)):
                         Directorio
                     </li>
                 </ul>
+                <?php if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)): ?>
+                    <div class="close_sesion" style="text-align: right; padding-right: 5px;"><a  href="<?php echo base_url('sesion/logout') ?>"><img style="height: 30px;" src="/images/logout.png" alt="Cerrar sesión"/></a></div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
 
+    <div class="menu_principal menu" id="menu_principal">
+        <div id="contenedor_menu_principal" class="contenedor_menu_principal">
+            <ul class="principal">
+                <li>
+                    <a href="<?php echo base_url() ?>"> Inicio </a>
+                </li>
+                <li>
+                    <a href="<?php echo base_url() ?>"> Venta </a>
+                </li>
+                <li>
+                    Cruza
+                </li>
+                <li>
+                    Adopción
+                </li>
+                <li>
+                    <a href="<?= base_url() ?>principal/tienda">Tienda</a>
+                </li>
+                <li>
+                    Directorio
+                </li>
+                <?php if ($keyUser !== FALSE && $tipoUsuario !==0): ?>
+                    <div class="close_sesion" style="text-align: right; padding-right: 5px;"><a  href="<?php echo base_url('sesion/logout') ?>"><img style="height: 30px;" src="/images/logout.png" alt="Cerrar sesión"/></a></div>
+                <?php endif; ?>
+            </ul>
+        </div>
+    </div>
 <?php else: ?>
     <div class="encabezado">
         <img src="/images/logo_admin.png" width="258" height="88"/>
@@ -122,9 +153,9 @@ if ($keyUser != 0 || is_null($keyUser)):
                     <a href="<?php echo base_url('admin/tiendaAdmin') ?>">Tienda</a>
                 </li>
             </ul>
+            <?php if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)): ?>
+                <div class="close_sesion" style="text-align: right; padding-right: 5px;"><a  href="<?php echo base_url('sesion/logout') ?>"><img style="height: 30px;" src="/images/logout.png" alt="Cerrar sesión"/></a></div>
+            <?php endif; ?>
         </div>
     </div>
-<?php endif; ?>
-<?php if (!is_null($keyUser)): ?>
-    <div class="close_sesion" style="text-align: right; padding-right: 5px;"><a href="<?php echo base_url('sesion/logout') ?>">cerrar sesi&oacute;n</a></div>
 <?php endif; ?>

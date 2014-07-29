@@ -59,18 +59,18 @@ class Usuario_model extends CI_Model {
 			if ($row->status == '1'){
 				return 0;
 			} else {
-			$this->db->where('idUsuario', $row->idUsuario);
-			$this->db->update($this->tablas['usuario'], array('status' => 1, 'codigoConfirmacion' => $this->getNewConfirmationCode($row->correo))); ;
-			$this->load->model('auth_model');
-			$this->auth_model->iniciarsesion($row, null);
-			return 1;
+				$this->db->where('idUsuario', $row->idUsuario);
+				$this->db->update($this->tablas['usuario'], array('status' => 1, 'codigoConfirmacion' => $this->getNewConfirmationCode($row->correo))); ;
+				$this->load->model('auth_model');
+				$this->auth_model->iniciarsesion($row, null);
+				return 1;
 			}
 		} else {
 			return -1;
 		}
 	}
-    
-    
+
+
 	/*
 	 * Información de la cuenta
 	 * */
@@ -100,13 +100,13 @@ class Usuario_model extends CI_Model {
 	 * Modificar información de la cuenta
 	 * */
 
-	 function passRecover($password, $idUsuario){
-	 	$password = $this->auth_model->hashPassword($password, null);
-	 	$this->db->where('idUsuario',$idUsuario);
+	function passRecover($password, $idUsuario){
+		$password = $this->auth_model->hashPassword($password, null);
+		$this->db->where('idUsuario',$idUsuario);
 		$this->db->update($this->tablas['usuario'], array('contrasena'=>$password));
 		return true;
-	 }
-	 
+	}
+
 	function cambiarContrasena($contrasenaActual, $contrasenaUsuario, $idUsuario, $admin) {		
 		/*CHECAMOS EL NIVEL DE USUARIO / ROL*/
 		if (!$admin) {
@@ -167,46 +167,46 @@ class Usuario_model extends CI_Model {
 			return false;
 		}
 	}
-    
-    function pendingActivation($idUsuario){
-        $this->db->where('idUsuario = '.$idUsuario.' and tmp_email != ""');
-        $query = $this->db->get($this->tablas['usuario']);        
-        if($query->num_rows() != 0)
-            return true;
-        return false;
-    }
-    
-    function get_tmp_email($idUsuario){
-    	/*OBTENEMOS EL EMAIL QUE SE ENCUENTRA EN TEMPORAL*/
-        $query = $this->db->get_where($this->tablas['usuario'], array('idUsuario' => $idUsuario));
-        if($query->num_rows() > 0)
-            return $query->row();
-        return false;       
-    }
-    
-    function cancel_tmp_email($idUsuario, $arrUpdate){
-    	/*CANCELACION DE CAMBIO DE CORREO*/
-        $this->db->where('idUsuario', $idUsuario);
-        $this->db->update($this->tablas['usuario'], $arrUpdate);
-        return true;        
-    }
-    
-    function email_is_empty($newWmail){
-    	/*EL EMAIL NO SE ENCUENTRA PREVIAMENTE REGISTRADO EN LA DB*/        
-        $this->db->where('correo', $newWmail);
-        $this->db->or_where('tmp_email', $newWmail);
-        $query = $this->db->get($this->tablas['usuario']); 
-        if($query->num_rows() > 0)
-            return false;
-        return true;
-    }
-    
-    function do_tmp_email($idUsuario, $arrUpdate){
-    	/*GUARDAMOS EL NUEVO CORREO ELECTRONICO DE LA CUENTA COMO TEMPORAL HASTA QUE LO ACTIVE*/
-        $this->db->where('idUsuario', $idUsuario);
-        $this->db->update($this->tablas['usuario'], $arrUpdate);
-        return true;
-    }
+
+	function pendingActivation($idUsuario){
+		$this->db->where('idUsuario = '.$idUsuario.' and tmp_email != ""');
+		$query = $this->db->get($this->tablas['usuario']);        
+		if($query->num_rows() != 0)
+			return true;
+		return false;
+	}
+
+	function get_tmp_email($idUsuario){
+		/*OBTENEMOS EL EMAIL QUE SE ENCUENTRA EN TEMPORAL*/
+		$query = $this->db->get_where($this->tablas['usuario'], array('idUsuario' => $idUsuario));
+		if($query->num_rows() > 0)
+			return $query->row();
+		return false;       
+	}
+
+	function cancel_tmp_email($idUsuario, $arrUpdate){
+		/*CANCELACION DE CAMBIO DE CORREO*/
+		$this->db->where('idUsuario', $idUsuario);
+		$this->db->update($this->tablas['usuario'], $arrUpdate);
+		return true;        
+	}
+
+	function email_is_empty($newWmail){
+		/*EL EMAIL NO SE ENCUENTRA PREVIAMENTE REGISTRADO EN LA DB*/        
+		$this->db->where('correo', $newWmail);
+		$this->db->or_where('tmp_email', $newWmail);
+		$query = $this->db->get($this->tablas['usuario']); 
+		if($query->num_rows() > 0)
+			return false;
+		return true;
+	}
+
+	function do_tmp_email($idUsuario, $arrUpdate){
+		/*GUARDAMOS EL NUEVO CORREO ELECTRONICO DE LA CUENTA COMO TEMPORAL HASTA QUE LO ACTIVE*/
+		$this->db->where('idUsuario', $idUsuario);
+		$this->db->update($this->tablas['usuario'], $arrUpdate);
+		return true;
+	}
 	
 	
 	
@@ -245,7 +245,7 @@ class Usuario_model extends CI_Model {
 			$this->db->update($this->tablas['usuario'], array('status' => 2));
 			$status = 'bannedOK';			
 		}
-			
+
 		else if($currentStatus == 2){
 			$this->db->update($this->tablas['usuario'], array('status' => 1));
 			$status = 'unblockedUser';		
@@ -262,8 +262,8 @@ class Usuario_model extends CI_Model {
 		if ($query->num_rows() == 1){
 			return $query->row();
 		} else {
-		return null;
-	    }
+			return null;
+		}
 	}
 
 	function myInfo($idUsuario){
@@ -276,8 +276,8 @@ class Usuario_model extends CI_Model {
 		if ($query->num_rows() == 1){
 			return $query->row();
 		} else {
-		return null;
-	    }
+			return null;
+		}
 	}
 
 
@@ -287,8 +287,8 @@ class Usuario_model extends CI_Model {
 		if ($query->num_rows() == 1){
 			return $query->row();
 		} else {
-		return null;
-	    }
+			return null;
+		}
 	}
 
 	function miUbicacion($idUsuarioDato){
@@ -300,9 +300,59 @@ class Usuario_model extends CI_Model {
 		if ($query->num_rows() == 1){
 			return $query->row();
 		} else {
-		return null;
-	    }
+			return null;
+		}
 	}
-	
+
+	function getCuponesUsuario($idUsuario, $tipo_cupon = null){
+		$this->db->from('serviciocontratado sc');
+		$this->db->join('cuponadquirido ca', 'sc.servicioID=ca.servicioID AND sc.paqueteID=ca.paqueteID AND sc.detalleID=ca.detalleID');
+		$this->db->join('cupondetalle cd', 'ca.cuponID=cd.cuponID AND ca.cuponDetalleID=cd.cuponDetalleID');
+		$this->db->where('sc.idUsuario', $idUsuario);
+		$this->db->where('ca.vigente', 1);
+		$this->db->where('ca.usado', 0);
+
+		if(!is_null($tipo_cupon)){
+			$this->db->where('cd.tipoCupon', $tipo_cupon);
+		}
+
+		return $this->db->get()->result();
+	}
+
+	function getDireccionesEnvioUsuario($idUsuario){
+		$this->db->from('usuariodetalle ud');
+		$this->db->join('usuario u', 'ud.idUsuario=u.idUsuario');
+		$this->db->where('u.idUsuario', $idUsuario);
+		return $this->db->get()->result();
+	}
+
+	function getValorDescuento($id_cupon_adquirido){
+		$this->db->from('cuponadquirido ca');
+		$this->db->join('cupondetalle cd', 'ca.cuponID=cd.cuponID AND ca.cuponDetalleID=cd.cuponDetalleID');
+		$this->db->where('ca.idCuponAdquirido', $id_cupon_adquirido);
+		$this->db->where('ca.vigente', 1);
+		$this->db->where('ca.usado', 0);
+
+		$this->db->get()->row();
+	}
+
+	function addCompra($compra, $compra_detalle)
+	{
+
+		$this->db->insert('compra', $compra[0]);
+		$compraID = $this->db->insert_id();
+		foreach ($compra_detalle as $value) {
+			$value['compraID'] = $compraID;
+			$this->db->insert('compradetalle', $value);
+		}
+
+	}
+
+	function deleteCarrito($idUsuario)
+	{
+		$this->db->delete('carrito', array('usuarioID' => $idUsuario));
+		$this->db->delete('carritototal', array('usuarioID' => $idUsuario));
+	}
+
 
 }
