@@ -3,5 +3,5 @@ RewriteEngine On
 RewriteCond %{HTTP_HOST} ^www\.(.*)$
 RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
-RewriteCond $1 !^(index.php|css|js|images|img|robots.txt|docs|maqueta|facebox|fonts)
-RewriteRule ^(.*)$ /qup/index.php?$1 [L]
+RewriteCond $1 !^(index.php|css|js|images|img|robots.txt|docs|maqueta|facebox|fonts|content)
+RewriteRule ^(.*)$ /qupC/qup/index.php?$1 [L]

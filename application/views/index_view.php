@@ -210,24 +210,24 @@ Se ha enviado contraseña al correo electronico indicado
 
 <p style="margin-top:15px;">Apellido:</p>
 
-<p style="margin-top:15px;">correo:</p>
+<p style="margin-top:15px;">Correo:</p>
 
-<p style="margin-top:15px;">Telefono:</p>
+<p style="margin-top:15px;">Tel&eacute;fono:</p>
 
-<p style="margin-top:15px;">contrasena:</p>
+<p style="margin-top:15px;">Contrase&ntilde;a:</p>
 
-<p>Confirmar contrasena:</p>
+<p>Confirmar Contrase&ntilde;a:</p>
 
  </div>
 <div class="contendeor_inputs" >
-<p><input type="text" name="nombre" id="nombre" class="validate[required]"/> *</p>
-<p><input type="text" name="apellido" id="apellido" class="validate[required]"/> *</p>
+<p><input type="text" name="nombre" id="nombre" class="validate[required,onlyLetterSp]"/> *</p>
+<p><input type="text" name="apellido" id="apellido" class="validate[required,onlyLetterSp]"/> *</p>
 
 <p><input type="text" name="correo" class="validate[required,custom[email],ajax[isthereemail]]" /> *</p>
 
-<p><input type="text" name="telefono" class="validate[custom[integer]]"/></p>
+<p><input type="text" name="telefono" class="validate[custom[integer,onlyNumberSp,]]"/></p>
 
-<p><input type="password" name="contrasena"  id="contrasena1" class="validate[required]"/> *</p>
+<p><input type="password" name="contrasena"  id="contrasena1" class="validate[required,minSize]"/> *</p>
 </br>
 <p><input type="password" name="confirmar"  id="contrasena2" class="validate[required,equals[contrasena1]]"/> *</p>
 
@@ -245,7 +245,7 @@ Se ha enviado contraseña al correo electronico indicado
 <p><input name="recibirCorreo" type="checkbox" value="1" /> <label> Quiero recibir información acerca de promociones </label></p>
 
 
-<p><input name="terminosCondiciones" type="checkbox" value="1" class="validate[required]"/> <label> He leído y acepto los <a href="<?php echo base_url()?>#" class="link_blanco">Términos y Condiciones</a> y <a href="<?php echo base_url()?>#" class="link_blanco">la Política de Privacidad</a> </label></p>
+<p><input name="terminosCondiciones" type="checkbox" value="1" class="validate[required]"/> <label> He leído y acepto los <a href="<?php echo base_url()?>content/terminos_y_condiciones.pdf" target="_blank" class="link_blanco">Términos y Condiciones</a> y <a href="<?php echo base_url()?>content/politica_de_privacidad.pdf" target="_blank" class="link_blanco">la Política de Privacidad</a> </label></p>
 
 
 <font class="asterisco">Los datos marcados con un astrisco (*) son obligatorios </font>
@@ -256,7 +256,7 @@ Se ha enviado contraseña al correo electronico indicado
  <img src="<?php echo base_url()?>images/flecha_blanca.png"/> Llenar información adicional </div>
  
 <div class="llenar_info_adicional" id="ocultar_info_adicional" onclick="oculta('datos_faltantes_usuario');oculta('datos_faltantes_negocio');oculta('datos_faltantes_asociacion');oculta('ocultar_info_adicional'); muestra('llenar_info_adicional');hideMap();" style="display:none;">
- <img src="<?php echo base_url()?>images/flecha_blanca.png"/> Despues llenar información </div>
+ <img src="<?php echo base_url()?>images/flecha_blanca.png"/> Despu&eacute;s llenar información </div>
 
 <div id="datos_faltantes_usuario" class="datos_faltantes_usuario" style="display:none;">
 </br>
@@ -413,7 +413,7 @@ Nombre:
   
      <label>
       <input type="checkbox" name="CheckboxGroup1[]" value="3" id="CheckboxGroup1_2" />
-      Estetica canina</label>
+      Est&eacute;tica canina</label>
           <label>
           </br>
       <input type="checkbox" name="CheckboxGroup1[]" value="4" id="CheckboxGroup1_3" />
@@ -448,7 +448,7 @@ Nombre:
    <div class="contenedor_giros">
     <label>
       <input type="checkbox" name="CheckboxGroup1[]" value="9" id="CheckboxGroup1_8" />
-      Guarderia de perros</label>
+      Guarder&iacute;a de perros</label>
     </br>
     <label>
       <input type="checkbox" name="CheckboxGroup1[]" value="10" id="CheckboxGroup1_9" />
@@ -461,7 +461,7 @@ Nombre:
           <label>
           </br>
       <input type="checkbox" name="CheckboxGroup1[]" value="12" id="CheckboxGroup1_11" />
-     Servico de paseo</label>
+     Servicio de paseo</label>
     
   
   
@@ -480,7 +480,7 @@ Nombre:
 <p style="margin-top:15px;">Municipio:</p>
 <p style="margin-top:15px;">Estado:</p>
 <p style="margin-top:15px;">Código Postal:</p>
-<p style="margin-top:15px;">correo:</p>
+<p style="margin-top:15px;">Correo:</p>
 <p style="margin-top:15px;">Página web:</p>
 <p style="margin-top:15px;">Logo:</p>
 <p style="margin-top:15px;">Descripción:</p>
