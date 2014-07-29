@@ -110,6 +110,8 @@ text-align: center;
 	margin-right:10px;
 	border-left:5px solid #FFB608;
 	}
+.contenedor_anunciar_negocio:hover{
+	cursor:pointer;}
 	
 .titulo_anunciate{
 	margin-top:10px;
@@ -155,4 +157,65 @@ text-align: center;
 	margin-top:10px;
 	padding-left:20px;
 	width:53px;
+	}
+.contenedor_checkbox{
+	font-size:15px;
+	width:260px; 
+	height:150px;  
+	display:inline-block; 
+	margin-top:70px; 
+	margin-left:15px;
+	}
+.perrito_uno{
+	margin-top:70px;
+	margin-left:40px;}
+.morado_directorio li{
+	margin-left:690px;
+	width:134px;
+	height:42px;
+	color:#FFFFFF;
+	background-image:url(../images/boton_redondo.png);
+	background-repeat:no-repeat;
+	text-align:center;
+	padding-top:10px;}
+	
+.morado_directorio li:hover{
+	background-image:url(../images/boton_redondo_over.png);
+	color:#762EA4;
+	cursor:pointer;
+	}
+	
+.leer_anuncio_directorio {
+width: 657px;
+min-height: 660px;
+border: 5px solid #DED9D5;
+background-color: #FFF;
+margin: 0 auto;
+margin-top: 5px;
+padding: 10px;
+}
+.contenedor_cerrar_anuncio_negocio{
+	width:692px;
+	height:66px;
+	margin:0px auto;
+	text-align:right;
+	}
+.mapa_negocio{
+	width:350px;
+	height:300px;
+	background-color:#996600;}
+	
+.contactar_al_aunuciante_negocio{
+	width:427px;
+	padding:10px;
+	height:540px;
+	border: 5px solid #DED9D5;
+	background-color:#FFF;
+	margin:0 auto;
+	}
+.contenedor_cerrar_contactar_negocio{
+	width:459px;
+	height:66px;
+	margin: 0 auto;
+	text-align:right;
 	}

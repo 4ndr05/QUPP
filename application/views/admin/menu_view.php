@@ -76,6 +76,9 @@ Pantallas
 <li>
 <a href="<?php echo base_url()?>admin/principal/getPantalla/16/9" id="TIENDA" name="16" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Tienda</a>
 </li>
+<li>
+<a href="<?php echo base_url()?>admin/principal/getPantalla/17/9" id="PUBLICIDAD LATERAL" name="16" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Publicidad Lateral</a>
+</li>
 </ul>
 </li>
 <li>

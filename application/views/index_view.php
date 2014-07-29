@@ -1,4 +1,119 @@
-<?php $this->load->view('general/general_header_view')?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Quierounperro</title>
+<link rel="shortcut icon" href="<?php echo base_url()?>images/ico.ico" />
+<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/reset.css" media="screen"></link>
+
+<link rel="stylesheet" href="<?php echo base_url()?>css/nivo-slider.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="<?php echo base_url()?>css/responsiveslides.css">
+ <link href="<?php echo base_url()?>css/bootstrap.min.css" rel="stylesheet" type="text/css">
+ 
+ <link rel="stylesheet" href="<?php echo base_url()?>css/validator/validationEngine.jquery.css" type="text/css"/>
+
+<script type="text/javascript" src="<?php echo base_url()?>js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/validator/languages/jquery.validationEngine-es.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/validator/jquery.validationEngine.js"></script>
+ 
+ 
+<!--<script src="<?php echo base_url()?>js/jquery-latest.js" type="text/javascript"></script>-->
+<script src="<?php echo base_url()?>js/funciones_.js" type="text/javascript"></script>
+
+
+<script>
+if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
+
+  document.write('<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/index_.css" media="screen"></link> <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/general.css" media="screen"></link> ');
+  }
+if  (navigator.appName=="Microsoft Internet Explorer") {
+	
+	  document.write('<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/index_explorer.css" media="screen"></link>');}
+  </script>
+
+  <!-- [if lt IE ]>
+  <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/index_explorer.css" media="screen"></link>
+  <![endif]-->
+
+ <!-- <script src="<?php echo base_url()?>js/jquery_1.4.js" type="text/javascript"></script>-->
+<!-- <script src="<?php echo base_url()?>js/jquery-1.10.2.js"></script>
+ <script src="<?php echo base_url()?>js/jquery.validate.js" type="text/javascript"></script>-->
+ <script src="<?php echo base_url()?>js/funciones_index.js" type="text/javascript"></script>
+<script src="<?php echo base_url()?>js/jquery.nivo.slider.js" type="text/javascript"></script>
+ <script src="<?php echo base_url()?>js/responsiveslides.min.js"></script>
+   <script src="<?php echo base_url()?>js/jquery-ui.js"></script>
+ <!-- include jQuery library -->
+
+<!-- include Cycle plugin -->
+<script type="text/javascript" src="<?php echo base_url()?>js/jquery.cycle.all.js"></script>  
+
+<script>
+
+
+function ajaxValidationCallback(status, form, json, options){
+  if (status === true) {
+        
+        var data = json;
+        console.log(data.response);
+        if(data.response == true){
+                               
+                              $("#confirm").prepend('<label>Tu usuario ha sido creado exitosamente, por favor activa tu cuenta atravez del e-mail que ha sido enviado a tu cuenta de correo electronico. Para poder anunciarte y publicar anuncios, deberás registrar tu información completa. Esto lo podrás hacer en cualquier momento entrando a tu perfil.</label>');
+                                muestra('contenedor_correcto'); 
+                                oculta('contenedor_registro');                                                                            
+          
+        }                                                                          
+  }
+}
+
+jQuery(document).ready(function(){
+			// binds form submission and fields to the validation engine
+			jQuery("#registerNow").validationEngine({
+				promptPosition           : "topRight",
+				scroll                   : false,
+				ajaxFormValidation       : true,
+				ajaxFormValidationMethod : 'post',
+        onAjaxFormComplete       : ajaxValidationCallback
+			});
+
+     
+});
+
+function showMap(){
+  var user =  $( "input:checked" ).val();
+    console.log(user);
+  if (user == 1){
+    $('#map-canvas').hide();
+  }else {
+    $('#map-canvas').show();
+   }
+
+}
+
+function hideMap(){
+  var user =  $( "input:checked" ).val();
+    console.log(user);
+   $('#map-canvas').hide();
+
+}
+
+    function updateDatabase(newLat, newLng){
+      // make an ajax request to a PHP file
+      // on our site that will update the database
+      // pass in our lat/lng as parameters
+      $("#newLat").val(newLat);
+      $("#newLng").val(newLng);
+      console.log(newLat,newLng);
+    }
+
+
+     
+
+
+
+</script>
+
+</head>
+<body>
 
 <script type="text/javascript">        
             jQuery(document).ready(function($) {                
@@ -692,9 +807,20 @@ Directorio
 <img src="<?php echo base_url()?>images/logo.png" width="348" height="93" class="contenido_superior"/>
 
 <div class="slideshow">
-<img src="<?php echo base_url()?>images/banner_superior/1.png" width="638" height="93"/>
-<img src="<?php echo base_url()?>images/banner_superior/2.png" width="638" height="93"/>
-<img src="<?php echo base_url()?>images/banner_superior/3.png" width="638" height="93"/>
+<?php if(is_logged() && ($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario')== 3)){
+	if($banner != null){
+		foreach($banner as $contenido){
+			if($this->session->userdata('zonaID') == $contenido->zonaID && $contenido->posicion == 1 && $contenido->seccionID == $seccion){?>
+            <img src="<?php echo base_url()?>images/<?php echo $contenido->imgbaner;?>" width="638" height="93"/>
+
+<?php }
+	}
+	} 
+} else {
+	foreach($banner as $contenido){
+			if($contenido->zonaID == 9 && $contenido->posicion == 1 && $contenido->seccionID == $seccion){?> 	<img src="<?php echo base_url()?>images/<?php echo $contenido->imgbaner;?>" width="638" height="93"/>
+	<?php }}}?>
+
 	</div>
 
 </br>
@@ -798,10 +924,19 @@ Directorio
 </div>
 
 <div id="banner_publicidad_derecha" class="slideshow_dos" style="height:200px; margin-top:10px;">
-<img src="<?php echo base_url()?>images/banner_lateral/1.png" width="215" height="192"/>
+<?php if(is_logged() && ($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario')== 3)){
+	if($banner != null){
+		foreach($banner as $contenido){
+			if($this->session->userdata('zonaID') == $contenido->zonaID && $contenido->posicion == 4 && $contenido->seccionID == 17){?>
+            <img src="<?php echo base_url()?>images/<?php echo $contenido->imgbaner;?>" width="215" height="192"/>
 
-<img src="<?php echo base_url()?>images/banner_lateral/2.png" alt="">
-<img src="<?php echo base_url()?>images/banner_lateral/3.png" alt="">
+<?php }
+	}
+	} 
+} else {
+	foreach($banner as $contenido){
+			if($contenido->zonaID == 9 && $contenido->posicion == 4 && $contenido->seccionID == 17){?> 	<img src="<?php echo base_url()?>images/<?php echo $contenido->imgbaner;?>" width="215" height="192"/>
+	<?php }}}?>
    
 </div>
 

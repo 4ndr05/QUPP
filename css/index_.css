@@ -386,7 +386,7 @@ body{
 	 }
 #mini_menu{
 	margin-left: 10px; 
-	margin-top:10px;
+	margin-top:10 px; 
 	position: fixed; 
 	z-index:2500; 
 	width:100%; 
@@ -596,7 +596,7 @@ body{
 	}
 .descipcion_pasos_mini{
 	width:840px;
-	height:auto;
+	height:500px;
 	background-color: #FFF;
 	border:2px solid #762EA4;
 	margin-top:70px;
@@ -609,7 +609,7 @@ body{
 	margin-top:70px;}
 .descipcion_pasos_mediano_mini{
 	width:840px;
-	height:650px;
+	min-height:650px;
 	background-color: #FFF;
 	border:2px solid #762EA4;
 	margin-top:70px;}
@@ -641,7 +641,7 @@ body{
 	}
 .contenido_indicacion_mini{
 	width:840px;
-	height:auto;
+	height:325px;
 	color:#762EA4;
 	font-size:18px;
 	}
@@ -661,8 +661,8 @@ body{
 	float:left;
 	}
 .morado_mini li{
-	margin-left:0px;
-	margin-top:0px;
+	margin-left:700px;
+	margin-top:250px;
 	
 	width:134px;
 	height:42px;
@@ -1229,4 +1229,45 @@ border: none;
 .los_inputs_registro{
 	min-width:153px; 
 	height:20px;
+}
+
+.tabla_pago th{
+	height:38px;
+	background-color:#9C9E9F;
+	font-size:15px;
+	border-right-color: #FFF;;
+	border-right-width: 1px;
+	border-right-style: solid;
+	vertical-align:middle;
+	color:#FFFFFF;
+	}
+.tabla_pago td{
+	height:51px;
+	font-size:14px;
+	border-bottom-color: #D9DADB;;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	vertical-align:middle;
+	padding-left:5px;
+	text-align: left;
+	}
+.texto_de_cupon{
+	font-size:16px; 
+	color:#762EA4;
+	}
+.ver_cupones{
+	font-size:16; 
+	color:#762EA4; 
+	text-decoration:underline; 
+	font-style: oblique;
+	}
+.ver_cupones:hover{
+	cursor:pointer;}
+.totales{
+	width:181px;
+	color:#762EA4;
+	font-weight:bold;
+	font-size:16px;
+	text-align:center !important;
+	
 	}

@@ -41,13 +41,13 @@ class Sesion extends CI_Controller {
 					}
 					else{
 						if($this->session->userdata('tipoUsuario')==1){
-                			redirect('usuario/cuenta/activado');
+                			redirect('usuario/cuenta/myProfile');
                 		} 
                 		if ($this->session->userdata('tipoUsuario')==2) {
-                		    redirect('negocio');
+                		    redirect('negocio/principal/myProfile');
                 		}
                			if ($this->session->userdata('tipoUsuario')==3) {
-                		    redirect('asociacion');
+                		    redirect('asociacion/principal/myProfile');
                 		}
                 		if ($this->session->userdata('tipoUsuario')==0) {
                 		    redirect('admin');

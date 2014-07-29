@@ -97,7 +97,7 @@
 	width:170px;
 	padding:5px;
 	height:18px;
-	background-color:#57B6B4;
+	background-color:#87888A;
 	text-align:center;
 	color:#FFF;
 	box-shadow: 2px 2px 7px #999;
@@ -110,7 +110,7 @@
 	height:18px;
 	background-color:#FFF;
 	text-align:center;
-	color:#57B6B4;
+	color:#87888A;
 	box-shadow: 2px 2px 7px #999;
 	list-style:none;
 	cursor:pointer;
@@ -175,11 +175,12 @@
 	width:394px;
 	height:243px;
 	display:inline-block;
+	border-right: 2px solid #FF7C00;
 	}
 	
 .datos_general{
-	width:249px;
-	height:243px;
+	width:247px;
+	min-height:243px;
 	display:inline-block;
 	margin-left:10px;
 	font-size:13px;
@@ -424,7 +425,7 @@ border: none;
 	margin:0 auto;
 	}
 .contenedor_cerrar_contactar{
-	width:427px;
+	width:458px;
 	height:66px;
 	margin: 0 auto;
 	text-align:right;
@@ -529,7 +530,7 @@ border: none;
 	}
 .descipcion_pasos{
 	width:840px;
-	height:500px;
+	min-height:500px;
 	background-color: #FFF;
 	border:2px solid #762EA4;
 	margin-top:70px;}
@@ -541,7 +542,7 @@ border: none;
     margin-top: 70px;}
 .descipcion_pasos_mediano{
 	width:840px;
-	height:650px;
+	min-height:650px;
 	background-color: #FFF;
 	border:2px solid #762EA4;
 	margin-top:70px;}
@@ -574,7 +575,7 @@ border: none;
 	}
 .contenido_indicacion{
 	width:840px;
-	height:325px;
+	min-height:325px;
 	color:#762EA4;
 	font-size:18px;
 	}
@@ -914,4 +915,43 @@ border: none;
 	background: transparent; 
 	font-size:18px; 
 	border:none;
+	}
+.tabla_pago th{
+	height:38px;
+	background-color:#9C9E9F;
+	font-size:15px;
+	border-right-color: #FFF;;
+	border-right-width: 1px;
+	border-right-style: solid;
+	vertical-align:middle;
+	color:#FFFFFF;
+	}
+.tabla_pago td{
+	height:51px;
+	font-size:14px;
+	border-bottom-color: #D9DADB;;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+	vertical-align:middle;
+	padding-left:5px;
+	text-align: left;
+	}
+.texto_de_cupon{
+	font-size:16px; 
+	color:#762EA4;
+	}
+.ver_cupones{
+	font-size:16; 
+	color:#762EA4; 
+	text-decoration:underline; 
+	font-style: oblique;
+	}
+.ver_cupones:hover{
+	cursor:pointer;}
+.totales{
+	width:181px;
+	color:#762EA4;
+	font-weight:bold;
+	font-size:16px;
+	text-align:center !important;
 	}

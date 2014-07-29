@@ -94,9 +94,11 @@ class Principal extends CI_Controller {
          $data['seccionNombre'] = $this->admin_model->getSingleItem('seccionID',$seccion,'seccion');
          if($seccion == 1){
            $this->load->view('admin/pantalla_inicio_view', $data); 
-         } elseif($seccion != 7 || $seccion != 8 || $seccion != 9 || $seccion != 10) {
+         } elseif($seccion != 7 && $seccion != 8 && $seccion != 9 && $seccion != 10 && $seccion != 17) {
             $this->load->view('admin/pantalla_texto_view', $data); 
-         } else {
+         } elseif($seccion == 17) {
+            $this->load->view('admin/publicidad_lateral_view', $data); 
+         }else {
             $this->load->view('admin/pantalla_articulo_view', $data); 
          }
          

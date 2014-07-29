@@ -1,21 +1,16 @@
-<?php $this -> load -> view('admin/menu_view.php') ?>
+<?php $this -> load -> view('admin/menu_view') ?>
 <script type="text/javascript" src="<?php echo base_url()?>js/jquery-1.8.2.min.js"></script>
 <script>
 jQuery(document).ready(function(){
-	
 	var zona = <?php if(isset($zonaT)){ echo $zonaT;} else {echo $zonaT = 9;}?>;
 	var seccion = <?php if(isset($seccion)){ echo $seccion;} else {echo $seccion = 1;}?>;
+	
 	$(".row").hide();
 	$(".zona"+zona+seccion).show();
-if(seccion == 7 || seccion == 8 || seccion == 9 || seccion == 10) {
-				$(".superior").fadeIn();
-				 $(".medio").fadeOut();
-				 $(".medioContenido").fadeIn();
-				 $("#seleccionAticulo").fadeIn();
-				 $("#seleccionApoyo").fadeOut();
-				 $(".imagenApoyo").fadeIn();
-				 $(".inferior").fadeIn();
+	if(seccion == 17){
+				 $(".superior").fadeIn();
 			 } 
+			 
 	
 	 
 	 $(".addContent").click(function() {
@@ -164,7 +159,7 @@ function goToSearch(){
 <input type="hidden" name="numeroSeccionR" id="numeroSeccionR" value="<?=$seccion?>" />
 <input type="hidden" name="nombreSeccionR" id="nombreSeccionR" value=""/>
 <input type="hidden" name="zonaIDR" id="zonaIDR" value="<?=$zonaT?>"/>
-<input type="hidden" name="posicion" id="posicion" value=""/>
+<input type="hidden" name="posicion" id="posicion" value="4"/>
 
 <div class="modificaciones"> 
 <div class="titulo_modificaciones"> 
@@ -280,7 +275,7 @@ ELIMINAR CONTENIDO</div>
 
 <input type="hidden" id="zonaContentDel" name="zonaContent" value="<?=$zonaT?>" />
 <input type="hidden" id="seccionContentDel" name="seccionContent" value="<?=$seccion?>" />
-<input type="hidden" id="posicionContentDel" name="posicionContent" value="" />
+<input type="hidden" id="posicionContentDel" name="posicionContent" value="4" />
 <input type="hidden" id="bannerIDContentDel" name="bannerIDContent" value="" />
 
 </div>
@@ -343,7 +338,7 @@ ELIMINAR TEXTO</div>
 
 <div class="contenedor_central">
 <div class="titulo_seccion">
-PANTALLAS- <label id="nombreSeccion"><label id="seccion"><?=$seccionNombre->seccionNombre?></label></label> 
+PANTALLAS- <label id="nombreSeccion"><label id="seccion"><?=$seccionNombre->seccionNombre?></label>
 </div>
 <div class="contenedor_buscador">
 <div class="fondo_select">
@@ -363,9 +358,6 @@ PANTALLAS- <label id="nombreSeccion"><label id="seccion"><?=$seccionNombre->secc
 <div class="subtitulo">
 ZONA- <label id="zonaNombre"><label id="nombreZona"><?=$zonaNombre->zona?></label></label>
 </div>
-
-
-</br>
 
 <!--       CONTENIDO SUPERIOR       -->
 <table class="tabla_carrito superior" width="990" style="display:none">
@@ -406,15 +398,15 @@ BP00001
 Banner Publicidad
 </td>
 <td bgcolor="#E6E7E8">
-  Superior
+  Lateral
 </td>
 <td bgcolor="#E6E7E8">
 
 </td>
 
 <td bgcolor="#E6E7E8">
-<img src="<?php echo base_url()?>images/agregar.png" class="addContent" data-rel="1"/>
-<img src="<?php echo base_url()?>images/baja_contenido.png" class="deleteContent" data-rel="0" id="1"/>
+<img src="<?php echo base_url()?>images/agregar.png" class="addContent" data-rel="4"/>
+<img src="<?php echo base_url()?>images/baja_contenido.png" class="deleteContent" data-rel="0" id="4"/>
 </td>
 
 </tr>
@@ -423,7 +415,7 @@ Banner Publicidad
 	  $contador = 0;
 	  foreach($contenido as $c):
 
-	  if($c->posicion == 1):?>
+	  if($c->posicion == 4):?>
 <tr class="zona<?=$c->zonaID?><?=$c->seccionID?> row" style="display:none;">
 <td>
 
@@ -448,7 +440,7 @@ Imagen
 <img src="<?php echo base_url()?>images/<?php echo $c->imgbaner?>" width="290" height="40" />
 </td>
 <td>
-<img src="<?php echo base_url()?>images/baja_contenido.png" class="deleteContent" data-rel="<?php echo $c->bannerID?>" id="1"/>
+<img src="<?php echo base_url()?>images/baja_contenido.png" class="deleteContent" data-rel="<?php echo $c->bannerID?>" id="4"/>
 </td>
 
 </tr>
@@ -459,221 +451,3 @@ Imagen
 
 </table>
 <!--       CONTENIDO SUPERIOR       -->
-
-<!--       CONTENIDO MEDIO ARTICULO       -->
-<table class="tabla_carrito medioContenido" width="990" style="display:">
-<tr>
-<th width="84">
-Nivel 1
-</th>
-<th width="81">
-Nivel 2
-</th>
-<th width="88">
-Nivel 3
-</th>
-<th width="137">
-Tipo
-</th>
-<th width="136">
-Ubicación
-</th>
-<th width="310">
-Contenido
-</th>
-<th width="122">
-Ajustes
-</th>
-</tr>
-<tr class="" style="display:">
-<td bgcolor="#E6E7E8" class="nivel">
-BC00002
-</td>
-<td bgcolor="#E6E7E8">
-
-</td>
-<td bgcolor="#E6E7E8">
-
-</td>
-<td bgcolor="#E6E7E8">
- Contenido
-</td>
-<td bgcolor="#E6E7E8">
-   Artículo / Texto Apoyo
-</td>
-<td bgcolor="#E6E7E8">
-
-</td>
-<td bgcolor="#E6E7E8">
-<div id="seleccionAticulo" style="display:none">
-<img src="<?php echo base_url()?>images/agregar.png" class="addContent" data-rel="2"/>
-</div>
-<div id="seleccionApoyo" style="display:none">
-<img src="<?php echo base_url()?>images/agregar.png" class="addContentText" data-rel="2"/>
-</div>
-<img src="<?php echo base_url()?>images/baja_contenido.png" class="deleteContent" id="2"/>
-</td>
-
-</tr>
-
-
-<?php if($contenido != null):
-	  $contador = 0;
-	  foreach($contenido as $c):
-
-	  if($c->posicion == 2):
-	  ?>
-
-<?php if($c->seccionID == 7 ||$c->seccionID == 8 || $c->seccionID == 9 || $c->seccionID == 10 ):  ?>
-
-<tr class="imagenApoyo zona<?=$c->zonaID?><?=$c->seccionID?> row" style="display:none">
-<td>
-
-</td>
-<td>
-<?=++$contador?>
-</td>
-<td>
-<input type="hidden" id="bannerID" name="bannerID" value="<?=$c->bannerID?>"/>
-</td>
-<td>
-Imagen
-</td>
-<td>
-
-</td>
-<td>
-<img src="<?php echo base_url()?>images/<?php echo $c->imgbaner?>" width="122" height="74"/>
-</td>
-<td>
-<img src="<?php echo base_url()?>images/baja_contenido.png" class="deleteContent" data-rel="<?php echo $c->bannerID?>" id="2"/>
-<img src="<?php echo base_url()?>images/agregar.png" class="updateText" data-rel="<?php echo $c->bannerID?>" id="2"/>
-</td>
-
-</tr>
-<?php endif; ?>
-<tr class="zona<?=$c->zonaID?><?=$c->seccionID?> row " style="display:none;">
-
-<td>
-
-</td>
-<td>
-
-</td>
-<td>
-<?=$n = $contador + 1;?>
-</td>
-<td>
-Texto de Apoyo
-</td>
-<td>
-
-</td>
-<td>
-<?php echo $c->texto?>
-</td>
-<td>
-<img src="<?php echo base_url()?>images/baja_contenido.png" class="deleteContentText" data-rel="<?php echo $c->bannerID?>" id="2" name="2"/>
-</td>
-
-</tr>
-	  <?php 
-	  endif;
-	  endforeach;
-	  endif; ?>
-
-</table>
-<!--       CONTENIDO MEDIO CONTENIDO       -->
-
-
-
-<!--       CONTENIDO BANNER INFERIOR       -->
-<table class="tabla_carrito inferior" width="990" style="display:none">
-<tr>
-<th width="84">
-Nivel 1
-</th>
-<th width="81">
-Nivel 2
-</th>
-<th width="88">
-Nivel 3
-</th>
-<th width="137">
-Tipo
-</th>
-<th width="136">
-Ubicación
-</th>
-<th width="310">
-Contenido
-</th>
-<th width="122">
-Ajustes
-</th>
-</tr>
-<tr>
-<td bgcolor="#E6E7E8" class="nivel">
-BP00003
-</td>
-<td bgcolor="#E6E7E8">
-
-</td>
-<td bgcolor="#E6E7E8">
-
-</td>
-<td bgcolor="#E6E7E8">
-Banner Publicidad
-</td>
-<td bgcolor="#E6E7E8"> Inferior
-</td>
-<td bgcolor="#E6E7E8">
-
-</td>
-
-<td bgcolor="#E6E7E8">
-<img src="<?php echo base_url()?>images/agregar.png" class="addContent" data-rel="3"/>
-<img src="<?php echo base_url()?>images/baja_contenido.png" class="deleteContent" data-rel="0" id="3"/>
-</td>
-
-</tr>
-
-<?php if($contenido != null):
-	  $contador = 0;
-	  foreach($contenido as $c):
-	  
-	  if($c->posicion == 3):?>
-<tr class="zona<?=$c->zonaID?><?=$c->seccionID?> row" style="display:none;">
-<td>
-
-</td>
-<td>
-<?=++$contador?>
-</td>
-<td>
-<input type="hidden" id="bannerID" name="bannerID" value="<?=$c->bannerID?>"/>
-</td>
-<td>
-Imagen
-</td>
-<td>
-
-</td>
-<td>
-<img src="<?php echo base_url()?>images/<?=$c->imgbaner?>" width="290" height="40" />
-</td>
-<td>
-<img src="<?php echo base_url()?>images/baja_contenido.png" class="deleteContent" data-rel="<?php echo $c->bannerID?>" id="3"/>
-</td>
-
-</tr>
-	  <?php 
-	  endif;
-	  endforeach;
-	  endif; ?>
-</table>
-<!--       CONTENIDO BANNER INFERIOR       -->
-
-</div>
-
-<?php $this -> load -> view('admin/footer_view.php') ?>

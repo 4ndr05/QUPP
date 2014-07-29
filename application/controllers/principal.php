@@ -75,7 +75,11 @@ class Principal extends CI_Controller {
 
         //razas
         $data['razas'] = $this->defaultdata_model->getRazas();
-		$this->load->view('index_view', $data);
+        $data['banner'] = $this->defaultdata_model->getTable('banner');
+        $data['seccion'] = 1;
+        $data['posicion'] = 1;
+        $data['zona'] = 9;
+        $this->load->view('index_view', $data);
 
 	}
 
@@ -238,6 +242,9 @@ class Principal extends CI_Controller {
 	
 	function tienda(){
 		$data['catalogo'] = $this->admin_model->getCatalogoProductos();
+		$data['seccion'] = 16;
+        $data['zona'] = 9;
+        $data['banner'] = $this->defaultdata_model->getTable('banner');
 		$this->load->view('tienda_view',$data);
 		
 		$config['base_url'] = base_url() . 'principal/tienda';
