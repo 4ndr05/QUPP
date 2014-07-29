@@ -79,20 +79,6 @@ class Defaultdata_model extends CI_Model {
     function getRazas(){
         return $this->db->get($this->tablas['raza'])->result();
     }
-	
-
-    function getPaquetes() {
-        $this->db->from('paquete p');
-        $this->db->join('detallepaquete dp', 'p.paqueteID=dp.paqueteID');
-
-        $resultSet = $this->db->get();
-
-        return $resultSet->result();
-    }
-
-    function getRazas(){
-        return $this->db->get($this->tablas['raza'])->result();
-    }
 
     function getCupones(){
         $this->db->from('cupon c');

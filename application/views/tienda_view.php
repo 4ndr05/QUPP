@@ -866,7 +866,7 @@
 <div id="contenedor_central">
     <div id="espacio_izquierda" class="seccion_izquierda_secciones">
         <ul class="iconos">
-            <li><img src="<?php echo base_url() ?>images/compras.png"/></li>
+            <li><a href="<?php echo base_url('carrito') ?>"><img src="<?php echo base_url() ?>images/compras.png"/></a></li>
             <li><img src="<?php echo base_url() ?>images/sesion.png"/></li>
             <li>
                 <img src="<?php echo base_url() ?>images/registrate.png"/>
@@ -881,9 +881,8 @@
         <?php if ($this->session->flashdata('info')): ?>
             <?php echo $this->session->flashdata('info'); ?>
         <?php endif; ?>
-        <div><a href="<?php echo base_url('carrito') ?>">Ir al carrito</a></div>
         <!-- item container -->
-        <ul id="itemContainer">
+        <div id="itemContainer" style="overflow-y: auto; height: auto!important;">
             <!-- Inicio FILA -->
 
             <?php if ($catalogo != null):
@@ -924,7 +923,7 @@
                 endforeach;
             endif;?>
             <!-- FIN FILA ---->
-        </ul>
+        </div>
         <br/>
         <br/>
         <br/>

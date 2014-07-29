@@ -358,7 +358,7 @@ class Carrito extends CI_Controller
                     'idCuponAdquirido' => null,
                     'descuento' => $carritototal->descuento,
                     'total' => $carritototal->totalPrecio,
-                    'fecha' => now(),
+                    'fecha' => date('Y-m-d H:i:s'),
                     );
             }else{
                 foreach ($carritototal as $value) {
@@ -369,7 +369,7 @@ class Carrito extends CI_Controller
                         'idCuponAdquirido' => null,
                         'descuento' => $value->descuento,
                         'total' => $value->totalPrecio,
-                        'fecha' => now(),
+                        'fecha' => date('Y-m-d H:i:s'),
                         );
                 }
             }
