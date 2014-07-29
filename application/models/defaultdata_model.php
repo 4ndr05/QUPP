@@ -66,6 +66,7 @@ class Defaultdata_model extends CI_Model {
         return $query -> result();
 
     }
+	
 
     function getPaquetes() {
         $this->db->from('paquete p');
