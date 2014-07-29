@@ -1,10 +1,9 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-419">
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Directorio-Quierounperro.com</title>
+<title>Mi Perfil-Quierounperro.com</title>
 <link rel="shortcut icon" href="<?php echo base_url()?>images/ico.ico" />  
 <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/reset.css" media="screen"></link>
  <link rel="stylesheet" href="<?php echo base_url()?>css/jPages.css">
@@ -30,6 +29,76 @@ if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
 
 <body>
 
+<div id="contenedor_cambiar_contrasena" class="contenedor_anuncio_detalle" style="display:none;">
+<div class="cerrar_registro"> <img src="<?php echo base_url()?>images/cerrar.png" onclick="oculta('contenedor_cambiar_contrasena');"/> </div>
+<div class="contenedor_contrasena">
+<div class="contenedor_titulo">
+<p> CAMBIAR CONTRASEÑA </p>
+</div>
+<div class="contenido_contrasena">
+<p> Contraseña actual:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"  class="background_morado"/> </p>
+
+<p> Nueva contraseña:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" class="background_morado"/> </p>
+
+<p> Confirmar contraseña: <input type="password" class="background_morado"/> </p>
+
+
+</div>
+
+</br>
+</br>
+<ul class="morado_boton">
+<li>
+<input type="submit" value="Suscribir" class="el_submit"/>
+</li>
+</ul> 
+</div>
+</div>
+
+
+<div id="contenedor_cambiar_contrasena_correcto" class="contenedor_anuncio_detalle" style="display:none;">
+<div class="cerrar_registro"> <img src="<?php echo base_url()?>images/cerrar.png" onclick="oculta('contenedor_cambiar_contrasena_correcto');"/> </div>
+<div class="contenedor_contrasena">
+<div class="contenedor_titulo">
+<p> CAMBIAR CONTRASEÑA </p>
+</div>
+<div class="contenido_contrasena">
+<div class="palomita">
+<img src="<?php echo base_url()?>images/palimita_morada.png"/>
+</div>
+<div class="contenido_contrasena_notificacion">
+Tu contraseña ha sido modificada con exito.
+Se ha enviado una copia al email.  hshshsh@
+</div>
+
+</div>
+
+</br>
+</div>
+</div>
+
+<div id="contenedor_cambiar_contrasena_error" class="contenedor_anuncio_detalle" style="display:none;">
+<div class="cerrar_registro"> <img src="<?php echo base_url()?>images/cerrar.png" onclick="oculta('contenedor_cambiar_contrasena_error');"/> </div>
+<div class="contenedor_contrasena">
+<div class="contenedor_titulo">
+<p> CAMBIAR CONTRASEÑA </p>
+</div>
+<div class="contenido_contrasena">
+<div class="palomita">
+<img src="<?php echo base_url()?>images/tache_morada.png"/>
+</div>
+<div class="contenido_contrasena_notificacion">
+<strong> Ha ocurrido un error. </strong>
+<p> Intentelo nuevamente</p>
+</div>
+
+</div>
+
+</br>
+</div>
+</div>
+
+
 <div id="mini_menu" >
 <input type="hidden" id="efecto" value="corre"/>
 <img style="float:left;" id="bajar_menu" src="<?php echo base_url()?>images/bajar_menu_dos.png" onclick="oculta('bajar_menu'); muestra('menu_oculto');"/>
@@ -37,7 +106,7 @@ if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
 <div id="contenedor_menu_principal" class="contenedor_menu_principal"> 
 <ul class="principal">
 <li>
-<a href="index.html">
+<a href="<?php echo base_url()?>index.html">
 Inicio
 </a>
 </li>
@@ -348,6 +417,7 @@ Continuar
    <div class="cantidades_detalle_paquete_premium"> 60 </div>
  <img src="<?php echo base_url()?>images/icono_calendario_premium.png" width="34" height="26"/>
  </li>
+
   <li>
    <div class="cantidades_detalle_paquete_premium"> 5 </div>
  <img src="<?php echo base_url()?>images/icono_ticket_premium.png" width="34" height="26" />
@@ -452,11 +522,11 @@ Descripción:<textarea  class="background_gris" cols="95" rows="3" > </textarea>
 <p class="margen_15_left">
 Link de video <input type="text" size="98"/><img src="<?php echo base_url()?>images/logo_youtube.png"/>
 </p>
-<p class="margen_15_left"> <a href="#"> Tutorial para subir video a <img src="<?php echo base_url()?>images/logo_youtube.png" width="43" height="16"/> </a> </p>
+<p class="margen_15_left"> <a href="<?php echo base_url()?>#"> Tutorial para subir video a <img src="<?php echo base_url()?>images/logo_youtube.png" width="43" height="16"/> </a> </p>
 </br>
 <p class="margen_15_left"> 
 
-<!-- <iframe src="../subir_archivos/index.html" style="overflow:none;" scrolling="no" width="800" height="100"> </iframe> -->
+<!-- <iframe src="<?php echo base_url()?>../subir_archivos/index.html" style="overflow:none;" scrolling="no" width="800" height="100"> </iframe> -->
  </p>
  
  <div style="width:800px; height:150px;"> 
@@ -574,7 +644,7 @@ Ver video
 VIDEO
 </div>
 
-<iframe class="youtube_video" src="http://www.youtube.com/embed/YlmidIPuZ58"></iframe>
+<iframe class="youtube_video" src="<?php echo base_url()?>http://www.youtube.com/embed/YlmidIPuZ58"></iframe>
 
 
 </div>
@@ -722,12 +792,10 @@ Pagar
 <div id="contenedor_menu_principal" class="contenedor_menu_principal"> 
 <ul class="principal">
 <li>
-<a href="index.html">
-Inicio
-</a>
+<a href="<?php echo base_url()?>"> Inicio </a>
 </li>
 <li>
-<a href="venta.html"> Venta </a>
+<a href="<?php echo base_url()?>"> Venta </a>
 </li>
 <li>
 Cruza
@@ -735,7 +803,9 @@ Cruza
 <li>
 Adopción
 </li>
-<li>Tienda</li>
+<li>
+<a href="<?=base_url()?>principal/tienda">Tienda</a>
+</li>
 <li>
 Directorio
 </li>
@@ -749,7 +819,7 @@ MI PERFIL
 
 <div class="contenedor_menu_perfil">
 <ul class="menu_perfil">
-<li>
+<li class="icono_seleccion">
 <p style="margin-top:13px; margin-left:10px;">Mi Perfil</p>
 </li>
 <li>
@@ -790,6 +860,372 @@ MI PERFIL
 
 <div class="contenedor_central" style="margin-bottom:45px;">
 <div class="contenedor_bienvenido">
+<div class="contenedor_icono_bienvenido">
+<img src="<?php echo base_url()?>images/icono_perfil.png"/>
+</div>
+<p class="bienvenido"> ¡Bienvenido! </p>
+</br>
+</br>
+</br>
+<p class="usuario_bienvenido"> Marina Baez </p>
+</div>
+</br>
+<div class="contenedor_formulario">
+<p>Nombre:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<input type="text" class="background_morado" readonly="readonly"/> </p>
+</br>
+<p>E-mail: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="background_morado" readonly="readonly"/> </p>
+</br>
+<p>Contraseña: <input type="text" class="background_morado" readonly="readonly"/> </p>
+</div>
+<div class="margen_div">
+</div>
+<div class="contenedor_formulario">
+<p>Apellido: <input type="text" class="background_morado"/> </p>
+</br>
+<p>Teléfono: <input type="text" class="gris_input"/> </p>
+</br>
+<p>Estado: &nbsp;&nbsp;&nbsp;<select class="gris_input"> 
+           <option> --- </option>
+           <option> HIDALGO </option>
+           </select> </p>
+</div>
+<div class="cambiar_contraseña">
+<p> Cambiar contraseña <font class="aqui_cambiar" onclick="muestra('contenedor_cambiar_contrasena');">aqui</font></p>
+</div>
+<div class="contenedor_boton"> 
+<ul class="boton_gris_perfil">
+<li>
+Editar
+</li>
+</ul>
+</div>
+
+<div class="contenedor_fiscales">
+<font class="espacios"> Datos fiscales</font>
+
+<div id="ver_el_detalle" class="detalle_fiscales" onclick="muestra('guardar_fiscales'); muestra('contenedor_formu_detalle_user'); muestra('ocultar_el_detalle');oculta('ver_el_detalle');">
+<p > &nbsp;Ver detalle <img src="<?php echo base_url()?>images/flecha_blanca.png"/></p>
+</div>
+
+<div id="ocultar_el_detalle" class="detalle_fiscales" onclick="oculta('guardar_fiscales'); oculta('contenedor_formu_detalle_user'); muestra('ver_el_detalle'); oculta('ocultar_el_detalle');" style="display:none;">
+<p > &nbsp; Ocultar detalle <img src="<?php echo base_url()?>images/flecha_blanca_revez.png"/></p>
+</div>
+
+</div>
+
+
+<!--- 
+----  INICIO contenedor fiscales usuario normal 
+   --->
+<div id="contenedor_formu_detalle_user" style=" display:none;">
+<div class="texto_inputs" >
+<p> Razón Social:</p>
+
+<p style="margin-top:15px;">RFC:</p>
+
+<p style="margin-top:15px;">Calle:</p>
+
+<p style="margin-top:15px;">No. Exterior:</p>
+
+<p style="margin-top:15px;">CP:</p>
+
+<p style="margin-top:15px;">Municipio:</p>
+
+<p style="margin-top:15px;">Estado:</p>
+
+<p style="margin-top:15px;">País:</p>
+
+
+ </div>
+
+<div class="contendeor_inputs" >
+<p><input type="text" name="razon" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="RFC" class="background_gris"/> </p>
+
+<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
+
+<p style="margin-top:14px;"><input type="text" name="no_exterior" class="gris_input"/></p>
+
+<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
+
+<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
+<p style="margin-top:14px;"><select name="estado" class="gris_input"/> <option> --- </option>  </select></p>
+<p style="margin-top:14px;"><select name="pais" class="gris_input"/> <option> --- </option> </select> </p>
+
+
+</div>
+
+</div>
+<!--- 
+----  Fin contenedor fiscales usuario normal 
+   --->
+   
+   
+   <!--- 
+----  INICIO contenedor fiscales negocio; 
+   --->
+
+<div id="contenedor_fiscales_negocio" style="display:none;"> 
+
+<div class="texto_inputs" >
+<p> Razón Social:</p>
+
+<p style="margin-top:15px;">RFC:</p>
+
+<p style="margin-top:15px;">Calle:</p>
+
+<p style="margin-top:15px;">No. Exterior:</p>
+
+<p style="margin-top:15px;">CP:</p>
+
+<p style="margin-top:15px;">Municipio:</p>
+
+<p style="margin-top:15px;">Estado:</p>
+
+<p style="margin-top:15px;">País:</p>
+
+
+ </div>
+
+<div class="contendeor_inputs" >
+<p><input type="text" name="razon" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="RFC" class="gris_input"/> </p>
+
+<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
+
+<p style="margin-top:14px;"><input type="text" name="no_exterior" class="gris_input"/></p>
+
+<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
+
+<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
+<p style="margin-top:14px;"><select name="estado" class="gris_input"/> <option> --- </option>  </select></p>
+<p style="margin-top:14px;"><select name="pais" class="gris_input"/> <option> --- </option> </select> </p>
+
+
+</div>
+
+<div class="contenedor_fiscales"> Datos del negocio </div>
+
+
+<div class="texto_inputs" >
+Nombre:
+</div>
+
+<div class="contendeor_inputs" >
+<p><input type="text" name="nombre_negocio" class="gris_input"/> </p>
+</div>
+</br>
+<div class="giro_negocio"> 
+
+<div class="contenedor_giros">
+    <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_0" />
+      Accesorios para mascotas</label>
+    </br>
+    <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_1" />
+      Veterinaria</label>
+  </br>
+  
+     <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_2" />
+      Estetica canina</label>
+          <label>
+          </br>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_3" />
+    Adiestramiento canino</label>
+    
+  
+  
+  </div>
+  
+  <div class="contenedor_giros">
+    <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_4" />
+     Centro de sociabilización</label>
+    </br>
+    <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_5" />
+     Criadero de perros</label>
+  </br>
+  
+     <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_6" />
+      Hotel y pensión canina</label>
+          <label>
+          </br>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_7" />
+   Alimento y medicamento </label>
+    
+  
+  
+  </div>
+   <div class="contenedor_giros">
+    <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_8" />
+      Guarderia de perros</label>
+    </br>
+    <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_9" />
+      Tienda de mascotas</label>
+  </br>
+  
+     <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_10" />
+      Servicios funerarios</label>
+          <label>
+          </br>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_11" />
+     Servico de paseo</label>
+    
+  
+  
+  </div>
+
+</div>
+
+
+<div class="texto_inputs" >
+<p>Contacto:</p>
+
+<p style="margin-top:15px;">Teléfono:</p>
+<p style="margin-top:15px;">Calle:</p>
+<p style="margin-top:15px;">Número:</p>
+<p style="margin-top:15px;">Colonia:</p>
+<p style="margin-top:15px;">Municipio:</p>
+<p style="margin-top:15px;">Estado:</p>
+<p style="margin-top:15px;">Código Postal:</p>
+<p style="margin-top:15px;">E-mail:</p>
+<p style="margin-top:15px;">Página web:</p>
+<p style="margin-top:15px;">Logo:</p>
+<p style="margin-top:15px;">Descripción:</p>
+<p style="margin-top:35px;">Ubicación:</p>
+</div>
+
+<div class="contendeor_inputs" >
+<p><input type="text" name="nombre_contacto" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="telefono" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="num" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="colonia" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="estado" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="e-mail" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="pagina_web" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="file" name="logo" class="gris_input"/> </p>
+<p style="margin-top:14px;"><textarea rows="3" cols="40" name="descricion" class="gris_input"/> </textarea> </p>
+
+    
+    
+</div>
+
+</div>
+<!--- 
+----  Fin contenedor fiscales negocio
+ --->
+
+<!-- 
+---- Inicio fiscales AC
+    -->
+<div id="datos_fiscales_AC" style="display:none;">
+<div class="texto_inputs" >
+<p> Razón Social:</p>
+
+<p style="margin-top:15px;">RFC:</p>
+
+<p style="margin-top:15px;">Calle:</p>
+
+<p style="margin-top:15px;">No. Exterior:</p>
+
+<p style="margin-top:15px;">CP:</p>
+
+<p style="margin-top:15px;">Municipio:</p>
+
+<p style="margin-top:15px;">Estado:</p>
+
+<p style="margin-top:15px;">País:</p>
+
+
+ </div>
+
+<div class="contendeor_inputs" >
+<p><input type="text" name="razon" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="RFC" class="gris_input"/> </p>
+
+<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
+
+<p style="margin-top:14px;"><input type="text" name="no_exterior" class="gris_input"/></p>
+
+<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
+
+<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
+<p style="margin-top:14px;"><select name="estado" class="gris_input"/> <option> --- </option>  </select></p>
+<p style="margin-top:14px;"><select name="pais" class="gris_input"/> <option> --- </option> </select> </p>
+
+
+</div>
+
+<div class="contenedor_fiscales"> Datos de la Asociación </div>
+
+
+
+
+<div class="texto_inputs" >
+<p > Nombre: </p>
+<p style="margin-top:15px;">Contacto:</p>
+
+<p style="margin-top:15px;">Teléfono:</p>
+<p style="margin-top:15px;">Calle:</p>
+<p style="margin-top:15px;">Número:</p>
+<p style="margin-top:15px;">Colonia:</p>
+<p style="margin-top:15px;">Municipio:</p>
+<p style="margin-top:15px;">Estado:</p>
+<p style="margin-top:15px;">Código Postal:</p>
+<p style="margin-top:15px;">E-mail:</p>
+<p style="margin-top:15px;">Página web:</p>
+<p style="margin-top:15px;">Logo:</p>
+<p style="margin-top:15px;">Descripción:</p>
+<p style="margin-top:35px;">Ubicación:</p>
+</div>
+
+<div class="contendeor_inputs" >
+<p><input type="text" name="nombre_ac" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="nombre_contacto" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="telefono" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="num" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="colonia" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="estado" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="e-mail" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="pagina_web" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="file" name="logo" class="gris_input"/> </p>
+<p style="margin-top:14px;"><textarea rows="3" cols="40" name="descricion" class="gris_input"/> </textarea> </p>
+
+
+
+    
+    
+    <div id="map-canvas_dos"></div>
+    
+</div>
+
+</div>
+
+    
+<!-- 
+ --- Fin Fiscales AC
+  -->
+
+
+<div class="contenedor_boton" id="guardar_fiscales" style=" display:none;"> 
+<ul class="boton_gris_perfil">
+<li>
+Guardar
+</li>
+</ul>
 </div>
 
 
@@ -853,6 +1289,7 @@ Contacto
 <li>- Tutorial</li>
 <li>- Publicidad </li>
 <li>- Soporte </li>
+
 <li>- Preguntas Frecuentes </li>
 </ul>
 </li>
@@ -863,8 +1300,8 @@ Contacto
     
 <div class="footer">
 <img src="<?php echo base_url()?>images/perro_final.png" width="46" height="42"/>
-<a href="#" ><img  src="<?php echo base_url()?>images/ico_fb.png" width="32" height="32" style="margin-top:10px;"/></a>
-<a href="#" class="margen"><img src="<?php echo base_url()?>images/ico_tw.png" width="32" height="32" style="margin-top:10px;"/></a>
+<a href="<?php echo base_url()?>#" ><img  src="<?php echo base_url()?>images/ico_fb.png" width="32" height="32" style="margin-top:10px;"/></a>
+<a href="<?php echo base_url()?>#" class="margen"><img src="<?php echo base_url()?>images/ico_tw.png" width="32" height="32" style="margin-top:10px;"/></a>
 </div>
 <div class="division_final">
 
