@@ -65,10 +65,10 @@ $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
 $db['local']['hostname'] = '127.0.0.1';
-$db['local']['database'] = 'quierounperro';
+$db['local']['database'] = 'quieroun_perro_dev';
 $db['local']['username'] = 'root';
 $db['local']['password'] = 'ZQpZ5TWu';
-$db['local']['dbdriver'] = 'mysqli';
+$db['local']['dbdriver'] = 'mysql';
 $db['local']['dbprefix'] = '';
 $db['local']['pconnect'] = TRUE;
 $db['local']['db_debug'] = TRUE;
