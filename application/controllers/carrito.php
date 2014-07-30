@@ -53,7 +53,7 @@ class Carrito extends CI_Controller
         $data['direcciones'] = $this->usuario_model->getDireccionesEnvioUsuario($this->session->userdata('idUsuario'));
         $data['estados'] = $this->defaultdata_model->getEstados();
         $data['paises'] = $this->defaultdata_model->getPaises();
-        $data['cupones'] = $this->usuario_model->getCuponesUsuario($this->session->userdata('idUsuario'));
+        $data['cupones'] = $this->usuario_model->getCuponesUsuario($this->session->userdata('idUsuario'), 1);
 
         $carrito = $this->admin_model->getCarrito($this->session->userdata('idUsuario'));
         $carritototal = $this->admin_model->getSingleItem('usuarioID', $this->session->userdata('idUsuario'), 'carritototal');
@@ -242,9 +242,16 @@ class Carrito extends CI_Controller
     {
         //Obtiene el valor de idCuponAdquirido
         //TODO falta indicar que el cupon ya fue utilizado.
-        $descuento = $this->usuario_model->getValorDescuento($this->input->post('descuento'))->valor;
 
-        $descuento = $descuento == null ? 0 : $descuento;
+        $idCuponAdquirido = $this->usuario_model->getCuponesUsuario($this->session->userdata('idUsuario'), NULL, $this->input->post('descuento'));
+        if($idCuponAdquirido != null){
+            $this->session->set_userdata('cuponusuario', $idCuponAdquirido);
+            $descuento = $idCuponAdquirido->valor;
+
+        }else{
+            $descuento = 0;
+            $this->session->set_userdata('cuponusuario', null);
+        }
 
         $carrito = $this->admin_model->getCarrito($this->session->userdata('idUsuario'));
         $carritototal = $this->admin_model->getSingleItem('usuarioID', $this->session->userdata('idUsuario'), 'carritototal');
@@ -390,6 +397,8 @@ class Carrito extends CI_Controller
             $this->usuario_model->addCompra($compra, $compra_detalle);
 
             $this->usuario_model->deleteCarrito($usuario);
+
+            $this->usuario_model->save_cupones($this->session->userdata('cuponusuario'));
 
             if ($this->db->trans_status() === FALSE)
             {

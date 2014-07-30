@@ -179,7 +179,6 @@ body {
     padding: 0 10px;
     position: static;
     min-height: 450px;
-    overflow-y: auto;
 }
 
 .footer {
@@ -324,7 +323,6 @@ label.css-label {
     background-image: url(../images/boton_redondo.png);
     background-repeat: no-repeat;
     text-align: center;
-    padding-top: 10px;
 }
 
 .morado_reg li:hover {
@@ -338,7 +336,7 @@ label.css-label {
     text-decoration: none;
 }
 
-input[type=submit] {
+input[type=submit], .boton_verde a {
     background: none;
     border: none;
     color: white;
@@ -346,10 +344,28 @@ input[type=submit] {
     padding: 0;
     height: 100%;
     width: 100%;
+    font-family: "miFuente";
+    font-size: 15px;
+    cursor:pointer;
 }
 
-input[type=submit]:hover {
+.morado_reg input[type=submit]:hover {
     color: #762EA4;
+}
+
+.boton_verde input[type=submit], .boton_verde a, .boton_verde a:visited{
+    font-size: 12px!important;
+    padding: 5px;
+    text-decoration: none;
+    color: #ffffff!important;
+}
+.boton_verde input[type=submit]:hover {
+    color:#7EA715!important;
+    background-color: transparent!important;
+}
+.boton_verde a:hover{
+    margin: 0;
+    padding: 0;
 }
 
 /*flashes*/

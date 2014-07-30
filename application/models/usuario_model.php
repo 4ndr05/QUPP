@@ -304,7 +304,8 @@ class Usuario_model extends CI_Model {
 		}
 	}
 
-	function getCuponesUsuario($idUsuario, $tipo_cupon = null){
+	/*Obtiene los cupones que tiene el usuario filtrando el tipo de cupon o el cupon adquirido */
+	function getCuponesUsuario($idUsuario, $tipo_cupon = null, $id_cupon_adquirido = NULL){
 		$this->db->from('serviciocontratado sc');
 		$this->db->join('cuponadquirido ca', 'sc.servicioID=ca.servicioID AND sc.paqueteID=ca.paqueteID AND sc.detalleID=ca.detalleID');
 		$this->db->join('cupondetalle cd', 'ca.cuponID=cd.cuponID AND ca.cuponDetalleID=cd.cuponDetalleID');
@@ -316,6 +317,11 @@ class Usuario_model extends CI_Model {
 			$this->db->where('cd.tipoCupon', $tipo_cupon);
 		}
 
+		if(!is_null($id_cupon_adquirido)){
+			$this->db->where('ca.idCuponAdquirido', $id_cupon_adquirido);
+			return $this->db->get()->row();
+		}
+
 		return $this->db->get()->result();
 	}
 
@@ -324,16 +330,6 @@ class Usuario_model extends CI_Model {
 		$this->db->join('usuario u', 'ud.idUsuario=u.idUsuario');
 		$this->db->where('u.idUsuario', $idUsuario);
 		return $this->db->get()->result();
-	}
-
-	function getValorDescuento($id_cupon_adquirido){
-		$this->db->from('cuponadquirido ca');
-		$this->db->join('cupondetalle cd', 'ca.cuponID=cd.cuponID AND ca.cuponDetalleID=cd.cuponDetalleID');
-		$this->db->where('ca.idCuponAdquirido', $id_cupon_adquirido);
-		$this->db->where('ca.vigente', 1);
-		$this->db->where('ca.usado', 0);
-
-		$this->db->get()->row();
 	}
 
 	function addCompra($compra, $compra_detalle)
@@ -352,6 +348,14 @@ class Usuario_model extends CI_Model {
 	{
 		$this->db->delete('carrito', array('usuarioID' => $idUsuario));
 		$this->db->delete('carritototal', array('usuarioID' => $idUsuario));
+	}
+
+/**
+Recibe de parametro un objeto compuesto de cuponadquirido y cupondetalle
+**/
+	function save_cupones($idCuponAdquirido){
+		$this->db->where('idCuponAdquirido', $idCuponAdquirido->idCuponAdquirido);
+		$this->db->update('cuponadquirido', array('usado' => 1));
 	}
 
 

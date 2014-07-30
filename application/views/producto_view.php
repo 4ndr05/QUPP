@@ -37,8 +37,8 @@
             </div>
             <div class="costo_producto">
                 <font style=" padding-left:10px;"> $<?= $detalleAnuncio->precio ?></font>
-                <font style=" padding-left:10px;"> <input name="cantidad" type="number" min="1" value="1" size="3" maxlength="3" class="validate[required]"/>&nbsp;cantidad</font>
-                <font style="float:right; padding-right:10px;"> MX </font>
+                <font style="padding-right:10px;"> MX </font>
+                <font style=" padding-left:10px;"> <input name="cantidad" type="number" min="1" value="1" size="3" maxlength="3" class="validate[required]" style="width: 78px;"/>&nbsp;cantidad</font>
             </div>
             <div class="contenedor_select_producto">
                 <select class="select_producto validate[required]" name="talla">

@@ -117,38 +117,7 @@
         </li>
     </ul>
 </div>
-<div id="contenedor_central_superior" class="contenedor_central_superior">
-
-    <div id="banner_superior">
-        <img src="<?php echo base_url() ?>images/logo_superior.png" width="348" height="93" class="contenido_superior"/>
-
-        <div class="slideshow">
-            <?php if (is_logged() && ($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3)) {
-                if ($banner != null) {
-                    foreach ($banner as $contenido) {
-                        if ($this->session->userdata('zonaID') == $contenido->zonaID && $contenido->posicion == 1 && $contenido->seccionID == $seccion) {
-                            ?>
-                            <img src="<?php echo base_url() ?>images/<?php echo $contenido->imgbaner; ?>" width="638"
-                                 height="93"/>
-
-                        <?php
-                        }
-                    }
-                }
-            } else {
-                foreach ($banner as $contenido) {
-                    if ($contenido->zonaID == 9 && $contenido->posicion == 1 && $contenido->seccionID == $seccion) {
-                        ?>    <img src="<?php echo base_url() ?>images/<?php echo $contenido->imgbaner; ?>" width="638"
-                                   height="93"/>
-                    <?php }
-                }
-            } ?>
-        </div>
-
-
-    </div>
-</div>
-
+<?php $this->load->view('general/menu_view'); ?>
 
 <div class="contenedor_contactar_previo" id="contenedor_contactar_previo" style=" display:none;">
     <div class="contenedor_cerrar_contactar">
@@ -213,6 +182,7 @@
 
     </div>
     <br/>
+
     <div class="descipcion_pasos">
         <div class="titulo_de_pasos"> PUBLICAR ANUNCIO</div>
         <div class="instrucciones_pasos"> Selecciona la sección de publicación</div>
@@ -268,209 +238,210 @@
 
 </div>
 <br/>
+
 <div class="descipcion_pasos">
-    <div class="titulo_de_pasos"> PUBLICAR ANUNCIO</div>
-    <div class="instrucciones_pasos"> Indica tu tipo de anuncio</div>
-    <div class="contenido_indicacion">
-        <div id="contenedor_paquetes" class="contenedor_paquetes">
+<div class="titulo_de_pasos"> PUBLICAR ANUNCIO</div>
+<div class="instrucciones_pasos"> Indica tu tipo de anuncio</div>
+<div class="contenido_indicacion">
+    <div id="contenedor_paquetes" class="contenedor_paquetes">
 
 
-            <div class="paquetes_izquierda">
-                <label>
-                    <div class="title_paquetes">
-                        <div class="lateral_lite"></div>
-                        <img src="<?php echo base_url() ?>images/perrito_lite.png" class="margen" width="29"
-                             height="29"/> <font class="title_paquetes_titilos"> PAQUETE LITE </font>
-                    </div>
-                    <div class="precio_paquete_lite">
-                        <div class="el_titulo_paquete_lite"> Gratis</div>
-                        <div class="descripcion_precio_paquete_lite">al crear tu usuario</div>
-                    </div>
-                    <div class="descripcion_paquetes">
-                        <strong>Incluye:</strong>
-                        <ul class="contenido_paquetes">
-                            <li>
-                                * 1 fotos
-                            </li>
+        <div class="paquetes_izquierda">
+            <label>
+                <div class="title_paquetes">
+                    <div class="lateral_lite"></div>
+                    <img src="<?php echo base_url() ?>images/perrito_lite.png" class="margen" width="29"
+                         height="29"/> <font class="title_paquetes_titilos"> PAQUETE LITE </font>
+                </div>
+                <div class="precio_paquete_lite">
+                    <div class="el_titulo_paquete_lite"> Gratis</div>
+                    <div class="descripcion_precio_paquete_lite">al crear tu usuario</div>
+                </div>
+                <div class="descripcion_paquetes">
+                    <strong>Incluye:</strong>
+                    <ul class="contenido_paquetes">
+                        <li>
+                            * 1 fotos
+                        </li>
 
-                            <li>
-                                * Texto de 50 caracteres
-                            </li>
-                            <li>
-                                * Vigencia de 30 días.
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="iconos_paquetes">
-                        <ul>
-                            <li>
-                                <div class="cantidades_detalle_paquete_lite"> 10</div>
-                                <img src="<?php echo base_url() ?>images/icono_camara.png" width="34" height="26"/>
-                            </li>
-                            <li>
-                                <div class="cantidades_detalle_paquete_lite"> 10</div>
-                                <img src="<?php echo base_url() ?>images/icono_texto.png" width="34" height="26"/>
-                            </li>
-                            <li>
-                                <div class="cantidades_detalle_paquete_lite"> 10</div>
-                                <img src="<?php echo base_url() ?>images/icono_calendario.png" width="34" height="26"/>
-                            </li>
-                            <li>
-                                <div class="cantidades_detalle_paquete_of"> 0</div>
-                                <img src="<?php echo base_url() ?>images/icono_ticket_of.png" width="34" height="26"/>
-                            </li>
-                            <li>
-                                <div class="cantidades_detalle_paquete_of"> 0</div>
-                                <img src="<?php echo base_url() ?>images/icono_video_of.png" width="34" height="26"/>
-                            </li>
-                        </ul>
-                    </div>
+                        <li>
+                            * Texto de 50 caracteres
+                        </li>
+                        <li>
+                            * Vigencia de 30 días.
+                        </li>
+                    </ul>
+                </div>
+                <div class="iconos_paquetes">
+                    <ul>
+                        <li>
+                            <div class="cantidades_detalle_paquete_lite"> 10</div>
+                            <img src="<?php echo base_url() ?>images/icono_camara.png" width="34" height="26"/>
+                        </li>
+                        <li>
+                            <div class="cantidades_detalle_paquete_lite"> 10</div>
+                            <img src="<?php echo base_url() ?>images/icono_texto.png" width="34" height="26"/>
+                        </li>
+                        <li>
+                            <div class="cantidades_detalle_paquete_lite"> 10</div>
+                            <img src="<?php echo base_url() ?>images/icono_calendario.png" width="34" height="26"/>
+                        </li>
+                        <li>
+                            <div class="cantidades_detalle_paquete_of"> 0</div>
+                            <img src="<?php echo base_url() ?>images/icono_ticket_of.png" width="34" height="26"/>
+                        </li>
+                        <li>
+                            <div class="cantidades_detalle_paquete_of"> 0</div>
+                            <img src="<?php echo base_url() ?>images/icono_video_of.png" width="34" height="26"/>
+                        </li>
+                    </ul>
+                </div>
 
-                    <input type="radio" style="margin-left:100px;" name="RadioGroup1" value="radio" id="RadioGroup1_0"/>
-                </label>
-
-            </div>
-
-
-            <div class="paquetes">
-                <label>
-                    <div class="title_paquetes">
-                        <div class="lateral_regular"></div>
-                        <img src="<?php echo base_url() ?>images/perrito_regular.png" class="margen" width="29"
-                             height="29"/> <font class="title_paquetes_titilos"> PAQUETE REGULAR </font>
-
-                    </div>
-                    <div class="precio_paquete_regular"> $89.00</div>
-
-                    <div class="descripcion_paquetes">
-                        <strong>Incluye:</strong>
-                        <ul class="contenido_paquetes">
-                            <li>
-                                * 5 fotos
-                            </li>
-                            <li>
-                                * Texto de 150 caracteres
-                            </li>
-                            <li>
-                                * 1 video
-                            </li>
-                            <li>
-                                * 2 cupones
-                            </li>
-                            <li>
-                                * Vigencia de 30 días
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="iconos_paquetes">
-                        <ul>
-                            <li>
-                                <div class="cantidades_detalle_paquete_regular"> 5</div>
-                                <img src="<?php echo base_url() ?>images/icono_camara_regular.png" width="34"
-                                     height="26"/>
-                            </li>
-                            <li>
-                                <div class="cantidades_detalle_paquete_regular"> 150</div>
-                                <img src="<?php echo base_url() ?>images/icono_texto_regular.png" width="34"
-                                     height="26">
-                            </li>
-                            <li>
-                                <div class="cantidades_detalle_paquete_regular"> 30</div>
-                                <img src="<?php echo base_url() ?>images/icono_calendario_regular.png" width="34"
-                                     height="26"/>
-                            </li>
-                            <li>
-                                <div class="cantidades_detalle_paquete_regular"> 2</div>
-                                <img src="<?php echo base_url() ?>images/icono_ticket_regular.png" width="34"
-                                     height="26"/>
-                            </li>
-                            <li>
-                                <div class="cantidades_detalle_paquete_regular"> 1</div>
-                                <img src="<?php echo base_url() ?>images/icono_video_regular.png" width="34"
-                                     height="26"/>
-                            </li>
-                        </ul>
-                    </div>
-                    <input type="radio" style="margin-left:100px;" name="RadioGroup1" value="radio" id="RadioGroup1_1"/>
-                </label>
-            </div>
-
-
-            <div class="paquetes_derecha">
-                <label>
-                    <div class="title_paquetes">
-                        <div class="lateral_premium"></div>
-                        <img src="<?php echo base_url() ?>images/perrito_premium.png" class="margen" width="29"
-                             height="29"/> <font class="title_paquetes_titilos"> PAQUETE PREMIUM </font>
-
-                    </div>
-                    <div class="precio_paquete_premium"> $165.00</div>
-
-                    <div class="descripcion_paquetes">
-                        <strong>Incluye:</strong>
-                        <ul class="contenido_paquetes">
-                            <li>
-                                * 15 fotos
-                            </li>
-                            <li>
-                                * Caracteres ilimitados
-                            </li>
-                            <li>
-                                * 2 video
-                            </li>
-                            <li>
-                                * 5 cupones
-                            </li>
-                            <li>
-                                * Vigencia de 60 días
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="iconos_paquetes">
-                        <ul>
-                            <li>
-                                <div class="cantidades_detalle_paquete_premium"> 15</div>
-                                <img src="<?php echo base_url() ?>images/icono_camara_premium.png" width="34"
-                                     height="26"/>
-                            </li>
-                            <li>
-                                <div class="cantidades_detalle_paquete_premium"> ∞</div>
-                                <img src="<?php echo base_url() ?>images/icono_texto_premium.png" width="34"
-                                     height="26">
-                            </li>
-                            <li>
-                                <div class="cantidades_detalle_paquete_premium"> 60</div>
-                                <img src="<?php echo base_url() ?>images/icono_calendario_premium.png" width="34"
-                                     height="26"/>
-                            </li>
-                            <li>
-                                <div class="cantidades_detalle_paquete_premium"> 5</div>
-                                <img src="<?php echo base_url() ?>images/icono_ticket_premium.png" width="34"
-                                     height="26"/>
-                            </li>
-                            <li>
-                                <div class="cantidades_detalle_paquete_premium"> 2</div>
-                                <img src="<?php echo base_url() ?>images/icono_video_premium.png" width="34"
-                                     height="26"/>
-                            </li>
-                        </ul>
-                    </div>
-                    <input type="radio" style="margin-left:100px;" name="RadioGroup1" value="radio" id="RadioGroup1_2"/>
-                </label>
-            </div>
-
+                <input type="radio" style="margin-left:100px;" name="RadioGroup1" value="radio" id="RadioGroup1_0"/>
+            </label>
 
         </div>
-        <!-- Contenedor de paquetes  -->
 
-        <br/>
-        <ul class="morado">
-            <li onclick="muestra('paso_tres'); oculta('paso_dos');">Continuar
-            </li>
-        </ul>
+
+        <div class="paquetes">
+            <label>
+                <div class="title_paquetes">
+                    <div class="lateral_regular"></div>
+                    <img src="<?php echo base_url() ?>images/perrito_regular.png" class="margen" width="29"
+                         height="29"/> <font class="title_paquetes_titilos"> PAQUETE REGULAR </font>
+
+                </div>
+                <div class="precio_paquete_regular"> $89.00</div>
+
+                <div class="descripcion_paquetes">
+                    <strong>Incluye:</strong>
+                    <ul class="contenido_paquetes">
+                        <li>
+                            * 5 fotos
+                        </li>
+                        <li>
+                            * Texto de 150 caracteres
+                        </li>
+                        <li>
+                            * 1 video
+                        </li>
+                        <li>
+                            * 2 cupones
+                        </li>
+                        <li>
+                            * Vigencia de 30 días
+                        </li>
+                    </ul>
+                </div>
+                <div class="iconos_paquetes">
+                    <ul>
+                        <li>
+                            <div class="cantidades_detalle_paquete_regular"> 5</div>
+                            <img src="<?php echo base_url() ?>images/icono_camara_regular.png" width="34"
+                                 height="26"/>
+                        </li>
+                        <li>
+                            <div class="cantidades_detalle_paquete_regular"> 150</div>
+                            <img src="<?php echo base_url() ?>images/icono_texto_regular.png" width="34"
+                                 height="26">
+                        </li>
+                        <li>
+                            <div class="cantidades_detalle_paquete_regular"> 30</div>
+                            <img src="<?php echo base_url() ?>images/icono_calendario_regular.png" width="34"
+                                 height="26"/>
+                        </li>
+                        <li>
+                            <div class="cantidades_detalle_paquete_regular"> 2</div>
+                            <img src="<?php echo base_url() ?>images/icono_ticket_regular.png" width="34"
+                                 height="26"/>
+                        </li>
+                        <li>
+                            <div class="cantidades_detalle_paquete_regular"> 1</div>
+                            <img src="<?php echo base_url() ?>images/icono_video_regular.png" width="34"
+                                 height="26"/>
+                        </li>
+                    </ul>
+                </div>
+                <input type="radio" style="margin-left:100px;" name="RadioGroup1" value="radio" id="RadioGroup1_1"/>
+            </label>
+        </div>
+
+
+        <div class="paquetes_derecha">
+            <label>
+                <div class="title_paquetes">
+                    <div class="lateral_premium"></div>
+                    <img src="<?php echo base_url() ?>images/perrito_premium.png" class="margen" width="29"
+                         height="29"/> <font class="title_paquetes_titilos"> PAQUETE PREMIUM </font>
+
+                </div>
+                <div class="precio_paquete_premium"> $165.00</div>
+
+                <div class="descripcion_paquetes">
+                    <strong>Incluye:</strong>
+                    <ul class="contenido_paquetes">
+                        <li>
+                            * 15 fotos
+                        </li>
+                        <li>
+                            * Caracteres ilimitados
+                        </li>
+                        <li>
+                            * 2 video
+                        </li>
+                        <li>
+                            * 5 cupones
+                        </li>
+                        <li>
+                            * Vigencia de 60 días
+                        </li>
+                    </ul>
+                </div>
+                <div class="iconos_paquetes">
+                    <ul>
+                        <li>
+                            <div class="cantidades_detalle_paquete_premium"> 15</div>
+                            <img src="<?php echo base_url() ?>images/icono_camara_premium.png" width="34"
+                                 height="26"/>
+                        </li>
+                        <li>
+                            <div class="cantidades_detalle_paquete_premium"> ∞</div>
+                            <img src="<?php echo base_url() ?>images/icono_texto_premium.png" width="34"
+                                 height="26">
+                        </li>
+                        <li>
+                            <div class="cantidades_detalle_paquete_premium"> 60</div>
+                            <img src="<?php echo base_url() ?>images/icono_calendario_premium.png" width="34"
+                                 height="26"/>
+                        </li>
+                        <li>
+                            <div class="cantidades_detalle_paquete_premium"> 5</div>
+                            <img src="<?php echo base_url() ?>images/icono_ticket_premium.png" width="34"
+                                 height="26"/>
+                        </li>
+                        <li>
+                            <div class="cantidades_detalle_paquete_premium"> 2</div>
+                            <img src="<?php echo base_url() ?>images/icono_video_premium.png" width="34"
+                                 height="26"/>
+                        </li>
+                    </ul>
+                </div>
+                <input type="radio" style="margin-left:100px;" name="RadioGroup1" value="radio" id="RadioGroup1_2"/>
+            </label>
+        </div>
 
 
     </div>
+    <!-- Contenedor de paquetes  -->
+
+    <br/>
+    <ul class="morado">
+        <li onclick="muestra('paso_tres'); oculta('paso_dos');">Continuar
+        </li>
+    </ul>
+
+
+</div>
 
 
 </div>
@@ -496,6 +467,7 @@
 
     </div>
     <br/>
+
     <div class="descipcion_pasos_largo">
         <div class="titulo_de_pasos"> PUBLICAR ANUNCIO</div>
         <div class="instrucciones_pasos"> Completa tu información</div>
@@ -505,6 +477,7 @@
                 Apellido: <input type="text" class="background_morado_35" readonly="readonly"/> Correo electrónico:
                 <input type="text" class="background_morado" readonly="readonly"/></p>
             <br/>
+
             <p class="margen_15_left"> Teléfono: <input type="text" class="background_gris_35"/> Mostrar teléfono en el
                 anuncio: <select class="background_gris_35">
                     <option>--</option>
@@ -516,10 +489,12 @@
 
             <div class="sub_instrucciones_pasos"> Detalles del aunucio</div>
             <br/>
+
             <p class="margen_15_left">Sección: <input type="text" class="background_morado_55" readonly="readonly"/>
                 Paquete: <input type="text" class="background_morado_55" readonly="readonly"/> Vencimiento: <input
                     type="text" class="background_morado" readonly="readonly"/></p>
             <br/>
+
             <p class="margen_15_left"> Titúlo: &nbsp;&nbsp;&nbsp; <input type="text" class="background_gris_55"/> Estado
                 &nbsp;&nbsp;&nbsp;&nbsp;<select class="background_gris_100">
                     <option>--</option>
@@ -548,10 +523,12 @@
                 <input class="background_gris" type="text"/>
             </p>
             <br/>
+
             <p class="margen_15_left">
                 Descripción:<textarea class="background_gris" cols="95" rows="3"> </textarea>
             </p>
             <br/>
+
             <p class="margen_15_left">
                 Link de video <input type="text" size="98"/><img src="<?php echo base_url() ?>images/logo_youtube.png"/>
             </p>
@@ -559,6 +536,7 @@
             <p class="margen_15_left"><a href="<?php echo base_url() ?>#"> Tutorial para subir video a <img
                         src="<?php echo base_url() ?>images/logo_youtube.png" width="43" height="16"/> </a></p>
             <br/>
+
             <p class="margen_15_left">
 
                 <!-- <iframe src="<?php echo base_url() ?>../subir_archivos/index.html" style="overflow:none;" scrolling="no" width="800" height="100"> </iframe> -->
@@ -601,6 +579,7 @@
 
     </div>
     <br/>
+
     <div class="descipcion_pasos_largo">
         <div class="titulo_de_pasos"> PUBLICAR ANUNCIO</div>
         <div class="instrucciones_pasos"> Vista previa de tu anuncio</div>
@@ -676,6 +655,7 @@
 
                 <div id="video_previo" class="desplegar_detalles" style="display:none;">
                     <br/>
+
                     <div class="titulo_anuncio_publicado">
                         VIDEO
                     </div>
@@ -756,6 +736,7 @@
         </ul>
     </div>
     <br/>
+
     <div class="crerar_publicar_anuncio">
         <img src="<?php echo base_url() ?>images/cerrar.png" onclick="oculta('contenedor_publicar_anuncio');"/>
 
@@ -765,6 +746,7 @@
         <div class="titulo_de_pasos"> PUBLICAR ANUNCIO</div>
         <div class="instrucciones_pasos"> Detalle de compra:</div>
         <br/>
+
         <div class="tipo_paquete_pago">
             <img src="<?php echo base_url() ?>images/pago_lite.png"/>
         </div>
@@ -790,6 +772,7 @@
 
         <br/>
         <br/>
+
         <div style="margin-top:150px;">
             <div class="sub_instrucciones_pasos"><img style=" margin-left:15px;"
                                                       src="<?php echo base_url() ?>images/mini_cupon.png"/> Cupones
@@ -828,33 +811,6 @@
 </div>
 <!-- Fin del contenedor publicar anucio fondo negro -->
 
-
-<div class="menu_principal" id="menu_principal">
-    <div id="contenedor_menu_principal" class="contenedor_menu_principal">
-        <ul class="principal">
-            <li>
-                <a href="<?php echo base_url() ?>">
-                    Inicio
-                </a>
-            </li>
-            <li>
-                <a href="<?php echo base_url() ?>"> Venta </a>
-            </li>
-            <li>
-                Cruza
-            </li>
-            <li>
-                Adopción
-            </li>
-            <li><a href="<?php echo base_url() ?>principal/tienda" style="color:#FFF;text-decoration:none;">Tienda</a>
-            </li>
-            <li>
-                Directorio
-            </li>
-        </ul>
-    </div>
-</div>
-
 <div class="titulo_seccion">
     TIENDA
 </div>
@@ -866,7 +822,8 @@
 <div id="contenedor_central">
     <div id="espacio_izquierda" class="seccion_izquierda_secciones">
         <ul class="iconos">
-            <li><a href="<?php echo base_url('carrito') ?>"><img src="<?php echo base_url() ?>images/compras.png"/></a></li>
+            <li><a href="<?php echo base_url('carrito') ?>"><img src="<?php echo base_url() ?>images/compras.png"/></a>
+            </li>
             <li><img src="<?php echo base_url() ?>images/sesion.png"/></li>
             <li>
                 <img src="<?php echo base_url() ?>images/registrate.png"/>
@@ -882,50 +839,50 @@
             <?php echo $this->session->flashdata('info'); ?>
         <?php endif; ?>
         <!-- item container -->
-        <div id="itemContainer" style="overflow-y: auto; height: auto!important;">
-            <!-- Inicio FILA -->
+        <div style="position: relative;">
+            <div id="itemContainer" style="overflow-y: auto; height: auto!important;">
+                <!-- Inicio FILA -->
 
-            <?php if ($catalogo != null):
-                foreach ($catalogo as $item):?>
-                    <!-- INICIO contenedor anuncio  -->
-                    <!--<input type="hidden" name="productoID" id="productoID" value="<?php echo $item->productoID ?>" />-->
-                    <div class="contenedor_producto" id="<?php echo $item->productoID ?>">
-                        <div class="contenedor_picture">
-                            <?php if ($item->foto != null): ?>
-                                <img src="<?php echo base_url() ?>images/productos/<?php echo $item->foto ?>"
-                                     width="184" height="158"/>
-                            <?php else: ?>
-                                <img src="<?php echo base_url() ?>images/productos/default.png" width="184"
-                                     height="158"/>
-                            <?php endif; ?>
+                <?php if ($catalogo != null):
+                    foreach ($catalogo as $item):?>
+                        <!-- INICIO contenedor anuncio  -->
+                        <!--<input type="hidden" name="productoID" id="productoID" value="<?php echo $item->productoID ?>" />-->
+                        <div class="contenedor_producto" id="<?php echo $item->productoID ?>">
+                            <div class="contenedor_picture">
+                                <?php if ($item->foto != null): ?>
+                                    <img src="<?php echo base_url() ?>images/productos/<?php echo $item->foto ?>"
+                                         width="184" height="158"/>
+                                <?php else: ?>
+                                    <img src="<?php echo base_url() ?>images/productos/default.png" width="184"
+                                         height="158"/>
+                                <?php endif; ?>
+                            </div>
+                            <div class="contenedor_descripcion_precio_producto detalleProducto"
+                                 id="<?php echo $item->productoID ?>">
+                                <font class="nombre_producto"><?php echo $item->nombre ?></font>
+                                <br/>
+                                <font class="precio_producto"><?php echo '$' . $item->precio ?></font>
+                            </div>
+
+                            <div>
+                            </div>
                         </div>
-                        <div class="contenedor_descripcion_precio_producto detalleProducto"
-                             id="<?php echo $item->productoID ?>">
-                            <font class="nombre_producto"><?php echo $item->nombre ?></font>
-                            <br/>
-                            <font class="precio_producto"><?php echo '$' . $item->precio ?></font>
+
+
+                        <!-- Fin contenedor annuncio -->
+
+
+                        <!-- Inicio margen falso -->
+                        <div class="margen_derecho_20">
+
                         </div>
-
-                        <div>
-                        </div>
-                    </div>
-
-
-                    <!-- Fin contenedor annuncio -->
-
-
-                    <!-- Inicio margen falso -->
-                    <div class="margen_derecho_20">
-
-                    </div>
-                    <!-- FIN margen falso -->
-                <?php
-                endforeach;
-            endif;?>
-            <!-- FIN FILA ---->
+                        <!-- FIN margen falso -->
+                    <?php
+                    endforeach;
+                endif;?>
+                <!-- FIN FILA ---->
+            </div>
         </div>
-        <br/>
-        <br/>
         <br/>
         <?php echo $this->pagination->create_links(); ?>
 
@@ -946,7 +903,7 @@
 </div>
 
 
-<div class="slideshow_tres">
+<div class="slideshow_tres" style="clear: both;">
     <?php if (is_logged() && ($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3)) {
         if ($banner != null) {
             foreach ($banner as $contenido) {
@@ -964,11 +921,12 @@
             if ($contenido->zonaID == 9 && $contenido->posicion == 3 && $contenido->seccionID == $seccion) {
                 ?>    <img src="<?php echo base_url() ?>images/<?php echo $contenido->imgbaner; ?>" width="638"
                            height="93"/>
-            <?php }
+            <?php
+            }
         }
     } ?>
 </div>
-
+<br/>
 <div class="division_menu_inferior"></div>
 <div class="contenedor_menu_inferior" align="center">
 

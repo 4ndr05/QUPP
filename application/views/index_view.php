@@ -832,32 +832,7 @@
         </li>
     </ul>
 </div>
-
-<div class="">
-
-    <div class="contenedor_central_banner">
-
-        <div id="contenedor_central_superior" class="contenedor_central_superior">
-
-            <div id="banner_superior">
-                <img src="<?php echo base_url() ?>images/logo.png" width="348" height="93" class="contenido_superior"/>
-
-                <div class="slideshow">
-                    <img src="<?php echo base_url() ?>images/banner_superior/1.png" width="638" height="93"/>
-                    <img src="<?php echo base_url() ?>images/banner_superior/2.png" width="638" height="93"/>
-                    <img src="<?php echo base_url() ?>images/banner_superior/3.png" width="638" height="93"/>
-                </div>
-
-                </br>
-
-            </div>
-        </div>
-
-        <?php $this->load->view('general/menu_view'); ?>
-
-    </div>
-
-</div>
+<?php $this->load->view('general/menu_view'); ?>
 
 <center>
 </br>

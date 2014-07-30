@@ -155,20 +155,7 @@
             </li>
         </ul>
     </div>
-    <div id="contenedor_central_superior" class="contenedor_central_superior">
-
-        <div id="banner_superior">
-            <img src="<?php echo base_url() ?>images/logo_superior.png" width="348" height="93" class="contenido_superior"/>
-
-            <div class="slideshow">
-                <img src="<?php echo base_url() ?>images/banner_superior/1.png" width="638" height="93"/>
-                <img src="<?php echo base_url() ?>images/banner_superior/2.png" width="638" height="93"/>
-                <img src="<?php echo base_url() ?>images/banner_superior/3.png" width="638" height="93"/>
-            </div>
-
-
-        </div>
-    </div>
+    <?php $this->load->view('general/menu_view') ?>
 
 
     <div class="contenedor_contactar_previo" id="contenedor_contactar_previo" style=" display:none;">
@@ -871,7 +858,6 @@
 </div>
 
 <!-- Fin del contenedor publicar anucio fondo negro -->
-<?php $this->load->view('general/menu_view') ?>
 
 <div class="titulo_seccion">
     MI CARRITO
@@ -894,7 +880,6 @@
 
 
     <div class="contenedor_central">
-        <font class="subti_info_tienda"> Articulos incluidos en el carrito: </font>
         <br/>
         <br/>
         <table width="795" class="tabla_carrito">
@@ -918,129 +903,153 @@
 
             <?php if ($carrito != null):
             foreach ($carrito as $product):
-                    /*foreach ($this->cart->contents() as $cartP): ?>
-
-                <?php echo form_hidden($cartP['rowid']);*/
                 ?>
-
-
-                <tr>
+            <tr>
+                <td>
+                    <img
+                    src="<?php echo base_url() ?>images/productos/<?php echo ($product->foto != null) ? $product->foto : 'default.png' ?>"
+                    width="47" height="41"/></td>
                     <td>
-                        <img
-                        src="<?php echo base_url() ?>images/productos/<?php echo ($product->foto != null) ? $product->foto : 'default.png' ?>"
-                        width="47" height="41"/></td>
-                        <td>
-                            <?php echo $product->nombre ?><br/>
-                            Talla: <?php echo $product->talla ?><br/>
-                            Color: <?php echo $product->color ?>
-                        </td>
-                        <td>
-                            <input type="hidden" name="precio" id="precio" value="<?php echo $product->precio ?>"/>
-                            $<?php echo $product->precio ?>
-                        </td>
-                        <td>
-                            <input type="hidden" name="cantidadV" id="cantidadV"
-                            value="<?php echo $product->cantidad ?>" class="cantidadValor"/>
-                            <input type="number" min="1" class="cantidad" value="<?php echo $product->cantidad ?>"
-                            name="cantidad" id="" data-rel="<?php echo $product->cartID ?>">
-                        </td>
-                        <td>
-                            <img src="<?php echo base_url() ?>images/eliminar.png" class="deleteItem"
-                            data-rel="<?php echo $product->cartID ?>"/>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="5">
-                        No hay productos en el carrito.
+                        <?php echo $product->nombre ?><br/>
+                        Talla: <?php echo $product->talla ?><br/>
+                        Color: <?php echo $product->color ?>
+                    </td>
+                    <td>
+                        <input type="hidden" name="precio" id="precio" value="<?php echo $product->precio ?>"/>
+                        $<?php echo $product->precio ?>
+                    </td>
+                    <td>
+                        <input type="hidden" name="cantidadV" id="cantidadV"
+                        value="<?php echo $product->cantidad ?>" class="cantidadValor"/>
+                        <input type="number" min="1" class="cantidad" value="<?php echo $product->cantidad ?>"
+                        name="cantidad" id="" data-rel="<?php echo $product->cartID ?>">
+                    </td>
+                    <td>
+                        <img src="<?php echo base_url() ?>images/eliminar.png" class="deleteItem"
+                        data-rel="<?php echo $product->cartID ?>"/>
                     </td>
                 </tr>
+            <?php endforeach; ?>
+            <tr>
+             <td colspan="4"> <p class="subtotal"> SUBTOTAL </p> </td>
+             <td> <p class="sub_cantidad"> $&nbsp;<?php echo $carritototal->subtotal; ?> </p> </td>
+         </tr>
+         <tr> 
+           <td colspan="4">
+               <p class="subtotal"> <img src="images/cupon_perfil.png" width="34" height="27"> Cupones de descuento
+                   <br>
+                   <font id="ver_cupones" class="ver_cupones" onclick="muestra('los_cupones'); muestra('ocultar_cupones'); oculta('ver_cupones');" style="display: none;"> Ver cupones </font>
+                   <font id="ocultar_cupones" class="ver_cupones" onclick="oculta('los_cupones'); oculta('ocultar_cupones');muestra('ver_cupones');" style="display: block;"> Ocultar cupones </font>
 
-            <?php endif;?>
-
-
-        </table>
-        <br/>
-        <?php if(!empty($cupones)): ?>
-            <div class="contenedor_cupones_productos">
-                <div class="cupones_productos">
-                    Cupones disponibles
-                </div>
-                <br/>
-
-                <p>
-                    <?php foreach($cupones as $cupon): ?>
+               </p><div style="display: block;" id="los_cupones"> 
+               <?php if (!empty($cupones)): ?>
+                   <p class="subtotal"> 
+                       <br>
+                       <?php foreach ($cupones as $cupon): ?>
                         <label>
-                            <input type="radio" name="descuento" value="<?php echo $cupon->idCuponAdquirido ?>" class="descuento" data-rel="<?php echo $carritototal->carritoTotalID ?>" <?php echo ($carritototal->descuento == $cupon->valor) ? 'checked=checked' : '' ?>/>
+                            <input type="radio" name="descuento" value="<?php echo $cupon->idCuponAdquirido ?>"
+                            class="descuento"
+                            data-rel="<?php echo $carritototal->carritoTotalID ?>" <?php echo ($carritototal->descuento == $cupon->valor) ? 'checked=checked' : '' ?>/>
                             <?php echo $cupon->valor ?>% de descuento</label><br/>
                         <?php endforeach; ?>
 
-                        <br/>
-                    </p>
+                        <label>
+                           <input type="radio" name="descuento" class="descuento" value="" data-rel="<?php echo $carritototal->carritoTotalID ?>"/>
+                           No usar cupones</label>
+                           <br/>
+                           <br/>
+                       </p>
+                   <?php endif; ?>
+               </div>
+               <p></p>
 
+           </td>
+           <td> <p class="sub_cantidad">  - $<?php echo number_format($carritototal->subtotal - $carritototal->totalPrecio, 2) ?> </p> </td>
+       </tr>
+       <!-- datos de envio -->
+       <tr>
+           <td colspan="4">
+               <p class="subtotal"><img src="images/sobre_perfil.png" width="34" height="27"> Gastos de envío <br>
+                 <font id="mostrar_envio" class="ver_cupones" onclick="muestra('los_datos_envio'); muestra('ocultar_envio'); oculta('mostrar_envio');" style="display: none;">  Ver datos de envío </font>
+                 <font id="ocultar_envio" class="ver_cupones" style="display: block;" onclick="muestra('mostrar_envio');oculta('los_datos_envio');oculta('ocultar_envio');">  Ocultar datos de envío </font>
+             </p>
+             <br/>
+             <div id="los_datos_envio" style="display: block;"> 
+                <div class="subtotal">
+                    <div style="margin-bottom:20px;">
+                        <a> Datos de envio </a> Datos de envio guardados
+                        <select id="direcciones">
+                            <option> ---</option>
+                            <?php if (!is_null($direcciones)): ?>
+                                <?php foreach ($direcciones as $direccion): ?>
+                                    <option data-nombre="<?php echo $direccion->nombre ?>"
+                                        data-apellido="<?php echo $direccion->apellido ?>"
+                                        data-cp="<?php echo $direccion->cp ?>" data-calle="<?php echo $direccion->calle ?>"
+                                        data-numero="<?php echo $direccion->numero ?>"
+                                        data-colonia="<?php echo $direccion->colonia ?>"
+                                        data-estado="<?php echo $direccion->idEstado ?>"><?php echo $direccion->idusuarioDetalle ?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Nombre:</label> <input class="background_gris_mini" name="nombre" type="text" value="<?php echo $datosPersonales->nombre ?>"/>
+                            <label>Apellidos:</label> <input class="background_gris_mini" name="apellidos" type="text" value="<?php echo $datosPersonales->apellido ?>"/>
+                        </div>
+                        <div>
+                            <label>C.P:</label> <input class="background_gris_mini" name="cp" type="text" value="<?php echo $datosPersonales->cp ?>"/>
+                            <label>Calle:</label> <input class="background_gris_mini" name="calle" type="text" value="<?php echo $datosPersonales->calle ?>"/>
+                        </div>
+                        <div>
+                            <label>Número:</label> <input name="noExterior" class="background_gris_mini" type="text" value="<?php echo $datosPersonales->numero ?>"/>
+                            <label>Colonia:</label> <input class="background_gris_mini" type="text" name="colonia"
+                            value="<?php echo $datosPersonales->colonia ?>"/>
+                        </div>
+                        <div>                   
+                            <label>Ciudad:</label> <input class="background_gris_mini" type="text" name="ciudad"
+                            value="<?php echo $datosPersonales->municipio ?>"/>
+                            <label>Estado:</label> <select class="background_gris_mini" name="idEstado">
+                            <option> ---</option>
+                            <?php
+                            if ($estados != null):
+                                foreach ($estados as $edo):
+                                    ?>
+                                <option
+                                value="<?php echo $edo->estadoID ?>" <?php echo ($edo->estadoID == $datosPersonales->idEstado) ? 'selected="selected"' : '' ?>><?php echo $edo->nombreEstado ?></option>
+
+                            <?php endforeach;
+                            endif; ?>
+                        </select>
+                    </div>
+                    <div>          
+
+                        <label>Pais:</label> <select class="background_gris_mini" name="idPais">
+                        <option> México</option>
+                    </select>
                 </div>
-                <br/>
-            <?php endif; ?>
-
-            <div class="total_productos">
-                <div class="contenedor_total_productos"> Subtotal $<input type="text" name="subtotal"
-                  class="total_solo_productos"
-                  value="<?php echo $carritototal->subtotal; ?>"/>
-              </div>
-              <div class="contenedor_total_productos"> Total <input type="text" name="total" id="total"
-                  class="total_solo_productos"
-                  value="<?php echo $carritototal->totalPrecio; ?>"/>
-              </div>
-          </div>
-          <br/>
-          <br/>
-
-
-          <div class="cupones_productos">
-            <a> Datos de envio </a> Datos de envio guardados 
-            <select id="direcciones">
-                <option> ---</option>
-                <?php if (!is_null($direcciones)): ?>
-                    <?php foreach ($direcciones as $direccion): ?>
-                        <?php var_dump($direccion) ?>
-                        <option data-nombre="<?php echo $direccion->nombre ?>" data-apellido="<?php echo $direccion->apellido ?>" data-cp="<?php echo $direccion->cp ?>" data-calle="<?php echo $direccion->calle ?>" data-numero="<?php echo $direccion->numero ?>" data-colonia="<?php echo $direccion->colonia ?>" data-estado="<?php echo $direccion->idEstado ?>"><?php echo $direccion->idusuarioDetalle ?></option>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </select>
+            </div>
         </div>
-        <br/><br/>
-        Nombre: <input name="nombre" type="text" value="<?php echo $datosPersonales->nombre ?>"/> &nbsp;&nbsp;&nbsp;
-        Apellidos: <input name="apellidos" type="text" value="<?php echo $datosPersonales->apellido ?>"/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C.P: <input name="cp" type="text" style="margin-left:32px;"
-        value="<?php echo $datosPersonales->cp ?>"/>
-        <br/>
-        <br/>
-        Calle: <input name="calle" type="text" style=" margin-left:22px;"
-        value="<?php echo $datosPersonales->calle ?>"/> &nbsp;&nbsp;&nbsp; Número: <input
-        name="noExterior" type="text" style="margin-left:10px;" value="<?php echo $datosPersonales->numero ?>"/>
-        &nbsp;&nbsp;&nbsp;&nbsp; Colonia: <input type="text" name="colonia" value="<?php echo $datosPersonales->colonia ?>"/>
-        <br/>
-        <br/>
-        Ciudad: <input type="text" style=" margin-left:5px;" name="ciudad" value="<?php echo $datosPersonales->municipio ?>"/>
-        &nbsp;&nbsp;&nbsp; Estado: <select style="margin-left:20px;" name="idEstado">
-        <option> ---</option>
-        <?php
+    </td>
+    <td> <p class="sub_cantidad">  $0.00 </p> </td>
+</tr>
+<tr>
+     <th colspan="4"> TOTAL </th>
+     <th> $&nbsp;<?php echo $carritototal->totalPrecio; ?> </th>
+      </tr>
+<?php else: ?>
+    <tr>
+        <td colspan="5">
+            No hay productos en el carrito.
+        </td>
+    </tr>
 
-        if ($estados != null):
-            foreach ($estados as $edo):
-                ?>
-            <option
-            value="<?php echo $edo->estadoID ?>" <?php echo ($edo->estadoID == $datosPersonales->idEstado) ? 'selected="selected"' : '' ?>><?php echo $edo->nombreEstado ?></option>
+<?php endif; ?>
 
-        <?php endforeach;
-        endif; ?>
-    </select>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    Pais: <select style="margin-left:30px;" name="idPais">
-    <option> México</option>
-</select>
+
+</table>
+<br/>
+
+
 <br/>
 <br/>
 <br/>
@@ -1048,7 +1057,7 @@
     <li>
         <script type="text/javascript" src="http://mp-tools.mlstatic.com/buttons/render.js"></script>
         <a href="<?php echo $preference['response']['sandbox_init_point']; ?>" name="MP-Checkout"
-           class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn">Pagar</a>
+           class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn" style="padding: 0px;">Pagar</a>
 
 
            <script type="text/javascript">
@@ -1056,23 +1065,24 @@
                 console.log(json.back_url, json.collection_id, json.collection_status, json.external_reference, json.preference_id);
 
                 if (json.collection_status == 'approved' || json.collection_status == 'in_process') {
-                    window.location = "<?php echo base_url('carrito/guardar_compra') ?>?id="+json.collection_id
+                    window.location = "<?php echo base_url('carrito/guardar_compra') ?>?id=" + json.collection_id
                 } else if (json.collection_status == 'pending') {
                     alert('El usuario no completó el pago');
                 } else if (json.collection_status == 'rejected') {
                     alert('El pago fué rechazado, el usuario puede intentar nuevamente el pago');
                 }
-            }                   
+            }
         </script>
     </li>
 </ul>
 <br/>
 <br/>
+
 <p>&nbsp; </p>
 <br/>
 <br/>
 </div>
-</div>
+
 <div class="seccion_derecha_paquetes">
     <ul class="aqui_crear_anuncio">
         <li onclick="muestra('contenedor_publicar_anuncio');">
@@ -1162,16 +1172,16 @@
             window.$MPBR_loaded !== true ? (window.attachEvent ? window.attachEvent('onload', $MPBR_load) : window.addEventListener('load', $MPBR_load, false)) : null;
         })();
 
-        $(function(){
-            $('#direcciones').on('change', function(){
+        $(function () {
+            $('#direcciones').on('change', function () {
                 var optionSel = $('option:selected', this);
-                var nombre =optionSel.data('nombre');
-                var apellido =optionSel.data('apellido');
-                var cp =optionSel.data('cp');
-                var calle =optionSel.data('calle');
-                var numero =optionSel.data('numero');
-                var colonia =optionSel.data('colonia');
-                var estado =optionSel.data('estado');
+                var nombre = optionSel.data('nombre');
+                var apellido = optionSel.data('apellido');
+                var cp = optionSel.data('cp');
+                var calle = optionSel.data('calle');
+                var numero = optionSel.data('numero');
+                var colonia = optionSel.data('colonia');
+                var estado = optionSel.data('estado');
 
 
                 $('[name=nombre]').val(nombre);

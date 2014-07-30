@@ -85,5 +85,9 @@ class Defaultdata_model extends CI_Model {
         $this->db->join('cupondetalle cd', 'c.cuponID=cd.cuponID');
         return $this->db->get()->result();
     }
+
+    function getBanner(){
+       return $this->db->get('banner')->result();
+    }
 }
 ?>
