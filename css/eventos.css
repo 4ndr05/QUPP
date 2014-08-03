@@ -1,0 +1,61 @@
+.aqui_crear_anuncio_eventos li {
+width: 53px;
+height: 235px;
+background-image: url(../images/publica_evento.png);
+}
+.aqui_crear_anuncio_eventos li:hover {
+background-image: url(../images/publica_evento_hover.png);
+cursor: pointer;
+}
+.contenedor_evento{
+	width:790px;
+	height:174px;
+	border: 1px solid #707173;
+	margin-top:25px;
+	}
+.contenedor_imagen_evento{
+	width:127px;
+	height:174px;
+	display:inline-block;
+	}
+.contenedor_fecha_evento{
+	width:68px;
+	height:77px;
+	background-color:#D40050;
+	border: 1px solid #FFF;
+	position:absolute;
+	margin-left:5px;
+	margin-top:-25px;
+	text-align:center;
+	color:#FFFFFF;
+	}
+.dia{
+	font-size:28px;
+	margin-top:10px;
+	}
+.mes{
+	font-size:12px;}
+.titulo_evento_mes{
+	display: inline-block;
+	width:659px;
+	font-weight:bolder;
+	font-size:19px;
+	}
+.contenido_evento{
+	display:inline-block;
+	width:649px;
+	padding:5px;
+	position:absolute;
+	}
+.ver_mas_evento{
+	width:382px;
+	height:23px;
+	background-image:url(../images/ver_mas_evento.png);
+	background-repeat:no-repeat;
+	position:absolute;
+	margin-top: 18px;
+    margin-left: 276px;
+	text-align:right;
+	font-weight:bolder;
+}
+.ver_mas_evento:hover
