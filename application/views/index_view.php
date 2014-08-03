@@ -58,8 +58,9 @@
                 var data = json;
                 console.log(data.response);
                 if (data.response == true) {
+                    
 
-                    $("#confirm").prepend('<label>Tu usuario ha sido creado exitosamente, por favor activa tu cuenta atravez del e-mail que ha sido enviado a tu cuenta de correo electronico. Para poder anunciarte y publicar anuncios, deberás registrar tu información completa. Esto lo podrás hacer en cualquier momento entrando a tu perfil.</label>');
+                    $("#confirm").html('<label>Tu usuario ha sido creado exitosamente, por favor activa tu cuenta atravez del e-mail que ha sido enviado a tu cuenta de correo electronico. Para poder anunciarte y publicar anuncios, deberás registrar tu información completa. Esto lo podrás hacer en cualquier momento entrando a tu perfil.</label>');
                     muestra('contenedor_correcto');
                     oculta('contenedor_registro');
 
@@ -703,7 +704,7 @@
 </br>
 <ul class="morado_reg">
     <li><!--<a href="#" id="suscribir" style="text-decoration:none; color:#FFF;">Suscribirse</a>-->
-        <input type="submit" value="Suscribir" class="el_submit" onClick="$('#registerNow')[0].reset();"/>
+        <input type="submit" value="Suscribir" class="el_submit"/>
          
     </li>
 </ul>
@@ -724,7 +725,7 @@
 <!-- ------------------------------------------------------ -->
 <div class="contenedor_registro" id="contenedor_correcto" style="display:none;"> <!-- Contenedor negro reistro-->
     <div class="cerrar_registro"><img src="<?php echo base_url() ?>images/cerrar.png"
-                                      onclick="oculta('contenedor_correcto');"/></div>
+                                      onclick="oculta('contenedor_correcto');$('#registerNow')[0].reset();"/></div>
 
     <div class="registro_normal"> <!-- Contenedor morado registro -->
 
