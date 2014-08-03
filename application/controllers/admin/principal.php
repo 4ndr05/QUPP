@@ -133,6 +133,12 @@ class Principal extends CI_Controller {
                         $folder = '';
                     break;
 
+                    case 7:
+                        $alto = 166;
+                        $ancho = 136;
+                        $folder = 'perros_perdidos';
+                    break;
+
                     case 8:
                         $alto = 166;
                         $ancho = 136;
@@ -169,6 +175,20 @@ class Principal extends CI_Controller {
             
         }
 
+        if($seccion == 7 || $seccion == 8 || $seccion == 9 || $seccion == 10){
+        //REGISTRO FOTOS
+        $this->load->library('upload'); 
+
+      
+        $config['upload_path'] = 'images/'.$folder;
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '5120';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '768';
+        $this->upload->initialize($config);
+        $this->upload->do_multi_upload("bannerA");
+        }else{
+
         $file_data = array(
                 'date'=>false,
                 'random' => true,
@@ -184,7 +204,7 @@ class Principal extends CI_Controller {
                 //$this -> session -> set_flashdata('custom_error', $imagen['error']);
                 echo 'error';
                 //var_dump($imagen);
-            }else{
+            
 
                 $data = array(
                     'imgbaner' => $folder.'/'.$imagen, 
@@ -195,7 +215,8 @@ class Principal extends CI_Controller {
 
                 $banner = $this->admin_model->insertBanner($data);
             }
-
+        }
+        
          redirect('admin/principal/getPantalla/'.$seccionID.'/'.$zonaID);
     }
 
