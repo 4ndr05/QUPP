@@ -131,7 +131,7 @@ body{
 	color:#FFF;
 	font-size:18px;
 	font-family:"miFuente";
-	border-right:2px inset #FFF;
+	border-right:2px solid #FFF;
 	padding-right:5px;
 	}
 .principal li:hover {
@@ -394,15 +394,12 @@ body{
 	}
 .reset{
 	color:#000000;
-	}
-.imagen_relleno{
-	position:absolute; 
-	margin-left:-25px;
+	text-decoration:none;
 	}
 .ver_mas{
 	width:237px; height:23px; 
 	background-image:url(../images/ver_mas.png); 
-	margin-top:102px; 
+	margin-top:-23px; 
 	position: absolute; 
 	text-align:right;
 	padding-right:5px;
@@ -879,6 +876,7 @@ body{
 	background-color:#C6C7C8;}
 .reset_mini{
 	color:#000000;
+	text-decoration:none;
 	}
 .contenedor_paquetes_mini{
 	margin-left:70px;
@@ -985,7 +983,7 @@ body{
 	}
 	
 .datos_general_mini{
-    width: 249px;
+    width: 248px;
     height: 243px;
     display: inline-block;
     margin-left: 10px;
