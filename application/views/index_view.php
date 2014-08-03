@@ -207,31 +207,29 @@
 
     <p style="margin-top:15px;">Apellido:</p>
 
-    <p style="margin-top:15px;">correo:</p>
+    <p style="margin-top:15px;">Correo:</p>
 
-    <p style="margin-top:15px;">Telefono:</p>
+    <p style="margin-top:15px;">Teléfono:</p>
 
-    <p style="margin-top:15px;">contrasena:</p>
+    <p style="margin-top:15px;">Contrase&ntilde;a:</p>
 
-    <p>Confirmar contrasena:</p>
-
-</div>
-<div class="contendeor_inputs">
-    <p><input type="text" name="nombre" id="nombre" class="validate[required]"/> *</p>
-
-    <p><input type="text" name="apellido" id="apellido" class="validate[required]"/> *</p>
-
-    <p><input type="text" name="correo" class="validate[required,custom[email],ajax[isthereemail]]"/> *</p>
-
-    <p><input type="text" name="telefono" class="validate[custom[integer]]"/></p>
-
-    <p><input type="password" name="contrasena" id="contrasena1" class="validate[required]"/> *</p>
-    </br>
-    <p><input type="password" name="confirmar" id="contrasena2" class="validate[required,equals[contrasena1]]"/> *</p>
-
+    <p>Confirmar Contrase&ntilde;a:</p>
 
 </div>
+<div class="contendeor_inputs" >
+<p><input type="text" name="nombre" id="nombre" class="validate[required,onlyLetterSp]"/> *</p>
+<p><input type="text" name="apellido" id="apellido" class="validate[required,onlyLetterSp]"/> *</p>
 
+<p><input type="text" name="correo" class="validate[required,custom[email],ajax[isthereemail]]" /> *</p>
+
+<p><input type="text" name="telefono" class="validate[custom[integer,onlyNumberSp,]]"/></p>
+
+<p><input type="password" name="contrasena"  id="contrasena1" class="validate[required,minSize]"/> *</p>
+</br>
+<p><input type="password" name="confirmar"  id="contrasena2" class="validate[required,equals[contrasena1]]"/> *</p>
+
+
+</div>
 <div class=" informacion_adicional_registro">
     <input type="radio" name="radiog_dark" id="radio1" class="css-checkbox" checked="checked" value="1"/><label
         for="radio1" class="css-label radGroup2"
@@ -252,9 +250,7 @@
             promociones </label></p>
 
 
-    <p><input name="terminosCondiciones" type="checkbox" value="1" class="validate[required]"/> <label> He leído y
-            acepto los <a href="<?php echo base_url() ?>#" class="link_blanco">Términos y Condiciones</a> y <a
-                href="<?php echo base_url() ?>#" class="link_blanco">la Política de Privacidad</a> </label></p>
+    <p><input name="terminosCondiciones" type="checkbox" value="1" class="validate[required]"/> <label> He leído y acepto los <a href="<?php echo base_url()?>content/terminos_y_condiciones.pdf" target="_blank" class="link_blanco">Términos y Condiciones</a> y <a href="<?php echo base_url()?>content/politica_de_privacidad.pdf" target="_blank" class="link_blanco">la Política de Privacidad</a> </label></p>
 
 
     <font class="asterisco">Los datos marcados con un astrisco (*) son obligatorios </font>
@@ -500,7 +496,7 @@
 
         <p style="margin-top:15px;">Código Postal:</p>
 
-        <p style="margin-top:15px;">correo:</p>
+        <p style="margin-top:15px;">Correo:</p>
 
         <p style="margin-top:15px;">Página web:</p>
 
@@ -640,7 +636,7 @@
 
         <p style="margin-top:15px;">Código Postal:</p>
 
-        <p style="margin-top:15px;">correo:</p>
+        <p style="margin-top:15px;">Correo:</p>
 
         <p style="margin-top:15px;">Página web:</p>
 
@@ -840,10 +836,17 @@
 
 <div id="espacio_izquierda" class="seccion_izquierda">
     <ul class="iconos" id="iconos_grandes">
-        <li onclick="window.location='<?= base_url() ?>carrito';"><img
-                src="<?php echo base_url() ?>images/compras.png"/></li>
-        <li onclick="muestra('contenedor_login');"><img src="<?php echo base_url() ?>images/sesion.png"/></li>
+        <li onclick="window.location='<?= base_url() ?>carrito';">
+            <div class="indicadores"> 
+                <?php echo $carritoT ?>
+            </div> 
+
+            <img src="<?php echo base_url() ?>images/compras.png"/></li>
+        <li onclick="muestra('contenedor_login');">
+            <div class="indicador"> <img src="images/indicador_no.png"> </div>
+            <img src="<?php echo base_url() ?>images/sesion.png"/></li>
         <li onclick="muestra('contenedor_registro');">
+            <div class="indicador"> <img src="<?php echo base_url() ?>images/indicador_si.png"> </div>
             <img src="<?php echo base_url() ?>images/registrate.png"/>
         </li>
     </ul>

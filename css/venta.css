@@ -38,10 +38,13 @@
 	margin-left:25px;
 	padding-top:5px;
 	}
-	
+
 .estilo_select{
 	background: transparent;
+	appearance:none;
+	
 	-webkit-appearance: none;
+	-moz-appearance: none;
 	height:32px;
 	width:150px;
 	border:none;
@@ -121,7 +124,7 @@
 	} 
 .margen_derecho_20{
 	height:232px;
-	width:17px;
+	width:19.5px;
 	float:left;
 	}
 .contenedor_buscar{
@@ -597,7 +600,6 @@ border: none;
 .morado li{
 	margin-left:700px;
 	margin-top:250px;
-	
 	width:134px;
 	height:42px;
 	color:#FFFFFF;

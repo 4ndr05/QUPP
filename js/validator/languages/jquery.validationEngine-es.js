@@ -23,7 +23,7 @@
                     "alertText": "* Field must equal test"
                 },
                 "minSize": {
-                    "regex": "none",
+                    "regex": "/^[0-9\ ]+{6}$",
                     "alertText": "* Mínimo de ",
                     "alertText2": " caracteres autorizados"
                 },
@@ -33,7 +33,7 @@
 					"alertTextCheckboxMultiple": "* Debe de rellenar al menos uno de los siguientes campos"
                 },
                 "maxSize": {
-                    "regex": "none",
+                    "regex": "/^[0-9\ ]+{,12}$",
                     "alertText": "* Máximo de ",
                     "alertText2": " caracteres autorizados"
                 },
