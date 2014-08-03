@@ -70,7 +70,7 @@
 
         jQuery(document).ready(function () {
             // binds form submission and fields to the validation engine
-            jQuery("#registerNow").validationEngine({
+            jQuery("form").validationEngine({
                 promptPosition: "topRight",
                 scroll: false,
                 ajaxFormValidation: true,
@@ -162,9 +162,9 @@
             </div>
 
             <div class="contendeor_inputs">
-                <p><input type="text" name="correo"/> *</p>
+                <p><input type="text" name="correo" class="validate[required]"/> *</p>
 
-                <p><input type="password" name="contrasena"/> *</p>
+                <p><input type="password" name="contrasena" class="validate[required]"/> *</p>
             </div>
             </br>
             <ul class="morado_reg">
@@ -253,7 +253,7 @@
             promociones </label></p>
 
 
-    <p><input name="terminosCondiciones" type="checkbox" value="1" class="validate[required]"/> <label> He leído y acepto los <a href="<?php echo base_url()?>content/terminos_y_condiciones.pdf" target="_blank" class="link_blanco">Términos y Condiciones</a> y <a href="<?php echo base_url()?>content/politica_de_privacidad.pdf" target="_blank" class="link_blanco">la Política de Privacidad</a> </label></p>
+    <p><input name="terminosCondiciones" type="checkbox" value="1" class="validate[required]"/> <label> He leído y acepto los <a href="<?php echo base_url()?>content/terminos_y_condiciones.pdf" target="_blank" class="link_blanco">Términos y Condiciones</a> y <a href="<?php echo base_url()?>content/politica_de_privacidad.pdf" target="_blank" class="link_blanco">la Política de Privacidad</a> *  </label></p>
 
 
     <font class="asterisco">Los datos marcados con un astrisco (*) son obligatorios </font>
