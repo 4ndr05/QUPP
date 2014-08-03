@@ -80,7 +80,7 @@ class Usuario_model extends CI_Model {
 		$this->db->where('idUsuario', $idUsuario);
 		$query = $this->db->get($this->tablas['usuario']);
 		if ($query->num_rows() == 1)
-			return $query;
+			return $query->row();
 		return null;
 	}
 
@@ -356,6 +356,31 @@ Recibe de parametro un objeto compuesto de cuponadquirido y cupondetalle
 	function save_cupones($idCuponAdquirido){
 		$this->db->where('idCuponAdquirido', $idCuponAdquirido->idCuponAdquirido);
 		$this->db->update('cuponadquirido', array('usado' => 1));
+	}
+
+
+	//PERFIL DEL USUARIO
+
+	function getInfoCompleta($idUsuario){
+		$this->db->join($this->tablas['usuariodetalle'],$this->tablas['usuariodetalle'].'.idUsuario = '.$this->tablas['usuariodato'].'.idUsuario','left');
+		$this->db->where($this->tablas['usuariodato'].'.idUsuario',$idUsuario);
+		$query = $this->db->get($this->tablas['usuariodato']);
+		if ($query->num_rows() == 1){
+			return $query->row();
+		} else {
+			return null;
+		}
+	}
+
+	function getGiro($idUsuarioDetalle){
+		$this->db->where($this->tablas['giroempresa'].'.idUsuarioDetalle',$idUsuarioDetalle);
+		$query = $this->db->get($this->tablas['giroempresa']);
+		if ($query->num_rows() >= 1){
+			return $query->result();
+		} else {
+			return null;
+		}
+
 	}
 
 
