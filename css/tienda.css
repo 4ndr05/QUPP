@@ -18,7 +18,9 @@ width:180px;
 	border:2px solid #ECEDED;
 	}
 .contenedor_descripcion_precio_producto:hover{
-	background-color:#CCCCCC;}
+	background-color:#CCCCCC;
+    cursor: pointer;
+}
 .nombre_producto{
 	font-size:15px;
 	color:#58585A;
@@ -50,7 +52,7 @@ width:180px;
 	}
 .contenido_producto{
 	width:664px;
-	height:374px;
+	height:420px;
 	background-color: #FFF;
 	margin:0px auto;
 	margin-top:10px;
@@ -129,13 +131,9 @@ border: none;
 	}
 
 .boton_verde li{
-	padding-left:5px;
-	padding-right:5px;
-	padding:5px;
-	height:13px;
 	background-color:#7EA715;
 	text-align:center;
-	width:143px;
+	width:165px;
 	color:#FFF;
 	box-shadow: 2px 2px 7px #999;
 	list-style:none;
@@ -144,14 +142,8 @@ border: none;
 	}
 	
 .boton_verde li:hover{
-	width:143px;
-	padding:5px;
-	height:13px;
 	background-color:#FFF;
-	text-align:center;
 	color:#7EA715;
-	box-shadow: 2px 2px 7px #999;
-	list-style:none;
 	cursor:pointer;
 	}
 .select_producto{

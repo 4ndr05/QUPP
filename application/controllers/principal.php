@@ -30,6 +30,7 @@ class Principal extends CI_Controller {
 		$data['SYS_metaTitle'] 			= '';
 		$data['SYS_metaKeyWords'] 		= '';
 		$data['SYS_metaDescription'] 	= '';  
+		$this->session->set_userdata('banner', $this->defaultdata_model->getBanner());
 		
 		$visitas = $this->defaultdata_model->getVisitas();
 		$contador = $visitas + 1;		

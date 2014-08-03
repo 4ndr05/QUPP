@@ -16,6 +16,7 @@ class Auth_model extends CI_Model {
 		//cargamos librerias y helpers necesarios en el constructor
 		$this->load->helper('cookie');
 		$this->load->library('user_agent');
+		$this->load->model('defaultdata_model');
 	}
 
 	function getSalt($saltLength) {
@@ -177,7 +178,7 @@ class Auth_model extends CI_Model {
 			'apellido' => $result->apellido,
 			'tipoUsuario' => $result->tipoUsuario,
 			'authKey' => $authKey,
-			'nivel' => $result->nivel
+			'nivel' => $result->nivel			
 		);
 
 		$tipoUsuario = $result->tipoUsuario;
