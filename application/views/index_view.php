@@ -832,42 +832,7 @@
         </li>
     </ul>
 </div>
-
-<div class="">
-
-    <div class="contenedor_central_banner">
-
-        <div id="contenedor_central_superior" class="contenedor_central_superior">
-
-            <div id="banner_superior">
-                <img src="<?php echo base_url() ?>images/logo.png" width="348" height="93" class="contenido_superior"/>
-
-                <div class="slideshow">
-                    <?php if(is_logged() && ($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario')== 3)){
-    if($banner != null){
-        foreach($banner as $contenido){
-            if($this->session->userdata('zonaID') == $contenido->zonaID && $contenido->posicion == 1 && $contenido->seccionID == $seccion){?>
-            <img src="<?php echo base_url()?>images/<?php echo $contenido->imgbaner;?>" width="638" height="93"/>
-
-               <?php }
-                }
-         } 
-} else {
-    foreach($banner as $contenido){
-            if($contenido->zonaID == 9 && $contenido->posicion == 1 && $contenido->seccionID == $seccion){?>    <img src="<?php echo base_url()?>images/<?php echo $contenido->imgbaner;?>" width="638" height="93"/>
-    <?php }}}?>
-                </div>
-
-                </br>
-
-            </div>
-        </div>
-
-        <?php $this->load->view('general/menu_view'); ?>
-
-    </div>
-
-</div>
+<?php $this->load->view('general/menu_view'); ?>
 
 <center>
 </br>
@@ -900,23 +865,22 @@
                                 <p>En nuestra seccion de Cruza encuentra la pareja perfecta para tu perrito.</p>
                             </div>
                         </div>
-                         <?php if(is_logged() && ($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario')== 3)){
-  if($banner != null){
-    foreach($banner as $contenido){
-      if($this->session->userdata('zonaID') == $contenido->zonaID && $contenido->posicion == 1 && $contenido->seccionID == $seccion){?>
-           <div class="item"><img src="<?php echo base_url()?>images/<?php echo $contenido->imgbaner;?>" alt="Model 1">
-              <div class="carousel-caption">
-                <p><?php echo $contenido->texto;?></p>
-              </div>
-            </div>
+                        <div class="item"><a href="<?php echo base_url() ?>#" target="_blank"><img
+                                    src="<?php echo base_url() ?>images/900x500_2.jpg" alt="Model 2"></a>
 
-<?php }
-  }
-  } 
-} else {
-  foreach($banner as $contenido){
-      if($contenido->zonaID == 9 && $contenido->posicion == 1 && $contenido->seccionID == $seccion){?>  <img src="<?php echo base_url()?>images/<?php echo $contenido->imgbaner;?>" width="638" height="93"/>
-  <?php }}}?>
+                            <div class="carousel-caption">
+                                Adopta a un perrito, sera tu compañero perfecto.
+                            </div>
+
+                        </div>
+                        <div class="item"><a href="<?php echo base_url() ?>#" target="_blank"><img
+                                    src="<?php echo base_url() ?>images/900x500_3.jpg" alt="Model 2"></a>
+
+                            <div class="carousel-caption">
+                                Vende con nosotros a tus perritos.
+                            </div>
+
+                        </div>
                     </div>
                     <a class="left carousel-control" href="<?php echo base_url() ?>#artCarousel"
                        data-slide="prev">&lsaquo;</a> <a class="right carousel-control"
@@ -947,19 +911,10 @@
     </div>
 
     <div id="banner_publicidad_derecha" class="slideshow_dos" style="height:200px; margin-top:10px;">
-        <?php if(is_logged() && ($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario')== 3)){
-    if($banner != null){
-        foreach($banner as $contenido){
-            if($this->session->userdata('zonaID') == $contenido->zonaID && $contenido->posicion == 4 && $contenido->seccionID == 17){?>
-            <img src="<?php echo base_url()?>images/<?php echo $contenido->imgbaner;?>" width="215" height="192"/>
+        <img src="<?php echo base_url() ?>images/banner_lateral/1.png" width="215" height="192"/>
 
-<?php }
-    }
-    } 
-} else {
-    foreach($banner as $contenido){
-            if($contenido->zonaID == 9 && $contenido->posicion == 4 && $contenido->seccionID == 17){?>  <img src="<?php echo base_url()?>images/<?php echo $contenido->imgbaner;?>" width="215" height="192"/>
-    <?php }}}?>
+        <img src="<?php echo base_url() ?>images/banner_lateral/2.png" alt="">
+        <img src="<?php echo base_url() ?>images/banner_lateral/3.png" alt="">
 
     </div>
 

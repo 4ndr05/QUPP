@@ -14,8 +14,7 @@ if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
   document.write('<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/general.css" media="screen"></link> <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/venta.css" media="screen"></link><link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/mi_perfil.css" media="screen"></link>');
   }
   </script>
-<!--   <script src="<?php echo base_url()?>js/jquery-1.10.2.js"></script>-->
-    <script type="text/javascript" src="<?php echo base_url() ?>js/jquery-1.8.2.min.js"></script>
+   <script src="<?php echo base_url()?>js/jquery-1.10.2.js"></script>
      <script src="<?php echo base_url()?>js/jPages.js"></script>
      <script src="<?php echo base_url()?>js/funciones_venta.js"></script>
      <script src="<?php echo base_url()?>js/funciones_negocio.js"></script>
@@ -23,98 +22,26 @@ if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
    <script type="text/javascript" src="<?php echo base_url()?>js/jquery.cycle.all.js"></script>
    <script src="<?php echo base_url()?>js/funciones_.js" type="text/javascript"></script>
   <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/general.css" media="screen"></link>
-  <link rel="stylesheet" href="<?php echo base_url() ?>css/validator/validationEngine.jquery.css" type="text/css"/>
-
-
-    <script type="text/javascript"
-            src="<?php echo base_url() ?>js/validator/languages/jquery.validationEngine-es.js"></script>
-    <script type="text/javascript" src="<?php echo base_url() ?>js/validator/jquery.validationEngine.js"></script> 
+  
   
 
 
 </head>
 
 <body>
-<script type="text/javascript">
-var busy = false;
-$(document).ready(function() {
-getView('<?=base_url()?>usuario/cuenta/miPerfil/');
- /****************************************/ 
-                   $(".ajaxLink").live(
-                       'click',
-                        function(e){                            
-                            e.preventDefault();                       
-                                var gotoURL = $(this).attr('href');
-                                 console.log('dddddddddddddddddddd');
-                                $("#contenedor_menu_perfil ul li").removeClass("icono_seleccion");
-                                $(this).addClass("icono_seleccion");
-                                $("#appSectionContainer").html();
-                                getView(gotoURL);
-                                
-                                                                                                                
-                        }
-                    );	
-	
-	
-	
-$('#editarContrasena').submit(function(e) {
-			e.preventDefault();
-			$.ajax({
-				url : "<?=base_url()?>usuario/cuenta/editar_contrasena",
-				type : 'POST',
-				dataType : 'json',
-				data : $(this).serialize(),
-				success : function(data) {
-					console.log(data.response);
-					if(data.response==true){
-						oculta('contenedor_cambiar_contrasena');
-						muestra('contenedor_cambiar_contrasena_correcto');
-					}
-					else{
-						oculta('contenedor_cambiar_contrasena');
-						muestra('contenedor_cambiar_contrasena_error');
-					}
-				}
-			})
-		});
-});
-jQuery(document).ready(function(){
-	
-			// binds form submission and fields to the validation engine
-			jQuery("#editarContrasena").validationEngine({
-				promptPosition           : "topRight",
-				scroll                   : false,
-				ajaxFormValidation       : false,
-				ajaxFormValidationMethod : 'post'
-			});
 
-     
-});
-function getView(viewURL){
-                busy = true;
-                $("#appSectionContainer").children().remove();
-                $("#appSectionContainer").load(viewURL, function(){                    
-                    $(".hidden").stop().fadeIn('fast', function(){
-                        busy = false;
-                        // $('#TIbody').css('cursor', 'default');
-                    });       
-                });
-            }
-	
-</script>
 <div id="contenedor_cambiar_contrasena" class="contenedor_anuncio_detalle" style="display:none;">
 <div class="cerrar_registro"> <img src="<?php echo base_url()?>images/cerrar.png" onclick="oculta('contenedor_cambiar_contrasena');"/> </div>
-<form action="#" method="post" id="editarContrasena">
 <div class="contenedor_contrasena">
 <div class="contenedor_titulo">
 <p> CAMBIAR CONTRASEÑA </p>
 </div>
 <div class="contenido_contrasena">
-<p> Contraseña actual:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"  class="background_morado validate[required]" name="contrasenaActual"/> </p>
+<p> Contraseña actual:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"  class="background_morado"/> </p>
 
-<p> Nueva contraseña:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" class="background_morado validate[required],maxSize[8]" name="contrasena1" id="contrasena1"/> </p>
+<p> Nueva contraseña:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" class="background_morado"/> </p>
 
-<p> Confirmar contraseña: <input type="password" class="background_morado validate[required,equals[contrasena1]],maxSize[8]" name="contrasena2"/> </p>
+<p> Confirmar contraseña: <input type="password" class="background_morado"/> </p>
 
 
 </div>
@@ -123,11 +50,10 @@ function getView(viewURL){
 </br>
 <ul class="morado_boton">
 <li>
-<input type="submit" value="Editar" class="el_submit"/>
+<input type="submit" value="Suscribir" class="el_submit"/>
 </li>
 </ul> 
 </div>
-</form>
 </div>
 
 
@@ -143,7 +69,7 @@ function getView(viewURL){
 </div>
 <div class="contenido_contrasena_notificacion">
 Tu contraseña ha sido modificada con exito.
-Se ha enviado una copia al email: <?=$this->session->userdata('correo');?>
+Se ha enviado una copia al email.  hshshsh@
 </div>
 
 </div>
@@ -890,28 +816,29 @@ Directorio
 <div class="titulo_seccion">
 MI PERFIL
 </div>
+
 <div class="contenedor_menu_perfil">
 <ul class="menu_perfil">
 <li class="icono_seleccion">
-<p style="margin-top:13px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>usuario/cuenta/miPerfil/" style="text-decoration:none;" class="ajaxLink">Mi Perfil</a></p>
+<p style="margin-top:13px; margin-left:10px;">Mi Perfil</p>
 </li>
 <li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>usuario/cuenta/anuncios/" style="text-decoration:none;" class="ajaxLink"> Admin. Anuncios</a> </p>
+<p style="margin-top:5px; margin-left:10px;"> Admin. Anuncios </p>
 </li>
 <li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>usuario/cuenta/mensajes/" style="text-decoration:none;" class="ajaxLink"> Mensajes</a> </p>
+<p style="margin-top:13px; margin-left:10px;"> Mensajes </p>
 </li>
 <li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>usuario/cuenta/cupones/" style="text-decoration:none;" class="ajaxLink"> Cupones</a> </p>
+<p style="margin-top:13px; margin-left:10px;"> Cupones </p>
 </li>
 <li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>usuario/cuenta/favoritos/" style="text-decoration:none;" class="ajaxLink">Favoritos</a> </p>
+<p style="margin-top:13px; margin-left:10px;"> Favoritos </p>
 </li>
 <li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>usuario/cuenta/soporte/" style="text-decoration:none;" class="ajaxLink">Soporte Tecnico</a> </p>
+<p style="margin-top:5px; margin-left:10px;"> Soporte Técnico </p>
 </li>
 <li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>usuario/cuenta/facturas/" style="text-decoration:none;" class="ajaxLink">Mis Facturas</a> </p>
+<p style="margin-top:5px; margin-left:10px;"> Mis Facturas </p>
 </li>
 </ul>
 
@@ -932,9 +859,380 @@ MI PERFIL
 
 
 <div class="contenedor_central" style="margin-bottom:45px;">
-<div id="appSectionContainer">
+<div class="contenedor_bienvenido">
+<div class="contenedor_icono_bienvenido">
+<img src="<?php echo base_url()?>images/icono_perfil.png"/>
 </div>
+<p class="bienvenido"> ¡Bienvenido! </p>
+</br>
+</br>
+</br>
+<p class="usuario_bienvenido"> Marina Baez </p>
 </div>
+</br>
+<div class="contenedor_formulario">
+<p>Nombre:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<input type="text" class="background_morado" readonly="readonly"/> </p>
+</br>
+<p>E-mail: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="background_morado" readonly="readonly"/> </p>
+</br>
+<p>Contraseña: <input type="text" class="background_morado" readonly="readonly"/> </p>
+</div>
+<div class="margen_div">
+</div>
+<div class="contenedor_formulario">
+<p>Apellido: <input type="text" class="background_morado"/> </p>
+</br>
+<p>Teléfono: <input type="text" class="gris_input"/> </p>
+</br>
+<p>Estado: &nbsp;&nbsp;&nbsp;<select class="gris_input"> 
+           <option> --- </option>
+           <option> HIDALGO </option>
+           </select> </p>
+</div>
+<div class="cambiar_contraseña">
+<p> Cambiar contraseña <font class="aqui_cambiar" onclick="muestra('contenedor_cambiar_contrasena');">aqui</font></p>
+</div>
+<div class="contenedor_boton"> 
+<ul class="boton_gris_perfil">
+<li>
+Editar
+</li>
+</ul>
+</div>
+
+<div class="contenedor_fiscales">
+<font class="espacios"> Datos fiscales</font>
+
+<div id="ver_el_detalle" class="detalle_fiscales" onclick="muestra('guardar_fiscales'); muestra('contenedor_formu_detalle_user'); muestra('ocultar_el_detalle');oculta('ver_el_detalle');">
+<p > &nbsp;Ver detalle <img src="<?php echo base_url()?>images/flecha_blanca.png"/></p>
+</div>
+
+<div id="ocultar_el_detalle" class="detalle_fiscales" onclick="oculta('guardar_fiscales'); oculta('contenedor_formu_detalle_user'); muestra('ver_el_detalle'); oculta('ocultar_el_detalle');" style="display:none;">
+<p > &nbsp; Ocultar detalle <img src="<?php echo base_url()?>images/flecha_blanca_revez.png"/></p>
+</div>
+
+</div>
+
+
+<!--- 
+----  INICIO contenedor fiscales usuario normal 
+   --->
+<div id="contenedor_formu_detalle_user" style=" display:none;">
+<div class="texto_inputs" >
+<p> Razón Social:</p>
+
+<p style="margin-top:15px;">RFC:</p>
+
+<p style="margin-top:15px;">Calle:</p>
+
+<p style="margin-top:15px;">No. Exterior:</p>
+
+<p style="margin-top:15px;">CP:</p>
+
+<p style="margin-top:15px;">Municipio:</p>
+
+<p style="margin-top:15px;">Estado:</p>
+
+<p style="margin-top:15px;">País:</p>
+
+
+ </div>
+
+<div class="contendeor_inputs" >
+<p><input type="text" name="razon" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="RFC" class="background_gris"/> </p>
+
+<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
+
+<p style="margin-top:14px;"><input type="text" name="no_exterior" class="gris_input"/></p>
+
+<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
+
+<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
+<p style="margin-top:14px;"><select name="estado" class="gris_input"/> <option> --- </option>  </select></p>
+<p style="margin-top:14px;"><select name="pais" class="gris_input"/> <option> --- </option> </select> </p>
+
+
+</div>
+
+</div>
+<!--- 
+----  Fin contenedor fiscales usuario normal 
+   --->
+   
+   
+   <!--- 
+----  INICIO contenedor fiscales negocio; 
+   --->
+
+<div id="contenedor_fiscales_negocio" style="display:none;"> 
+
+<div class="texto_inputs" >
+<p> Razón Social:</p>
+
+<p style="margin-top:15px;">RFC:</p>
+
+<p style="margin-top:15px;">Calle:</p>
+
+<p style="margin-top:15px;">No. Exterior:</p>
+
+<p style="margin-top:15px;">CP:</p>
+
+<p style="margin-top:15px;">Municipio:</p>
+
+<p style="margin-top:15px;">Estado:</p>
+
+<p style="margin-top:15px;">País:</p>
+
+
+ </div>
+
+<div class="contendeor_inputs" >
+<p><input type="text" name="razon" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="RFC" class="gris_input"/> </p>
+
+<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
+
+<p style="margin-top:14px;"><input type="text" name="no_exterior" class="gris_input"/></p>
+
+<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
+
+<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
+<p style="margin-top:14px;"><select name="estado" class="gris_input"/> <option> --- </option>  </select></p>
+<p style="margin-top:14px;"><select name="pais" class="gris_input"/> <option> --- </option> </select> </p>
+
+
+</div>
+
+<div class="contenedor_fiscales"> Datos del negocio </div>
+
+
+<div class="texto_inputs" >
+Nombre:
+</div>
+
+<div class="contendeor_inputs" >
+<p><input type="text" name="nombre_negocio" class="gris_input"/> </p>
+</div>
+</br>
+<div class="giro_negocio"> 
+
+<div class="contenedor_giros">
+    <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_0" />
+      Accesorios para mascotas</label>
+    </br>
+    <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_1" />
+      Veterinaria</label>
+  </br>
+  
+     <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_2" />
+      Estetica canina</label>
+          <label>
+          </br>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_3" />
+    Adiestramiento canino</label>
+    
+  
+  
+  </div>
+  
+  <div class="contenedor_giros">
+    <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_4" />
+     Centro de sociabilización</label>
+    </br>
+    <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_5" />
+     Criadero de perros</label>
+  </br>
+  
+     <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_6" />
+      Hotel y pensión canina</label>
+          <label>
+          </br>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_7" />
+   Alimento y medicamento </label>
+    
+  
+  
+  </div>
+   <div class="contenedor_giros">
+    <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_8" />
+      Guarderia de perros</label>
+    </br>
+    <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_9" />
+      Tienda de mascotas</label>
+  </br>
+  
+     <label>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_10" />
+      Servicios funerarios</label>
+          <label>
+          </br>
+      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_11" />
+     Servico de paseo</label>
+    
+  
+  
+  </div>
+
+</div>
+
+
+<div class="texto_inputs" >
+<p>Contacto:</p>
+
+<p style="margin-top:15px;">Teléfono:</p>
+<p style="margin-top:15px;">Calle:</p>
+<p style="margin-top:15px;">Número:</p>
+<p style="margin-top:15px;">Colonia:</p>
+<p style="margin-top:15px;">Municipio:</p>
+<p style="margin-top:15px;">Estado:</p>
+<p style="margin-top:15px;">Código Postal:</p>
+<p style="margin-top:15px;">E-mail:</p>
+<p style="margin-top:15px;">Página web:</p>
+<p style="margin-top:15px;">Logo:</p>
+<p style="margin-top:15px;">Descripción:</p>
+<p style="margin-top:35px;">Ubicación:</p>
+</div>
+
+<div class="contendeor_inputs" >
+<p><input type="text" name="nombre_contacto" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="telefono" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="num" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="colonia" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="estado" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="e-mail" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="pagina_web" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="file" name="logo" class="gris_input"/> </p>
+<p style="margin-top:14px;"><textarea rows="3" cols="40" name="descricion" class="gris_input"/> </textarea> </p>
+
+    
+    
+</div>
+
+</div>
+<!--- 
+----  Fin contenedor fiscales negocio
+ --->
+
+<!-- 
+---- Inicio fiscales AC
+    -->
+<div id="datos_fiscales_AC" style="display:none;">
+<div class="texto_inputs" >
+<p> Razón Social:</p>
+
+<p style="margin-top:15px;">RFC:</p>
+
+<p style="margin-top:15px;">Calle:</p>
+
+<p style="margin-top:15px;">No. Exterior:</p>
+
+<p style="margin-top:15px;">CP:</p>
+
+<p style="margin-top:15px;">Municipio:</p>
+
+<p style="margin-top:15px;">Estado:</p>
+
+<p style="margin-top:15px;">País:</p>
+
+
+ </div>
+
+<div class="contendeor_inputs" >
+<p><input type="text" name="razon" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="RFC" class="gris_input"/> </p>
+
+<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
+
+<p style="margin-top:14px;"><input type="text" name="no_exterior" class="gris_input"/></p>
+
+<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
+
+<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
+<p style="margin-top:14px;"><select name="estado" class="gris_input"/> <option> --- </option>  </select></p>
+<p style="margin-top:14px;"><select name="pais" class="gris_input"/> <option> --- </option> </select> </p>
+
+
+</div>
+
+<div class="contenedor_fiscales"> Datos de la Asociación </div>
+
+
+
+
+<div class="texto_inputs" >
+<p > Nombre: </p>
+<p style="margin-top:15px;">Contacto:</p>
+
+<p style="margin-top:15px;">Teléfono:</p>
+<p style="margin-top:15px;">Calle:</p>
+<p style="margin-top:15px;">Número:</p>
+<p style="margin-top:15px;">Colonia:</p>
+<p style="margin-top:15px;">Municipio:</p>
+<p style="margin-top:15px;">Estado:</p>
+<p style="margin-top:15px;">Código Postal:</p>
+<p style="margin-top:15px;">E-mail:</p>
+<p style="margin-top:15px;">Página web:</p>
+<p style="margin-top:15px;">Logo:</p>
+<p style="margin-top:15px;">Descripción:</p>
+<p style="margin-top:35px;">Ubicación:</p>
+</div>
+
+<div class="contendeor_inputs" >
+<p><input type="text" name="nombre_ac" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="nombre_contacto" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="telefono" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="num" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="colonia" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="estado" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="e-mail" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="pagina_web" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="file" name="logo" class="gris_input"/> </p>
+<p style="margin-top:14px;"><textarea rows="3" cols="40" name="descricion" class="gris_input"/> </textarea> </p>
+
+
+
+    
+    
+    <div id="map-canvas_dos"></div>
+    
+</div>
+
+</div>
+
+    
+<!-- 
+ --- Fin Fiscales AC
+  -->
+
+
+<div class="contenedor_boton" id="guardar_fiscales" style=" display:none;"> 
+<ul class="boton_gris_perfil">
+<li>
+Guardar
+</li>
+</ul>
+</div>
+
+
+
+</br>
+    
+      </div>
 	  
 	  
 	  <div class="seccion_derecha_paquetes">

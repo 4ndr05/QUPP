@@ -4,41 +4,75 @@ $tipoUsuario = $this->session->userdata('tipoUsuario');
 
 if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)):
     ?>
-    <div id="mini_menu" class="menu">
-        <input type="hidden" id="efecto" value="corre"/>
-        <img src="<?php echo base_url() ?>images/bajar_menu_dos.png" id="bajar_menu" style="float:left; margin-left:10px;"
-             onclick="oculta('bajar_menu');
-                         muestra('menu_oculto');"/>
+<div id="mini_menu" class="menu">
+    <input type="hidden" id="efecto" value="corre"/>
+    <img src="<?php echo base_url() ?>images/bajar_menu_dos.png" id="bajar_menu" style="float:left; margin-left:10px;"
+    onclick="oculta('bajar_menu');
+    muestra('menu_oculto');"/>
 
-        <div id="menu_oculto" class="menu_principal" style=" display:none;">
-            <div id="contenedor_menu_principal" class="contenedor_menu_principal">
-                <ul class="principal">
-                    <li>
-                        <a href="<?php echo base_url() ?>"> Inicio</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url() ?>venta.html"> Venta </a>
-                    </li>
-                    <li>
-                        Cruza
-                    </li>
-                    <li>
-                        Adopción
-                    </li>
-                    <li>
-                        Tienda
-                    </li>
-                    <li>
-                        Directorio
-                    </li>
-                </ul>
-                <?php if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)): ?>
-                    <div class="close_sesion" style="text-align: right; padding-right: 5px;"><a  href="<?php echo base_url('sesion/logout') ?>"><img style="height: 30px;" src="/images/logout.png" alt="Cerrar sesión"/></a></div>
-                <?php endif; ?>
-            </div>
+    <div id="menu_oculto" class="menu_principal" style=" display:none;">
+        <div id="contenedor_menu_principal" class="contenedor_menu_principal">
+            <ul class="principal">
+                <li>
+                    <a href="<?php echo base_url() ?>"> Inicio</a>
+                </li>
+                <li>
+                    <a href="<?php echo base_url() ?>venta.html"> Venta </a>
+                </li>
+                <li>
+                    Cruza
+                </li>
+                <li>
+                    Adopción
+                </li>
+                <li>
+                    Tienda
+                </li>
+                <li>
+                    Directorio
+                </li>
+            </ul>
+            <?php if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)): ?>
+                <div class="close_sesion" style="text-align: right; padding-right: 5px;"><a  href="<?php echo base_url('sesion/logout/principal') ?>"><img style="height: 30px;" src="/images/logout.png" alt="Cerrar sesión"/></a></div>
+            <?php endif; ?>
         </div>
     </div>
+</div>
+<div id="contenedor_central_superior" class="contenedor_central_superior">
 
+    <div id="banner_superior">
+        <img src="<?php echo base_url() ?>images/logo_superior.png" width="348" height="93" class="contenido_superior"/>
+
+        <div class="slideshow">
+        <?php $banner = $this->session->userdata('banner'); ?>
+            <?php if (is_logged() && ($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3)) {
+                if ($banner != null) {
+
+                    foreach ($banner as $contenido) {
+                        if ($this->session->userdata('zonaID') == $contenido->zonaID && $contenido->posicion == 1 && $contenido->seccionID == $contenido->seccionID) {
+                            ?>
+                            <img src="<?php echo base_url() ?>images/<?php echo $contenido->imgbaner; ?>" width="638"
+                            height="93"/>
+
+                            <?php
+                        }
+                    }
+                }
+            } else {
+                if ($banner !== null && !empty($banner)) {
+                    foreach ($banner as $contenido) {
+                        if ($contenido->zonaID == 9 && $contenido->posicion == 1 && $contenido->seccionID == $contenido->seccionID) {
+                            ?>    <img src="<?php echo base_url() ?>images/<?php echo $contenido->imgbaner; ?>" width="638"
+                            height="93"/>
+                            <?php }
+                        }
+                    }
+                } ?>
+            </div>
+
+
+        </div>
+    </div>
     <div class="menu_principal menu" id="menu_principal">
         <div id="contenedor_menu_principal" class="contenedor_menu_principal">
             <ul class="principal">
@@ -61,7 +95,7 @@ if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)):
                     Directorio
                 </li>
                 <?php if ($keyUser !== FALSE && $tipoUsuario !==0): ?>
-                    <div class="close_sesion" style="text-align: right; padding-right: 5px;"><a  href="<?php echo base_url('sesion/logout') ?>"><img style="height: 30px;" src="/images/logout.png" alt="Cerrar sesión"/></a></div>
+                    <div class="close_sesion" style="text-align: right; padding-right: 5px;"><a  href="<?php echo base_url('sesion/logout/principal') ?>"><img style="height: 30px;" src="/images/logout.png" alt="Cerrar sesión"/></a></div>
                 <?php endif; ?>
             </ul>
         </div>
@@ -154,7 +188,7 @@ if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)):
                 </li>
             </ul>
             <?php if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)): ?>
-                <div class="close_sesion" style="text-align: right; padding-right: 5px;"><a  href="<?php echo base_url('sesion/logout') ?>"><img style="height: 30px;" src="/images/logout.png" alt="Cerrar sesión"/></a></div>
+                <div class="close_sesion" style="text-align: right; padding-right: 5px;"><a  href="<?php echo base_url('sesion/logout/principal') ?>"><img style="height: 30px;" src="/images/logout.png" alt="Cerrar sesión"/></a></div>
             <?php endif; ?>
         </div>
     </div>
