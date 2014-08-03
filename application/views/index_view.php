@@ -217,19 +217,21 @@
 
 </div>
 <div class="contendeor_inputs" >
-<p><input type="text" name="nombre" id="nombre" class="validate[required,onlyLetterSp]"/> *</p>
-<p><input type="text" name="apellido" id="apellido" class="validate[required,onlyLetterSp]"/> *</p>
+<p><input type="text" name="nombre" id="nombre" class="validate[required],custom[onlyLetterSp]"/> *</p>
+<p><input type="text" name="apellido" id="apellido" class="validate[required],custom[onlyLetterSp]"/> *</p>
 
 <p><input type="text" name="correo" class="validate[required,custom[email],ajax[isthereemail]]" /> *</p>
 
-<p><input type="text" name="telefono" class="validate[custom[integer,onlyNumberSp,]]"/></p>
+<p><input type="text" name="telefono" class="validate[custom[onlyNumberSp],minSize[10]]"/></p>
 
-<p><input type="password" name="contrasena"  id="contrasena1" class="validate[required,minSize]"/> *</p>
+<p><input type="password" name="contrasena"  id="contrasena1" class="validate[required],minSize[6],maxSize[12]"/> *</p>
 </br>
 <p><input type="password" name="confirmar"  id="contrasena2" class="validate[required,equals[contrasena1]]"/> *</p>
 
 
 </div>
+
+
 <div class=" informacion_adicional_registro">
     <input type="radio" name="radiog_dark" id="radio1" class="css-checkbox" checked="checked" value="1"/><label
         for="radio1" class="css-label radGroup2"
@@ -700,9 +702,9 @@
 
 </br>
 <ul class="morado_reg">
-    <li><!--<a href="#" id="suscribir" style="text-decoration:none; color:#FFF;">Suscribirse</a>--><input type="submit"
-                                                                                                          value="Suscribir"
-                                                                                                          class="el_submit"/>
+    <li><!--<a href="#" id="suscribir" style="text-decoration:none; color:#FFF;">Suscribirse</a>-->
+        <input type="submit" value="Suscribir" class="el_submit" onClick="$('#registerNow')[0].reset();"/>
+         
     </li>
 </ul>
 
