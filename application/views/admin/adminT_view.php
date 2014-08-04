@@ -123,24 +123,23 @@ EDITAR PRODUCTO
 </div>
 <input type="hidden" name="productoID" id="productoID" value="<?=$productoID?>" />
 <div class="contenido_intruciones">
-<table width="402" height="534">
-<tr>
-<td width="93">
+<div class="texto_inputs">
 <p> ID Producto: </p>
-</td> <td width="297"> <p><input name="sku" type="text" class="validate[required],custom[onlyLetterNumber],maxSize[10]" id="sku" style="min-width:153px; height:20px;" value="<?php echo $producto->sku;?>" maxlength="11" /></p> </td> </tr>
-<tr><td>
 <p style="margin-top:15px;"> Nombre: </p>
-</td>  <td><p><input name="nombre" type="text" class="validate[required],maxSize[20]" style="min-width:153px; height:20px;margin-top:10px;" value="<?php echo $producto->nombre;?>" maxlength="20" /></p
-> </td> </tr>
-<tr> <td>
 <p style="margin-top:15px;"> Descripción: </p>
-</td> <td> <p><input name="descripcion" type="text" class="validate[required],maxSize[200]" style="min-width:153px; height:20px;  margin-top:10px;" value="<?php echo $producto->descripcion;?>" maxlength="200"/></p>  </td> </tr>
-<tr> <td>
 <p style="margin-top:15px;"> Costo: </p>
-</td> <td> <p><input name="costo" type="text" class="validate[required,custom[number]" style="min-width:153px; height:20px;  margin-top:10px;" value="<?php echo $producto->precio;?>"/></p></td> </tr>
-<tr> <td>
-<p > Talla: </p>
-</td> <td> <p> <input type="hidden" name="talla[]" id="talla[]" value="0" />
+<p style="margin-top:15px;"> Talla: </p>
+<p style="margin-top:60px;"> Color: </p>
+<p style="margin-top:15px;"> Fotos: </p>
+</div>
+
+<div class="contendeor_inputs">
+<p><input name="sku" type="text" class="validate[required],custom[onlyLetterNumber],maxSize[10]" id="sku" style="min-width:153px; height:20px;" value="<?php echo $producto->sku;?>" maxlength="11" /></p>
+<p><input name="nombre" type="text" class="validate[required],maxSize[20]" style="min-width:153px; height:20px;margin-top:10px;" value="<?php echo $producto->nombre;?>" maxlength="20" /></p
+><p><input name="descripcion" type="text" class="validate[required],maxSize[200]" style="min-width:153px; height:20px;  margin-top:10px;" value="<?php echo $producto->descripcion;?>" maxlength="200"/></p> 
+<p><input name="costo" type="text" class="validate[required,custom[number]" style="min-width:153px; height:20px;  margin-top:10px;" value="<?php echo $producto->precio;?>"/></p>
+<p>
+<input type="hidden" name="talla[]" id="talla[]" value="0" />
       <input type="checkbox" name="talla[]" value="Chica" id="talla1" class="validate[required,groupRequired[tallas]]" <?php if($detalleProducto != null){
 	  foreach($detalleProducto as $detalle){
 	  if($detalle->productoID == $producto->productoID && $detalle->detalle == 'talla'){ ?><?=($detalle->valor == 'Chica') ? 'checked="checked"' : ''?><?php }}}?>/>
@@ -157,10 +156,8 @@ EDITAR PRODUCTO
 	  foreach($detalleProducto as $detalle){
 	  if($detalle->productoID == $producto->productoID && $detalle->detalle == 'talla'){ ?><?=($detalle->valor == 'Unitalla') ? 'checked="checked"' : ''?><?php }}}?>/>
       <label>Unitalla</label><br />
-    </p>  </td> </tr>
-<tr> <td>
-<p > Color: </p>
-</td> <td> <p id="colors<?=$productoID?>"><input type="hidden" name="color[]" id="color[]" value="0" />
+    </p>
+<p id="colors<?=$productoID?>"><input type="hidden" name="color[]" id="color[]" value="0" />
    <input name="color[]" type="text" size="8" id="colorP<?=$productoID?>" style="margin-top:10px;" class=""/> <a href="#" id="addColor" class="addColor" style="color:#fff; font-size:9px; margin-top:8px;" data-rel="<?=$productoID?>">Agregar</a><br />
 <?php if($detalleProducto != null){
 	  foreach($detalleProducto as $detalle){
@@ -169,10 +166,7 @@ EDITAR PRODUCTO
 <?php }
 	  }
 }?>
-</p>  </td> </tr>
-<tr> <td>
-<p style="margin-top:15px;"> Fotos: </p>
-</td> <td>  
+</p>
 <p><input name="fotoproducto[]" type="file" id="fotoproducto" multiple="multiple" style="margin-top:13px;"/></p>
 <?php if($fotostienda != null){
 	  foreach($fotostienda as $foto){
@@ -180,9 +174,8 @@ EDITAR PRODUCTO
 <p><img src="<?php echo base_url()?>images/productos/<?=$foto->foto?>" width="30" height="30"/><input type="hidden" id="imagen" name="imagen[]" value="<?=$foto->foto?>"/><a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a></p>
 <?php }
 	  }
-}?> </td> </tr>
-</table>
-
+}?>
+</div>
 
 </div>
 
@@ -195,8 +188,6 @@ EDITAR PRODUCTO
 </li>
 </ul>
 </form>
-</br>
-</br>
 </div>
 
 
@@ -222,25 +213,22 @@ AGREGAR PRODUCTO
 </div>
 
 <div class="contenido_intruciones">
+<div class="texto_inputs">
+<p> ID Producto: </p>
+<p style="margin-top:15px;"> Nombre: </p>
+<p style="margin-top:15px;"> Descripción: </p>
+<p style="margin-top:15px;"> Costo: </p>
+<p style="margin-top:15px;"> Talla: </p>
+<p style="margin-top:60px;"> Color: </p>
+<p style="margin-top:15px;"> Fotos: </p>
+</div>
 
-<table width="335" height="310">
-<tr>
-<td>
-<p> ID Producto: </p> </td> <td> <p><input name="sku" type="text" class="validate[required],custom[onlyLetterNumber],maxSize[10]" id="sku" style="min-width:153px; height:20px;" maxlength="11"/></p>
- </td>
-</tr>
-<tr>
-<td> <p style="margin-top:15px;"> Nombre: </p></td>  <td> <p><input name="nombre" type="text" class="validate[required],maxSize[20]" style="min-width:153px; height:20px;margin-top:10px;" maxlength="20" /></p
->  </td>
-</tr>
-<tr>
-<td> <p style="margin-top:15px;"> Descripción: </p></td><td> <p><input type="text" style="min-width:153px; height:20px;  margin-top:10px;" name="descripcion" class="validate[required],maxSize[200]" maxlength="200"/></p>  </td>
-</tr>
-<tr>
-<td> <p style="margin-top:15px;"> Costo: </p></td> <td> <p><input type="text" style="min-width:153px; height:20px;  margin-top:10px;" name="costo" class="validate[required,custom[number]"/></p> </td>
-</tr>
-<tr>
-<td><p style="margin-top:15px;"> Talla: </p></td> <td> <p>
+<div class="contendeor_inputs">
+<p><input name="sku" type="text" class="validate[required],custom[onlyLetterNumber],maxSize[10]" id="sku" style="min-width:153px; height:20px;" maxlength="11"/></p>
+<p><input name="nombre" type="text" class="validate[required],maxSize[20]" style="min-width:153px; height:20px;margin-top:10px;" maxlength="20" /></p
+><p><input type="text" style="min-width:153px; height:20px;  margin-top:10px;" name="descripcion" class="validate[required],maxSize[200]" maxlength="200"/></p> 
+<p><input type="text" style="min-width:153px; height:20px;  margin-top:10px;" name="costo" class="validate[required,custom[number]"/></p>
+<p>
 <input type="hidden" name="talla[]" id="talla[]" value="0" />
       <input type="checkbox" name="talla[]" value="Chica" id="talla1" class="validate[required,groupRequired[tallas]]"/>
       <label>Chica</label><br />
@@ -250,19 +238,12 @@ AGREGAR PRODUCTO
       <label>Grande</label><br />
       <input type="checkbox" name="talla[]" value="Unitalla" id="talla4" class="validate[required,groupRequired[tallas]]"/>
       <label>Unitalla</label><br />
-    </p> </td>
-</tr>
-<tr>
-<td><p> Color: </p></td> <td> <p id="colorsE"><input type="hidden" name="color[]" id="color[]" value="0" />
+    </p>
+<p id="colorsE"><input type="hidden" name="color[]" id="color[]" value="0" />
    <input name="color[]" type="text" size="8" id="colorPE" style="margin-top:10px;" class="validate[required]"/> <a href="#" id="addColorE" class="addColorE" style="color:#fff; font-size:9px; margin-top:8px;">Agregar</a><br />
-</p>  </td>
-</tr>
-<tr>
-<td><p style="margin-top:15px;"> Fotos: </p> </td> <td> <p><input name="fotoproducto[]" type="file" id="fotoproducto" multiple="multiple" style="margin-top:13px;"/></p> </td>
-</tr>
-</table>
-
-
+</p>
+<p><input name="fotoproducto[]" type="file" id="fotoproducto" multiple="multiple" style="margin-top:13px;"/></p>
+</div>
 
 </div>
 
@@ -275,9 +256,6 @@ AGREGAR PRODUCTO
 </li>
 </ul>
 </form>
-
-</br>
-</br>
 </div>
 
 
@@ -325,56 +303,58 @@ ELIMINAR PRODUCTO
 Pantallas
 <ul>
 <li>
-<a href="<?php echo base_url()?>admin/principal/getPantalla/1/9" id="INICIO" name="1" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Inicio</a>
-</li>
-<li>
-<a href="<?php echo base_url()?>admin/principal/getPantalla/2/9" id="VENTA" name="2" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Venta</a>
-</li>
-<li>
-<a href="<?php echo base_url()?>admin/principal/getPantalla/3/9" id="CRUZA" name="3" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Cruza</a>
-</li>
-<li>
-<a href="<?php echo base_url()?>admin/principal/getPantalla/4/9" id="DIRECTORIO" name="4" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Directorio</a>
-</li>
-<li>
-<a href="<?php echo base_url()?>admin/principal/getPantalla/5/9" id="PERFIL DE USUARIO" name="5" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Prefil de usuario</a>
-</li>
-<li>
 <a href="<?php echo base_url()?>admin/principal/getPantalla/6/9" id="ADOPCIÓN" name="6" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Adopción</a>
-</li>
-<li>
-<a href="<?php echo base_url()?>admin/principal/getPantalla/7/9" id="PERROS PERDIDOS" name="7" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Perros Perdidos</a>
-</li>
-<li>
-<a href="<?php echo base_url()?>admin/principal/getPantalla/8/9" id="RAZA DEL MES" name="8" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> La raza del mes</a>
-</li>
-<li>
-<a href="<?php echo base_url()?>admin/principal/getPantalla/9/9" id="EVENTO DEL MES" name="9" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Evento del mes</a>
-</li>
-<li>
-<a href="<?php echo base_url()?>admin/principal/getPantalla/10/9" id="DATOS CURIOSOS" name="10" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Datos curiosos</a>
 </li>
 <li>
 <a href="<?php echo base_url()?>admin/principal/getPantalla/11/9" id="ASOCIACIONES P." name="11" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Asociaciones Protectoras</a>
 </li>
 <li>
+<a href="<?php echo base_url()?>admin/principal/getPantalla/3/9" id="CRUZA" name="3" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Cruza</a>
+</li>
+<li>
+<a href="<?php echo base_url()?>admin/principal/getPantalla/10/9" id="DATOS CURIOSOS" name="10" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Datos curiosos</a>
+</li>
+<li>
+<a href="<?php echo base_url()?>admin/principal/getPantalla/4/9" id="DIRECTORIO" name="4" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Directorio</a>
+</li>
+<li>
+<a href="<?php echo base_url()?>admin/principal/getPantalla/9/9" id="EVENTO DEL MES" name="9" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Evento del mes</a>
+</li>
+<li>
+<a href="<?php echo base_url()?>admin/principal/getPantalla/1/9" id="INICIO" name="1" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Inicio</a>
+</li>
+<li>
+<a href="<?php echo base_url()?>admin/principal/getPantalla/8/9" id="RAZA DEL MES" name="8" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> La raza del mes</a>
+</li>
+<li>
+<a href="<?php echo base_url()?>admin/principal/getPantalla/7/9" id="PERROS PERDIDOS" name="7" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Perros Perdidos</a>
+</li>
+<li>
+<a href="<?php echo base_url()?>admin/principal/getPantalla/5/9" id="PERFIL DE USUARIO" name="5" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Prefil de usuario</a>
+</li>
+<li>
+<a href="<?php echo base_url()?>admin/principal/getPantalla/17/9" id="PUBLICIDAD LATERAL" name="16" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Publicidad Lateral</a>
+</li>
+<li>
 <a href="<?php echo base_url()?>admin/principal/getPantalla/12/9" id="¿QUIÉNES SOMOS?" name="12" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> ¿Quiénes somos?</a>
-</li>
-<li>
-<a href="<?php echo base_url()?>admin/principal/getPantalla/13/9" id="TUTORIAL" name="13" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Tutorial</a>
-</li>
-<li>
-<a href="<?php echo base_url()?>admin/principal/getPantalla/14/9" id="PUBLICIDAD" name="14" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Publicidad</a>
-</li>
-<li>
-<a href="<?php echo base_url()?>admin/principal/getPantalla/15/9" id="PREGUNTAS F." name="15" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Preguntas frecuentes</a>
 </li>
 <li>
 <a href="<?php echo base_url()?>admin/principal/getPantalla/16/9" id="TIENDA" name="16" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Tienda</a>
 </li>
 <li>
-<a href="<?php echo base_url()?>admin/principal/getPantalla/17/9" id="PUBLICIDAD LATERAL" name="16" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Publicidad Lateral</a>
+<a href="<?php echo base_url()?>admin/principal/getPantalla/13/9" id="TUTORIAL" name="13" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Tutorial</a>
 </li>
+<li>
+<a href="<?php echo base_url()?>admin/principal/getPantalla/2/9" id="VENTA" name="2" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Venta</a>
+</li>
+<!--<li>
+<a href="<?php echo base_url()?>admin/principal/getPantalla/14/9" id="PUBLICIDAD" name="14" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Publicidad</a>
+</li>-->
+<li>
+<a href="<?php echo base_url()?>admin/principal/getPantalla/15/9" id="PREGUNTAS F." name="15" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Preguntas frecuentes</a>
+</li>
+
+
 </ul>
 </li>
 <li>
@@ -552,7 +532,7 @@ Chica
 </td>
 <td>
 <img src="<?php echo base_url()?>images/baja_contenido.png" class="deleteContent" data-rel="<?=$productoID?>" />
-<a href="#" class="editarL" id="editarL" data-rel="<?=$productoID?>"><img src="<?php echo base_url()?>images/editar.png"/></a>
+<a href="#" class="editarL" id="editarL" data-rel="<?=$productoID?>">Editar</a>
 </td>
 
 </tr>

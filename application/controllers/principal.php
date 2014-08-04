@@ -80,6 +80,7 @@ class Principal extends CI_Controller {
         $data['seccion'] = 1;
         $data['posicion'] = 1;
         $data['zona'] = 9;
+        $data['carritoT'] = count ($this->admin_model->getCarrito($this->session->userdata('idUsuario')));
         $this->load->view('index_view', $data);
 
 	}
@@ -265,6 +266,7 @@ class Principal extends CI_Controller {
        	$data['fotos'] = $this->admin_model->getSingleItems('productoID',$productoID,'fotostienda');
        	$data['productoID'] = $productoID;
        	$this->load->view('producto_view',$data);
+
 	}
 	
 }

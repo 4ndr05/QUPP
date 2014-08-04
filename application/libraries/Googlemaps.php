@@ -51,11 +51,11 @@ class Googlemaps {
 	var $language					= '';						// The map will by default load in the language of the browser. This can be overriden however here. For a full list of codes see https://spreadsheets.google.com/pub?key=p9pdwsai2hDMsLkXsoM05KQ&gid=1
 	var $loadAsynchronously			= FALSE;					// Load the map and API asynchronously once the page has loaded
 	var $map_div_id					= "map_canvas";				// The ID of the <div></div> that is output which contains the map
-	var $map_height					= "450px";					// The height of the map container. Any units (ie 'px') can be used. If no units are provided 'px' will be presumed
+	var $map_height					= "200px";					// The height of the map container. Any units (ie 'px') can be used. If no units are provided 'px' will be presumed
 	var $map_name					= "map";					// The JS reference to the map. Currently not used but to be used in the future when multiple maps are supported
 	var $map_type					= "ROADMAP";				// The default MapType. Values accepted are 'HYBRID', 'ROADMAP', 'SATELLITE' or 'TERRAIN'
 	var $map_types_available		= array();					// The other MapTypes available for selection on the map
-	var $map_width					= "100%";					// The width of the map container. Any units (ie 'px') can be used. If no units are provided 'px' will be presumed
+	var $map_width					= "350px";					// The width of the map container. Any units (ie 'px') can be used. If no units are provided 'px' will be presumed
 	var $maps_loaded				= 0;						// Counter which keeps track of how many maps have been created to avoid standard functions being output twice
 	var $mapTypeControlPosition		= '';						// The position of the MapType control, eg. 'BOTTOM_RIGHT'
 	var $mapTypeControlStyle		= '';						// The style of the MapType control. blank, 'DROPDOWN_MENU' or 'HORIZONTAL_BAR' values accepted.

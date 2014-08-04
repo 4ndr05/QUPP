@@ -58,8 +58,9 @@
                 var data = json;
                 console.log(data.response);
                 if (data.response == true) {
+                    
 
-                    $("#confirm").prepend('<label>Tu usuario ha sido creado exitosamente, por favor activa tu cuenta atravez del e-mail que ha sido enviado a tu cuenta de correo electronico. Para poder anunciarte y publicar anuncios, deberás registrar tu información completa. Esto lo podrás hacer en cualquier momento entrando a tu perfil.</label>');
+                    $("#confirm").html('<label>Tu usuario ha sido creado exitosamente, por favor activa tu cuenta atravez del e-mail que ha sido enviado a tu cuenta de correo electronico. Para poder anunciarte y publicar anuncios, deberás registrar tu información completa. Esto lo podrás hacer en cualquier momento entrando a tu perfil.</label>');
                     muestra('contenedor_correcto');
                     oculta('contenedor_registro');
 
@@ -69,7 +70,7 @@
 
         jQuery(document).ready(function () {
             // binds form submission and fields to the validation engine
-            jQuery("#registerNow").validationEngine({
+            jQuery("form").validationEngine({
                 promptPosition: "topRight",
                 scroll: false,
                 ajaxFormValidation: true,
@@ -161,9 +162,9 @@
             </div>
 
             <div class="contendeor_inputs">
-                <p><input type="text" name="correo"/> *</p>
+                <p><input type="text" name="correo" class="validate[required]"/> *</p>
 
-                <p><input type="password" name="contrasena"/> *</p>
+                <p><input type="password" name="contrasena" class="validate[required]"/> *</p>
             </div>
             </br>
             <ul class="morado_reg">
@@ -207,30 +208,30 @@
 
     <p style="margin-top:15px;">Apellido:</p>
 
-    <p style="margin-top:15px;">correo:</p>
+    <p style="margin-top:15px;">Correo:</p>
 
-    <p style="margin-top:15px;">Telefono:</p>
+    <p style="margin-top:15px;">Teléfono:</p>
 
-    <p style="margin-top:15px;">contrasena:</p>
+    <p style="margin-top:15px;">Contrase&ntilde;a:</p>
 
-    <p>Confirmar contrasena:</p>
-
-</div>
-<div class="contendeor_inputs">
-    <p><input type="text" name="nombre" id="nombre" class="validate[required]"/> *</p>
-
-    <p><input type="text" name="apellido" id="apellido" class="validate[required]"/> *</p>
-
-    <p><input type="text" name="correo" class="validate[required,custom[email],ajax[isthereemail]]"/> *</p>
-
-    <p><input type="text" name="telefono" class="validate[custom[integer]]"/></p>
-
-    <p><input type="password" name="contrasena" id="contrasena1" class="validate[required]"/> *</p>
-    </br>
-    <p><input type="password" name="confirmar" id="contrasena2" class="validate[required,equals[contrasena1]]"/> *</p>
-
+    <p>Confirmar Contrase&ntilde;a:</p>
 
 </div>
+<div class="contendeor_inputs" >
+<p><input type="text" name="nombre" id="nombre" class="validate[required],custom[onlyLetterSp]"/> *</p>
+<p><input type="text" name="apellido" id="apellido" class="validate[required],custom[onlyLetterSp]"/> *</p>
+
+<p><input type="text" name="correo" class="validate[required,custom[email],ajax[isthereemail]]" /> *</p>
+
+<p><input type="text" name="telefono" class="validate[custom[onlyNumberSp],minSize[10]]"/></p>
+
+<p><input type="password" name="contrasena"  id="contrasena1" class="validate[required],minSize[6],maxSize[12]"/> *</p>
+</br>
+<p><input type="password" name="confirmar"  id="contrasena2" class="validate[required,equals[contrasena1]]"/> *</p>
+
+
+</div>
+
 
 <div class=" informacion_adicional_registro">
     <input type="radio" name="radiog_dark" id="radio1" class="css-checkbox" checked="checked" value="1"/><label
@@ -252,9 +253,7 @@
             promociones </label></p>
 
 
-    <p><input name="terminosCondiciones" type="checkbox" value="1" class="validate[required]"/> <label> He leído y
-            acepto los <a href="<?php echo base_url() ?>#" class="link_blanco">Términos y Condiciones</a> y <a
-                href="<?php echo base_url() ?>#" class="link_blanco">la Política de Privacidad</a> </label></p>
+    <p><input name="terminosCondiciones" type="checkbox" value="1" class="validate[required]"/> <label> He leído y acepto los <a href="<?php echo base_url()?>content/terminos_y_condiciones.pdf" target="_blank" class="link_blanco">Términos y Condiciones</a> y <a href="<?php echo base_url()?>content/politica_de_privacidad.pdf" target="_blank" class="link_blanco">la Política de Privacidad</a> *  </label></p>
 
 
     <font class="asterisco">Los datos marcados con un astrisco (*) son obligatorios </font>
@@ -500,7 +499,7 @@
 
         <p style="margin-top:15px;">Código Postal:</p>
 
-        <p style="margin-top:15px;">correo:</p>
+        <p style="margin-top:15px;">Correo:</p>
 
         <p style="margin-top:15px;">Página web:</p>
 
@@ -640,7 +639,7 @@
 
         <p style="margin-top:15px;">Código Postal:</p>
 
-        <p style="margin-top:15px;">correo:</p>
+        <p style="margin-top:15px;">Correo:</p>
 
         <p style="margin-top:15px;">Página web:</p>
 
@@ -704,9 +703,9 @@
 
 </br>
 <ul class="morado_reg">
-    <li><!--<a href="#" id="suscribir" style="text-decoration:none; color:#FFF;">Suscribirse</a>--><input type="submit"
-                                                                                                          value="Suscribir"
-                                                                                                          class="el_submit"/>
+    <li><!--<a href="#" id="suscribir" style="text-decoration:none; color:#FFF;">Suscribirse</a>-->
+        <input type="submit" value="Suscribir" class="el_submit"/>
+         
     </li>
 </ul>
 
@@ -726,7 +725,7 @@
 <!-- ------------------------------------------------------ -->
 <div class="contenedor_registro" id="contenedor_correcto" style="display:none;"> <!-- Contenedor negro reistro-->
     <div class="cerrar_registro"><img src="<?php echo base_url() ?>images/cerrar.png"
-                                      onclick="oculta('contenedor_correcto');"/></div>
+                                      onclick="oculta('contenedor_correcto');$('#registerNow')[0].reset();"/></div>
 
     <div class="registro_normal"> <!-- Contenedor morado registro -->
 
@@ -840,10 +839,17 @@
 
 <div id="espacio_izquierda" class="seccion_izquierda">
     <ul class="iconos" id="iconos_grandes">
-        <li onclick="window.location='<?= base_url() ?>carrito';"><img
-                src="<?php echo base_url() ?>images/compras.png"/></li>
-        <li onclick="muestra('contenedor_login');"><img src="<?php echo base_url() ?>images/sesion.png"/></li>
+        <li onclick="window.location='<?= base_url() ?>carrito';">
+            <div class="indicadores"> 
+                <?php echo $carritoT ?>
+            </div> 
+
+            <img src="<?php echo base_url() ?>images/compras.png"/></li>
+        <li onclick="muestra('contenedor_login');">
+            <div class="indicador"> <img src="images/indicador_no.png"> </div>
+            <img src="<?php echo base_url() ?>images/sesion.png"/></li>
         <li onclick="muestra('contenedor_registro');">
+            <div class="indicador"> <img src="<?php echo base_url() ?>images/indicador_si.png"> </div>
             <img src="<?php echo base_url() ?>images/registrate.png"/>
         </li>
     </ul>
