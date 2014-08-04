@@ -17,7 +17,11 @@
 	
 $().ready(function() {	
 	// Configuramos la validación de los distintos campos del formulario
-	$("#registerNow").validate({
+        /**
+         * TODO se cambio de validate a validationEngine por que marcaba error en la 
+         * platilla de directorio, desconozco si debe ser validate o validationEngine
+         */
+	$("#registerNow").validationEngine({
 		// Empezamos por las reglas
 		rules: {
 			nombre: "required", // Para el campo firstname(nombre) pedimos que sea requerido.

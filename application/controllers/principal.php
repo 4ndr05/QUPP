@@ -265,7 +265,6 @@ class Principal extends CI_Controller {
        	$data['fotos'] = $this->admin_model->getSingleItems('productoID',$productoID,'fotostienda');
        	$data['productoID'] = $productoID;
        	$this->load->view('producto_view',$data);
-
 	}
 	
 }

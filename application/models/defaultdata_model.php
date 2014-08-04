@@ -87,7 +87,11 @@ class Defaultdata_model extends CI_Model {
     }
 
     function getBanner(){
-       return $this->db->get('banner')->result();
+       return $this->db->get('banner')->result(); 
+    }
+    
+    function getGiros(){
+        return $this->db->get('giro')->result();
     }
 }
 ?>

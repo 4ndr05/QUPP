@@ -5,9 +5,6 @@ if (!defined('BASEPATH'))
 class Carrito extends CI_Controller
 {
 
-
-    var $idUsuario = "";
-
     public function __construct()
     {
         parent::__construct();

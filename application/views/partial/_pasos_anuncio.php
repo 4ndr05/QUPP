@@ -13,7 +13,7 @@ $this->session->userdata('emailUsuario', 'isc_martin_estrada@hotmail.com');
 
 ?>
 
-<div>
+<div style="display: none;">
 <div class="numeros_publicar_anuncio_mini">
     <ul class="listado_numeros_anuncio_mini">
         <li data-titulo="Selecciona la sección de publicación" data-p="paso_uno" class="numero_seccion_mini view_step">
