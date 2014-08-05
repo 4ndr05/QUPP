@@ -9,8 +9,8 @@
         <link rel="stylesheet" href="<?php echo base_url() ?>css/responsiveslides.css"/>
         <link href="<?php echo base_url() ?>css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="<?php echo base_url() ?>css/validator/validationEngine.jquery.css" type="text/css"/>
-        <link rel="stylesheet" href="css/jPages.css"/>
-        <link type="text/css" rel="stylesheet" href="css/general.css" media="screen"/>
+        <link rel="stylesheet" href="<?php echo base_url() ?>css/jPages.css"/>
+        <link type="text/css" rel="stylesheet" href="<?php echo base_url() ?>css/general.css" media="screen"/>
         
         <?php if (isset($links)): ?>
             <?php foreach ($links as $l): ?>
@@ -19,9 +19,9 @@
         <?php endif; ?>
 
         <script type="text/javascript" src="<?php echo base_url() ?>js/jquery-1.8.2.min.js"></script>
-        <script src="js/jquery-ui.js"></script>
-        <script src="js/jPages.js"></script>
-        <script type="text/javascript" src="js/jquery.cycle.all.js"></script>
+        <script src="<?php echo base_url() ?>js/jquery-ui.js"></script>
+        <script src="<?php echo base_url() ?>js/jPages.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.cycle.all.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>js/validator/languages/jquery.validationEngine-es.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>js/validator/jquery.validationEngine.js"></script>
         <script src="<?php echo base_url() ?>js/funciones_.js" type="text/javascript"></script>

@@ -384,7 +384,7 @@ Recibe de parametro un objeto compuesto de cuponadquirido y cupondetalle
 
 	}
 
-    function getDirectorios($giro = null, $estado = null, $palabraclave = null) {
+    function getDirectorios($giro = null, $estado = null, $palabraclave = null, $id = null) {
         /*
          * 
          * Posible recomentacion para pasarlo a una vista
@@ -430,6 +430,12 @@ Recibe de parametro un objeto compuesto de cuponadquirido y cupondetalle
              */
             $this->db->where($clause);
         }
+        
+        if(!is_null($id)){
+            $this->db->where('u.idUsuario', $id);
+        }
+        
+        
         $resultSet = $this->db->get();
         return array('data' => $resultSet->result(), 'count' => $resultSet->num_rows);
     }

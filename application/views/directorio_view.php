@@ -89,7 +89,7 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
                     </div>
 
                     <ul class="ver_mas_negocio">
-                        <li onclick="muestra('contenedor_anuncio_negocio');">
+                        <li onclick="javascript:window.location.href='<?php echo base_url('directorio/detalles/'.$directorio->idUsuario) ?>'">
                             Ver más...
                         </li>
                     </ul>
@@ -137,8 +137,6 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
         <img src="images/cerrar_anuncio_gris.png" onclick="oculta('contenedor_anuncio_negocio');"/>
     </div>
     <div class="leer_anuncio_directorio">
-
-
         <div class="contenedor_galeria">
             <img src="images/negocio_logo/mundo_mascotas.png"/>
         </div>
@@ -389,11 +387,11 @@ $this->load->view('partial/_pasos_anuncio', array('paquetes' => $paquetes,
                         var cont_neg = $('<div class="contenedor_negocio"></div>');
                         cont_neg.data('object', data[i]);
 
-                        var cont_imagen = $('<div class="contenedor_imagen_negocio"></div>');                        
+                        var cont_imagen = $('<div class="contenedor_imagen_negocio"></div>');
                         var logo = data[i].logo !== null ? data[i].logo : 'adistramiento_canino.png';
                         cont_imagen.append('<img src="images/giros_negocio/' + logo + '" alt="logo"/>');
                         cont_neg.append(cont_imagen);
-                        
+
                         var cont_nombre = $('<div class="contenedor_nombre_negocio"></div>');
                         cont_nombre.append('<strong>' + data[i].nombreNegocio + '</strong>');
                         cont_neg.append(cont_nombre);
@@ -428,7 +426,7 @@ $this->load->view('partial/_pasos_anuncio', array('paquetes' => $paquetes,
         }
 
         function show_details(data) {
-            
+
 
         }
 
