@@ -221,6 +221,7 @@ class Principal extends CI_Controller {
     }
 
 
+
     function tablasDinamicas(){
             var_dump($_POST);
             echo '------------------';

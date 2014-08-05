@@ -257,6 +257,7 @@ class Principal extends CI_Controller {
 		$config['first_link'] = 'Inicio';
 		$config['last_link'] = 'Fin';
 		$this -> pagination -> initialize($config);
+		$data['seccion'] = 16;
 	}
 
 

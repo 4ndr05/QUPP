@@ -14,80 +14,77 @@ class Sesion extends CI_Controller {
 		$redir = str_replace('-', '/', $redir);
 		// $redir = str_replace('/admin-login','',$redir);	
 		$failredir = str_replace('-', '/', $failredir);
-		//var_dump($redir);
-		//var_dump($failredir);
-		$this->form_validation->set_rules('correo', 'Usuario', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('contrasena', 'Contrase&ntilde;a', 'trim|required|xss_clean');
-		$this->form_validation->set_message('required', 'El campo "%s" es requerido');
-		$this->form_validation->set_message('xss_clean', 'El campo "%s" contiene un posible ataque XSS');
-		$this->form_validation->set_error_delimiters('<span class="error">', '</span>');
-		// Ejecuto la validacion de campos de lado del servidor
-		if (!$this->form_validation->run()) {
-			//$this->session->set_flashdata('error', 'error_4');
-
-			redirect('registro/meh');
-			return false;
-		} else {						
+		
 			
-			$correo = $this->input->post('correo');
-			$contrasena = $this->input->post('contrasena');
+			$correo = $this->input->get('correo');
+			$contrasena = $this->input->get('contrasena');
 			$recordarme = '';
 
 
 			switch($this->auth_model->login($correo, $contrasena, $recordarme)) {
 				case 1:
-					if($query!=""){
+					/*if($query!=""){
 						$redirect = $redir.$query;
 						$redirect = substr($redirect, 0,(strlen($redirect)-12));
+						$data['url'] = 'http://localhost:82/qup/'.$redirect;
+						$data['response'] = true;
 					}
-					else{
+					else{*/
 
 						if($this->session->userdata('tipoUsuario')==1){
-                			redirect('usuario/cuenta/myProfile');
+                			$data['url'] = 'http://localhost:82/qup/usuario/cuenta/myProfile';
                 		} 
                 		if ($this->session->userdata('tipoUsuario')==2) {
-                		    redirect('negocio/principal/myProfile');
+                		    $data['url'] = 'http://localhost:82/qup/negocio/principal/myProfile';
                 		}
                			if ($this->session->userdata('tipoUsuario')==3) {
-                		    redirect('asociacion/principal/myProfile');
+                		    $data['url'] = 'http://localhost:82/qup/asociacion/principal/myProfile';
                 		}
                 		if ($this->session->userdata('tipoUsuario')==0) {
-                		    redirect('admin');
+                		    $data['url'] = 'http://localhost:82/qup/admin';
 						}
 
-						redirect($redirect);
-					}
+						//redirect($redirect);
+						$data['response'] = true;
+					//}
 					
 					
 				break;
 				case 9 :
 
-					$this->session->set_flashdata('error', 'infoIncorrect');
-					redirect($failredir);
+					//$this->session->set_flashdata('error', 'infoIncorrect');
+					$data['url'] = 'http://localhost:82/qup/';
+					$data['response'] = false;
 				break;
 				case 0 :
 
-					$this->session->set_flashdata('error', 'inactiveUser');
-					redirect($failredir);
+					//$this->session->set_flashdata('error', 'inactiveUser');
+					$data['url'] = 'http://localhost:82/qup/';
+					$data['response'] = false;
 				break;
 				case -2 :
 
-					$this->session->set_flashdata('error', 'bannedUser');
-					redirect($failredir);
+					//$this->session->set_flashdata('error', 'bannedUser');
+					$data['url'] = 'http://localhost:82/qup/';
+					$data['response'] = false;
 				break;
 
 				case 3 :
 
-					if($query!=""){
+					/*if($query!=""){
 						$redirect = $redir.$query;
 						$redirect = substr($redirect, 0,(strlen($redirect)-12));
 					}
 					else{
 						$redirect = $redir;
-					}
+					}*/
+					$data['url'] = 'http://localhost:82/qup/';
+					$data['registro'] = false;
+					$data['response'] = false;
+
 				break;
 			}
-		}
+		echo json_encode($data);
 	}
 
 	function logout($redir, $error = null) {

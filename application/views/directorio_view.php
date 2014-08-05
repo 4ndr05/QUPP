@@ -137,6 +137,8 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
         <img src="images/cerrar_anuncio_gris.png" onclick="oculta('contenedor_anuncio_negocio');"/>
     </div>
     <div class="leer_anuncio_directorio">
+
+
         <div class="contenedor_galeria">
             <img src="images/negocio_logo/mundo_mascotas.png"/>
         </div>

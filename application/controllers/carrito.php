@@ -51,7 +51,7 @@ class Carrito extends CI_Controller
         $data['estados'] = $this->defaultdata_model->getEstados();
         $data['paises'] = $this->defaultdata_model->getPaises();
         $data['cupones'] = $this->usuario_model->getCuponesUsuario($this->session->userdata('idUsuario'), 1);
-
+        $data['seccion'] = 2;
         $carrito = $this->admin_model->getCarrito($this->session->userdata('idUsuario'));
         $carritototal = $this->admin_model->getSingleItem('usuarioID', $this->session->userdata('idUsuario'), 'carritototal');
 

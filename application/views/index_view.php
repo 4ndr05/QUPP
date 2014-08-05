@@ -52,18 +52,27 @@
     <script>
 
 
-        function ajaxValidationCallback(status, form, json, options) {
+         function ajaxValidationCallback(status, form, json, options) {
             if (status === true) {
 
                 var data = json;
                 console.log(data.response);
                 if (data.response == true) {
                     
-
-                    $("#confirm").html('<label>Tu usuario ha sido creado exitosamente, por favor activa tu cuenta atravez del e-mail que ha sido enviado a tu cuenta de correo electronico. Para poder anunciarte y publicar anuncios, deberás registrar tu información completa. Esto lo podrás hacer en cualquier momento entrando a tu perfil.</label>');
+                    if(data.registro == true){
+                    $("#confirm").html('<label>Tu usuario ha sido creado exitosamente, por favor activa tu cuenta a traves del e-mail que ha sido enviado a tu cuenta de correo electronico. Para poder anunciarte y publicar anuncios, deberás registrar tu información completa. Esto lo podrás hacer en cualquier momento entrando a tu perfil.</label>');
                     muestra('contenedor_correcto');
                     oculta('contenedor_registro');
+                    } else{
+                        $("#confirm").html('<label>Inicio de sesion correcto.</label>');
+                        muestra('contenedor_correcto');
+                        oculta('contenedor_login');
+                        window.location.replace(data.url);
+                    }
 
+                } else {
+                    muestra('contenedor_error');
+                    oculta('contenedor_login');
                 }
             }
         }
@@ -871,22 +880,47 @@
                                 <p>En nuestra seccion de Cruza encuentra la pareja perfecta para tu perrito.</p>
                             </div>
                         </div>
-                        <div class="item"><a href="<?php echo base_url() ?>#" target="_blank"><img
-                                    src="<?php echo base_url() ?>images/900x500_2.jpg" alt="Model 2"></a>
+
+
+
+
+                        <?php $banner = $this->session->userdata('banner'); ?>
+            <?php if (is_logged() && ($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3)) {
+                if ($banner != null) {
+
+                    foreach ($banner as $contenido) {
+                        if ($this->session->userdata('zonaID') == $contenido->zonaID && $contenido->posicion == 2 && $contenido->seccionID == $seccion) {
+                            ?>
+                            <div class="item"><a href="<?php echo base_url() ?>#" target="_blank"><img
+                                    src="<?php echo base_url() ?>images/<?php echo $contenido->imgbaner; ?>" alt="Model 2"></a>
 
                             <div class="carousel-caption">
-                                Adopta a un perrito, sera tu compañero perfecto.
+                                <?php echo $contenido->texto; ?>
                             </div>
 
                         </div>
-                        <div class="item"><a href="<?php echo base_url() ?>#" target="_blank"><img
-                                    src="<?php echo base_url() ?>images/900x500_3.jpg" alt="Model 2"></a>
+
+                            <?php
+                        }
+                    }
+                }
+            } else {
+                if ($banner !== null && !empty($banner)) {
+                    foreach ($banner as $contenido) {
+                        if ($contenido->zonaID == 9 && $contenido->posicion == 2 && $contenido->seccionID == $seccion) {
+                            ?>    <div class="item"><a href="<?php echo base_url() ?>#" target="_blank"><img
+                                    src="<?php echo base_url() ?>images/<?php echo $contenido->imgbaner; ?>" alt="Model 2"></a>
 
                             <div class="carousel-caption">
-                                Vende con nosotros a tus perritos.
+                                <?php echo $contenido->texto; ?>
                             </div>
 
                         </div>
+                            <?php }
+                        }
+                    }
+                } ?>
+
                     </div>
                     <a class="left carousel-control" href="<?php echo base_url() ?>#artCarousel"
                        data-slide="prev">&lsaquo;</a> <a class="right carousel-control"
@@ -917,10 +951,30 @@
     </div>
 
     <div id="banner_publicidad_derecha" class="slideshow_dos" style="height:200px; margin-top:10px;">
-        <img src="<?php echo base_url() ?>images/banner_lateral/1.png" width="215" height="192"/>
+         <?php $banner = $this->session->userdata('banner'); ?>
+            <?php if (is_logged() && ($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3)) {
+                if ($banner != null) {
 
-        <img src="<?php echo base_url() ?>images/banner_lateral/2.png" alt="">
-        <img src="<?php echo base_url() ?>images/banner_lateral/3.png" alt="">
+                    foreach ($banner as $contenido) {
+                        if ($this->session->userdata('zonaID') == $contenido->zonaID && $contenido->posicion == 4 && $contenido->seccionID == $seccion) {
+                            ?>
+                            <img src="<?php echo base_url() ?>images/<?php echo $contenido->imgbaner; ?>" width="638"
+                            height="93"/>
+
+                            <?php
+                        }
+                    }
+                }
+            } else {
+                if ($banner !== null && !empty($banner)) {
+                    foreach ($banner as $contenido) {
+                        if ($contenido->zonaID == 9 && $contenido->posicion == 4 && $contenido->seccionID == 17) {
+                            ?>    <img src="<?php echo base_url() ?>images/<?php echo $contenido->imgbaner; ?>" width="215"
+                            height="190"/>
+                            <?php }
+                        }
+                    }
+                } ?>
 
     </div>
 

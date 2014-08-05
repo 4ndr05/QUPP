@@ -38,7 +38,7 @@ class Directorio extends CI_Controller {
         $data['paquetes'] = $this->defaultdata_model->getPaquetes();
         $data['razas'] = $this->defaultdata_model->getRazas();
         $data['giros'] = $this->defaultdata_model->getGiros();
-        
+        $data['seccion'] = 4;
         $data['directorios'] = $this->usuario_model->getDirectorios();
 
         $this->load->view('directorio_view', $data);

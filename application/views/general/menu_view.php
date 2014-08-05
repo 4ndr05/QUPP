@@ -79,7 +79,7 @@ if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)):
                 if ($banner != null) {
 
                     foreach ($banner as $contenido) {
-                        if ($this->session->userdata('zonaID') == $contenido->zonaID && $contenido->posicion == 1 && $contenido->seccionID == $contenido->seccionID) {
+                        if ($this->session->userdata('zonaID') == $contenido->zonaID && $contenido->posicion == 1 && $contenido->seccionID == $seccion) {
                             ?>
                             <img src="<?php echo base_url() ?>images/<?php echo $contenido->imgbaner; ?>" width="638"
                             height="93"/>
@@ -91,7 +91,7 @@ if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)):
             } else {
                 if ($banner !== null && !empty($banner)) {
                     foreach ($banner as $contenido) {
-                        if ($contenido->zonaID == 9 && $contenido->posicion == 1 && $contenido->seccionID == $contenido->seccionID) {
+                        if ($contenido->zonaID == 9 && $contenido->posicion == 1 && $contenido->seccionID == $seccion) {
                             ?>    <img src="<?php echo base_url() ?>images/<?php echo $contenido->imgbaner; ?>" width="638"
                             height="93"/>
                             <?php }

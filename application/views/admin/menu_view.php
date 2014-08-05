@@ -8,6 +8,157 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/administrador.css" media="screen"></link>
 <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/general.css" media="screen"></link>
 <script src="<?php echo base_url()?>js/funciones_.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/jquery-1.8.2.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+	var zona = <?php if(isset($zonaT)){ echo $zonaT;} else {echo $zonaT = 9;}?>;
+	var seccion = <?php if(isset($seccion)){ echo $seccion;} else {echo $seccion = 1;}?>;
+	
+	$(".row").hide();
+	$(".zona"+zona+seccion).show();
+	if(seccion == 1){
+				 $(".superior").fadeIn();
+				 $(".medio").fadeIn();
+				 $(".medioContenido").fadeOut();
+				 $(".inferior").fadeIn();
+			 } 
+			 
+	
+	 
+	 $(".addContent").click(function() {
+		 	
+             var posicion = $(this).attr('data-rel');
+			 $("#posicion").val(posicion);
+             var uno = $("#posicion").val(posicion);
+             
+			 muestra('contenedor_modificaciones');
+             //console.log(uno);
+     });
+	 
+	 $(".addContentText").click(function() {
+		 	
+            var zonaN = $("#zonaIDR").val();
+             var seccionN = $("#numeroSeccionR").val();
+			  $("#zonaContentN").val(zonaN);
+			  $("#seccionContentN").val(seccionN);
+			  
+             
+			 muestra('contenedor_texto_apoyo');
+             //console.log(uno);
+     });
+	 
+	 $(".deleteContent").click(function() {
+		 	
+             var bannerIDel = $(this).attr('data-rel');
+			 var posicionDel = $(this).attr('id');
+             var zonaDel = $("#zonaIDR").val();
+             var seccionDel = $("#numeroSeccionR").val();
+			  $("#zonaContentDel").val(zonaDel);
+			  $("#seccionContentDel").val(seccionDel);
+			  $("#posicionContentDel").val(posicionDel);
+			  $("#bannerIDContentDel").val(bannerIDel);
+			  muestra('contenedor_delete');
+              console.log(bannerIDel,zonaDel, seccionDel,posicionDel);
+     });
+	 
+	 $(".deleteContentText").click(function() {
+		 	
+             var bannerIDT = $(this).attr('data-rel');
+			 var posicionT = $(this).attr('id');
+			 var tipo = $(this).attr('name');
+			 
+			 if(tipo == 1){
+				 $('#deleteTextForm').attr('action', '<?=base_url()?>admin/principal/deleteBannerText');
+		     } else {
+				 $('#deleteTextForm').attr('action', '<?=base_url()?>admin/principal/deleteTextApoyo'); 
+			 }
+			 
+             var zonaT = $("#zonaIDR").val();
+             var seccionT = $("#numeroSeccionR").val();
+			  $("#zonaContentT").val(zonaT);
+			  $("#seccionContentT").val(seccionT);
+			  $("#posicionContentT").val(posicionT);
+			  $("#bannerIDContentT").val(bannerIDT);
+			  muestra('contenedor_delete_text');
+              console.log(bannerID,zonaT, seccionT,posicionT);
+     });
+	 
+	  $(".updateText").click(function() {
+		 	
+             var bannerID = $(this).attr('data-rel');
+			 var posicionD = $(this).attr('id');
+             var zonaD = $("#zonaIDR").val();
+             var seccionD = $("#numeroSeccionR").val();
+			  $("#zonaContent").val(zonaD);
+			  $("#seccionContent").val(seccionD);
+			  $("#posicionContent").val(posicionD);
+			  $("#bannerIDContent").val(bannerID);
+			  muestra('contenedor_modificaciones_texto');
+              console.log(bannerID,zonaD, seccionD,posicionD);
+     });
+	 
+
+     $("#genero").change(
+                function(){
+					$("#personalizado").remove();
+                    var thisValue = $(this).val();
+                    var nombreZona = $('#genero option:selected').html();
+                    //console.log(thisValue, nombreZona);
+                    $("#nombreZona").detach();
+             		$('<label id="nombreZona">'+nombreZona+'</label>').appendTo('#zonaNombre');
+                    $("#zonaIDR").val(thisValue);
+					numeroZona = thisValue;
+					numeroSeccion = $("#numeroSeccionR").val();
+					$(".row").hide();
+					$(".zona"+numeroZona+numeroSeccion).show();
+					console.log(".zona"+numeroZona+numeroSeccion);
+    }); 
+	
+	
+	
+	
+	 $("#saveBanner").click(function() {
+              zona = $("#zonaIDR").val();
+              uno = $("#numeroSeccionR").val();
+             var dos = $("#nombreSeccionR").val();
+                         
+
+             //console.log(uno, dos, zona);
+			 
+			/* $.ajax({
+                url:'<?=base_url()?>admin/principal/uploadBanner',
+                type:'POST',
+                dataType: 'json',
+                data: $("#addBanner").serialize(),
+                success: function(data){
+                  
+                }
+    		});*/
+     });  
+	 
+	$(".filtro").click(
+	function(){
+		$("#personalizado").remove();		
+		goToSearch();		        
+	});
+
+
+	 
+});
+
+function goToSearch(){
+	
+	$.ajax({
+		url     : '<?=base_url()?>admin/principal/tablasDinamicas',
+		type    : 'POST',
+		data    : $('#addBanner').serialize(),
+		success : function(data){	
+			$(".personalizado").remove();		
+			$('#tablasDinamicasA').html(data);
+		}                                       
+	});
+}
+</script>
 </head>
 <body>
 

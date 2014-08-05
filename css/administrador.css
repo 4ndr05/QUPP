@@ -481,3 +481,22 @@ border: none;
 	text-align:left;
 	display: inline-block;
 	margin-top:15px;}
+.tabla_cupones th{
+	background-color:#FFFFFF;
+	color:#762EA4;
+	border-left:2px solid #762EA4;
+	}
+.tabla_cupones td {
+	border-left: 1px solid #FFF;
+	border-right: 1px solid #FFF;
+	color:#FFFFFF;}
+
+.agregar{
+	color:#FFFFFF;
+	}
+.agregar:hover{
+	font-size:14px;
+	cursor:pointer;
+	}
+.cursor:hover{
+	cursor:pointer;}
