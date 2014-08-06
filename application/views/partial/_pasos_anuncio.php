@@ -13,7 +13,7 @@ $this->session->userdata('emailUsuario', 'isc_martin_estrada@hotmail.com');
 
 ?>
 
-<div style="display: none;">
+<div>
 <div class="numeros_publicar_anuncio_mini">
     <ul class="listado_numeros_anuncio_mini">
         <li data-titulo="Selecciona la sección de publicación" data-p="paso_uno" class="numero_seccion_mini view_step">
@@ -132,8 +132,7 @@ $this->session->userdata('emailUsuario', 'isc_martin_estrada@hotmail.com');
         </div>
         <input type="radio" style="margin-left:100px;" data-vigencia="<?php echo $paquetes[0]->vigencia ?>"
                data-np="<?php echo $paquetes[0]->nombrePaquete ?>" name="paquete"
-               value="<?php echo $paquetes[0]->paqueteID ?>" data-precio="<?php echo $paquetes[0]->precio ?>"
-               value="radio" id="RadioGroup1_0"/>
+               value="<?php echo $paquetes[0]->paqueteID ?>" data-precio="<?php echo $paquetes[0]->precio ?>" id="RadioGroup1_0"/>
     </label>
 </div>
 <div class="paquetes_mini">
@@ -288,7 +287,7 @@ $this->session->userdata('emailUsuario', 'isc_martin_estrada@hotmail.com');
 </div>
 
 <!--paso tres-->
-<div id="paso_tres" class="paso contenido_indicacion_formulario_mini">
+<div id="paso_tres" class="paso contenido_indicacion_formulario_mini descipcion_pasos_mediano">
     <p class="margen_15_left_mini">Nombre: <input required="required" type="text" name="nombre"
                                                   class="background_morado_35_mini" readonly="readonly"
                                                   value="<?php echo $this->session->userdata('nombreUsuario'); ?>"/>
@@ -535,7 +534,6 @@ $this->session->userdata('emailUsuario', 'isc_martin_estrada@hotmail.com');
 <br/>
 
 <div id="btn_sig" style="display: block; text-align: right; padding-right: 10px;">
-    <div id="msj_paso" style="font-size: 10px;display: inline-block; vertical-align: bottom; height: 38px;"></div>
     <ul class="morado_mini" style="display: inline-block;">
         <li class="sig_paso">Continuar</li>
     </ul>
