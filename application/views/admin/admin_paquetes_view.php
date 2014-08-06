@@ -1,0 +1,226 @@
+<?=$this->load->view('admin/menu_view');?>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+ $(".cursor").click(function() {		 	
+             var paqueteID = $(this).attr('id');   
+			 console.log(paqueteID);  
+			 muestra('contenedor_modificaciones_paquete'+paqueteID);
+     });
+	 
+  $(".agregar").click(function(e){
+        e.preventDefault(); 
+		console.log('FFFFF');
+		 var paqueteID = $(this).attr('data-rel');   
+			 console.log(paqueteID);
+		 var tipoCupon = $(this).attr('id');
+		 console.log(tipoCupon);
+		 var contador = 0; 
+       /* $('#colorP'+productoID).removeClass('validate[required]');
+		var color = $('#colorP'+productoID).val();
+		$('#colorP'+productoID).val('');*/
+		
+		if(tipoCupon == 1){
+		$('<p id="cupon'+paqueteID+'"><input name="cuponTienda[]" type="text" id="cuponTienda" size="3"/>% <a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a><br /></p>').appendTo('#cupon1'+paqueteID);
+		} 
+		if(tipoCupon == 2){
+		$('<p id="cupon'+paqueteID+'"><input name="cuponPaquete[]" type="text" id="cuponPaquete" size="3"/>% <a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a><br /></p>').appendTo('#cupon2'+paqueteID);
+		} 
+		if(tipoCupon == 3) {
+		$('<p id="cupon'+paqueteID+'"><select name="cuponNegocioTienda[]"id="cuponNegocioTienda"><option> Tienda 1 </option><option> Tienda 2 </option></select><input name="cuponNegocio[]" type="text" id="cuponNegocio" size="3"/>% <a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a><br /></p>').appendTo('#cupon3'+paqueteID);
+		}
+		
+		contador++;
+        
+   	 });
+	 
+	 $("body").on("click",".eliminar", function(e){
+            $(this).parent('p').remove(); 
+        return false;
+    });
+});
+</script>
+
+<?php foreach($paquetes as $paquete){?>
+<form id="paquetes" action="<?=base_url()?>admin/paquetes/editPaquete" method="post">
+<div class="contenedor_modificaciones" id="contenedor_modificaciones_paquete<?=$paquete->paqueteID;?>" style="display:none"> <!-- Contenedor negro imagenes-->
+<div class="cerrar_modificaciones"> <img src="<?=base_url()?>images/cerrar.png" onclick="oculta('contenedor_modificaciones_paquete<?=$paquete->paqueteID;?>');"/> </div>
+
+
+<div class="modificaciones"> 
+<div class="titulo_modificaciones"> 
+EDITAR PAQUETE
+</div>
+<div class="contenido_intruciones">
+<table> 
+<tr>
+<td width="92">
+Paquete:</td> <td width="387"> <strong><?=$paquete->nombrePaquete;?></strong></td>
+</tr>
+<tr>
+<td>
+<input type="hidden" name="paqueteID" id="paqueteID" value="<?=$paquete->paqueteID;?>"/>
+Fotos:</td> <td> <input name="cantFotos" type="text" id="cantFotos" value="<?=$paquete->cantFotos;?>" /></td>
+</tr>
+<tr>
+<td>
+Texto:</td> <td> <input name="caracteres" type="text" id="caracteres" value="<?=$paquete->caracteres;?>"/></td>
+</tr>
+<tr>
+<td>
+Vigencia:</td> <td> <input name="vigencia" type="text" id="vigencia" value="<?=$paquete->vigencia;?>"/></td>
+</tr>
+<tr>
+<td>
+Videos:</td><td> <input name="videos" type="text" id="videos" value="<?=$paquete->videos;?>"/></td>
+</tr>
+<tr>
+<td>
+Cupones:</td> <td> <input name="cupones" type="text" id="cupones" value="<?=$paquete->cupones;?>"/></td>
+</tr>
+<tr>
+<td colspan="2">
+<strong>Detalle de cupones:</strong>
+</br>
+</br>
+<table class="tabla_cupones" width="482"> 
+<tr> 
+<th width="138">
+TIENDA
+</th>
+<th width="148">
+PAQUETES
+</th>
+<th width="180">
+NEGOCIO
+</th>
+</tr>
+<tr> 
+<td id="cupon1<?=$paquete->paqueteID;?>">
+<input name="cuponTienda[]" type="text" id="cuponTienda" size="3"/>% <a class="agregar" href="# " id="1" data-rel="<?=$paquete->paqueteID;?>"> Agregar </a>
+</td>
+<td id="cupon2<?=$paquete->paqueteID;?>">
+<input name="cuponPaquete" type="text" id="cuponPaquete" size="3"/>% <a class="agregar" href="#" id="2" data-rel="<?=$paquete->paqueteID;?>"> Agregar </a>
+</td>
+<td id="cupon3<?=$paquete->paqueteID;?>">
+<select name="cuponNegocioTienda[]" id="cuponNegocioTienda">
+<option> Tienda 1 </option>
+<option> Tienda 2 </option>
+</select> <input type="text" size="3" />% <a class="agregar" href="#" id="3" data-rel="<?=$paquete->paqueteID;?>"> Agregar </a>
+</td>
+</tr>
+</table>
+
+</br>
+
+</td>
+<tr> 
+<td> Costo: </td> <td> <input name="precio" type="text" id="precio" value="<?=$paquete->precio;?>"/>$</td>
+</tr>
+</table>
+</p>
+
+</div>
+<ul class="morado_reg">
+<li>
+<input type="submit" value="Guardar" />
+</li>
+</ul>
+
+
+
+</div>
+
+</div> <!-- Fin contenedor negro imagenes -->
+</form>
+<?php }?>
+
+
+
+
+
+
+
+
+<div class="contenedor_central">
+<div class="titulo_seccion">
+PAQUETES- ANUNCIOS
+</div>
+</br>
+<table class="tabla_carrito" width="990">
+<tr>
+<th width="84">
+Paquete
+</th>
+<th width="81">
+Disponibles
+</th>
+<th width="81">
+Fotos
+</th>
+<th width="88">
+Texto
+</th>
+<th width="137">
+Vigencia
+</th>
+<th width="136">
+Videos
+</th>
+<th width="310">
+Cupones
+</th>
+<th width="122">
+Costo
+</th>
+<th width="122">
+
+</th>
+</tr>
+<?php foreach($paquetes as $paquete){?>
+
+<tr >
+<td>
+<?php if($paquete->paqueteID == 1){?>
+<img src="<?=base_url()?>images/pago_lite.png" width="171" height="86"/>
+<?php } elseif($paquete->paqueteID == 2){?>
+<img src="<?=base_url()?>images/pago_regular.png" width="171" height="86"/>
+<?php }else{?>
+<img src="<?=base_url()?>images/pago_premium.png" width="171" height="86"/>
+<?php  } ?>
+</td>
+<td>
+1
+</td>
+<td>
+<?=$paquete->cantFotos;?>
+</td>
+<td>
+<?=$paquete->caracteres?>
+</td>
+<td>
+<?=$paquete->vigencia?> días
+</td>
+<td>
+<?=$paquete->videos?>
+</td>
+<td>
+<?=$paquete->cupones;?>
+</td>
+<td>
+<?=$paquete->precio?>
+</td>
+<td>
+<img src="<?=base_url()?>images/editar.png" class="cursor" id="<?=$paquete->paqueteID;?>"/>
+</td>
+
+</tr>
+<?php 
+	
+} ?>
+
+
+</table>
+
+</div>
+
+</body>
