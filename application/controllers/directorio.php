@@ -53,5 +53,12 @@ class Directorio extends CI_Controller {
         echo json_encode($this->usuario_model->getDirectorios($giro, $estado, $palabra_clave));
         
     }
+    
+    public function detalles($id){
+                
+        $data['detalles'] = $this->usuario_model->getDirectorios(null, null, null, intval($id));
+        $this->load->view('d_directorio_view', $data);
+        
+    }
 
 }

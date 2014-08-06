@@ -45,26 +45,26 @@ if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)):
                 <li>
 
                     <img id="horizontal_compras_mini"  onmouseover="mostrar_icono('horizontal_compras');
-                            ocultar_icono('horizontal_compras_mini');"class="iconos_flotantes" src="images/compras_horizontal_mini.png"/>
+                            ocultar_icono('horizontal_compras_mini');"class="iconos_flotantes" src="<?php echo base_url() ?>images/compras_horizontal_mini.png"/>
 
                     <img class="iconos_flotantes2" onmouseout="mostrar_icono('horizontal_compras_mini');
-                            ocultar_icono('horizontal_compras');"  id="horizontal_compras" src="images/compras_horizontal.png"/>
+                            ocultar_icono('horizontal_compras');"  id="horizontal_compras" src="<?php echo base_url() ?>images/compras_horizontal.png"/>
 
                 </li>
                 <li>
                     <img id="horizontal_ingresar_mini" onmouseover="mostrar_icono('horizontal_ingresar');
-                            ocultar_icono('horizontal_ingresar_mini');" class="iconos_flotantes" src="images/ingresar_horizontal_mini.png"/>
+                            ocultar_icono('horizontal_ingresar_mini');" class="iconos_flotantes" src="<?php echo base_url() ?>images/ingresar_horizontal_mini.png"/>
 
                     <img class="iconos_flotantes2" onmouseout="mostrar_icono('horizontal_ingresar_mini');
-                            ocultar_icono('horizontal_ingresar');" id="horizontal_ingresar" src="images/ingresar_horizontal.png"/>
+                            ocultar_icono('horizontal_ingresar');" id="horizontal_ingresar" src="<?php echo base_url() ?>images/ingresar_horizontal.png"/>
                 </li>
 
                 <li>
                     <img id="horizontal_registrate_mini" onmouseover="mostrar_icono('horizontal_registrate');
-                            ocultar_icono('horizontal_registrate_mini');"class="iconos_flotantes" src="images/registrate_horizontal_mini.png"/>
+                            ocultar_icono('horizontal_registrate_mini');"class="iconos_flotantes" src="<?php echo base_url() ?>images/registrate_horizontal_mini.png"/>
 
                     <img class="iconos_flotantes2" onmouseout="mostrar_icono('horizontal_registrate_mini');
-                            ocultar_icono('horizontal_registrate');" id="horizontal_registrate" src="images/registrate_horizontal.png"/>
+                            ocultar_icono('horizontal_registrate');" id="horizontal_registrate" src="<?php echo base_url() ?>images/registrate_horizontal.png"/>
                 </li>
             </ul>
         </div>
