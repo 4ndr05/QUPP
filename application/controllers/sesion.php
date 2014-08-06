@@ -32,16 +32,19 @@ class Sesion extends CI_Controller {
 					else{*/
 
 						if($this->session->userdata('tipoUsuario')==1){
-                			$data['url'] = 'http://localhost:82/qup/usuario/cuenta/myProfile';
+                			//$data['url'] = 'http://localhost:82/qup/usuario/cuenta/myProfile';
+                			$data['url'] = base_url().'usuario/cuenta/myProfile';
                 		} 
                 		if ($this->session->userdata('tipoUsuario')==2) {
-                		    $data['url'] = 'http://localhost:82/qup/negocio/principal/myProfile';
+                		    //$data['url'] = 'http://localhost:82/qup/negocio/principal/myProfile';
+                		    $data['url'] = base_url().'negocio/principal/myProfile';
                 		}
                			if ($this->session->userdata('tipoUsuario')==3) {
-                		    $data['url'] = 'http://localhost:82/qup/asociacion/principal/myProfile';
+                		    //$data['url'] = 'http://localhost:82/qup/asociacion/principal/myProfile';
+                		    $data['url'] = base_url().'asociacion/principal/myProfile';
                 		}
                 		if ($this->session->userdata('tipoUsuario')==0) {
-                		    $data['url'] = 'http://localhost:82/qup/admin';
+                		    $data['url'] = base_url().'admin';
 						}
 
 						//redirect($redirect);
@@ -53,19 +56,19 @@ class Sesion extends CI_Controller {
 				case 9 :
 
 					//$this->session->set_flashdata('error', 'infoIncorrect');
-					$data['url'] = 'http://localhost:82/qup/';
+					$data['url'] = base_url();
 					$data['response'] = false;
 				break;
 				case 0 :
 
 					//$this->session->set_flashdata('error', 'inactiveUser');
-					$data['url'] = 'http://localhost:82/qup/';
+					$data['url'] = base_url();
 					$data['response'] = false;
 				break;
 				case -2 :
 
 					//$this->session->set_flashdata('error', 'bannedUser');
-					$data['url'] = 'http://localhost:82/qup/';
+					$data['url'] = base_url();
 					$data['response'] = false;
 				break;
 
@@ -78,7 +81,7 @@ class Sesion extends CI_Controller {
 					else{
 						$redirect = $redir;
 					}*/
-					$data['url'] = 'http://localhost:82/qup/';
+					$data['url'] = base_url();
 					$data['registro'] = false;
 					$data['response'] = false;
 
