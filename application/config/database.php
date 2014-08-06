@@ -45,13 +45,13 @@
 | the active record class
 */
 
-$active_group = 'local';
+$active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['database'] = 'quierounperro';
-$db['default']['username'] = 'ti2014';
-$db['default']['password'] = 't@1n2014!';
+$db['default']['database'] = 'qup';
+$db['default']['username'] = 'root';
+$db['default']['password'] = '';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
