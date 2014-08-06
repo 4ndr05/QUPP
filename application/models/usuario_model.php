@@ -384,6 +384,15 @@ Recibe de parametro un objeto compuesto de cuponadquirido y cupondetalle
 
 	}
 
+        function getGirosUsuario($idUsuario){
+            $this->db->from('giroempresa ge');
+            $this->db->join('giro g', 'ge.giroID=g.giroID');         
+            
+            $this->db->where('ge.idUsuarioDetalle',$idUsuario);
+            return $this->db->get()->result();
+		
+        }
+        
     function getDirectorios($giro = null, $estado = null, $palabraclave = null, $id = null) {
         /*
          * 
@@ -433,6 +442,8 @@ Recibe de parametro un objeto compuesto de cuponadquirido y cupondetalle
         
         if(!is_null($id)){
             $this->db->where('u.idUsuario', $id);
+            
+            return $this->db->get()->row();
         }
         
         

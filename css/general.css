@@ -367,6 +367,12 @@ input[type=submit], .boton_verde a {
     margin: 0;
     padding: 0;
 }
+.boton_naranja_tres *{
+    font-size: 11px!important;
+}
+.boton_naranja_tres *:hover{
+    color:#FF7C00;
+    }
 
 /*flashes*/
 .alert {
@@ -456,3 +462,21 @@ input[type=submit], .boton_verde a {
 }
 
 /*end loader*/
+
+/*placeholder */
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #FFF;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #FFF;
+    opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #FFF;
+    opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #FFF;
+}
+/*end placeholder */
