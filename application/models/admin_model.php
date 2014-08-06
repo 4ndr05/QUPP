@@ -254,6 +254,13 @@ class Admin_model extends CI_Model
         return true;
     }
 
+    function updatePaquete($paqueteID, $data)
+    {
+        $this->db->where('paqueteID', $paqueteID);
+        $this->db->update($this->tablas['detallepaquete'], $data);
+        return true;
+    }
+
 
 
 }
