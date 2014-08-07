@@ -261,6 +261,7 @@ Mensajes
 </li>
 <li><a href="<?php echo base_url()?>admin/principal/anuncios" style="color:#FFF;text-decoration:none;">Anuncios</a></li>
 <li><a href="<?php echo base_url()?>admin/tiendaAdmin" style="color:#FFF;text-decoration:none;">Tienda</a></li>
+<li><a href="<?php echo base_url()?>admin/paquetes" style="color:#FFF;text-decoration:none;">Paquetes</a></li>
 </ul>
 </div>
 
