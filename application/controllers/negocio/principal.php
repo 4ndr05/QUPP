@@ -17,6 +17,7 @@ class Principal extends CI_Controller {
         $this->load->helper(array('form', 'url'));
         $this->load->model('defaultdata_model');
         $this->load->library('googlemaps');
+        $this->load->model('usuario_model');
 
         //is_authorized($nivelesReq, $idPermiso, $nivelUsuario, $rolUsuario)
         if (!is_authorized(array(2), 2, $this->session->userdata('nivel'), $this->session->userdata('rol'))) {
