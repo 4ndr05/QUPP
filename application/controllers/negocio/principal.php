@@ -71,7 +71,141 @@ class Principal extends CI_Controller {
     }
 
     function myProfile(){
-         $this->load->view('negocio/myprofile_view');
+        $data['SYS_metaTitle']          = '';
+        $data['SYS_metaKeyWords']       = '';
+        $data['SYS_metaDescription']    = '';  
+        $data['myInfo']    = $this->usuario_model->getMyInfo($this->session->userdata('idUsuario'));
+        $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
+        $data['estados']    = $this->defaultdata_model->getEstados();
+
+        if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
+            $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
+            $data['giro'] = $this->usuario_model->getGiro($this->session->userdata('idUsuarioDetalle'));
+        }
+        
+         $this->load->view('negocio/myprofile_view',$data);
+    }
+
+    function miPerfil(){
+        $data['myInfo']    = $this->usuario_model->getMyInfo($this->session->userdata('idUsuario'));
+        $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
+        $data['estados']    = $this->defaultdata_model->getEstados();
+
+        if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
+            $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
+            $data['giro'] = $this->usuario_model->getGiro($this->session->userdata('idUsuarioDetalle'));
+        }
+        $this->load->view('negocio/perfil/mi_perfil_view',$data);
+    }
+
+    function anuncios(){
+        $data['myInfo']    = $this->usuario_model->getMyInfo($this->session->userdata('idUsuario'));
+        $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
+        $data['estados']    = $this->defaultdata_model->getEstados();
+
+        if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
+            $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
+            $data['giro'] = $this->usuario_model->getGiro($this->session->userdata('idUsuarioDetalle'));
+        }
+        $this->load->view('negocio/perfil/anuncios_view',$data);
+    }
+
+    function mensajes(){
+        $data['myInfo']    = $this->usuario_model->getMyInfo($this->session->userdata('idUsuario'));
+        $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
+        $data['estados']    = $this->defaultdata_model->getEstados();
+
+        if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
+            $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
+            $data['giro'] = $this->usuario_model->getGiro($this->session->userdata('idUsuarioDetalle'));
+        }
+        $this->load->view('negocio/perfil/mensajes_view',$data);
+    }
+
+    function cupones(){
+        $data['myInfo']    = $this->usuario_model->getMyInfo($this->session->userdata('idUsuario'));
+        $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
+        $data['estados']    = $this->defaultdata_model->getEstados();
+
+        if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
+            $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
+            $data['giro'] = $this->usuario_model->getGiro($this->session->userdata('idUsuarioDetalle'));
+        }
+        $this->load->view('negocio/perfil/cupones_view',$data);
+    }
+
+    function favoritos(){
+        $data['myInfo']    = $this->usuario_model->getMyInfo($this->session->userdata('idUsuario'));
+        $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
+        $data['estados']    = $this->defaultdata_model->getEstados();
+
+        if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
+            $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
+            $data['giro'] = $this->usuario_model->getGiro($this->session->userdata('idUsuarioDetalle'));
+        }
+        $this->load->view('negocio/perfil/favoritos_view',$data);
+    }
+
+    function soporte(){
+        $data['myInfo']    = $this->usuario_model->getMyInfo($this->session->userdata('idUsuario'));
+        $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
+        $data['estados']    = $this->defaultdata_model->getEstados();
+
+        if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
+            $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
+            $data['giro'] = $this->usuario_model->getGiro($this->session->userdata('idUsuarioDetalle'));
+        }
+        $this->load->view('negocio/perfil/soporte_view',$data);
+    }
+
+    function facturas(){
+        $data['myInfo']    = $this->usuario_model->getMyInfo($this->session->userdata('idUsuario'));
+        $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
+        $data['estados']    = $this->defaultdata_model->getEstados();
+
+        if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
+            $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
+            $data['giro'] = $this->usuario_model->getGiro($this->session->userdata('idUsuarioDetalle'));
+        }
+        $this->load->view('negocio/perfil/facturas_view',$data);
+    }
+
+
+
+    
+    function editar_contrasena() {       
+            if ($this -> usuario_model -> cambiarContrasena($this -> input -> post('contrasenaActual'), $this -> input -> post('contrasena1'), $this -> session -> userdata('idUsuario'),1)) {
+               
+                $mensaje = '<link rel="stylesheet" href="'.base_url().'css/general.css" type="text/css" media="screen" /><table width="647" align="center"><tr>
+<td width="231" rowspan="2"><img src="'.base_url().'images/logo_mail.jpg"/></td>
+<td height="48" colspan="6" style="font-family: "titulos"; font-size:50px; color:#72A937; margin:0px; padding:0px; margin-bottom:-10px;">
+Bienvenido</td></tr>
+<tr style="font-size:14px; background-color:#72A937; color:#FFFFFF;" valign="top">
+<td width="60" height="23"><a> &nbsp;Inicio</a></td>
+<td width="57"><a>&nbsp;Venta</a></td>
+<td width="52"><a>&nbsp;Cruza</a></td>
+<td width="78"><a>&nbsp;Adopción</a></td>
+<td width="64"><a>&nbsp;Tienda</a></td>
+<td width="73"><a>&nbsp;Directorio</a></td>
+</tr>
+<tr>
+<td colspan="7" ><p>&nbsp;  </p><font style="margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" >Hola: '.$this->session->userdata('nombre').'!! </font>
+</br></br><font>Tu contraseña ha sido cambiada por la siguiente:</font>
+</br></br><font color="#000066">  '.$this -> input -> post("contrasena1").' </font>
+<br/>
+<p> </p>
+</td></tr><tr bgcolor="#6A2C91" ><td colspan="7" ><font style=" font-size:14px; padding-left:15px; color:#FFFFFF;"> Bienvenido </font>
+<br/><font style=" font-size:12px; padding-left:15px; color:#FFFFFF;"> Equipo QUP </font></td>
+</tr>
+</table>';
+
+        $this->email_model->send_email('', $this->session->userdata('correo'), 'Has cambiado tu contraseña en QUP', $mensaje);
+                $data['response'] = true;
+            } else {
+               $data['response'] = false;
+            }
+        echo json_encode($data);
+
     }
 
 
