@@ -55,6 +55,86 @@ class Paquetes extends CI_Controller {
         $paqueteID = $this->input->post('paqueteID');
         //$this->admin_model->updatePaquete($paqueteID,$data);
         //redirect('admin/paquetes');
+        $cuponTienda = $this->input->post('cuponTienda');
+                if( $cuponTienda != null){
+                    for($i=0;$i<=count($cuponTienda)-1;$i++){
+                        
+                        if($cuponTienda[$i] != '0' && $cuponTienda[$i] != ''){
+                        $arrcuponTienda= array(
+                            'nombreCupon'   => 'cuponTienda',
+                            'paqueteID' => $paqueteID
+                        );
+                        $e = $this->admin_model->insertItem('cupon',$arrcuponTienda);
+                        $arrcuponTienda = null;
+
+                        $arrcuponDetalle= array(
+                            'descripcion'   => 'cuponTienda',
+                            'valor' => $cuponTienda[$i],
+                            'vigencia' => $this->input->post('vigencia'),
+                            'tipoCupon' => 1,
+                            'cuponID' =>$e
+                        );
+                        $c = $this->admin_model->insertItem('cupondetalle',$arrcuponDetalle);  
+                        $arrcuponDetalle = null;
+
+                        
+                        }                        
+                    }
+                }
+
+        $cuponPaquete = $this->input->post('cuponPaquete');
+                if( $cuponPaquete != null){
+                    for($i=0;$i<=count($cuponPaquete)-1;$i++){
+                        
+                        if($cuponPaquete[$i] != '0' && $cuponPaquete[$i] != ''){
+                        $arrcuponTienda= array(
+                            'nombreCupon'   => 'cuponPaquete',
+                            'paqueteID' => $paqueteID
+                        );
+                        $e = $this->admin_model->insertItem('cupon',$arrcuponTienda);
+                        $arrcuponTienda = null;
+
+                        $arrcuponDetalle= array(
+                            'descripcion'   => 'cuponPaquete',
+                            'valor' => $cuponPaquete[$i],
+                            'vigencia' => $this->input->post('vigencia'),
+                            'tipoCupon' => 1,
+                            'cuponID' =>$e
+                        );
+                        $c = $this->admin_model->insertItem('cupondetalle',$arrcuponDetalle);  
+                        $arrcuponDetalle = null;
+
+                        
+                        }                        
+                    }
+                }
+
+        $cuponNegocio = $this->input->post('cuponNegocio');
+                if( $cuponNegocio != null){
+                    for($i=0;$i<=count($cuponNegocio)-1;$i++){
+                        
+                        if($cuponNegocio[$i] != '0' && $cuponNegocio[$i] != ''){
+                        $arrcuponTienda= array(
+                            'nombreCupon'   => 'cuponNegocio',
+                            'paqueteID' => $paqueteID
+                        );
+                        $e = $this->admin_model->insertItem('cupon',$arrcuponTienda);
+                        $arrcuponTienda = null;
+
+                        $arrcuponDetalle= array(
+                            'descripcion'   => $cuponNegocio[$i],
+                            'valor' => $cuponNegocioTienda[$i],
+                            'vigencia' => $this->input->post('vigencia'),
+                            'tipoCupon' => 1,
+                            'cuponID' =>$e
+                        );
+                        $c = $this->admin_model->insertItem('cupondetalle',$arrcuponDetalle);  
+                        $arrcuponDetalle = null;
+
+                        
+                        }                        
+                    }
+                }
     }
 
 
