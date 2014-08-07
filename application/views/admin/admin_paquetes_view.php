@@ -116,17 +116,39 @@ NEGOCIO
 </tr>
 <tr> 
 <td id="cupon1<?=$paquete->paqueteID;?>">
+<input name="cuponTienda[]" type="hidden" id="cuponTienda" size="3" value="0"/>
 <input name="cuponTienda[]" type="text" id="cuponTienda" size="3"/>% <a class="agregar" href="# " id="1" data-rel="<?=$paquete->paqueteID;?>"> Agregar </a>
+<?php if($cupones != null){
+	foreach($cupones as $cupon){
+		if($cupon->paqueteID == $paquete->paqueteID && $cupon->tipoCupon == 1){?>
+<p id="cupon<?=$paquete->paqueteID;?>"><input name="cuponTienda[]" type="text" id="cuponTienda" size="3" class="validate[required],custom[number]" value="<?=$cupon->valor?>"/>% <a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a>
+<?php }}}?>
 </td>
 <td id="cupon2<?=$paquete->paqueteID;?>">
-<input name="cuponPaquete" type="text" id="cuponPaquete" size="3"/>% <a class="agregar" href="#" id="2" data-rel="<?=$paquete->paqueteID;?>"> Agregar </a>
+<input name="cuponPaquete[]" type="hidden" id="cuponPaquete" size="3" value="0"/>
+<input name="cuponPaquete[]" type="text" id="cuponPaquete" size="3"/>% <a class="agregar" href="#" id="2" data-rel="<?=$paquete->paqueteID;?>"> Agregar </a>
+<?php if($cupones != null){
+	foreach($cupones as $cupon){
+		if($cupon->paqueteID == $paquete->paqueteID && $cupon->tipoCupon == 2){?>
+<p id="cupon<?=$paquete->paqueteID;?>"><input name="cuponPaquete[]" type="text" id="cuponPaquete" size="3" class="validate[required],custom[number]" value="<?=$cupon->valor?>"/>% <a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a>
+<?php }}}?>
 </td>
 <td id="cupon3<?=$paquete->paqueteID;?>">
+<input name="cuponNegocioTienda[]" type="hidden" id="cuponNegocioTienda" size="3" value="0" />
 <select name="cuponNegocioTienda[]" id="cuponNegocioTienda">
 <option value> Seleccione </option>
 <option value="idTienda"> Tienda 1 </option>
 <option value="idTienda"> Tienda 2 </option>
-</select> <input name="cuponNegocio" type="text" id="cuponNegocio" size="3" />% <a class="agregar" href="#" id="3" data-rel="<?=$paquete->paqueteID;?>"> Agregar </a>
+</select> 
+<input name="cuponNegocio[]" type="hidden" id="cuponNegocio" size="3" value="0" />
+<input name="cuponNegocio[]" type="text" id="cuponNegocio" size="3" />% <a class="agregar" href="#" id="3" data-rel="<?=$paquete->paqueteID;?>"> Agregar </a>
+
+<?php if($cupones != null){
+	foreach($cupones as $cupon){
+		if($cupon->paqueteID == $paquete->paqueteID && $cupon->tipoCupon == 3){?>
+<p id="cupon<?=$paquete->paqueteID?>"><select name="cuponNegocioTienda[]"id="cuponNegocioTienda" class="validate[required]"><option value> Seleccione </option><option value="Tienda 1" <?=($cupon->descripcion == 'Tienda 1') ? 'selected="selected"' : ''?>> Tienda 1 </option><option value="Tienda 2" <?=($cupon->descripcion == 'Tienda 2') ? 'selected="selected"' : ''?>> Tienda 2 </option></select><input name="cuponNegocio[]" type="text" id="cuponNegocio" size="3" class="validate[required],custom[number]" value="<?=$cupon->valor;?>"/>% <a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a>
+<?php }}}?>
+
 </td>
 </tr>
 </table>
@@ -172,9 +194,9 @@ PAQUETES- ANUNCIOS
 <th width="84">
 Paquete
 </th>
-<th width="81">
+<!--<th width="81">
 Disponibles
-</th>
+</th>-->
 <th width="81">
 Fotos
 </th>
@@ -209,9 +231,9 @@ Costo
 <img src="<?=base_url()?>images/pago_premium.png" width="171" height="86"/>
 <?php  } ?>
 </td>
-<td>
+<!--<td>
 1
-</td>
+</td>-->
 <td>
 <?=$paquete->cantFotos;?>
 </td>
@@ -225,7 +247,17 @@ Costo
 <?=$paquete->videos?>
 </td>
 <td>
-<?=$paquete->cupones;?>
+<?=$paquete->cupones;?><br /><br />
+<?php if($cupones != null){
+	foreach($cupones as $cupon){
+		if($cupon->paqueteID == $paquete->paqueteID){
+			echo $cupon->valor.'% '.$cupon->nombreCupon.'<br>';
+			
+			?>
+        
+<?php }
+	}
+}?>
 </td>
 <td>
 <?=$paquete->precio?>

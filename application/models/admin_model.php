@@ -261,6 +261,11 @@ class Admin_model extends CI_Model
         return true;
     }
 
+    function deleteCupon($paquete){
+        $this -> db -> where('paqueteID', $paquete);
+        $this -> db -> delete($this -> tablas['cupon']);
+        return true;
+    }
 
 
 }
