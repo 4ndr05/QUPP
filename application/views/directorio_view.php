@@ -1,10 +1,10 @@
 <?php
 $this->load->view('general/general_header_view', array('title' => 'Directorio',
-		'scripts'                                                    => array('funciones_venta', 'funciones_'), 'links' => array('venta',
-			'directorio')))
-?>
+  'scripts'                                                    => array('funciones_venta', 'funciones_'), 'links' => array('venta',
+     'directorio')))
+     ?>
      <?php $this->load->view('general/menu_view', array('seccion' => $seccion))?>
-<div class="titulo_seccion">
+     <div class="titulo_seccion">
         DIRECTORIO
 
 
@@ -23,26 +23,26 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
     <div class="contenedor_buscador">
         <form id="filtro_directorio">
             <div class="fondo_select_directorio" style=" margin-left:5px;">
-<?php if (isset($giros)):?>
-<select name="giro" class="estilo_select_directorio" id="giro">
+                <?php if (isset($giros)):?>
+                    <select name="giro" class="estilo_select_directorio" id="giro">
                         <option value=""> Selecciona un Giro </option>
-<?php foreach ($giros as $g):?>
+                        <?php foreach ($giros as $g):?>
                             <option value="<?php echo $g->giroID?>" style="background-color: #BCBEC0;"><?php echo $g->nombreGiro?></option>
-<?php endforeach;?>
-</select>
-<?php endif;?>
-</div>
+                        <?php endforeach;?>
+                    </select>
+                <?php endif;?>
+            </div>
 
             <div class="fondo_select_directorio">
-<?php if (isset($estados)):?>
-<select name="estado"  class="estilo_select_directorio" id="estado">
+                <?php if (isset($estados)):?>
+                    <select name="estado"  class="estilo_select_directorio" id="estado">
                         <option value="" > Selecciona un Estado </option>
-<?php foreach ($estados as $edo):?>
+                        <?php foreach ($estados as $edo):?>
                             <option value="<?php echo $edo->estadoID?>" ><?php echo $edo->nombreEstado;?></option>
-<?php endforeach;?>
-</select>
-<?php endif;?>
-</div>
+                        <?php endforeach;?>
+                    </select>
+                <?php endif;?>
+            </div>
 
             <div class="contenedor_buscar_directorio">
                 <input type="text" class="buscar_directorio" name="palabra_clave" size="4" placeholder="Palabras clave" />
@@ -67,7 +67,7 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
             <!-- item container -->
             <ul id="itemContainer_negocio" style="min-height:100px; display:inline-block;">
                 <!-- Inicio FILA -->
-<?php $fila                 = 1;?>
+                <?php $fila                 = 1;?>
                 <?php $data = $directorios['data']?>
                 <?php foreach ($data as $directorio):?>
                     <!-- INICIO contenedor anuncio  -->
@@ -78,41 +78,41 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
                         </div>
                         <div class="contenedor_nombre_negocio">
                             <strong>
-<?php echo $directorio->nombreNegocio;?>
-</strong>
+                                <?php echo $directorio->nombreNegocio;?>
+                            </strong>
                         </div>
 
                         <div class="contenedor_descripcion_negocio">
-<?php echo $directorio->nombreGiro?><br/>
-<?php echo $directorio->telefono?>
-</div>
+                            <?php echo $directorio->nombreGiro?><br/>
+                            <?php echo $directorio->telefono?>
+                        </div>
 
                         <ul class="ver_mas_negocio">
-<?php if ($this->session->userdata('idUsuario') !== FALSE):?>
+                            <?php if ($this->session->userdata('idUsuario') !== FALSE):?>
                                 <li onclick="javascript:window.location.href='<?php echo base_url('directorio/detalles/'.$directorio->idUsuario)?>'">
                                     Ver más...
                                 </li>
-<?php else:?>
-<li onclick="javascript:alert('Favor de iniciar sesión.')">
+                            <?php else:?>
+                                <li onclick="javascript:alert('Favor de iniciar sesión.')">
                                     Ver más...
                                 </li>
-<?php endif;?>
-</ul>
+                            <?php endif;?>
+                        </ul>
                     </div>
 
                     <!-- Fin contenedor annuncio -->
 
-<?php if (3 > $fila++):?>
-<!-- Inicio margen falso -->
+                    <?php if (3 > $fila++):?>
+                        <!-- Inicio margen falso -->
                         <div class="margen_derecho_20">
 
                         </div>
-<?php else:?>
+                    <?php else:?>
                         <?php $fila = 1;?>
                     <?php endif;?>
-<!-- FIN margen falso -->
-<?php endforeach;?>
-<!-- Fin contenedor annuncio -->
+                    <!-- FIN margen falso -->
+                <?php endforeach;?>
+                <!-- Fin contenedor annuncio -->
                 <!-- FIN FILA ---->
             </ul>
             <br/>
@@ -326,12 +326,12 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
         </ul>
     </div>
 
-<?php
-$this->load->view('partial/_pasos_anuncio', array('paquetes' => $paquetes,
-		'estados'                                                  => $estados, 'razas'                                                  => $razas));
-?>
+    <?php
+    $this->load->view('partial/_pasos_anuncio', array('paquetes' => $paquetes,
+      'estados'                                                  => $estados, 'razas'                                                  => $razas));
+      ?>
 
-<?php $this->load->view('partial/_pasos_anuncio_negocio');?>
+      <?php $this->load->view('partial/_pasos_anuncio_negocio');?>
 
       <div class="footer">
         <img src="images/perro_final.png" width="46" height="42"/>
@@ -404,13 +404,13 @@ $this->load->view('partial/_pasos_anuncio', array('paquetes' => $paquetes,
                             var cont_descrip = $('<div class="contenedor_descripcion_negocio"></div>');
                             cont_descrip.append(data[i].nombreGiro + '<br/>' + data[i].telefono);
                             cont_neg.append(cont_descrip);
-<?php if ($this->session->userdata('idUsuario') !== FALSE):?>
+                            <?php if ($this->session->userdata('idUsuario') !== FALSE):?>
                             var ver_mas = $('<ul class="ver_mas_negocio"><li onclick=" javascript:window.location.href=\'<?php echo base_url()?>directorio/detalles/'+data[i].idUsuario+'\'">Ver más...</li></ul>');
-<?php else:?>
-var ver_mas = $('<ul class="ver_mas_negocio"><li onclick="javascript:alert(\'Favor de iniciar sesión.\')">Ver más...</li></ul>');
+                        <?php else:?>
+                        var ver_mas = $('<ul class="ver_mas_negocio"><li onclick="javascript:alert(\'Favor de iniciar sesión.\')">Ver más...</li></ul>');
 
-<?php endif;?>
-cont_neg.append(ver_mas);
+                    <?php endif;?>
+                    cont_neg.append(ver_mas);
 
                     $("#itemContainer_negocio").append(cont_neg);
                     if (3 > separator++)

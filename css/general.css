@@ -259,6 +259,17 @@ display:block;
     background-image: url(../images/publicar_dos.png);
     cursor:pointer;
 }
+input[type=submit]{
+    color: #FFF;
+    margin: 0;
+    border: 0px none;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    font-size: 12px;
+    padding: 0;
+    cursor: pointer;
+}
 
 .morado_reg input[type=submit]:hover {
     color: #762EA4;
@@ -398,7 +409,7 @@ input[type=radio].css-checkbox {
     background-image:url(../images/boton_redondo.png);
     background-repeat:no-repeat;
     text-align:center;
-    padding-top:10px;}
+    /*padding-top:10px; se comenta por que no debe contener padding por que su elemento hijo es un input:[submit]*/}
     
 .morado_reg li:hover{
     background-image:url(../images/boton_redondo_over.png);
