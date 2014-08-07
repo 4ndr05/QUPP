@@ -306,19 +306,19 @@
     </div>
 
     <div class="contendeor_inputs">
-        <p><input type="text" name="razon"/></p>
+        <p><input type="text" name="razon" id="razon" class="custom[onlyLetterSp]"/></p>
 
-        <p><input type="text" name="RFC"/></p>
+        <p><input type="text" name="RFC" id="RFC" class="validate[required]"/></p>
 
-        <p><input type="text" name="calle"/></p>
+        <p><input type="text" name="calle" id="calle" class="validate[required]"/></p>
 
-        <p><input type="text" name="no_exterior"/></p>
+        <p><input type="text" name="no_exterior" id="no_exterior" class="custom[onlyNumberSp]"/></p>
 
-        <p><input type="text" name="cp"/></p>
+        <p><input type="text" name="cp" id="cp" class="custom[onlyNumberSP]"/></p>
 
-        <p><input type="text" name="municipio"/></p>
+        <p><input type="text" name="municipio" id="municipio" class="validate[required],custom[onlyLetterSp]"/></p>
 
-        <p><select name="estado" id="estado">
+        <p><select name="estado" id="estado" class="validate[required]"/>
                 <option> ---</option>
                 <?php
 
@@ -375,19 +375,19 @@
     </div>
 
     <div class="contendeor_inputs">
-        <p><input type="text" name="razonN"/></p>
+        <p><input type="text" name="razonN" id="razonN" class="custom[onlyLetterSp]"/></p>
 
-        <p><input type="text" name="RFCN"/></p>
+        <p><input type="text" name="RFCN" id="RFCN" class="validate[required]"/></p>
 
-        <p><input type="text" name="calleN"/></p>
+        <p><input type="text" name="calleN" id="calleN"class="validate[required]"/></p>
 
-        <p><input type="text" name="no_exteriorN"/></p>
+        <p><input type="text" name="no_exteriorN" id="no_exteriorN" class="custom[onlyNumberSp]"/></p>
 
-        <p><input type="text" name="cpN"/></p>
+        <p><input type="text" name="cpN" id="cpN" class="custom[onlyNumberSP]"/></p>
 
-        <p><input type="text" name="municipioN"/></p>
+        <p><input type="text" name="municipioN" id="municipioN" class="validate[required],custom[onlyLetterSp]"/></p>
 
-        <p><select name="estadoN">
+        <p><select name="estadoN" id="estadoN" class="validate[required]"/>
                 <option> ---</option>
                 <?php
                 if ($estados != null):
@@ -520,19 +520,19 @@
     </div>
 
     <div class="contendeor_inputs">
-        <p><input type="text" name="nombre_contactoN"/></p>
+        <p><input type="text" name="nombre_contactoN" id="nombre_contactoN" class="custom[onlyLetterSp]"/></p>
 
-        <p><input style="margin-top:3px;" type="text" name="telefonoN1"/></p>
+        <p><input style="margin-top:3px;" type="text" name="telefonoN1" id="telefonoN1"class="custom[onlyNumberSp]"/></p>
 
-        <p><input style="margin-top:3px;" type="text" name="calleN1"/></p>
+        <p><input style="margin-top:3px;" type="text" name="calleN1" id="calleN1"class="validate[required]"/></p>
 
-        <p><input style="margin-top:3px;" type="text" name="numN1"/></p>
+        <p><input style="margin-top:3px;" type="text" name="numN1" id="numN1" class="validate[required]"/></p>
 
-        <p><input style="margin-top:3px;" type="text" name="coloniaN1"/></p>
+        <p><input style="margin-top:3px;" type="text" name="coloniaN1" id="coloniaN1" class="validate[required]"/></p>
 
-        <p><input style="margin-top:3px;" type="text" name="municipioN1"/></p>
+        <p><input style="margin-top:3px;" type="text" name="municipioN1" id="municipioN1"class="validate[required],custom[onlyLetterSp]"/></p>
 
-        <p><select name="estadoN1"/>
+        <p><select name="estadoN1" id="estadoN1" class="validate[required]"/>
             <option> ---</option>
             <?php
             if ($estados != null):
@@ -543,9 +543,9 @@
                 <?php endforeach;
             endif; ?>
             </select> </p>
-        <p><input style="margin-top:3px;" type="text" name="cpN1"/></p>
+        <p><input style="margin-top:3px;" type="text" name="cpN1" class="custom[onlyNumberSp]"/></p>
 
-        <p><input style="margin-top:3px;" type="text" name="correoN1"/></p>
+        <p><input style="margin-top:3px;" type="text" name="correoN1"class="validate[required],custom[email]"></p>
 
         <p><input style="margin-top:3px;" type="text" name="pagina_webN1"/></p>
 
@@ -588,19 +588,19 @@
     </div>
 
     <div class="contendeor_inputs">
-        <p><input type="text" name="razonAC"/></p>
+        <p><input type="text" name="razonAC" id="razonAC" class="validate[required],custom[onlyLetterSp]"/></p>
 
-        <p><input type="text" name="RFCAC"/></p>
+        <p><input type="text" name="RFCAC" id="RFCAC"></p>
 
-        <p><input type="text" name="calleAC"/></p>
+        <p><input type="text" name="calleAC" id="calleAC"></p>
 
-        <p><input type="text" name="no_exterioACr"/></p>
+        <p><input type="text" name="no_exterioACr" id="no_exterioACr"class="custom[onlyNumberSp]"></p>
 
-        <p><input type="text" name="cpAC"/></p>
+        <p><input type="text" name="cpAC" id="cpAC" class="custom[onlyNumberSp]"></p>
 
-        <p><input type="text" name="municipioAC"/></p>
+        <p><input type="text" name="municipioAC" id="municipioAC" class="validate[required],custom[onlyLetterSp]"/></p>
 
-        <p><select name="estadoAC"/>
+        <p><select name="estadoAC" id="estadoAC" class="validate[required]"/>
             <option> ---</option>
             <?php
             if ($estados != null):
@@ -660,21 +660,21 @@
     </div>
 
     <div class="contendeor_inputs">
-        <p><input type="text" name="nombre_ac"/></p>
+        <p><input type="text" name="nombre_ac" class="validate[required],custom[onlyLetterSp]"/></p>
 
-        <p><input type="text" name="nombre_contactoAC1"/></p>
+        <p><input type="text" name="nombre_contactoAC1" class="validate[required]"/></p>
 
-        <p><input style="margin-top:3px;" type="text" name="telefonoAC1"/></p>
+        <p><input style="margin-top:3px;" type="text" name="telefonoAC1" id="telefonoAC1" class="custom[onlyNumberSp]"/></p>
 
-        <p><input style="margin-top:3px;" type="text" name="calleAC1"/></p>
+        <p><input style="margin-top:3px;" type="text" name="calleAC1" id="calleAC1" /></p>
 
-        <p><input style="margin-top:3px;" type="text" name="numAC1"/></p>
+        <p><input style="margin-top:3px;" type="text" name="numAC1" id="numAC1" class="custom[onlyNumberSp]"/></p>
 
-        <p><input style="margin-top:3px;" type="text" name="coloniaAC1"/></p>
+        <p><input style="margin-top:3px;" type="text" name="coloniaAC1" id="coloniaAC1"/></p>
 
-        <p><input style="margin-top:3px;" type="text" name="municipioAC1"/></p>
+        <p><input style="margin-top:3px;" type="text" name="municipioAC1" id="municipioAC1" class="validate[required],custom[onlyLetterSp]"/></p>
 
-        <p><select name="estadoAC1"/>
+        <p><select name="estadoAC1" class="validate[required]"/>
             <option> ---</option>
             <?php
             if ($estados != null):
@@ -685,9 +685,9 @@
                 <?php endforeach;
             endif; ?>
             </select> </p>
-        <p><input style="margin-top:3px;" type="text" name="cpAC1"/></p>
+        <p><input style="margin-top:3px;" type="text" name="cpAC1" class="custom[onlyNumberSp]" /></p>
 
-        <p><input style="margin-top:3px;" type="text" name="correoA1C"/></p>
+        <p><input style="margin-top:3px;" type="text" name="correoA1C" class="validate[required],custom[email]"/></p>
 
         <p><input style="margin-top:3px;" type="text" name="pagina_webAC1"/></p>
 
