@@ -194,9 +194,9 @@ PAQUETES- ANUNCIOS
 <th width="84">
 Paquete
 </th>
-<th width="81">
+<!--<th width="81">
 Disponibles
-</th>
+</th>-->
 <th width="81">
 Fotos
 </th>
@@ -231,9 +231,9 @@ Costo
 <img src="<?=base_url()?>images/pago_premium.png" width="171" height="86"/>
 <?php  } ?>
 </td>
-<td>
+<!--<td>
 1
-</td>
+</td>-->
 <td>
 <?=$paquete->cantFotos;?>
 </td>
