@@ -50,11 +50,11 @@ Editar
 <div class="contenedor_fiscales">
 <font class="espacios"> Datos fiscales</font>
 
-<div id="ver_el_detalle" class="detalle_fiscales" onclick="muestra('guardar_fiscales'); muestra('contenedor_formu_detalle_user'); muestra('ocultar_el_detalle');oculta('ver_el_detalle');">
+<div id="ver_el_detalle" class="detalle_fiscales" onclick="muestra('guardar_fiscales'); muestra('datos_fiscales_AC'); muestra('ocultar_el_detalle');oculta('ver_el_detalle');">
 <p > &nbsp;Ver detalle <img src="<?php echo base_url()?>images/flecha_blanca.png"/></p>
 </div>
 
-<div id="ocultar_el_detalle" class="detalle_fiscales" onclick="oculta('guardar_fiscales'); oculta('contenedor_formu_detalle_user'); muestra('ver_el_detalle'); oculta('ocultar_el_detalle');" style="display:none;">
+<div id="ocultar_el_detalle" class="detalle_fiscales" onclick="oculta('guardar_fiscales'); oculta('datos_fiscales_AC'); muestra('ver_el_detalle'); oculta('ocultar_el_detalle');" style="display:none;">
 <p > &nbsp; Ocultar detalle <img src="<?php echo base_url()?>images/flecha_blanca_revez.png"/></p>
 </div>
 

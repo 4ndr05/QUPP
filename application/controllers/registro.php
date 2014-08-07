@@ -259,13 +259,14 @@ Bienvenido</td></tr>
   				$ubicacionUsuarioID = $this->usuario_model->registrarDato($casificacionGeografica,'ubicacionusuario');
   				//var_dump($ubicacionUsuarioID);
   				$data['response'] = true;
-				$data['url'] = 'http://localhost:82/qup/';
-				$data['registro'] = true;
+				
 			break;
+
 			
 		}
 
-		
+		$data['url'] = base_url();
+		$data['registro'] = true;
 	 	
 		echo json_encode($data);
 
