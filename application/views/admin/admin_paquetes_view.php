@@ -1,4 +1,8 @@
 <?=$this->load->view('admin/menu_view');?>
+
+<link rel="stylesheet" href="<?php echo base_url()?>css/validator/validationEngine.jquery.css" type="text/css"/>
+<script type="text/javascript" src="<?php echo base_url()?>js/validator/languages/jquery.validationEngine-es.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/validator/jquery.validationEngine.js"></script>
 <script type="text/javascript">
 jQuery(document).ready(function(){
  $(".cursor").click(function() {		 	
@@ -14,19 +18,21 @@ jQuery(document).ready(function(){
 			 console.log(paqueteID);
 		 var tipoCupon = $(this).attr('id');
 		 console.log(tipoCupon);
+		 var cupones = $('#cupones').val();
+		 console.log(cupones);
 		 var contador = 0; 
        /* $('#colorP'+productoID).removeClass('validate[required]');
 		var color = $('#colorP'+productoID).val();
 		$('#colorP'+productoID).val('');*/
 		
 		if(tipoCupon == 1){
-		$('<p id="cupon'+paqueteID+'"><input name="cuponTienda[]" type="text" id="cuponTienda" size="3"/>% <a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a><br /></p>').appendTo('#cupon1'+paqueteID);
+		$('<p id="cupon'+paqueteID+'"><input name="cuponTienda[]" type="text" id="cuponTienda" size="3" class="validate[required],custom[number]"/>% <a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a><br /></p>').appendTo('#cupon1'+paqueteID);
 		} 
 		if(tipoCupon == 2){
-		$('<p id="cupon'+paqueteID+'"><input name="cuponPaquete[]" type="text" id="cuponPaquete" size="3"/>% <a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a><br /></p>').appendTo('#cupon2'+paqueteID);
+		$('<p id="cupon'+paqueteID+'"><input name="cuponPaquete[]" type="text" id="cuponPaquete" size="3" class="validate[required],custom[number]"/>% <a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a><br /></p>').appendTo('#cupon2'+paqueteID);
 		} 
 		if(tipoCupon == 3) {
-		$('<p id="cupon'+paqueteID+'"><select name="cuponNegocioTienda[]"id="cuponNegocioTienda"><option> Tienda 1 </option><option> Tienda 2 </option></select><input name="cuponNegocio[]" type="text" id="cuponNegocio" size="3"/>% <a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a><br /></p>').appendTo('#cupon3'+paqueteID);
+		$('<p id="cupon'+paqueteID+'"><select name="cuponNegocioTienda[]"id="cuponNegocioTienda" class="validate[required]"><option value> Seleccione </option><option value="Tienda 1"> Tienda 1 </option><option value="Tienda 2"> Tienda 2 </option></select><input name="cuponNegocio[]" type="text" id="cuponNegocio" size="3" class="validate[required],custom[number]"/>% <a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a><br /></p>').appendTo('#cupon3'+paqueteID);
 		}
 		
 		contador++;
@@ -37,6 +43,20 @@ jQuery(document).ready(function(){
             $(this).parent('p').remove(); 
         return false;
     });
+	
+	
+	
+});
+
+
+jQuery(document).ready(function(){
+			// binds form submission and fields to the validation engine
+			jQuery("form").validationEngine({
+				promptPosition           : "topRight",
+				scroll                   : false,
+				ajaxFormValidation       : false,
+				ajaxFormValidationMethod : 'post'
+			});
 });
 </script>
 
@@ -59,23 +79,23 @@ Paquete:</td> <td width="387"> <strong><?=$paquete->nombrePaquete;?></strong></t
 <tr>
 <td>
 <input type="hidden" name="paqueteID" id="paqueteID" value="<?=$paquete->paqueteID;?>"/>
-Fotos:</td> <td> <input name="cantFotos" type="text" id="cantFotos" value="<?=$paquete->cantFotos;?>" /></td>
+Fotos:</td> <td> <input name="cantFotos" type="text" id="cantFotos" value="<?=$paquete->cantFotos;?>" class="validate[required],custom[number]" /></td>
 </tr>
 <tr>
 <td>
-Texto:</td> <td> <input name="caracteres" type="text" id="caracteres" value="<?=$paquete->caracteres;?>"/></td>
+Texto:</td> <td> <input name="caracteres" type="text" id="caracteres" value="<?=$paquete->caracteres;?>" class="validate[required],custom[number]"/></td>
 </tr>
 <tr>
 <td>
-Vigencia:</td> <td> <input name="vigencia" type="text" id="vigencia" value="<?=$paquete->vigencia;?>"/></td>
+Vigencia:</td> <td> <input name="vigencia" type="text" id="vigencia" value="<?=$paquete->vigencia;?>" class="validate[required],custom[number]"/></td>
 </tr>
 <tr>
 <td>
-Videos:</td><td> <input name="videos" type="text" id="videos" value="<?=$paquete->videos;?>"/></td>
+Videos:</td><td> <input name="videos" type="text" id="videos" value="<?=$paquete->videos;?>" class="validate[required],custom[number]"/></td>
 </tr>
 <tr>
 <td>
-Cupones:</td> <td> <input name="cupones" type="text" id="cupones" value="<?=$paquete->cupones;?>"/></td>
+Cupones:</td> <td> <input name="cupones" type="text" id="cupones" value="<?=$paquete->cupones;?>" class="validate[required],custom[number]"/></td>
 </tr>
 <tr>
 <td colspan="2">
@@ -103,9 +123,10 @@ NEGOCIO
 </td>
 <td id="cupon3<?=$paquete->paqueteID;?>">
 <select name="cuponNegocioTienda[]" id="cuponNegocioTienda">
-<option> Tienda 1 </option>
-<option> Tienda 2 </option>
-</select> <input type="text" size="3" />% <a class="agregar" href="#" id="3" data-rel="<?=$paquete->paqueteID;?>"> Agregar </a>
+<option value> Seleccione </option>
+<option value="idTienda"> Tienda 1 </option>
+<option value="idTienda"> Tienda 2 </option>
+</select> <input name="cuponNegocio" type="text" id="cuponNegocio" size="3" />% <a class="agregar" href="#" id="3" data-rel="<?=$paquete->paqueteID;?>"> Agregar </a>
 </td>
 </tr>
 </table>

@@ -110,6 +110,7 @@ class Paquetes extends CI_Controller {
                 }
 
         $cuponNegocio = $this->input->post('cuponNegocio');
+        $cuponNegocioTienda = $this->input->post('cuponNegocioTienda');
                 if( $cuponNegocio != null){
                     for($i=0;$i<=count($cuponNegocio)-1;$i++){
                         
@@ -122,8 +123,8 @@ class Paquetes extends CI_Controller {
                         $arrcuponTienda = null;
 
                         $arrcuponDetalle= array(
-                            'descripcion'   => $cuponNegocio[$i],
-                            'valor' => $cuponNegocioTienda[$i],
+                            'descripcion'   => $cuponNegocioTienda[$i],
+                            'valor' => $cuponNegocio[$i],
                             'vigencia' => $this->input->post('vigencia'),
                             'tipoCupon' => 1,
                             'cuponID' =>$e
