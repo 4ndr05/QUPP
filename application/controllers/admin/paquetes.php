@@ -37,13 +37,12 @@ class Paquetes extends CI_Controller {
         $data['SYS_metaKeyWords']       = '';
         $data['SYS_metaDescription']    = '';  
         $data['paquetes']    = $this->defaultdata_model->getPaquetes();
-        //var_dump($data['paquetes']);
+        $data['cupones']    = $this->defaultdata_model->getCupones();
         $this->load->view('admin/admin_paquetes_view',$data);
     }
 
 
     function editPaquete(){
-        var_dump($_POST);
         $data = array(
             'cantFotos' => $this->input->post('cantFotos'), 
             'caracteres' => $this->input->post('caracteres'), 
@@ -53,15 +52,16 @@ class Paquetes extends CI_Controller {
             'precio' => $this->input->post('precio')
         );
         $paqueteID = $this->input->post('paqueteID');
-        //$this->admin_model->updatePaquete($paqueteID,$data);
-        //redirect('admin/paquetes');
+        $this->admin_model->updatePaquete($paqueteID,$data);
+        
         $cuponTienda = $this->input->post('cuponTienda');
+        $this->admin_model->deleteCupon($paqueteID);
                 if( $cuponTienda != null){
                     for($i=0;$i<=count($cuponTienda)-1;$i++){
                         
                         if($cuponTienda[$i] != '0' && $cuponTienda[$i] != ''){
                         $arrcuponTienda= array(
-                            'nombreCupon'   => 'cuponTienda',
+                            'nombreCupon'   => 'Tienda',
                             'paqueteID' => $paqueteID
                         );
                         $e = $this->admin_model->insertItem('cupon',$arrcuponTienda);
@@ -88,7 +88,7 @@ class Paquetes extends CI_Controller {
                         
                         if($cuponPaquete[$i] != '0' && $cuponPaquete[$i] != ''){
                         $arrcuponTienda= array(
-                            'nombreCupon'   => 'cuponPaquete',
+                            'nombreCupon'   => 'Paquete',
                             'paqueteID' => $paqueteID
                         );
                         $e = $this->admin_model->insertItem('cupon',$arrcuponTienda);
@@ -98,7 +98,7 @@ class Paquetes extends CI_Controller {
                             'descripcion'   => 'cuponPaquete',
                             'valor' => $cuponPaquete[$i],
                             'vigencia' => $this->input->post('vigencia'),
-                            'tipoCupon' => 1,
+                            'tipoCupon' => 2,
                             'cuponID' =>$e
                         );
                         $c = $this->admin_model->insertItem('cupondetalle',$arrcuponDetalle);  
@@ -110,22 +110,23 @@ class Paquetes extends CI_Controller {
                 }
 
         $cuponNegocio = $this->input->post('cuponNegocio');
+        $cuponNegocioTienda = $this->input->post('cuponNegocioTienda');
                 if( $cuponNegocio != null){
                     for($i=0;$i<=count($cuponNegocio)-1;$i++){
                         
                         if($cuponNegocio[$i] != '0' && $cuponNegocio[$i] != ''){
                         $arrcuponTienda= array(
-                            'nombreCupon'   => 'cuponNegocio',
+                            'nombreCupon'   => 'Negocio',
                             'paqueteID' => $paqueteID
                         );
                         $e = $this->admin_model->insertItem('cupon',$arrcuponTienda);
                         $arrcuponTienda = null;
 
                         $arrcuponDetalle= array(
-                            'descripcion'   => $cuponNegocio[$i],
-                            'valor' => $cuponNegocioTienda[$i],
+                            'descripcion'   => $cuponNegocioTienda[$i],
+                            'valor' => $cuponNegocio[$i],
                             'vigencia' => $this->input->post('vigencia'),
-                            'tipoCupon' => 1,
+                            'tipoCupon' => 3,
                             'cuponID' =>$e
                         );
                         $c = $this->admin_model->insertItem('cupondetalle',$arrcuponDetalle);  
@@ -135,6 +136,8 @@ class Paquetes extends CI_Controller {
                         }                        
                     }
                 }
+
+            redirect('admin/paquetes');
     }
 
 
