@@ -1,24 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Quierounperro</title>
-<link rel="shortcut icon" href="<?php echo base_url()?>images/ico.ico" />
-<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/reset.css" media="screen"></link>
-
-<link rel="stylesheet" href="<?php echo base_url()?>css/nivo-slider.css" type="text/css" media="screen" /> 
-<link rel="stylesheet" href="<?php echo base_url()?>css/responsiveslides.css">
- <link href="<?php echo base_url()?>css/bootstrap.min.css" rel="stylesheet" type="text/css">
- 
- <link rel="stylesheet" href="<?php echo base_url()?>css/validator/validationEngine.jquery.css" type="text/css"/>
-
-<script type="text/javascript" src="<?php echo base_url()?>js/jquery-1.8.2.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url()?>js/validator/languages/jquery.validationEngine-es.js"></script>
-<script type="text/javascript" src="<?php echo base_url()?>js/validator/jquery.validationEngine.js"></script>
- 
- 
-<!--<script src="<?php echo base_url()?>js/jquery-latest.js" type="text/javascript"></script>-->
-<script src="<?php echo base_url()?>js/funciones_.js" type="text/javascript"></script>
 
 
 <script>
@@ -31,21 +10,7 @@ if  (navigator.appName=="Microsoft Internet Explorer") {
     document.write('<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/index_explorer.css" media="screen"></link>');}
   </script>
 
-  <!-- [if lt IE ]>
-  <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/index_explorer.css" media="screen"></link>
-  <![endif]-->
 
- <!-- <script src="<?php echo base_url()?>js/jquery_1.4.js" type="text/javascript"></script>-->
-<!-- <script src="<?php echo base_url()?>js/jquery-1.10.2.js"></script>
- <script src="<?php echo base_url()?>js/jquery.validate.js" type="text/javascript"></script>-->
- <script src="<?php echo base_url()?>js/funciones_index.js" type="text/javascript"></script>
-<script src="<?php echo base_url()?>js/jquery.nivo.slider.js" type="text/javascript"></script>
- <script src="<?php echo base_url()?>js/responsiveslides.min.js"></script>
-   <script src="<?php echo base_url()?>js/jquery-ui.js"></script>
- <!-- include jQuery library -->
-
-<!-- include Cycle plugin -->
-<script type="text/javascript" src="<?php echo base_url()?>js/jquery.cycle.all.js"></script>  
 
 <script>
 
@@ -1381,30 +1346,6 @@ Directorio
 </div>
 </div>
 
-<div id="iconos_ocultos" class="iconos_ocultos">
-
-
-<ul class="iconos_estatus">
-<li>
-
-<img id="horizontal_compras_mini"  onmouseover="mostrar_icono('horizontal_compras'); ocultar_icono('horizontal_compras_mini');"class="iconos_flotantes" src="<?php echo base_url()?>images/compras_horizontal_mini.png"/>
-
-<img class="iconos_flotantes2" onmouseout="mostrar_icono('horizontal_compras_mini'); ocultar_icono('horizontal_compras');"  id="horizontal_compras" src="<?php echo base_url()?>images/compras_horizontal.png" onclick="window.location='carrito.html';"/>
-
-</li>
-<li>
-<img id="horizontal_ingresar_mini" onmouseover="mostrar_icono('horizontal_ingresar'); ocultar_icono('horizontal_ingresar_mini');" class="iconos_flotantes" src="<?php echo base_url()?>images/ingresar_horizontal_mini.png"/>
-
-<img class="iconos_flotantes2" onmouseout="mostrar_icono('horizontal_ingresar_mini'); ocultar_icono('horizontal_ingresar');" onclick="muestra('contenedor_login');" id="horizontal_ingresar" src="<?php echo base_url()?>images/ingresar_horizontal.png" />
-</li>
-
-<li>
-<img id="horizontal_registrate_mini" onmouseover="mostrar_icono('horizontal_registrate'); ocultar_icono('horizontal_registrate_mini');"class="iconos_flotantes" src="<?php echo base_url()?>images/registrate_horizontal_mini.png"/>
-
-<img class="iconos_flotantes2" onmouseout="mostrar_icono('horizontal_registrate_mini'); ocultar_icono('horizontal_registrate');" id="horizontal_registrate" src="<?php echo base_url()?>images/registrate_horizontal.png"/>
-</li>
-</ul>
-</div>
 
 <div class="">
 
@@ -1463,9 +1404,7 @@ Directorio
 <ul class="iconos" id="iconos_grandes">
 <li onclick="window.location='carrito.html';"> <img src="<?php echo base_url()?>images/compras.png"/></li>
 <li onclick="muestra('contenedor_login');"><img src="<?php echo base_url()?>images/sesion.png"/></li>
-<li onclick="muestra('contenedor_registro');">
-<img src="<?php echo base_url()?>images/registrate.png"/>
-</li>
+
 </ul>
 </div>
 <div id="banner_central">

@@ -22,6 +22,7 @@ if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
    <script type="text/javascript" src="<?php echo base_url()?>js/jquery.cycle.all.js"></script>
    <script src="<?php echo base_url()?>js/funciones_.js" type="text/javascript"></script>
   <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/general.css" media="screen"></link>
+  <link rel="stylesheet" href="<?php echo base_url() ?>css/mi_perfil.css" type="text/css"/>
   
   
 
@@ -61,30 +62,6 @@ Directorio
 </div>
 </div>
 
-<div id="iconos_ocultos" class="iconos_ocultos">
-
-
-<ul class="iconos_estatus">
-<li>
-
-<img id="horizontal_compras_mini"  onmouseover="mostrar_icono('horizontal_compras'); ocultar_icono('horizontal_compras_mini');"class="iconos_flotantes" src="<?php echo base_url()?>images/compras_horizontal_mini.png"/>
-
-<img class="iconos_flotantes2" onmouseout="mostrar_icono('horizontal_compras_mini'); ocultar_icono('horizontal_compras');"  id="horizontal_compras" src="<?php echo base_url()?>images/compras_horizontal.png"/>
-
-</li>
-<li>
-<img id="horizontal_ingresar_mini" onmouseover="mostrar_icono('horizontal_ingresar'); ocultar_icono('horizontal_ingresar_mini');" class="iconos_flotantes" src="<?php echo base_url()?>images/ingresar_horizontal_mini.png"/>
-
-<img class="iconos_flotantes2" onmouseout="mostrar_icono('horizontal_ingresar_mini'); ocultar_icono('horizontal_ingresar');" id="horizontal_ingresar" src="<?php echo base_url()?>images/ingresar_horizontal.png"/>
-</li>
-
-<li>
-<img id="horizontal_registrate_mini" onmouseover="mostrar_icono('horizontal_registrate'); ocultar_icono('horizontal_registrate_mini');"class="iconos_flotantes" src="<?php echo base_url()?>images/registrate_horizontal_mini.png"/>
-
-<img class="iconos_flotantes2" onmouseout="mostrar_icono('horizontal_registrate_mini'); ocultar_icono('horizontal_registrate');" id="horizontal_registrate" src="<?php echo base_url()?>images/registrate_horizontal.png"/>
-</li>
-</ul>
-</div>
 <div id="contenedor_central_superior" class="contenedor_central_superior">
 
 <div id="banner_superior">
@@ -781,9 +758,7 @@ MI PERFIL
 <ul class="iconos">
 <li> <img src="<?php echo base_url()?>images/compras.png"/></li>
 <li><img src="<?php echo base_url()?>images/sesion.png"/></li>
-<li>
-<img src="<?php echo base_url()?>images/registrate.png"/>
-</li>
+
 </ul>
 </div>
 

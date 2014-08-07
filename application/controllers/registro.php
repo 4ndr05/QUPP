@@ -265,7 +265,7 @@ Bienvenido</td></tr>
 			
 		}
 
-		$data['url'] = 'http://localhost:82/qup/';
+		$data['url'] = base_url();
 		$data['registro'] = true;
 	 	
 		echo json_encode($data);
