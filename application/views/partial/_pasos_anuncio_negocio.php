@@ -4,7 +4,7 @@
     <div id="publicar_anuncio_negocio" class="pubicar_anuncio">
 
 
-
+    
         <!-- Inicio Paso UNO -->
         <div id="paso_uno_negocio">
             <div class="numeros_publicar_anuncio">

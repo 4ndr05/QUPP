@@ -102,6 +102,14 @@ class Carrito extends CI_Controller
                     "currency_id" => "MX",
                     "unit_price" => floatval($precio)
                     )
+                ),
+            "payer" => array(
+                'name' => $this->session->userdata('nombre'),
+                'surname' => $this->session->userdata('apellido'),
+                'email' => $this->session->userdata('email')
+            ),
+            "back_urls" => array(
+                
                 )
             );
 
