@@ -442,13 +442,10 @@ border: none;
 
 .boton_naranja_tres li{
 	float:right;
-	padding-left:5px;
-	padding-right:5px;
-	padding:5px;
-	height:13px;
+	height:23px;
 	background-color:#FF7C00;
 	text-align:center;
-	width:80px;
+	width:89px;
 	color:#FFF;
 	box-shadow: 2px 2px 7px #999;
 	list-style:none;
@@ -458,9 +455,8 @@ border: none;
 	}
 	
 .boton_naranja_tres li:hover{
-	width:80px;
-	padding:5px;
-	height:13px;
+	width:90px;
+	height:23px;
 	background-color:#FFF;
 	text-align:center;
 	color:#FF7C00;
