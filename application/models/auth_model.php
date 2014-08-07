@@ -207,44 +207,52 @@ class Auth_model extends CI_Model {
 
 		if($tipoUsuario == 2){
 			$this->load->model('usuario_model');
-			$info = $this->usuario_model->myInfo($idUsuario);
+			$info = $this->usuario_model->myInfoR($idUsuario);
 			$tipoUsuario = 2;
 			$idUsuarioDato = $info->idUsuarioDato;
 			$idUsuarioDetalle = $info->idUsuarioDetalle;
 			$ubicacion = $this->usuario_model->miUbicacion($idUsuarioDato);
+			if($ubicacion != null){
 			$estadoID = $ubicacion->estadoID;
 			$zonaID = $ubicacion->zonageograficaID;
 			$zonaNombre = $ubicacion->nombre;
 			$estadoNombre = $ubicacion->nombreEstado;	
-			$rol = 2;	
-			$userdata['idUsuarioDato'] = $idUsuarioDato;
-			$userdata['idUsuarioDetalle'] = $idUsuarioDetalle;
-			$userdata['nivel'] = $nivel;
-			$userdata['estadoID'] = $restadoIDol;
+			
+			$userdata['estadoID'] = $estadoID;
 			$userdata['zonaNombre'] = $zonaNombre;
 			$userdata['zonaID'] = $zonaID;
 			$userdata['estadoNombre'] = $estadoNombre;
+			}
+			$rol = 2;	
+			$nivel = 2;
+			$userdata['idUsuarioDato'] = $idUsuarioDato;
+			$userdata['idUsuarioDetalle'] = $idUsuarioDetalle;
+			$userdata['nivel'] = $nivel;
 			$userdata['rol'] = $rol;
 		}
 
 		if($tipoUsuario == 3){
 			$this->load->model('usuario_model');
-			$info = $this->usuario_model->myInfo($idUsuario);
+			$info = $this->usuario_model->myInfoR($idUsuario);
 			$tipoUsuario = 3;
 			$idUsuarioDato = $info->idUsuarioDato;
 			$idUsuarioDetalle = $info->idUsuarioDetalle;	
 			$ubicacion = $this->usuario_model->miUbicacion($idUsuarioDato);
+			if($ubicacion != null){
 			$estadoID = $ubicacion->estadoID;
 			$zonaID = $ubicacion->zonageograficaID;
 			$zonaNombre = $ubicacion->nombre;
 			$estadoNombre = $ubicacion->nombreEstado;	
-			$userdata['idUsuarioDato'] = $idUsuarioDato;
-			$userdata['idUsuarioDetalle'] = $idUsuarioDetalle;
-			$userdata['estadoID'] = $restadoIDol;
+			$userdata['estadoID'] = $estadoID;
 			$userdata['zonaNombre'] = $zonaNombre;
 			$userdata['zonaID'] = $zonaID;
 			$userdata['estadoNombre'] = $estadoNombre;
+			}
+			$userdata['idUsuarioDato'] = $idUsuarioDato;
+			$userdata['idUsuarioDetalle'] = $idUsuarioDetalle;
 			$rol = 3;
+			$nivel = 3;
+			$userdata['nivel'] = $nivel;
 			$userdata['rol'] = $rol;
 		}
 
