@@ -359,6 +359,7 @@ display:block;
     40% {
         -webkit-transform: scale(1.0)
     }
+}
     
 input[type=radio].css-checkbox {
                             display:none;
@@ -388,6 +389,7 @@ input[type=radio].css-checkbox {
                 -ms-user-select: none;
                 user-select: none;
             }
+
 .morado_reg li{
     margin-left:450px;
     width:134px;
@@ -425,7 +427,6 @@ input[type=radio].css-checkbox {
     color:#FFF; 
     text-align: center;
     }
-}
 
 /*end loader*/
 
