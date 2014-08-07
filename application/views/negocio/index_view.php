@@ -1381,31 +1381,6 @@ Directorio
 </div>
 </div>
 
-<div id="iconos_ocultos" class="iconos_ocultos">
-
-
-<ul class="iconos_estatus">
-<li>
-
-<img id="horizontal_compras_mini"  onmouseover="mostrar_icono('horizontal_compras'); ocultar_icono('horizontal_compras_mini');"class="iconos_flotantes" src="<?php echo base_url()?>images/compras_horizontal_mini.png"/>
-
-<img class="iconos_flotantes2" onmouseout="mostrar_icono('horizontal_compras_mini'); ocultar_icono('horizontal_compras');"  id="horizontal_compras" src="<?php echo base_url()?>images/compras_horizontal.png" onclick="window.location='carrito.html';"/>
-
-</li>
-<li>
-<img id="horizontal_ingresar_mini" onmouseover="mostrar_icono('horizontal_ingresar'); ocultar_icono('horizontal_ingresar_mini');" class="iconos_flotantes" src="<?php echo base_url()?>images/ingresar_horizontal_mini.png"/>
-
-<img class="iconos_flotantes2" onmouseout="mostrar_icono('horizontal_ingresar_mini'); ocultar_icono('horizontal_ingresar');" onclick="muestra('contenedor_login');" id="horizontal_ingresar" src="<?php echo base_url()?>images/ingresar_horizontal.png" />
-</li>
-
-<li>
-<img id="horizontal_registrate_mini" onmouseover="mostrar_icono('horizontal_registrate'); ocultar_icono('horizontal_registrate_mini');"class="iconos_flotantes" src="<?php echo base_url()?>images/registrate_horizontal_mini.png"/>
-
-<img class="iconos_flotantes2" onmouseout="mostrar_icono('horizontal_registrate_mini'); ocultar_icono('horizontal_registrate');" id="horizontal_registrate" src="<?php echo base_url()?>images/registrate_horizontal.png"/>
-</li>
-</ul>
-</div>
-
 <div class="">
 
 <div class="contenedor_central_banner">
@@ -1463,9 +1438,7 @@ Directorio
 <ul class="iconos" id="iconos_grandes">
 <li onclick="window.location='carrito.html';"> <img src="<?php echo base_url()?>images/compras.png"/></li>
 <li onclick="muestra('contenedor_login');"><img src="<?php echo base_url()?>images/sesion.png"/></li>
-<li onclick="muestra('contenedor_registro');">
-<img src="<?php echo base_url()?>images/registrate.png"/>
-</li>
+
 </ul>
 </div>
 <div id="banner_central">
