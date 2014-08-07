@@ -726,26 +726,26 @@ MI PERFIL
 
 <div class="contenedor_menu_perfil">
 <ul class="menu_perfil">
-<li>
-<p style="margin-top:13px; margin-left:10px;">Mi Perfil</p>
+<li class="icono_seleccion">
+<p style="margin-top:13px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>asociacion/principal/miPerfil/" style="text-decoration:none;color:" class="ajaxLink">Mi Perfil</a></p>
 </li>
 <li>
-<p style="margin-top:5px; margin-left:10px;"> Admin. Anuncios </p>
+<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>asociacion/principal/anuncios/" style="text-decoration:none;" class="ajaxLink"> Admin. Anuncios</a> </p>
 </li>
 <li>
-<p style="margin-top:13px; margin-left:10px;"> Mensajes </p>
+<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>asociacion/principal/mensajes/" style="text-decoration:none;" class="ajaxLink"> Mensajes</a> </p>
 </li>
 <li>
-<p style="margin-top:13px; margin-left:10px;"> Cupones </p>
+<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>asociacion/principal/cupones/" style="text-decoration:none;" class="ajaxLink"> Cupones</a> </p>
 </li>
 <li>
-<p style="margin-top:13px; margin-left:10px;"> Favoritos </p>
+<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>asociacion/principal/favoritos/" style="text-decoration:none;" class="ajaxLink">Favoritos</a> </p>
 </li>
 <li>
-<p style="margin-top:5px; margin-left:10px;"> Soporte Técnico </p>
+<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>asociacion/principal/soporte/" style="text-decoration:none;" class="ajaxLink">Soporte Tecnico</a> </p>
 </li>
 <li>
-<p style="margin-top:5px; margin-left:10px;"> Mis Facturas </p>
+<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>asociacion/principal/facturas/" style="text-decoration:none;" class="ajaxLink">Mis Facturas</a> </p>
 </li>
 </ul>
 
