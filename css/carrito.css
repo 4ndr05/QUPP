@@ -121,3 +121,17 @@ color: #762EA4;
 background-color: #D9DADB;
 border: hidden;
 }
+
+#form_envio label{
+    width: 90px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+#form_envio [name]{
+    height: 15px;
+    width: 130px;
+}
+#form_envio [name]+label{
+    margin-left: 15px;
+}

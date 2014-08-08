@@ -80,6 +80,22 @@ $db['local']['swap_pre'] = '';
 $db['local']['autoinit'] = TRUE;
 $db['local']['stricton'] = FALSE;
 
+$db['production']['hostname'] = 'quierounperro.com';
+$db['production']['database'] = 'quieroun_quierounperro';
+$db['production']['username'] = 'quieroun_perro';
+$db['production']['password'] = 'p3rr0l0c0';
+$db['production']['dbdriver'] = 'mysql';
+$db['production']['dbprefix'] = '';
+$db['production']['pconnect'] = TRUE;
+$db['production']['db_debug'] = TRUE;
+$db['production']['cache_on'] = FALSE;
+$db['production']['cachedir'] = '';
+$db['production']['char_set'] = 'utf8';
+$db['production']['dbcollat'] = 'utf8_general_ci';
+$db['production']['swap_pre'] = '';
+$db['production']['autoinit'] = TRUE;
+$db['production']['stricton'] = FALSE;
+
 $db['remote']['hostname'] = '216.240.135.130';
 $db['remote']['database'] = 'oguadar_qup';
 $db['remote']['username'] = 'oguadar_qup';

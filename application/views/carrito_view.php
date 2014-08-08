@@ -1020,6 +1020,7 @@
                                                                                             <?php endif; ?>
                                                                                 </select>
                                                                             </div>
+                                                                            <div id="form_envio">
                                                                             <div>
                                                                                 <label>Nombre:</label> <input class="background_gris_mini" name="nombre" type="text" value="<?php echo $datosPersonales->nombre ?>"/>
                                                                                 <label>Apellidos:</label> <input class="background_gris_mini" name="apellidos" type="text" value="<?php echo $datosPersonales->apellido ?>"/>
@@ -1057,6 +1058,7 @@
                                                                                     <option> México</option>
                                                                                 </select>
                                                                             </div>
+                                                                        </div>
                                                                         </div>
                                                                     </div>
                                                                     </td>

@@ -2,7 +2,7 @@
 <body>
 <div class="contenedor_anuncio_detalle" id="contenedor_anuncio_detalle" style=" display:none;">
     <div class="contenedor_cerrar_anuncio">
-        <img src="/images/cerrar_anuncio.png" onclick="oculta('contenedor_anuncio_detalle');"/>
+        <img src="<?php echo base_url() ?>images/cerrar_anuncio.png" onclick="oculta('contenedor_anuncio_detalle');"/>
     </div>
     <div class="validar_anuncio">
         <ul class="boton_azul">
@@ -15,10 +15,10 @@
     <div class="leer_anuncio">
         <div class="contenedor_galeria">
             <div id="slideshow_publicar_anuncio" class="picse">
-                <img src="/images/anuncios/02/1.png" width="294" height="200"/>
-                <img src="/images/anuncios/02/2.png" width="294" height="200"/>
-                <img src="/images/anuncios/02/3.png" width="294" height="200"/>
-                <img src="/images/anuncios/02/1.png" width="294" height="200"/>
+                <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>
+                <img src="<?php echo base_url() ?>images/anuncios/02/2.png" width="294" height="200"/>
+                <img src="<?php echo base_url() ?>images/anuncios/02/3.png" width="294" height="200"/>
+                <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>
             </div>
         </div>
         <div class="datos_general">
@@ -50,7 +50,7 @@
             <br/>
             <ul class="boton_gris">
                 <li>
-                    <img src="/images/favorito.png"/>Agregar a Favoritos
+                    <img src="<?php echo base_url() ?>images/favorito.png"/>Agregar a Favoritos
                 </li>
             </ul>
         </div>
@@ -78,7 +78,7 @@
             </div>
             <ul class="boton_rojo_dos">
                 <li>
-                    <img src="/images/alert.png"/>
+                    <img src="<?php echo base_url() ?>images/alert.png"/>
                     Denunciar Anuncio
                 </li>
             </ul>
@@ -233,16 +233,16 @@
                             row.append('<td>' + response.data[i].fechaCreacion + '</td>');
                             var image_paquete;
                             if (response.data[i].nombrePaquete === "Lite") {
-                                image_paquete = '/images/pago_lite.png';
+                                image_paquete = 'images/pago_lite.png';
                             }
                             if (response.data[i].nombrePaquete === "Regular") {
-                                image_paquete = '/images/pago_regular.png';
+                                image_paquete = 'images/pago_regular.png';
                             }
                             if (response.data[i].nombrePaquete === "Premium") {
-                                image_paquete = '/images/pago_premium.png';
+                                image_paquete = 'images/pago_premium.png';
                             }
 
-                            row.append('<td> <img width="99" heigth="50" src="' + image_paquete + '" alt=' + response.data[i].nombrePaquete + ' /></td>');
+                            row.append('<td> <img width="99" heigth="50" src="<?php echo base_url() ?>' + image_paquete + '" alt=' + response.data[i].nombrePaquete + ' /></td>');
                             row.append('<td></td>');
                             row.append('<td><a class="ver_anuncio" href="#">ver anuncio</a></td>');
                             table_data.append(row).slideDown();

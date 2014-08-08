@@ -1,34 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Venta-Quierounperro.com</title>
-        <link rel="shortcut icon" href="<?php echo base_url() ?>images/ico.ico"/>
-        <link type="text/css" rel="stylesheet" href="<?php echo base_url() ?>css/reset.css" media="screen"/>
-        <link rel="stylesheet" href="<?php echo base_url() ?>css/jPages.css"/>
-        <link type="text/css" rel="stylesheet" href="<?php echo base_url() ?>css/general.css" media="screen"/>
-        <link rel="stylesheet" href="<?php echo base_url() ?>css/validator/validationEngine.jquery.css" type="text/css"/>
-
-        <script type="text/javascript" src="<?php echo base_url() ?>js/jquery-1.8.2.min.js"></script>    
-        <script src="<?php echo base_url() ?>js/jquery-ui.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>js/validator/languages/jquery.validationEngine-es.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>js/validator/jquery.validationEngine.js"></script>
-        <script>
-            if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
-
-                document.write('<link type="text/css" rel="stylesheet" href="<?php echo base_url() ?>css/general.css" media="screen"></link> <link type="text/css" rel="stylesheet" href="<?php echo base_url() ?>css/venta.css" media="screen"></link> <link type="text/css" rel="stylesheet" href="<?php echo base_url() ?>css/tienda.css" media="screen"></link>');
-            }
-        </script>
-
-        <script src="<?php echo base_url() ?>js/jPages.js"></script>
-        <script src="<?php echo base_url() ?>js/funciones_venta.js"></script>
-        <script src="<?php echo base_url() ?>js/funciones_tienda.js"></script>
-
-        <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.cycle.all.js"></script>
-        <script src="<?php echo base_url() ?>js/funciones_.js" type="text/javascript"></script>
-
-
+<?php $this->load->view('general/general_header_view', array('title'=> 'Tienda', 'links' => array('venta', 'tienda'),'scripts'=> array('funciones_venta', 'funciones_tienda', 'funciones_'))) ?>
         <script>
             jQuery(document).ready(function() {
 
@@ -70,17 +40,7 @@
                 });
             });
 
-            // binds form submission and fields to the validation engine
-            //        jQuery(".productoForm").validationEngine({
-            //            promptPosition: "topRight",
-            //            scroll: false,
-            //            ajaxFormValidation: false,
-            //            ajaxFormValidationMethod: 'post'
-            //        });
         </script>
-    </head>
-
-    <body>
         <div id="productoDetallePop">
         </div>
 
