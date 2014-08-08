@@ -787,7 +787,7 @@
 
 </div>
 
-</div>
+
 
 <!--		FIN ERROR REGISTRO							-->
 <!-- ------------------------------------------------------ -->
@@ -981,7 +981,7 @@
 </div>
 <div id="contenedor_paquetes" class="contenedor_paquetes">
 
-<a href="<?php echo base_url() ?>#" class="paquete_comprar reset"
+<a href="#" onclick="muestra('contenedor_publicar_anuncio');" class="paquete_comprar reset"
    data-paquete='{"id":"<?php echo $paquetes[0]->paqueteID ?>","nombre":"<?php echo $paquetes[0]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[0]->vigencia ?>","precio":"<?php echo $paquetes[0]->precio ?>"}'>
     <div class="paquetes_izquierda">
         <div class="title_paquetes">
