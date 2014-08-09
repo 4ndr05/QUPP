@@ -306,7 +306,7 @@ class Usuario_model extends CI_Model {
 	}
 
 	function miUbicacion($idUsuarioDato){
-		$this->db->select($this->tablas['ubicacionusuario'].'.*',$this->tablas['zonageograficaestado'].'.zonageograficaID',$this->tablas['zonageograficaestado'].'.nombre',$this->tablas['estado'].'.nombreEstado');
+		$this->db->select($this->tablas['ubicacionusuario'].'.*,'.$this->tablas['zonageograficaestado'].'.zonageograficaID,'.$this->tablas['zonageograficaestado'].'.nombre,'.$this->tablas['estado'].'.nombreEstado');
 		$this->db->join($this->tablas['zonageograficaestado'],$this->tablas['zonageograficaestado'].'.estadoID = '.$this->tablas['ubicacionusuario'].'.estadoID');
 		$this->db->join($this->tablas['estado'],$this->tablas['estado'].'.estadoID = '.$this->tablas['ubicacionusuario'].'.estadoID');
 		$this->db->where('idUsuarioDato',$idUsuarioDato);

@@ -73,6 +73,7 @@ class Principal extends CI_Controller {
 
         //paquetes
 		$data['paquetes'] = $this->defaultdata_model->getPaquetes();
+		//var_dump($data['paquetes']);
 
         //razas
         $data['razas'] = $this->defaultdata_model->getRazas();
