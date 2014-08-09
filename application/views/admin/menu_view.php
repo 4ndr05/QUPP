@@ -7,8 +7,12 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/reset.css" media="screen"></link>
 <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/administrador.css" media="screen"></link>
 <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/general.css" media="screen"></link>
-<script src="<?php echo base_url()?>js/funciones_.js" type="text/javascript"></script>
+
 <script type="text/javascript" src="<?php echo base_url()?>js/jquery-1.8.2.min.js"></script>
+<script src="<?php echo base_url() ?>js/jquery-ui.js"></script>
+<script src="<?php echo base_url() ?>js/jPages.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.cycle.all.js"></script>
+<script src="<?php echo base_url()?>js/funciones_.js" type="text/javascript"></script>
 <script>
 jQuery(document).ready(function(){
 	var zona = <?php if(isset($zonaT)){ echo $zonaT;} else {echo $zonaT = 9;}?>;
