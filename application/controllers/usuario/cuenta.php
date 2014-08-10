@@ -21,7 +21,7 @@ class Cuenta extends CI_Controller {
         $this->load->helper(array('form', 'url'));
         $this->load->library('googlemaps');
         $this->load->library('cart');
-        
+        $this->load->model('perfil_model');
 
         if (!is_authorized(array(1), 1, $this->session->userdata('nivel'), $this->session->userdata('rol'))) {
                 $this->session->set_flashdata('error', 'userNotAutorized');
@@ -135,6 +135,8 @@ class Cuenta extends CI_Controller {
         $data['myInfo']    = $this->usuario_model->getMyInfo($this->session->userdata('idUsuario'));
         $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
         $data['estados']    = $this->defaultdata_model->getEstados();
+        $data['fiscData'] = $this->perfil_model->infoFiscal($this->session->userdata('idUsuario'));
+        $data['paises']     = $this->defaultdata_model->getPaises();
 
         if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
             $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));

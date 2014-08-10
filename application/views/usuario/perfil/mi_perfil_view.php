@@ -61,9 +61,7 @@ Editar
 </div>
 
 
-<!--- 
-----  INICIO contenedor fiscales usuario normal 
-   --->
+
 <div id="contenedor_formu_detalle_user" style=" display:none;">
 <div class="texto_inputs" >
 <p> Razón Social:</p>
@@ -86,18 +84,42 @@ Editar
  </div>
 
 <div class="contendeor_inputs" >
-<p><input type="text" name="razon" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="RFC" class="background_gris"/> </p>
+<p><input type="text" name="razon" class="gris_input" value ="<?php echo $fiscData->razonSocial ?>"/> </p>
+<p style="margin-top:14px;"><input type="text" name="RFC" class="gris_input" value ="<?php echo $fiscData->rfc ?>" > </p>
 
-<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input" value ="<?php echo $fiscData->calle ?>"> </p>
 
-<p style="margin-top:14px;"><input type="text" name="no_exterior" class="gris_input"/></p>
+<p style="margin-top:14px;"><input type="text" name="no_exterior" class="gris_input" value ="<?php echo $fiscData->noExterior ?>"></p>
 
-<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input" value ="<?php echo $fiscData->cp ?>"> </p>
 
-<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
-<p style="margin-top:14px;"><select name="estado" class="gris_input"/> <option> --- </option>  </select></p>
-<p style="margin-top:14px;"><select name="pais" class="gris_input"/> <option> --- </option> </select> </p>
+<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input" value ="<?php echo $fiscData->municipio ?>"> </p>
+
+<p style="margin-top:14px;"><select name="estadoID" class="gris_input" id="estadoID">      
+<option value="">Seleccione</option>
+           <?php
+
+                if ($estados != null):
+                    foreach ($estados as $edo):
+                        ?>
+                        <option value="<?php echo $edo->estadoID ?>" <?=($fiscData->estadoID == $edo->estadoID) ? 'selected="selected"' : ''?>><?php echo $edo->nombreEstado ?></option>
+
+                    <?php endforeach;
+                endif; ?>
+           </select> 
+  </p>
+<p style="margin-top:14px;">
+<select name="paisID" class="gris_input"> 
+<option value="">Seleccione</option>
+            <?php
+                if ($paises != null):
+                    foreach ($paises as $pais):
+                        ?>
+                        <option value="<?php echo $pais->paisID ?>" <?=($fiscData->idPais == $pais->paisID)  ? 'selected="selected"' : ''?>><?php echo $pais->nombrePais ?></option>
+
+                    <?php endforeach;
+                endif; ?>
+           </select> </p>
 
 
 </div>
