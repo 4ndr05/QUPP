@@ -186,7 +186,8 @@ class Principal extends CI_Controller {
 
 
 	function meh(){
-		$this->load->view('meh_view');
+		$this->load->model('email_model');
+		$this->email_model->send_email(null, 'fraleiz17@gmail.com', 'Cambio de contraseña', 'grrrrrrrrrrr');
 	}
 
 	function uploadBanner(){
@@ -268,6 +269,23 @@ class Principal extends CI_Controller {
        	$data['fotos'] = $this->admin_model->getSingleItems('productoID',$productoID,'fotostienda');
        	$data['productoID'] = $productoID;
        	$this->load->view('producto_view',$data);
+
+	}
+
+	function miPerfil(){
+		var_dump($this->session->userdata('tipoUsuario'));
+		if($this->session->userdata('tipoUsuario')==1){
+                			redirect('usuario/cuenta/myProfile');
+                		} 
+                		if ($this->session->userdata('tipoUsuario')==2) {
+                		    redirect('negocio/principal/myProfile');
+                		}
+               			if ($this->session->userdata('tipoUsuario')==3) {
+                		    redirect('asociacion/principal/myProfile');
+                		}
+                		if ($this->session->userdata('tipoUsuario')==0) {
+                		    redirect('admin');
+						}
 
 	}
 	

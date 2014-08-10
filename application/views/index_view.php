@@ -55,9 +55,9 @@
          function ajaxValidationCallback(status, form, json, options) {
             if (status === true) {
 
-                var data = json;
+                 var data = json;
                 console.log(data.response);
-                if (data.response == true) {
+                if (data.response == true && data.cambioContrasena == false) {
                     
                     if(data.registro == true){
                     $("#confirm").html('<label>Tu usuario ha sido creado exitosamente, por favor activa tu cuenta a traves del e-mail que ha sido enviado a tu cuenta de correo electronico. Para poder anunciarte y publicar anuncios, deberás registrar tu información completa. Esto lo podrás hacer en cualquier momento entrando a tu perfil.</label>');
@@ -70,6 +70,9 @@
                         window.location.replace(data.url);
                     }
 
+                } else if(data.response == true && data.cambioContrasena == true){
+                    muestra('confirmacionCambio');
+                    oculta('envio_con');
                 } else {
                     muestra('contenedor_error');
                     oculta('contenedor_login');
@@ -162,7 +165,9 @@
                                           onclick="oculta('contenedor_login');"/></div>
 
         <div class="registro_normal">
+			
             <div class="titulo_registro"> INGRESAR</div>
+			<div id="ingreso_normal">
             <div class="texto_inputs">
                 <p> Usuario:</p>
 
@@ -176,25 +181,51 @@
                 <p><input type="password" name="contrasena" class="validate[required]"/> *</p>
             </div>
             </br>
+            <div class="subrayado" onclick="muestra('envio_con');oculta('ingreso_normal');">¿Olvidaste contraseña?</div>
+            <div class="subrayado" onclick="muestra('contenedor_registro');oculta('contenedor_login');"> Crear cuenta
+            </div>
+            </br>
             <ul class="morado_reg">
                 <li>
                     <input type="submit"/>
                 </li>
             </ul>
+			</div>
+</form>
 
-
-            <div class="subrayado" onclick="muestra('envio_con');">¿Olvidaste contraseña?</div>
+            
             <div id="envio_con" class="envio_con">
-                Se ha enviado contraseña al correo electronico indicado
+            <form action="<?= base_url() ?>recuperarcontrasena/sendLink" id="recuperarcontrasena" method="post">
+				</br>
+                <div class="titulo_registro"></div>
+				<div class="texto_inputs">
+                <p> Ingresa tu correo:</p>
+                </div>
+
+            <div class="contendeor_inputs">
+                <p><input type="text" name="correoR" class="validate[required,custom[email]]"/> *</p>
             </div>
-            <div class="subrayado" onclick="muestra('contenedor_registro');oculta('contenedor_login');"> Crear cuenta
+
+                
+				<ul class="morado_reg">
+                <li>
+                   <input type="submit" value="Recuperar contrase&ntilde;a"/>
+                </li>
+            </ul>
+                
+            </form>
+			</br>
             </div>
-            </br>
+			
+			<div id="confirmacionCambio" style="display:none;">
+			 Se ha enviado contraseña al correo electronico indicado.
+			</div>
+            
 
         </div>
 
     </div>
-</form>
+<!--</form>-->
 <!-- ------------------------------------------------------ -->
 <!--		FIN    CONTENEDOR LOGIN							-->
 
@@ -825,7 +856,7 @@
 
             <img class="iconos_flotantes2"
                  onmouseout="mostrar_icono('horizontal_ingresar_mini'); ocultar_icono('horizontal_ingresar');"
-                 onclick="muestra('contenedor_login');" id="horizontal_ingresar"
+                 onclick="muestra('contenedor_login');oculta('envio_con');muestra('ingreso_normal');" id="horizontal_ingresar"
                  src="<?php echo base_url() ?>images/ingresar_horizontal.png"/>
         </li>
 
@@ -854,7 +885,7 @@
             </div> 
 
             <img src="<?php echo base_url() ?>images/compras.png"/></li>
-        <li onclick="muestra('contenedor_login');">
+        <li onclick="muestra('contenedor_login');oculta('envio_con');muestra('ingreso_normal');">
             <div class="indicador"> <img src="images/indicador_no.png"> </div>
             <img src="<?php echo base_url() ?>images/sesion.png"/></li>
         <li onclick="muestra('contenedor_registro');">

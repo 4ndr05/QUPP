@@ -267,7 +267,7 @@ Bienvenido</td></tr>
 
 		$data['url'] = base_url();
 		$data['registro'] = true;
-	 	
+		$data['cambioContrasena'] = false;
 		echo json_encode($data);
 
 
