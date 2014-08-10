@@ -16,36 +16,29 @@ class Perfil_model extends CI_Model{
 	}
 
 
-	function myInfo($idUsuario){
+	function infoFiscal($idUsuario){
 		
-		$this->db->select($this->tablas['usuario'].'.*,'.$this->tablas['usuariodato'].'.*,'.$this->tablas['usuariodetalle'].'.*');
-		$this->db->join($this->tablas['usuariodato'],$this->tablas['usuariodato'].'.idUsuario = '.$this->tablas['usuario'].'.idUsuario','left');
-		$this->db->join($this->tablas['usuariodetalle'],$this->tablas['usuariodetalle'].'.idUsuario = '.$this->tablas['usuario'].'.idUsuario','left');
-		$this->db->where($this->tablas['usuario'].'.idUsuario', $idUsuario);
-		$query = $this->db->get($this->tablas['usuario']);
+		$query = $this->db-> query('SELECT b.razonSocial, b.rfc, b.calle, b.noExterior, b.cp, b.municipio, b.estadoID, b.idPais
+from Usuario a INNER JOIN usuarioDato b ON a.idUsuario = b.idUsuario 
+where a.idUsuario ='.$idUsuario);
 		if ($query->num_rows() == 1){
 			return $query->row();
 		} else {
 			return null;
 		}
+
 	}
 
-	function myInfoR($idUsuario){
-		
-		$this->db->select($this->tablas['usuario'].'.*,'.$this->tablas['usuariodato'].'.idUsuarioDato,'.$this->tablas['usuariodetalle'].'.idUsuarioDetalle');
-		$this->db->join($this->tablas['usuariodato'],$this->tablas['usuariodato'].'.idUsuario = '.$this->tablas['usuario'].'.idUsuario','left');
-		$this->db->join($this->tablas['usuariodetalle'],$this->tablas['usuariodetalle'].'.idUsuario = '.$this->tablas['usuario'].'.idUsuario','left');
-		$this->db->where($this->tablas['usuario'].'.idUsuario', $idUsuario);
-		$query = $this->db->get($this->tablas['usuario']);
+	function infoDetalleN($idUsuario){
+		$query = $this->db-> query('SELECT b.nombreNegocio, b.nombreContacto, b.telefono, b.calle, b.numero, b.colonia, b.municipioC, b.idEstado, b.cp, b.correo, b.paginaWeb, b.Logo, b.descripcion, d.latitud, d.longitud
+FROM Usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUsuario AND b.idUsuario = d.idUsuarioDato AND a.idUsuario ='.$idUsuario);
 		if ($query->num_rows() == 1){
 			return $query->row();
 		} else {
 			return null;
 		}
+
 	}
-
-
-
 
 
 }

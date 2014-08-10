@@ -18,6 +18,7 @@ class Principal extends CI_Controller {
         $this->load->model('defaultdata_model');
         $this->load->library('googlemaps');
         $this->load->model('usuario_model');
+        $this->load->model('perfil_model');
 
         //is_authorized($nivelesReq, $idPermiso, $nivelUsuario, $rolUsuario)
         if (!is_authorized(array(2), 2, $this->session->userdata('nivel'), $this->session->userdata('rol'))) {
@@ -72,12 +73,15 @@ class Principal extends CI_Controller {
     }
 
     function myProfile(){
+        
+
         $data['SYS_metaTitle']          = '';
         $data['SYS_metaKeyWords']       = '';
         $data['SYS_metaDescription']    = '';  
         $data['myInfo']    = $this->usuario_model->getMyInfo($this->session->userdata('idUsuario'));
         $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
         $data['estados']    = $this->defaultdata_model->getEstados();
+
 
         if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
             $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
@@ -91,6 +95,12 @@ class Principal extends CI_Controller {
         $data['myInfo']    = $this->usuario_model->getMyInfo($this->session->userdata('idUsuario'));
         $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
         $data['estados']    = $this->defaultdata_model->getEstados();
+        $data['fiscData'] = $this->perfil_model->infoFiscal($this->session->userdata('idUsuario'));
+        $data['estados']    = $this->defaultdata_model->getEstados();
+        $data['paises']     = $this->defaultdata_model->getPaises();
+        $data['datConN'] = $this->perfil_model->infoDetalleN($this->session->userdata('idUsuario'));
+
+        //var_dump($data['datConN']);
 
         if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
             $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));

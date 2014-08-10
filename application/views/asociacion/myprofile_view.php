@@ -4,9 +4,9 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Directorio-Quierounperro.com</title>
+<title>Mi Perfil-Quierounperro.com</title>
 <link rel="shortcut icon" href="<?php echo base_url()?>images/ico.ico" />  
-<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/reset.css" media="screen"></link>
+<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/reset.css" media="screen"/>
  <link rel="stylesheet" href="<?php echo base_url()?>css/jPages.css">
 <script>
 if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
@@ -14,7 +14,8 @@ if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
   document.write('<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/general.css" media="screen"></link> <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/venta.css" media="screen"></link><link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/mi_perfil.css" media="screen"></link>');
   }
   </script>
-   <script src="<?php echo base_url()?>js/jquery-1.10.2.js"></script>
+<!--   <script src="<?php echo base_url()?>js/jquery-1.10.2.js"></script>-->
+    <script type="text/javascript" src="<?php echo base_url() ?>js/jquery-1.8.2.min.js"></script>
      <script src="<?php echo base_url()?>js/jPages.js"></script>
      <script src="<?php echo base_url()?>js/funciones_venta.js"></script>
      <script src="<?php echo base_url()?>js/funciones_negocio.js"></script>
@@ -23,13 +24,156 @@ if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
    <script src="<?php echo base_url()?>js/funciones_.js" type="text/javascript"></script>
   <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/general.css" media="screen"></link>
   <link rel="stylesheet" href="<?php echo base_url() ?>css/mi_perfil.css" type="text/css"/>
-  
+  <link rel="stylesheet" href="<?php echo base_url() ?>css/validator/validationEngine.jquery.css" type="text/css"/>
+
+
+    <script type="text/javascript"
+            src="<?php echo base_url() ?>js/validator/languages/jquery.validationEngine-es.js"></script>
+    <script type="text/javascript" src="<?php echo base_url() ?>js/validator/jquery.validationEngine.js"></script> 
   
 
 
 </head>
 
 <body>
+<script type="text/javascript">
+var busy = false;
+$(document).ready(function() {
+getView('<?=base_url()?>asociacion/principal/miPerfil/');
+ /****************************************/ 
+                   $(".ajaxLink").live(
+                       'click',
+                        function(e){                            
+                            e.preventDefault();                       
+                                var gotoURL = $(this).attr('href');
+                                 console.log('dddddddddddddddddddd');
+                                $("#contenedor_menu_perfil ul li").removeClass("icono_seleccion");
+                                $(this).addClass("icono_seleccion");
+                                $("#appSectionContainer").html();
+                                getView(gotoURL);
+                                
+                                                                                                                
+                        }
+                    );  
+  
+  
+  
+$('#editarContrasena').submit(function(e) {
+      e.preventDefault();
+      $.ajax({
+        url : "<?=base_url()?>asociacion/principal/editar_contrasena",
+        type : 'POST',
+        dataType : 'json',
+        data : $(this).serialize(),
+        success : function(data) {
+          console.log(data.response);
+          if(data.response==true){
+            oculta('contenedor_cambiar_contrasena');
+            muestra('contenedor_cambiar_contrasena_correcto');
+          }
+          else{
+            oculta('contenedor_cambiar_contrasena');
+            muestra('contenedor_cambiar_contrasena_error');
+          }
+        }
+      })
+    });
+});
+jQuery(document).ready(function(){
+  
+      // binds form submission and fields to the validation engine
+      jQuery("#editarContrasena").validationEngine({
+        promptPosition           : "topRight",
+        scroll                   : false,
+        ajaxFormValidation       : false,
+        ajaxFormValidationMethod : 'post'
+      });
+
+     
+});
+function getView(viewURL){
+                busy = true;
+                $("#appSectionContainer").children().remove();
+                $("#appSectionContainer").load(viewURL, function(){                    
+                    $(".hidden").stop().fadeIn('fast', function(){
+                        busy = false;
+                        // $('#TIbody').css('cursor', 'default');
+                    });       
+                });
+            }
+  
+</script>
+<div id="contenedor_cambiar_contrasena" class="contenedor_anuncio_detalle" style="display:none;">
+<div class="cerrar_registro"> <img src="<?php echo base_url()?>images/cerrar.png" onclick="oculta('contenedor_cambiar_contrasena');"/> </div>
+<form action="#" method="post" id="editarContrasena">
+<div class="contenedor_contrasena">
+<div class="contenedor_titulo">
+<p> CAMBIAR CONTRASEÑA </p>
+</div>
+<div class="contenido_contrasena">
+<p> Contraseña actual:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"  class="background_morado validate[required]" name="contrasenaActual"/> </p>
+
+<p> Nueva contraseña:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" class="background_morado validate[required],maxSize[8]" name="contrasena1" id="contrasena1"/> </p>
+
+<p> Confirmar contraseña: <input type="password" class="background_morado validate[required,equals[contrasena1]],maxSize[8]" name="contrasena2"/> </p>
+
+
+</div>
+
+</br>
+</br>
+<ul class="morado_boton">
+<li>
+<input type="submit" value="Editar" class="el_submit"/>
+</li>
+</ul> 
+</div>
+</form>
+</div>
+
+
+<div id="contenedor_cambiar_contrasena_correcto" class="contenedor_anuncio_detalle" style="display:none;">
+<div class="cerrar_registro"> <img src="<?php echo base_url()?>images/cerrar.png" onclick="oculta('contenedor_cambiar_contrasena_correcto');"/> </div>
+<div class="contenedor_contrasena">
+<div class="contenedor_titulo">
+<p> CAMBIAR CONTRASEÑA </p>
+</div>
+<div class="contenido_contrasena">
+<div class="palomita">
+<img src="<?php echo base_url()?>images/palimita_morada.png"/>
+</div>
+<div class="contenido_contrasena_notificacion">
+Tu contraseña ha sido modificada con exito.
+Se ha enviado una copia al email: <?=$this->session->userdata('correo');?>
+</div>
+
+</div>
+
+</br>
+</div>
+</div>
+
+<div id="contenedor_cambiar_contrasena_error" class="contenedor_anuncio_detalle" style="display:none;">
+<div class="cerrar_registro"> <img src="<?php echo base_url()?>images/cerrar.png" onclick="oculta('contenedor_cambiar_contrasena_error');"/> </div>
+<div class="contenedor_contrasena">
+<div class="contenedor_titulo">
+<p> CAMBIAR CONTRASEÑA </p>
+</div>
+<div class="contenido_contrasena">
+<div class="palomita">
+<img src="<?php echo base_url()?>images/tache_morada.png"/>
+</div>
+<div class="contenido_contrasena_notificacion">
+<strong> Ha ocurrido un error. </strong>
+<p> Intentelo nuevamente</p>
+</div>
+
+</div>
+
+</br>
+</div>
+</div>
+
 
 <div id="mini_menu" >
 <input type="hidden" id="efecto" value="corre"/>
@@ -38,7 +182,7 @@ if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
 <div id="contenedor_menu_principal" class="contenedor_menu_principal"> 
 <ul class="principal">
 <li>
-<a href="index.html">
+<a href="<?php echo base_url()?>index.html">
 Inicio
 </a>
 </li>
@@ -62,6 +206,7 @@ Directorio
 </div>
 </div>
 
+ 
 <div id="contenedor_central_superior" class="contenedor_central_superior">
 
 <div id="banner_superior">
@@ -71,7 +216,7 @@ Directorio
 <img src="<?php echo base_url()?>images/banner_superior/1.png" width="638" height="93"/>
 <img src="<?php echo base_url()?>images/banner_superior/2.png" width="638" height="93"/>
 <img src="<?php echo base_url()?>images/banner_superior/3.png" width="638" height="93"/>
-	</div>
+  </div>
 
 
 
@@ -699,12 +844,10 @@ Pagar
 <div id="contenedor_menu_principal" class="contenedor_menu_principal"> 
 <ul class="principal">
 <li>
-<a href="index.html">
-Inicio
-</a>
+<a href="<?php echo base_url()?>"> Inicio </a>
 </li>
 <li>
-<a href="venta.html"> Venta </a>
+<a href="<?php echo base_url()?>"> Venta </a>
 </li>
 <li>
 Cruza
@@ -712,7 +855,9 @@ Cruza
 <li>
 Adopción
 </li>
-<li>Tienda</li>
+<li>
+<a href="<?=base_url()?>principal/tienda">Tienda</a>
+</li>
 <li>
 Directorio
 </li>
@@ -723,7 +868,6 @@ Directorio
 <div class="titulo_seccion">
 MI PERFIL
 </div>
-
 <div class="contenedor_menu_perfil">
 <ul class="menu_perfil">
 <li class="icono_seleccion">
@@ -745,12 +889,13 @@ MI PERFIL
 <p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>asociacion/principal/soporte/" style="text-decoration:none;" class="ajaxLink">Soporte Tecnico</a> </p>
 </li>
 <li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>asociacion/principal/facturas/" style="text-decoration:none;" class="ajaxLink">Mis Facturas</a> </p>
+<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>usuario/cuenta/facturas/" style="text-decoration:none;" class="ajaxLink">Mis Facturas</a> </p>
 </li>
 </ul>
 
 
 </div>
+
 
 
 <div id="contenedor_central">
@@ -764,17 +909,12 @@ MI PERFIL
 
 
 <div class="contenedor_central" style="margin-bottom:45px;">
-<div class="contenedor_bienvenido">
+<div id="appSectionContainer">
 </div>
-
-
-
-</br>
+</div>
     
-      </div>
-	  
-	  
-	  <div class="seccion_derecha_paquetes">
+    
+    <div class="seccion_derecha_paquetes">
 <ul class="aqui_crear_anuncio">
 <li onclick="muestra('contenedor_publicar_anuncio');">
 
@@ -790,7 +930,7 @@ MI PERFIL
 <img src="<?php echo base_url()?>images/banner_inferior/1.png" width="638" height="93"/>
 <img src="<?php echo base_url()?>images/banner_inferior/2.png" width="638" height="93"/>
 <img src="<?php echo base_url()?>images/banner_inferior/3.png" width="638" height="93"/>
-	</div>
+  </div>
     
 <div class="division_menu_inferior"> </div>
 <div class="contenedor_menu_inferior" align="center"> 
@@ -838,8 +978,8 @@ Contacto
     
 <div class="footer">
 <img src="<?php echo base_url()?>images/perro_final.png" width="46" height="42"/>
-<a href="#" ><img  src="<?php echo base_url()?>images/ico_fb.png" width="32" height="32" style="margin-top:10px;"/></a>
-<a href="#" class="margen"><img src="<?php echo base_url()?>images/ico_tw.png" width="32" height="32" style="margin-top:10px;"/></a>
+<a href="<?php echo base_url()?>#" ><img  src="<?php echo base_url()?>images/ico_fb.png" width="32" height="32" style="margin-top:10px;"/></a>
+<a href="<?php echo base_url()?>#" class="margen"><img src="<?php echo base_url()?>images/ico_tw.png" width="32" height="32" style="margin-top:10px;"/></a>
 </div>
 <div class="division_final">
 
