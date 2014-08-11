@@ -21,9 +21,8 @@ class Usuario_model extends CI_Model {
 	
 	function insertNewConfirmationCode($identificador, $code){
 		$this->db->where('idUsuario', $identificador);
-		$this->db->or_where('usuario', $identificador);
-		$this->db->or_where('emailUsuario', $identificador);
-		$this->db->update($this->tablas['usuario'], array('confirmationCode'=>$code));
+		$this->db->or_where('correo', $identificador);
+		$this->db->update($this->tablas['usuario'], array('codigoConfirmacion'=>$code));
 		return true;
 	}
 
@@ -41,8 +40,7 @@ class Usuario_model extends CI_Model {
 		return $this->db->insert_id();
 	}
 
-	
-	
+
 	function is_there_activation_code($activationCode){
 		$this->db->where('codigoConfirmacion', $activationCode);
 		$query = $this->db->get($this->tablas['usuario']);
@@ -71,6 +69,23 @@ class Usuario_model extends CI_Model {
 		}
 	}
 
+	function resetPassword($activationCode) {
+		//activa un usuario, devuelve 1: activado, 0:usuario ya activado, -1: codigo no existe
+		//si el usuario ya esta activo y se intenta activar nuevamente, cambia el confirmation code nuevamente
+		$activacion = $this->is_there_activation_code($activationCode);
+		if($activacion!=null) {
+			$row = $activacion->row();
+			
+				$this->db->where('idUsuario', $row->idUsuario);
+				$this->db->update($this->tablas['usuario'], array('status' => 1, 'codigoConfirmacion' => $this->getNewConfirmationCode($row->correo))); ;
+				$this->load->model('auth_model');
+				$this->auth_model->iniciarsesion($row, null);
+				return 1;
+		} else {
+			return -1;
+		}
+	}
+
 
 	/*
 	 * Información de la cuenta
@@ -88,12 +103,11 @@ class Usuario_model extends CI_Model {
 	
 	
 	function getMyConfirmationCode($usuario){
-		$this->db->select('idUsuario, usuario, correo, nombre, codigoConfirmacion');
-		$this->db->where('usuario', $usuario);
-		$this->db->or_where('correo', $usuario);
+		$this->db->select('idUsuario, correo, nombre, codigoConfirmacion');
+		$this->db->where('correo', $usuario);
 		$query = $this->db->get($this->tablas['usuario']);
 		if($query->num_rows()==1)
-			return $query;
+			return $query->row();
 		return null;
 	}
 	
@@ -110,14 +124,14 @@ class Usuario_model extends CI_Model {
 
 	function cambiarContrasena($contrasenaActual, $contrasenaUsuario, $idUsuario, $admin) {		
 		/*CHECAMOS EL NIVEL DE USUARIO / ROL*/
-		if (!$admin) {
+		if ($admin) {
 			$this->load->model('auth_model');
 			$this->db->select('contrasena');
 			$this->db->where('idUsuario', $idUsuario);
 			$query = $this->db->get($this->tablas['usuario']);
 			if ($query->num_rows() == 1) {
 				$row = $query->row();
-				if ($this->auth_model->hashPassword($contrasenaActual, substr($row->contrasenaUsuario, 0, 10)) == $row->contrasenaUsuario) {
+				if ($this->auth_model->hashPassword($contrasenaActual, substr($row->contrasena, 0, 10)) == $row->contrasena) {
 					$arrNewPass = array('contrasena' => $this->auth_model->hashPassword($contrasenaUsuario));
 					$this->db->where('idUsuario', $idUsuario);
 					$this->db->update($this->tablas['usuario'], $arrNewPass);
@@ -306,7 +320,7 @@ class Usuario_model extends CI_Model {
 	}
 
 	function miUbicacion($idUsuarioDato){
-		$this->db->select($this->tablas['ubicacionusuario'].'.*',$this->tablas['zonageograficaestado'].'.zonageograficaID',$this->tablas['zonageograficaestado'].'.nombre',$this->tablas['estado'].'.nombreEstado');
+		$this->db->select($this->tablas['ubicacionusuario'].'.*,'.$this->tablas['zonageograficaestado'].'.zonageograficaID,'.$this->tablas['zonageograficaestado'].'.nombre,'.$this->tablas['estado'].'.nombreEstado');
 		$this->db->join($this->tablas['zonageograficaestado'],$this->tablas['zonageograficaestado'].'.estadoID = '.$this->tablas['ubicacionusuario'].'.estadoID');
 		$this->db->join($this->tablas['estado'],$this->tablas['estado'].'.estadoID = '.$this->tablas['ubicacionusuario'].'.estadoID');
 		$this->db->where('idUsuarioDato',$idUsuarioDato);
@@ -465,3 +479,4 @@ Recibe de parametro un objeto compuesto de cuponadquirido y cupondetalle
     }
 
 }
+?>

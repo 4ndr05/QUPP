@@ -8,7 +8,6 @@ class Recuperarcontrasena extends CI_Controller{
 		parent::__construct();
 		$this->load->model('email_model');
 		$this->load->model('usuario_model');
-		$this->load->model('vacante_model');
 		$this->load->model('defaultdata_model');
 	}
 	
@@ -20,28 +19,31 @@ class Recuperarcontrasena extends CI_Controller{
 	}
 	
 	function sendLink(){
-		$usuario = $this->input->post('usuario');
+		$usuario = $this->input->get('correoR');
+
 		$data = array();
-		if($this->usuario_model->is_there_usuario($usuario) || $this->usuario_model->is_there_emailUsuario($usuario)){
+		if($this->usuario_model->is_there_emailUsuario($usuario)){
 			$this->usuario_model->insertNewConfirmationCode($usuario, $this->usuario_model->getNewConfirmationCode($usuario));
 			$CC = $this->usuario_model->getMyConfirmationCode($usuario);
-			$CC = $CC->row();
+			//var_dump($CC,$usuario);
 			$mensaje = "
-				Hola ".$CC->nombre.", ha solicitado un cambio de contraseña para el usuario 
-				".$CC->usuario.". <br/>Para efectuar el cambio, por favor, ingrese al enlace más abajo mostrado y cambie su contraseña.<br/>
+				Hola ".$CC->nombre.", ha solicitado un cambio de contraseña. <br/>Para efectuar el cambio, por favor, ingrese al enlace más abajo mostrado y cambie su contraseña.<br/>
 				Este enlace tiene una validez de <strong>sólo 24 horas</strong>, después de esto, tendrá que solicitar otro cambio en caso de que no lo haya efectuado.
-				\r\n
-				".base_url()."recuperar-contrasena/cambiar/".$CC->confirmationCode.time().$CC->idUsuario."
-				\r\n\r\n
+				<br>
+				".base_url()."recuperarcontrasena/doChange/".$CC->codigoConfirmacion.time()."
+				<br>
 				<br/>En caso de que usted no haya solicitado este cambio, simplemente ignore este correo y su cuenta permancerá segura.
 			";
-			$this->email_model->send_email(null, $CC->emailUsuario, 'Cambio de contraseña', $mensaje);
-			$data['email'] = $CC->emailUsuario;
-			$data['response'] = 'true';
-		}
-		else{
-			$data['response'] = 'false';
-		}
+			$this->email_model->send_email(null, $CC->correo, 'Cambio de contraseña', $mensaje);
+			$data['email'] = $CC->correo;
+			$data['response'] = true;
+			$data['cambioContrasena'] = true;
+            //$data['registro'] = false;
+
+            } else {
+               $data['response'] = false;
+               $data['cambioContrasena'] = false;
+            }
 		echo json_encode($data);
 	}
 	
@@ -51,31 +53,44 @@ class Recuperarcontrasena extends CI_Controller{
 		$codeTime = substr($code, 25, $lenCodeTime);
 		$idUsuario = substr($code,(25+$lenCodeTime));
 		$codeAge = time() - $codeTime;
+		var_dump($confirmationCode,$lenCodeTime,$codeTime,$idUsuario,$codeAge);
 		if($codeAge>86400){
 			$data['response'] = 'expired';
 		}
-		elseif($this->usuario_model->is_there_activation_code($confirmationCode)==null){
+		elseif($this->usuario_model->is_there_activation_code($confirmationCode) == null){
 			$data['response'] = 'noCode';
 		}
 		else{
 			$data['response'] = 'ok';
+			$data['gerr'] = $this->resetPassword($confirmationCode);
 		}
+
+		var_dump($data);
 		
-		$data['pestana']                = '0';
-		$data['slider'] = $this->defaultdata_model->getImgEmpresas();
-		$data['SYS_metaTitle'] 			= 'Recuperación de contraseña | Talento Industrial ';
-		$data['SYS_metaKeyWords'] 		= 'bolsa de trabajo, empleo, industria';
-		$data['SYS_metaDescription'] 	= 'Bolsa de trabajo de Talento Industrial';
-		$data['module'] 				= 'publico/recuperar_contrasena_view';
-		$data['sidebar'] 				= 'publico/sidebar_public_v2';
-		setMyToken('getPass');
-		$data['total_ofertas_activas'] 	= $this->vacante_model->getTotalVacantes(true);
-		if($data['total_ofertas_activas'] < 1001){
-			$data['total_ofertas_activas'] = 'muchas';
+	}
+
+	function resetPassword($activationCode) {
+		switch($this->usuario_model->resetPassword($activationCode)) {
+			case 1 :
+				if($this->session->userdata('tipoUsuario')==1){
+							$this->session->set_userdata('recuperarusuario', true);
+                			redirect('usuario/cuenta/myProfile');
+                		} 
+                		if ($this->session->userdata('tipoUsuario')==2) {
+                			$this->session->set_userdata('recuperarusuario', true);
+                		    redirect('negocio/principal/myProfile');
+                		}
+               			if ($this->session->userdata('tipoUsuario')==3) {
+               				$this->session->set_userdata('recuperarusuario', true);
+                		    redirect('asociacion/principal/myProfile');
+                		}
+				break;
+			
+			case -1 :
+				redirect('principal/sss');
+
+				break;
 		}
-		$data['code'] = $confirmationCode;
-		$data['idUsuario'] = $idUsuario;
-		$this->load->view('publico/main_view', $data);
 	}
 
 	function changePassword(){

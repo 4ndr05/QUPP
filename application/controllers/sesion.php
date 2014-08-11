@@ -87,6 +87,8 @@ class Sesion extends CI_Controller {
 
 				break;
 			}
+			
+			$data['cambioContrasena'] = false;
 		echo json_encode($data);
 	}
 

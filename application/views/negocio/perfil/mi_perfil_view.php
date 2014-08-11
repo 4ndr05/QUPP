@@ -61,57 +61,6 @@ Editar
 </div>
 
 
-<!--- 
-----  INICIO contenedor fiscales usuario normal 
-   --->
-<div id="contenedor_formu_detalle_user" style=" display:none;">
-<div class="texto_inputs" >
-<p> Razón Social:</p>
-
-<p style="margin-top:15px;">RFC:</p>
-
-<p style="margin-top:15px;">Calle:</p>
-
-<p style="margin-top:15px;">No. Exterior:</p>
-
-<p style="margin-top:15px;">CP:</p>
-
-<p style="margin-top:15px;">Municipio:</p>
-
-<p style="margin-top:15px;">Estado:</p>
-
-<p style="margin-top:15px;">País:</p>
-
-
- </div>
-
-<div class="contendeor_inputs" >
-<p><input type="text" name="razon" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="RFC" class="background_gris"/> </p>
-
-<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
-
-<p style="margin-top:14px;"><input type="text" name="no_exterior" class="gris_input"/></p>
-
-<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
-
-<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
-<p style="margin-top:14px;"><select name="estado" class="gris_input"/> <option> --- </option>  </select></p>
-<p style="margin-top:14px;"><select name="pais" class="gris_input"/> <option> --- </option> </select> </p>
-
-
-</div>
-
-</div>
-<!--- 
-----  Fin contenedor fiscales usuario normal 
-   --->
-   
-   
-   <!--- 
-----  INICIO contenedor fiscales negocio; 
-   --->
-
 <div id="contenedor_fiscales_negocio" style="display:none;"> 
 
 <div class="texto_inputs" >
@@ -129,24 +78,49 @@ Editar
 
 <p style="margin-top:15px;">Estado:</p>
 
+
 <p style="margin-top:15px;">País:</p>
 
 
  </div>
 
 <div class="contendeor_inputs" >
-<p><input type="text" name="razon" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="RFC" class="gris_input"/> </p>
+<p><input type="text" name="razon" class="gris_input" value ="<?php echo $fiscData->razonSocial ?>"/> </p>
+<p style="margin-top:14px;"><input type="text" name="RFC" class="gris_input" value ="<?php echo $fiscData->rfc ?>" > </p>
 
-<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input" value ="<?php echo $fiscData->calle ?>"> </p>
 
-<p style="margin-top:14px;"><input type="text" name="no_exterior" class="gris_input"/></p>
+<p style="margin-top:14px;"><input type="text" name="no_exterior" class="gris_input" value ="<?php echo $fiscData->noExterior ?>"></p>
 
-<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
+<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input" value ="<?php echo $fiscData->cp ?>"> </p>
 
-<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
-<p style="margin-top:14px;"><select name="estado" class="gris_input"/> <option> --- </option>  </select></p>
-<p style="margin-top:14px;"><select name="pais" class="gris_input"/> <option> --- </option> </select> </p>
+<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input" value ="<?php echo $fiscData->municipio ?>"> </p>
+
+<p style="margin-top:14px;"><select name="estadoID" class="gris_input" id="estadoID">      
+<option value="">Seleccione</option>
+           <?php
+
+                if ($estados != null):
+                    foreach ($estados as $edo):
+                        ?>
+                        <option value="<?php echo $edo->estadoID ?>" <?=($fiscData->estadoID == $edo->estadoID) ? 'selected="selected"' : ''?>><?php echo $edo->nombreEstado ?></option>
+
+                    <?php endforeach;
+                endif; ?>
+           </select> 
+  </p>
+<p style="margin-top:14px;">
+<select name="paisID" class="gris_input"> 
+<option value="">Seleccione</option>
+            <?php
+                if ($paises != null):
+                    foreach ($paises as $pais):
+                        ?>
+                        <option value="<?php echo $pais->paisID ?>" <?=($fiscData->idPais == $pais->paisID)  ? 'selected="selected"' : ''?>><?php echo $pais->nombrePais ?></option>
+
+                    <?php endforeach;
+                endif; ?>
+           </select> </p>
 
 
 </div>
@@ -159,7 +133,7 @@ Nombre:
 </div>
 
 <div class="contendeor_inputs" >
-<p><input type="text" name="nombre_negocio" class="gris_input"/> </p>
+<p><input type="text" name="nombre_negocio" class="gris_input" value ="<?php echo $datConN->nombreNegocio ?>"> </p>
 </div>
 </br>
 <div class="giro_negocio"> 
@@ -250,123 +224,39 @@ Nombre:
 </div>
 
 <div class="contendeor_inputs" >
-<p><input type="text" name="nombre_contacto" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="telefono" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="num" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="colonia" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="estado" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="e-mail" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="pagina_web" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="file" name="logo" class="gris_input"/> </p>
-<p style="margin-top:14px;"><textarea rows="3" cols="40" name="descricion" class="gris_input"/> </textarea> </p>
+<p><input type="text" name="nombre_contacto" class="gris_input" value ="<?php echo $datConN->nombreContacto ?>"/> </p>
+<p style="margin-top:14px;"><input type="text" name="telefono" class="gris_input" value ="<?php echo $datConN->telefono ?>"/> </p>
+<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input" value ="<?php echo $datConN->calle ?>"/> </p>
+<p style="margin-top:14px;"><input type="text" name="num" class="gris_input" value ="<?php echo $datConN->numero ?>"/> </p>
+<p style="margin-top:14px;"><input type="text" name="colonia" class="gris_input" value ="<?php echo $datConN->colonia ?>"/> </p>
+<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input" value ="<?php echo $datConN->municipioC ?>"/> </p>
+<p style="margin-top:14px;">  
+  <select name="estadoID" class="gris_input" id="estadoID">       
+  <option value="">Seleccione</option>
+           <?php
 
-    
-    
-</div>
+                if ($estados != null):
+                    foreach ($estados as $edo):
+                        ?>
+                        <option value="<?php echo $edo->estadoID ?>" <?=($datConN->idEstado == $edo->estadoID) ? 'selected="selected"' : ''?>><?php echo $edo->nombreEstado ?></option>
 
-</div>
-<!--- 
-----  Fin contenedor fiscales negocio
- --->
+                    <?php endforeach;
+                endif; ?>
+  </select> 
+  </p>
+<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input" value ="<?php echo $datConN->cp ?>"/> </p>
+<p style="margin-top:14px;"><input type="text" name="e-mail" class="gris_input" value ="<?php echo $datConN->correo ?>"/> </p>
+<p style="margin-top:14px;"><input type="text" name="pagina_web" class="gris_input" value ="<?php echo $datConN->paginaWeb ?>"/> </p>
+<p style="margin-top:14px;"><input type="file" name="logo" class="gris_input" value ="<?php echo $datConN->Logo ?>"/> </p>
+<p style="margin-top:14px;"><textarea rows="3" cols="40" name="descripcion" class="gris_input" > <?php echo $datConN->descripcion ?></textarea> </p>
 
-<!-- 
----- Inicio fiscales AC
-    -->
-<div id="datos_fiscales_AC" style="display:none;">
-<div class="texto_inputs" >
-<p> Razón Social:</p>
-
-<p style="margin-top:15px;">RFC:</p>
-
-<p style="margin-top:15px;">Calle:</p>
-
-<p style="margin-top:15px;">No. Exterior:</p>
-
-<p style="margin-top:15px;">CP:</p>
-
-<p style="margin-top:15px;">Municipio:</p>
-
-<p style="margin-top:15px;">Estado:</p>
-
-<p style="margin-top:15px;">País:</p>
-
-
- </div>
-
-<div class="contendeor_inputs" >
-<p><input type="text" name="razon" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="RFC" class="gris_input"/> </p>
-
-<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
-
-<p style="margin-top:14px;"><input type="text" name="no_exterior" class="gris_input"/></p>
-
-<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
-
-<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
-<p style="margin-top:14px;"><select name="estado" class="gris_input"/> <option> --- </option>  </select></p>
-<p style="margin-top:14px;"><select name="pais" class="gris_input"/> <option> --- </option> </select> </p>
-
-
-</div>
-
-<div class="contenedor_fiscales"> Datos de la Asociación </div>
-
-
-
-
-<div class="texto_inputs" >
-<p > Nombre: </p>
-<p style="margin-top:15px;">Contacto:</p>
-
-<p style="margin-top:15px;">Teléfono:</p>
-<p style="margin-top:15px;">Calle:</p>
-<p style="margin-top:15px;">Número:</p>
-<p style="margin-top:15px;">Colonia:</p>
-<p style="margin-top:15px;">Municipio:</p>
-<p style="margin-top:15px;">Estado:</p>
-<p style="margin-top:15px;">Código Postal:</p>
-<p style="margin-top:15px;">E-mail:</p>
-<p style="margin-top:15px;">Página web:</p>
-<p style="margin-top:15px;">Logo:</p>
-<p style="margin-top:15px;">Descripción:</p>
-<p style="margin-top:35px;">Ubicación:</p>
-</div>
-
-<div class="contendeor_inputs" >
-<p><input type="text" name="nombre_ac" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="nombre_contacto" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="telefono" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="num" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="colonia" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="estado" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="e-mail" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="pagina_web" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="file" name="logo" class="gris_input"/> </p>
-<p style="margin-top:14px;"><textarea rows="3" cols="40" name="descricion" class="gris_input"/> </textarea> </p>
-
-
-
-    
-    
-    <div id="map-canvas_dos"></div>
+<div id="map-canvas_dos"></div>
     
 </div>
 
 </div>
 
-    
-<!-- 
- --- Fin Fiscales AC
-  -->
-
-
+ 
 <div class="contenedor_boton" id="guardar_fiscales" style=" display:none;"> 
 <ul class="boton_gris_perfil">
 <li>

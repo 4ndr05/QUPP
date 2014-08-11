@@ -17,10 +17,11 @@ class Cuenta extends CI_Controller {
        
         $this->load->model('defaultdata_model');
 		$this->load->model('usuario_model');
+        $this->load->model('email_model');
         $this->load->helper(array('form', 'url'));
         $this->load->library('googlemaps');
         $this->load->library('cart');
-        
+        $this->load->model('perfil_model');
 
         if (!is_authorized(array(1), 1, $this->session->userdata('nivel'), $this->session->userdata('rol'))) {
                 $this->session->set_flashdata('error', 'userNotAutorized');
@@ -126,7 +127,7 @@ class Cuenta extends CI_Controller {
             $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
             $data['giro'] = $this->usuario_model->getGiro($this->session->userdata('idUsuarioDetalle'));
         }
-        
+        $data['seccion'] = 5;
          $this->load->view('usuario/myprofile_view',$data);
     }
 
@@ -134,6 +135,8 @@ class Cuenta extends CI_Controller {
         $data['myInfo']    = $this->usuario_model->getMyInfo($this->session->userdata('idUsuario'));
         $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
         $data['estados']    = $this->defaultdata_model->getEstados();
+        $data['fiscData'] = $this->perfil_model->infoFiscal($this->session->userdata('idUsuario'));
+        $data['paises']     = $this->defaultdata_model->getPaises();
 
         if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
             $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
@@ -218,7 +221,7 @@ class Cuenta extends CI_Controller {
 
     
     function editar_contrasena() {       
-            if ($this -> usuario_model -> cambiarContrasena($this -> input -> post('contrasenaActual'), $this -> input -> post('contrasena1'), $this -> session -> userdata('idUsuario'),1)) {
+            if ($this -> usuario_model -> cambiarContrasena($this -> input -> post('contrasenaActual'), $this -> input -> post('contrasena1'), $this -> session -> userdata('idUsuario'),false)) {
                
                 $mensaje = '<link rel="stylesheet" href="'.base_url().'css/general.css" type="text/css" media="screen" /><table width="647" align="center"><tr>
 <td width="231" rowspan="2"><img src="'.base_url().'images/logo_mail.jpg"/></td>
@@ -245,6 +248,7 @@ Bienvenido</td></tr>
 
         $this->email_model->send_email('', $this->session->userdata('correo'), 'Has cambiado tu contraseña en QUP', $mensaje);
                 $data['response'] = true;
+                $this->session->unset_userdata('recuperarusuario');
             } else {
                $data['response'] = false;
             }
