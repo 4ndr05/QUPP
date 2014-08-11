@@ -176,6 +176,7 @@ class Auth_model extends CI_Model {
 			'correo' => $result->correo, 
 			'nombre' => $result->nombre,
 			'apellido' => $result->apellido,
+			'telefono' => $result->telefono,
 			'tipoUsuario' => $result->tipoUsuario,
 			'authKey' => $authKey,
 			'nivel' => $result->nivel			

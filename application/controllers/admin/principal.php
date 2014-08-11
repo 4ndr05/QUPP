@@ -235,6 +235,60 @@ class Principal extends CI_Controller {
         redirect('admin/principal/getPantalla/'.$this->input->post('seccionContent').'/'.$this->input->post('zonaContent'));
     }
 
+    function uploadArticulo(){
+    	var_dump($_POST);
+    	$texto = $this->input->post('textoContentN');
+    	$seccionID = $this->input->post('seccionContentN');
+
+    	switch ($seccionID) {
+                    case 7:
+                        $alto = 166;
+                        $ancho = 136;
+                        $folder = 'perros_perdidos';
+                    break;
+
+                    case 8:
+                        $alto = 166;
+                        $ancho = 136;
+                        $folder = 'raza_mes';
+                    break;
+
+                    case 9:
+                        $alto = 170;
+                        $ancho = 220;
+                        $folder = 'eventos';
+                    break;
+
+                    case 10:
+                        $alto = 164;
+                        $ancho = 86;
+                        $folder = 'curiosos';
+                    break;
+        }
+    	//REGISTRO FOTOS
+        $this->load->library('upload'); 
+
+      
+        $config['upload_path'] = 'images/'.$folder;
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '5120';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '768';
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_multi_upload("imagenesArticulo")) { 
+            $imagenes = $this->upload->get_multi_upload_data(); 
+            foreach ($imagenes as $imagen) {
+               $data = array(
+                    'foto' => $imagen['file_name'], 
+                    'productoID' => $productoID
+                );
+
+                //$fotoID = $this->admin_model->insertItem('fotostienda',$data);
+            }
+        }
+    }
+
     function deleteBannerText(){
         $data = array(
             'texto' => $this->input->post('textoT'), 
@@ -244,9 +298,7 @@ class Principal extends CI_Controller {
         redirect('admin/principal/getPantalla/'.$this->input->post('seccionContentT').'/'.$this->input->post('zonaContentT'));
     }
 
-    function deleteTextApoyo(){
-       
-        
+    function deleteTextApoyo(){        
         $idContent = $this->input->post('bannerIDContentT');
         $this->admin_model->deleteContent($idContent,null, null,null);
         redirect('admin/principal/getPantalla/'.$this->input->post('seccionContentT').'/'.$this->input->post('zonaContentT'));
