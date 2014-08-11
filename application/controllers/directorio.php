@@ -43,7 +43,7 @@ class Directorio extends CI_Controller {
 		$data['seccion']     = 4;
 		$data['directorios'] = $this->usuario_model->getDirectorios();
                 
-                $data['planes'] = $this->defaultdata_model->getPaquetes(2);
+                $data['planes'] = $this->defaultdata_model->getPaquetesCupon(2);
 
 		$this->load->view('directorio_view', $data);
 	}

@@ -55,7 +55,7 @@
                             <?php foreach ($giros as $index => $giro): ?>
                                 <?php if ($index % 2 !== 0): ?>
                                     <label style="display: inline-block; margin-bottom: 2px;">
-                                        <input type="checkbox" name="giro_<?php echo ($index + 1); ?>_form" value="<?php $giro->giroID ?>" id="CheckboxGiro_0" />
+                                        <input class="validate[required]" type="checkbox" name="giro_form" value="<?php $giro->giroID ?>" id="CheckboxGiro_0" />
                                         <?php echo $giro->nombreGiro; ?>
                                     </label>
                                     <br />
@@ -67,7 +67,7 @@
                             <?php foreach ($giros as $index => $giro): ?>
                                 <?php if ($index % 2 === 0): ?>
                                     <label style="display: inline-block; margin-bottom: 2px;">
-                                        <input type="checkbox" name="giro_<?php echo ($index + 1); ?>_form" value="<?php $giro->giroID ?>" id="CheckboxGiro_0" />
+                                        <input class="validate[required]" type="checkbox" name="giro_form" value="<?php $giro->giroID ?>" id="CheckboxGiro_0" />
                                         <?php echo $giro->nombreGiro; ?>
                                     </label>
                                     <br />
@@ -89,7 +89,7 @@
                 </div>
             </div>
             <!-- FIN anuncio UNO -->
-            
+
             <!-- Inicio paso DOS -->
             <div id="paso_dos_negocio" class="paso" style="display:none;">
                 <div class="descipcion_pasos">
@@ -141,66 +141,65 @@
                     <div class="titulo_de_pasos"> PUBLICAR EN DIRECTORIO </div>
                     <div class="instrucciones_pasos"> Completa tu información</div>
                     <div class="sub_instrucciones_pasos"> Datos de contacto </div>
-                    <div class="contenido_indicacion_formulario">
+                    <div class="contenido_indicacion_formulario" style="height: auto!important;">
                         <p class="margen_15_left" >
-                            <label>Nombre:</label><input name="nombre_negocio" type="text" class="background_morado_35" readonly="readonly" /> 
-                            <label>Apellido:</label><input name="apellido_negocio" type="text" class="background_morado_35" readonly="readonly" />  
-                            <label>Correo electrónico:</label><input name="email_negocio" type="text" class="background_morado" readonly="readonly" /> </p>
+                            <label>Nombre:</label><input name="nombre_negocio" type="text" class="background_morado_35 validate[required]" readonly="readonly" /> 
+                            <label>Apellido:</label><input name="apellido_negocio" type="text" class="background_morado_35 validate[required]" readonly="readonly" />  
+                            <label>Correo electrónico:</label><input name="email_negocio" type="text" class="background_morado validate[required, custom[email]]" readonly="readonly" /> </p>
                         <br/>
                         <p class="margen_15_left"> 
-                            <label>Teléfono:</label><input name="telefono_negocio" type="text" class="background_gris_35"/> 
-                            <label>Mostrar teléfono en el anuncio:</label><select name="muestra_telefono_negocio" class="background_gris">
+                            <label>Teléfono:</label><input name="telefono_negocio" type="text" class="background_gris_35 validate[required, custom[phone]]"/> 
+                            <label>Mostrar teléfono en el anuncio:</label><select name="muestra_telefono_negocio" class="background_gris validate[required]">
                                 <option>--</option>
                                 <option> Si </option>
                                 <option> No </option>
                             </select>
-                            
+
                         </p>
                         <br/>
                         <div class="sub_instrucciones_pasos"> Horarios atención </div>
                         <br/>
                         <p>
-                            
+                            <label>Favor de colocar el horario y días de atención.</label> <textarea name="horarios_negocio" class="background_gris validate[required]" cols="95" rows="6" ></textarea>
                         </p>
                         <div class="sub_instrucciones_pasos"> Detalles del anuncio </div>
                         <br/>
                         <div id="body_form_partial">
-                        <p class="margen_15_left">
-                            <label>Estado:</label><select name="estado_negocio" class="background_gris_100">
-                                <option value=""> --- </option>
-                                <?php foreach ($estados as $edo) : ?>
-                                    <option value="<?php echo $edo->estadoID ?>"> <?php echo $edo->nombreEstado ?> </option>
-                                <?php endforeach; ?>
-                            </select>
-                            <label>Municipio:</label><input name="ciudad_negocio" class="background_gris_100"/>
-                            <label>Colonia:</label><input name="colonia_negocio" type="text" class="background_gris"/> </p>
-                        <br/>
+                            <p class="margen_15_left">
+                                <label>Estado:</label><select name="estado_negocio" class="background_gris_100 validate[required]">
+                                    <option value=""> --- </option>
+                                    <?php foreach ($estados as $edo) : ?>
+                                        <option value="<?php echo $edo->estadoID ?>"> <?php echo $edo->nombreEstado ?> </option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <label>Municipio:</label><input name="ciudad_negocio" class="background_gris_100 validate[required]"/>
+                                <label>Colonia:</label><input name="colonia_negocio" type="text" class="background_gris validate[required]"/> </p>
+                            <br/>
 
-                        <p class="margen_15_left"> 
-                            <label>Calle:</label><input name="calle_negocio" type="text" class="background_gris_55"  /> 
-                            <label>Número:</label><input name="numero_negocio" type="text" class="background_gris" />
-                            <label>Vencimiento:</label><input name="vencimiento_negocio" class="background_morado" type="text"/>
-                        </p>
-                        <br/>
+                            <p class="margen_15_left"> 
+                                <label>Calle:</label><input name="calle_negocio" type="text" class="background_gris_55 validate[required]"  /> 
+                                <label>Número:</label><input name="numero_negocio" type="text" class="background_gris validate[required]" />
+                                <label>Vencimiento:</label><input name="vencimiento_negocio" class="background_morado validate[required]" type="text"/>
+                            </p>
+                            <br/>
 
-                        <p class="margen_15_left"> 
-                            <label>CP:</label><input name="cp_negocio" type="text" class="background_gris_55"/> 
-                        <label>E-mail:</label><input name="email_negocio" type="text" class="background_gris"/>
-                        <label>Pagina Web:</label><input name="pagina_web_negocio" class="background_gris" type="text"/>
-                        </p>
+                            <p class="margen_15_left"> 
+                                <label>CP:</label><input name="cp_negocio" type="text" class="background_gris_55 validate[required]"/> 
+                                <label>E-mail:</label><input name="email_negocio" type="text" class="background_gris validate[required]"/>
+                                <label>Pagina Web:</label><input name="pagina_web_negocio" class="background_gris validate[required]" type="text"/>
+                            </p>
                         </div>
                         <br/>
                         <p class="margen_15_left">
-                            <label>Descripción:</label><textarea name="descripcion_negocio"  class="background_gris" cols="95" rows="3" > </textarea>
+                            <label>Descripción:</label><textarea name="descripcion_negocio" class="background_gris validate[required]" cols="95" rows="3" ></textarea>
                         </p>
                         <br/>
                         <p class="margen_15_left">
                             <label>Ubicación:</label>
-                        <div id="mapa_negocio"></div>
-                        <input type="hidden" value="" name="latitud_negocio"/>
-                        <input type="hidden" value="" name="longitud_negocio"/>
+                        <div id="mapa_negocio" style="height: 300px;"></div>
+                        <input type="hidden" value="" name="latitud_negocio" id="latitud_negocio"/>
+                        <input type="hidden" value="" name="longitud_negocio" id="longitud_negocio"/>
                         </p>
-
                         <br/>
                         <p class="margen_15_left">
                             <label>Logotipo:</label>
@@ -366,6 +365,65 @@
     </div>
 </div>
 <script>
+    var map;
+    var marker;
+    var g;
+    var myLatlng;
+
+    function initialize() {
+        g = google.maps.event;
+        myLatlng = new google.maps.LatLng(<?php echo $this->session->userdata('latitud') !== FALSE ? $this->session->userdata('latitud') : '20.5593958' ?>, <?php echo $this->session->userdata('longitud') !== FALSE ? $this->session->userdata('longitud') : '-100.4190292' ?>);
+
+        var mapOptions = {
+            zoom: 16,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            draggable: true
+        };
+
+        map = new google.maps.Map(document.getElementById("mapa_negocio"), mapOptions);
+
+        marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            title: 'Ubica tu negocio'
+        });
+        google.maps.event.addListener(marker, 'click', toggleBounce);
+        google.maps.event.addListener(marker, 'dragend', getPositionMarker);
+        
+    }
+
+    function toggleBounce() {
+
+        if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+        } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+    }
+
+    function getPositionMarker() {
+        var position = marker.getPosition();
+
+        var latitudField = document.getElementById('latitud_negocio');
+        var longitudField = document.getElementById('longitud_negocio');
+
+        latitudField.value = position.lat();
+        longitudField.value = position.lng();
+
+    }
+
+    function loadScript() {
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyBMU3tBrpE9oNyv2pgKTxKqNwV_IL4Y0DI&sensor=TRUE&callback=initialize";
+        document.body.appendChild(script);
+    }
+
+    window.onload = loadScript;
+
     $(function() {
         var form_negocio = $('#form_anuncio_negocio');
 
@@ -376,7 +434,7 @@
             var sig_paso = $('.paso_show', form_negocio).next('.paso');
             //if (revision_step($('.paso_show'))) {
             $('.paso_show', form_negocio).removeClass('paso_show').hide();
-            sig_paso.show().addClass('paso_show');
+            sig_paso.show(function(){g.trigger(map, 'resize'); map.setCenter(marker.getPosition()); }).addClass('paso_show');
             $('.listado_numeros_anuncio li.numero_seccion').removeClass('numero_seccion');
             var sel_paso = $('.listado_numeros_anuncio').find('[data-p="' + sig_paso.prop('id') + '"]');
             sel_paso.addClass('numero_seccion view_step');
@@ -397,7 +455,7 @@
 
                 $('.paso').removeClass('paso_show').hide();
                 $('#msj_paso').text('');
-                $('#' + paso, form_negocio).show().addClass('paso_show');
+                $('#' + paso, form_negocio).show(function(){g.trigger(map, 'resize'); map.setCenter(marker.getPosition()); }).addClass('paso_show');
                 $('.instrucciones_pasos').text(titulo_paso);
             });
         }
@@ -405,18 +463,20 @@
         function revision_step(element) {
             if (element.prop('id') === 'paso_uno_negocio') {
                 $('#msj_paso').text("Debe seleccionar una sección");
+                $('[name=giro_form]').validationEngine('validate');
                 return $('input[name=seccion]:checked', form_negocio).val() === undefined ? false : true;
             }
 
             if (element.prop('id') === 'paso_dos_negocio') {
                 $('#msj_paso').text("Debe seleccionar un paquete");
+                $('[name=plan_form]').validationEngine('validate');
                 return $('input[name=paquete]:checked', form_negocio).val() === undefined ? false : true;
             }
 
             if (element.prop('id') === 'paso_tres_negocio') {
                 $('#msj_paso').text("Debe completar todos los campos requeridos");
                 var obj = $('#paso_tres_negocio [name]:required', form_negocio).serialize().split('&');
-
+                $('#paso_tres_negocio [name]').validationEngine('validate');
                 for (var i = 0; i < obj.length; i++) {
                     var field = obj[i].split('=');
                     if (field[1] === '') {
@@ -425,9 +485,17 @@
                 }
                 return true;
             }
+
+            if (element.prop('id') === 'paso_cuatro_negocio') {
+
+
+            }
+
             return true;
         }
 
         add_step_move();
+        $('#form_anuncio_negocio').validationEngine();
     });
+
 </script>

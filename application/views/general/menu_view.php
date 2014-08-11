@@ -128,7 +128,7 @@ if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)):
                     <a href="<?= base_url("principal/tienda") ?>">Tienda</a>
                 </li>
                 <li>
-                    <a href="<?php echo base_url('directorio') ?>" >Directsorio</a>
+                    <a href="<?php echo base_url('directorio') ?>" >Directorio</a>
                 </li>
                 <?php if(is_logged()){?>
                 <li>

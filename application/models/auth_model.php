@@ -223,6 +223,9 @@ class Auth_model extends CI_Model {
 			$userdata['zonaNombre'] = $zonaNombre;
 			$userdata['zonaID'] = $zonaID;
 			$userdata['estadoNombre'] = $estadoNombre;
+			$userdata['latitud'] = $ubicacion->latitud;
+			$userdata['longitud'] = $ubicacion->longitud;
+                        
 			}
 			$rol = 2;	
 			$nivel = 2;
@@ -248,6 +251,8 @@ class Auth_model extends CI_Model {
 			$userdata['zonaNombre'] = $zonaNombre;
 			$userdata['zonaID'] = $zonaID;
 			$userdata['estadoNombre'] = $estadoNombre;
+                        $userdata['latitud'] = $ubicacion->latitud;
+			$userdata['longitud'] = $ubicacion->longitud;
 			}
 			$userdata['idUsuarioDato'] = $idUsuarioDato;
 			$userdata['idUsuarioDetalle'] = $idUsuarioDetalle;

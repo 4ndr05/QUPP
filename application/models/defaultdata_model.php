@@ -125,5 +125,44 @@ class Defaultdata_model extends CI_Model {
     function getGiros(){
         return $this->db->get('giro')->result();
     }
+    
+    function getPaquetesCupon($tipopaquete = NULL) {
+        /**
+         * Se realiza asi el select por que en detallepaquete y detallecupon exite la columna vigencia y se reemplaza 
+         * la columna vigencia de detallepaquete por la columna vigencia de detallecupon
+         */
+        $this->db->select('p.paqueteID,
+      p.nombrePaquete,
+       dp.detalleID,
+       dp.cantFotos,
+       dp.caracteres, 
+       dp.vigencia,
+       dp.cupones,
+       dp.videos,
+       dp.precio,
+       dp.tipoPaquete,
+        
+       c.cuponID,
+       c.nombreCupon,
+       cd.cuponDetalleID,
+       cd.descripcion,
+       cd.valor,
+       cd.vigencia as vigenciaCupon,
+       cd.tipoCupon'
+        );
+        
+        $this->db->from('paquete p');
+        $this->db->join('detallepaquete dp', 'p.paqueteID=dp.paqueteID');
+        $this->db->join('cupon c', 'p.paqueteID=c.paqueteID');
+        $this->db->join('cupondetalle cd', 'c.cuponID=cd.cuponID');
+        
+        if(!is_null($tipopaquete)){
+            $this->db->where('dp.tipoPaquete', $tipopaquete);
+        }
+
+        $resultSet = $this->db->get();
+
+        return $resultSet->result();
+    }
 }
 ?>
