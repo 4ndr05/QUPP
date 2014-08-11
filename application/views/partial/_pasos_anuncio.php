@@ -491,189 +491,121 @@ MÁS DETALLES
 
 ksdjfkjslfk fdglksj gkfdsjg  jgfkdjgkfd gfdgkdf gfdskj fgsfkjg sdlkf gjkfdsg fdlkgjdfl glfdsjg dflkgj dfgj flkgjf gjfd gfdjg fdlg fdlg fjgfd gjdslf gkgj lgjfgk gjfdkg lkgjf gjjkgj s
 </div>
-</br>
-<ul class="boton_naranja_dos_mini">
-<li id="ver_video" onclick="muestra('video_previo');">
-Ver video
-</li>
-</ul>
+<script>
+    $(function () {
+        $('.paso').hide();
+        $('#paso_uno').show().addClass('paso_show');
 
-<div id="video_previo" class="desplegar_detalles_mini" style="display:none;" >
-</br>
-<div class="titulo_anuncio_publicado_mini">
-VIDEO
-</div>
+        $('#btn_sig .sig_paso').on('click', function () {
+            var sig_paso = $('.paso_show').next('.paso');
+            if (revision_step($('.paso_show'))) {
+                $('.paso_show').removeClass('paso_show').hide();
+                sig_paso.show().addClass('paso_show');
+                $('.listado_numeros_anuncio_mini li.numero_seccion_mini').removeClass('numero_seccion_mini');
+                var sel_paso = $('.listado_numeros_anuncio_mini').find('[data-p="' + sig_paso.prop('id') + '"]');
+                sel_paso.addClass('numero_seccion_mini view_step');
+                $('.instrucciones_pasos_mini').text(sel_paso.data('titulo'));
+                $('#msj_paso').text("");
+                add_step_move();
+            }
+        });
 
-<iframe class="youtube_video_mini" src="http://www.youtube.com/embed/YlmidIPuZ58"></iframe>
+        function add_step_move() {
+            $('.listado_numeros_anuncio_mini li.view_step').on('click', function () {
+                $('.listado_numeros_anuncio_mini li.numero_seccion_mini').removeClass('numero_seccion_mini');
+                $(this).addClass('numero_seccion_mini');
+                var paso = $(this).data('p');
+                var titulo_paso = $(this).data('titulo');
 
+                $('.instrucciones_pasos_mini').text(titulo_paso);
 
-</div>
+                $('.paso').removeClass('paso_show').hide();
+                $('#msj_paso').text('');
+                $('#' + paso).show().addClass('paso_show');
+                $('.instrucciones_pasos_mini').text(titulo_paso);
+            });
+        }
 
+        function revision_step(element) {
+            if (element.prop('id') === 'paso_uno') {
+                $('#msj_paso').text("Debe seleccionar una sección");
+                return $('#p_form input[name=seccion]:checked').val() === undefined ? false : true;
+            }
 
+            if (element.prop('id') === 'paso_dos') {
+                $('#msj_paso').text("Debe seleccionar un paquete");
+                return $('#p_form input[name=paquete]:checked').val() === undefined ? false : true;
+            }
 
-<ul class="boton_rojo_dos_mini">
-<li>
-<img src="images/alert.png"/>
-Denunciar Anuncio
-</li>
-</ul>
+           if (element.prop('id') === 'paso_tres') {
+                $('#msj_paso').text("Debe completar todos los campos requeridos");
+                var obj = $('#paso_tres [name]:required').serialize().split('&');
 
-<div class="consejos_advertencias_mini">
+                for (var i = 0; i < obj.length; i++) {
+                    var field = obj[i].split('=');
+                    if (field[1] === '') {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            return true;
+        }
 
-- QuierounPerro.com te invita a que antes de comprar pienses en adoptar, ya que hoy en día hay millones de perros sin hogar que deben ser sacrificados.
-</br>
-- Tener un perro conlleva una serie de responsabilidades, cuidados y atenciones que debes considerar antes de comprar uno.
-</br>
-- Infórmate de los cuidados especiales que debes de tener con la raza específica que estás comprando.
-</br>
-- NUNCA compres una nueva mascota sin verla físicamente antes.
-</br>
-- NUNCA hagas depósitos o transferencias bancarias a través de medios donde tu dinero no pueda ser rastreado, como lo son Money Gram y Western Union.
-</br>
-- NUNCA pagues por un perro con registro de pedigree AKC si no te muestran los certificados, ya que corres el riesgo de que sea una estafa y nunca te los entreguen. Exige ver los papeles y asegúrate de que el nombre del criador esté en el certificado.
-</br>
-- Cuando vayas a ver al vendedor, nunca vayas solo y revisa los alrededores.
-</br>
-- El vendedor también debe estar interesado en ti y en manos de quién dejará a su perro.
-</div>
+        add_step_move();
 
+        $('.paquete_comprar').on('click', function () {
+			<?php if (!is_logged()): ?>  
+             	muestra('contenedor_login');
+                oculta('contenedor_publicar_anuncio');
+            <?php else :?>               
+           
+            var paquete_val = $(this).data('paquete');
 
+            $('#paso_dos [data-np="' + paquete_val.nombre + '"]').prop('checked', true);
+            $('#paso_tres [name=paquete_texto]').val(paquete_val.nombre);
+            $('#paso_tres [name=vigencia_texto]').val(paquete_val.vigencia);
+            //$('#paso_tres [name=precio]').val(paquete_val.precio);
+			$('#paso_tres [name=caracteresN]').val(paquete_val.caracteres);
+            $('#contenedor_publicar_anuncio').fadeIn();
+			<?php endif;?>
+        });
 
-</div>
+		$('textarea').keyup(function(e) {
+   			 var tval = $('#descripcion').val(),
+        	 tlength = tval.length,	
+			 set = $('#caracteresN').val(),
+        	remain = parseInt(set - tlength);
+			$('#meh').val(remain);
+			console.log(tval);
+    		console.log(tlength,remain,set);
+    		if (remain <= 0) {
+        		$('#descripcion').val((tval.substring(0,set)));
+   			 }
+		});
 
-</br>
+		
+        $('#paso_dos [name=paquete]').on('change', function () {
+            $('#paso_tres [name=paquete_texto]').val($(this).data('np'));
+            $('#paso_tres [name=vigencia_texto]').val($(this).data('vigencia'));
+            $('#paso_tres [name=precio]').val($(this).data('precio'));
+        });
+		
+		 $('#paso_tres [name=paquete]').on('change', function () {
+			 /*var titulo = $('#titulo').val();
+			 console.log(titulo);*/
+			 alert('grrrr');
+        });
 
-</div>
+        $('#paso_uno [name=seccion]').on('change', function() {
+            $('#paso_tres [name=seccion_texto]').val($(this).next().text());
+        });
+		
+		$("body").on("click",".del", function(e){
+            $(this).parent('span').remove(); 
+        return false;
+    });
 
-<div id="contendedor_morado" class="contenedor_morado_mini">
-<ul class="morado_15_sinmargen_mini" >
-
-<li onclick="">
-
-Editar
-
-</li>
-</ul> 
-
-<ul class="morado_15_sinmargen_mini" >
-
-<li onclick="muestra('paso_cinco'); oculta('paso_cuatro');">
-
-Continuar
-
-</li>
-
-</ul> 
-</div>
-
-</div>
-
-</div> <!-- final del contendor paso 4 -->
-
-
-<!-- Inicio paso 5 -->
-<div id="paso_cinco" style=" display:none;"> 
-<div class="numeros_publicar_anuncio_mini">
-<ul class="listado_numeros_anuncio_mini">
-<li>1</li>
-<li>2</li>
-<li >3</li>
-<li >4</li>
-<li class="numero_seccion_mini">5</li>
-</ul>
- </div>
-  </br>
-<div class="crerar_publicar_anuncio_mini" style="margin-top:0px;">
-<img src="images/cerrar.png" onclick="oculta('contenedor_publicar_anuncio');"/>
-
- </div>
-
-<div class="descipcion_pasos_mediano_mini">
-<div class="titulo_de_pasos_mini"> PUBLICAR   ANUNCIO </div>
-<div class="instrucciones_pasos_mini"> Detalle de compra: </div>
-</br>
-<table class="tabla_pago" style="margin-left:70px;" width="700">
-<tr> 
-<th width="158">
-PRODUCTO
-</th>
-<th width="345">
-DETALLE
-</th>
-<th width="181">
-COSTO
-</th>
-</tr>
-<tr>
-<td>
-<img src="images/pago_regular.png" width="156" height="79"/>
-</td>
-<td>
-<p>* 5 fotos</p>
-<p>* Texto de 150 caracteres</p> 
-<p>* Vigencia de 30 días</p>
-<p>* 2 cupones</p>
-<p>* 1 video</p>
-</td>
-<td>
-<p class="totales">$89.00</p>
-</td>
-</tr>
-<tr> 
-<td colspan="2">
-<p>SUBTOTAL:</p>
-</td>
-<td>
-<p class="totales"> $89.00 </p>
-</td>
-</tr>
-<tr>
-<td colspan="2">
- <img style="" src="images/mini_cupon.png"/> <font class="texto_de_cupon" >Cupones de descuento: </font> </br> <font id="ver_cupones" class="ver_cupones" onclick="muestra('los_cupones_disponibles');muestra('no_ver_cupones');
- oculta('ver_cupones');"> Ver cupones </font> 
-  <font style="display:none;" id="no_ver_cupones" class="ver_cupones" onclick="oculta('los_cupones_disponibles');oculta('no_ver_cupones');muestra('ver_cupones');"> Ocultar cupones </font>
-<div id="los_cupones_disponibles" style="padding:15px; display:none;">
-<form  class="radios_cupones_mini" action="">
-<input type="radio" name="radiog_dark" id="radio_pago1" class="css-checkbox" /><label for="radio_pago1" class="css-label radGroup2"> 10% de descuento</label>
-</br>
-<input type="radio" name="radiog_dark" id="radio_pago2" class="css-checkbox" checked="checked"/>
-<label for="radio_pago2" class="css-label radGroup2">5% de descuento</label>
-</br>
-<input type="radio" name="radiog_dark" id="radio_pago3" class="css-checkbox" /><label for="radio_pago3" class="css-label radGroup2"> 20% de descuento</label>
-</br>
-<input type="radio" name="radiog_dark" id="radio_pago4" class="css-checkbox" / checked="checked"><label for="radio_pago4" class="css-label radGroup2"> No usar cupones</label>
-</br>
-</form>
-</div>
-
-
-</td>
-<td>
-<p class="totales">- $0.00 </p>
-</td>
-</tr>
-<tr>
-<th colspan="2">
-TOTAL
-</th>
-<th>
-<p class="totales" style="color: #FFF;">$89.00</p>
-</th>
-</tr>
-</table>
-
-</br>
-
-<ul class="morado_15_mini" >
-
-<li onclick="">
-Pagar
-</li>
-
-</ul>
-
-</br>
-</br>
- 
-</div> 
-</div><!-- Fin  paso 5 -->
+    });
+	
+</script>

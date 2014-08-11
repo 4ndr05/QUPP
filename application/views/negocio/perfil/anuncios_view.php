@@ -64,10 +64,37 @@
   <td> <ul class="boton_gris_perfil_tabla" > <li> Renovar </li> </ul>
    </td>
   </tr>
-  </table> 
-    
-    
-    
-      </div>
-	  
-	
+  
+  <?php 
+  foreach ($anunciosInAct as $anuncio) { ?>
+    <tr>
+            <?php if ($anuncio->NombrePaquete =='Lite'){?>
+                <td><img src="<?php echo base_url()?>images/ico_lite.png" width="34" height="34"/>
+                    </br>
+                <font class="lite"> Lite </font> </td>
+            <?php } elseif ($anuncio->NombrePaquete == 'Regular') {?>
+                <td><img src="<?php echo base_url()?>images/ico_regular.png" width="34" height="34"/>
+                </br>
+                <font class="lite"> Lite </font> </td>        
+            <?php  } else { ?>
+                <td><img src="<?php echo base_url()?>images/ico_premium.png" width="34" height="34"/>
+                </br><font class="lite"> Lite </font> </td>        
+            <?php } ?>
+            
+            <td> <?php echo $anuncio->seccionNombre ?> </td>
+            <td> <?php echo $anuncio->titulo ?> </td>
+            <td>
+                <?php if ($anuncio->vigente == 1) {?>
+                Activo
+                <?php } else { ?>
+                Inactivo
+                <?php } ?>
+
+            </td>
+            <td> <?php echo $anuncio->fechaVencimiento ?> </td>
+            <td> <?php echo $anuncio->numeroVisitas ?> </td>
+            <td> <ul class="boton_gris_perfil_tabla"> <li> Renovar </li> </ul> </td>
+    </tr>
+  <?php } ?>
+ </table>
+ <div>
