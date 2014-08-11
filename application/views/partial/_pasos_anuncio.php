@@ -1,495 +1,651 @@
+<?php
+/*
+ * Recibe como parametros de vista 
+ * los paquetes $paquetes = array({},{},{});
+ * los estados $estados = array();
+ * las razas $razas = array();
+ * 
+ */
 
-<script type="text/javascript">
-jQuery(document).ready(function(){
-	
 
-	
-	$("#paso111").click(function() {
-	var checked = verifiedRadio(3);
-	if(checked == false){
-       	$("#error").html('<label>Seleccione una opción</label>');         
-        return false;     
-    } else {
-				muestra('paso_dos'); 
-				oculta('paso_uno');
-	}
-			
-     });
-	 
-	 $("#paso222").click(function() {
-	var checked = verifiedRadio(4);
-	if(checked == false){
-       	$("#error2").html('<label>Seleccione una opción</label>');         
-        return false;     
-    } else {
-				muestra('paso_tres'); 
-				oculta('paso_dos');
-	}
-			
-     });
-	 
-	  
- 
+?>
 
-});
-function verifiedRadio(n){
-	var ggg = $('input[type=radio]:checked').size();
-	console.log(ggg);
-		 	 if($('input[type=radio]:checked').size() < n){
-       
-				       
-       			 return false;     
-    		} 
-}
-</script>
-<!-- Inicio Paso UNO -->
-<div id="paso_uno">
+<div>
 <div class="numeros_publicar_anuncio_mini">
-<ul class="listado_numeros_anuncio_mini">
-<li class="numero_seccion_mini">1</li>
-<li>2</li>
-<li>3</li>
-<li>4</li>
-<li>5</li>
-</ul>
- </div>
+    <ul class="listado_numeros_anuncio_mini">
+        <li data-titulo="Selecciona la sección de publicación" data-p="paso_uno" class="numero_seccion_mini view_step">
+            1
+        </li>
+        <li data-titulo="Indica tu tipo de anuncio" data-p="paso_dos">2</li>
+        <li data-titulo="Completa tu información" data-p="paso_tres">3</li>
+        <li data-titulo="Vista previa de tu anuncio" data-p="paso_cuatro">4</li>
+        <li data-titulo="Detalle de compra:" data-p="paso_cinco">5</li>
+    </ul>
+</div>
 <div class="crerar_publicar_anuncio_mini">
-<img src="images/cerrar.png" onclick="oculta('contenedor_publicar_anuncio');"/>
+    <img src="<?php echo base_url() ?>images/cerrar.png" onclick="oculta('contenedor_publicar_anuncio');"/>
+</div>
+<br/>
 
- </div>
- </br>
 <div class="descipcion_pasos_mini">
-<div class="titulo_de_pasos_mini"> PUBLICAR   ANUNCIO </div>
-<div class="instrucciones_pasos_mini"> Selecciona la sección de publicación</div>
-<div class="contenido_indicacion_mini"> 
-<img src="images/pero_paso_uno.png" class="perro_paso_uno_mini"/>
+<div class="titulo_de_pasos_mini"> PUBLICAR ANUNCIO</div>
+<div class="instrucciones_pasos_mini">Selecciona la sección de publicación</div>
+<div class="contenido_indicacion_mini">
+<form id="p_form" name="p_form" method="post" action="#">
+<!--pasos-->
+<!--paso uno-->
+<div id="paso_uno" class="paso view_step" style="height: 190px;">
+    <div style="position: relative;">
+        <img src="<?php echo base_url() ?>images/pero_paso_uno.png" class="perro_paso_uno_mini"/>
 
-<form id="form1" name="form1" method="post" class="radios_secciones_mini" action="">
-<p id="error"></p>
-<input type="radio" name="radiog_dark" id="radio4" class="css-checkbox" /><label for="radio4" class="css-label radGroup2 seccion"> Cruza</label>
-</br>
-<input type="radio" name="radiog_dark" id="radio5" class="css-checkbox validate[required,groupRequired[seccion]]" />
-<label for="radio5" class="css-label radGroup2 seccion">Venta</label>
-</br>
-<input type="radio" name="radiog_dark" id="radio6" class="css-checkbox" /><label for="radio6" class="css-label radGroup2 seccion">Adopción</label>
-</br>
-<input type="radio" name="radiog_dark" id="radio7" class="css-checkbox" /><label for="radio7" class="css-label radGroup2 seccion">Perros perdidos</label>
-</form>
-
-</br>
-
-<ul class="morado_mini">
-<li>
-
-<a href="#" id="paso111">Continuar</a>
-</li>
-</ul> 
-
-
+        <div class="radios_secciones_mini">
+            <input type="radio" id="radio4" name="seccion" value="cruza" class="css-checkbox"/>
+            <label for="radio4" class="css-label radGroup2">Cruza</label>
+            <br/>
+            <input type="radio" id="radio5" name="seccion" value="venta" class="css-checkbox"/>
+            <label for="radio5" class="css-label radGroup2">Venta</label>
+            <br/>
+            <input type="radio" id="radio6" name="seccion" value="adopcion" class="css-checkbox"/>
+            <label for="radio6" class="css-label radGroup2">Adopción</label>
+            <br/>
+            <input type="radio" id="radio7" name="seccion" value="perdidos" class="css-checkbox"/>
+            <label for="radio7" class="css-label radGroup2">Perros perdidos</label>
+        </div>
+    </div>
 </div>
-
-</div>
-
-</div>
-<!-- FIN anuncio UNO -->
-
-
-<!-- Inicio paso DOS -->
-<div id="paso_dos" style="display:none;">
-<div  class="numeros_publicar_anuncio_mini" >
-<ul class="listado_numeros_anuncio_mini">
-<li >1</li>
-<li class="numero_seccion_mini">2</li>
-<li>3</li>
-<li>4</li>
-<li>5</li>
-</ul>
- </div>
-<div class="crerar_publicar_anuncio_mini">
-<img src="images/cerrar.png" onclick="oculta('contenedor_publicar_anuncio');"/>
-
- </div>
- </br>
-<div class="descipcion_pasos_mini">
-<div class="titulo_de_pasos_mini"> PUBLICAR   ANUNCIO </div>
-<div class="instrucciones_pasos_mini"> Indica tu tipo de anuncio</div>
-<p id="error2"></p>
-<div class="contenido_indicacion_mini"> 
-<div id="contenedor_paquetes" class="contenedor_paquetes_mini">
-
-
-
-    
+<!--paso dos-->
+<div id="paso_dos" class="paso contenedor_paquetes_mini">
+<div style="display: inline-block; margin-bottom: 30px;">
 <div class="paquetes_izquierda_mini">
- <label>
-  <div class="title_paquetes_mini">
-<div class="lateral_lite_mini"></div>
-  <img src="images/perrito_lite.png" class="margen_mini" width="29" height="29"/> <font class="title_paquetes_titilos_mini"> PAQUETE LITE </font>
+    <label>
+        <div class="title_paquetes_mini">
+            <div class="lateral_lite_mini"></div>
+            <img src="<?php echo base_url() ?>images/perrito_lite.png" class="margen_mini" width="29"
+                 height="29"/> <font class="title_paquetes_titilos_mini">
+                PAQUETE <?php echo strtoupper($paquetes[0]->nombrePaquete) ?> </font>
+        </div>
+        <div class="precio_paquete_lite_mini">
+            <?php if ($paquetes[0]->precio == 0): ?>
+                <div class="el_titulo_paquete_lite_mini"> Gratis</div>
+                <div class="descripcion_precio_paquete_lite_mini">al crear tu usuario</div>
+            <?php else: ?>
+                <div class="precio_paquete_regular_mini"> $<?php echo $paquetes[0]->precio ?></div>
+            <?php endif; ?>
+        </div>
+        <div class="descripcion_paquetes_mini">
+            <strong>Incluye:</strong>
+            <ul class="contenido_paquetes_mini">
+                <li>
+                    * <?php echo $paquetes[0]->cantFotos ?> fotos
+                </li>
+
+                <li>
+                    * Texto de <?php echo $paquetes[0]->caracteres ?> caracteres
+                </li>
+                <li>
+                    * Vigencia de <?php echo $paquetes[0]->vigencia ?> días.
+                </li>
+            </ul>
+        </div>
+        <div class="iconos_paquetes_mini">
+            <ul>
+                <li>
+                    <?php if ($paquetes[0]->cantFotos > 0): ?>
+                        <div class="cantidades_detalle_paquete_lite_mini"> <?php echo $paquetes[0]->cantFotos ?></div>
+                        <img src="<?php echo base_url() ?>images/icono_camara.png" width="34" height="26"/>
+                    <?php else: ?>
+                        <div class="cantidades_detalle_paquete_of_mini"> <?php echo $paquetes[0]->cantFotos ?></div>
+                        <img src="<?php echo base_url() ?>images/icono_camara_of.png" width="34" height="26"/>
+                    <?php endif; ?>
+                </li>
+                <li>
+                    <div class="cantidades_detalle_paquete_lite_mini"> <?php echo $paquetes[0]->caracteres ?></div>
+                    <img src="<?php echo base_url() ?>images/icono_texto.png" width="34" height="26"/>
+                </li>
+                <li>
+                    <div class="cantidades_detalle_paquete_lite_mini"> <?php echo $paquetes[0]->vigencia ?></div>
+                    <img src="<?php echo base_url() ?>images/icono_calendario.png" width="34" height="26"/>
+                </li>
+                <li>
+
+                    <?php if ($paquetes[0]->cupones > 0): ?>
+                        <div class="cantidades_detalle_paquete_lite"> <?php echo $paquetes[0]->cupones ?></div>
+                        <img src="<?php echo base_url() ?>images/icono_ticket.png" width="34" height="26"/>
+                    <?php else: ?>
+                        <div class="cantidades_detalle_paquete_of_mini"> <?php echo $paquetes[0]->cupones ?></div>
+                        <img src="<?php echo base_url() ?>images/icono_ticket_of.png" width="34" height="26"/>
+                    <?php endif; ?>
+                </li>
+                <li>
+                    <?php if ($paquetes[0]->videos > 0): ?>
+                        <div class="cantidades_detalle_paquete_lite_mini"> <?php echo $paquetes[0]->videos ?></div>
+                        <img src="<?php echo base_url() ?>images/icono_video_lite.png" width="34" height="26"/>
+                    <?php else: ?>
+                        <div class="cantidades_detalle_paquete_of_mini"> <?php echo $paquetes[0]->videos ?></div>
+                        <img src="<?php echo base_url() ?>images/icono_video_of.png" width="34" height="26"/>
+                    <?php endif; ?>
+                </li>
+            </ul>
+        </div>
+        <input type="radio" style="margin-left:100px;" data-vigencia="<?php echo $paquetes[0]->vigencia ?>"
+               data-np="<?php echo $paquetes[0]->nombrePaquete ?>" name="paquete"
+               value="<?php echo $paquetes[0]->paqueteID ?>" data-precio="<?php echo $paquetes[0]->precio ?>" id="RadioGroup1_0"/>
+    </label>
 </div>
-<div class="precio_paquete_lite_mini"><div class="el_titulo_paquete_lite_mini"> Gratis </div>  <div class="descripcion_precio_paquete_lite_mini">al crear tu usuario</div> </div>
- <div class="descripcion_paquetes_mini">
- <strong>Incluye:</strong>
-<ul class="contenido_paquetes_mini">
-<li>
-* 1 fotos
-</li>
-
-<li>
-* Texto de 50 caracteres 
-</li>
-<li>
- * Vigencia de 30 días.
-</li>
-</ul>
- </div>
- <div class="iconos_paquetes_mini">
- <ul>
- <li>
- <div class="cantidades_detalle_paquete_lite_mini"> 10 </div>
- <img src="images/icono_camara.png" width="34" height="26"/>
- </li>
-  <li>
-   <div class="cantidades_detalle_paquete_lite_mini"> 10 </div>
- <img src="images/icono_texto.png" width="34" height="26"/>
- </li>
-  <li>
-   <div class="cantidades_detalle_paquete_lite_mini"> 10 </div>
- <img src="images/icono_calendario.png" width="34" height="26"/>
- </li>
-  <li>
-   <div class="cantidades_detalle_paquete_of_mini"> 0 </div>
- <img src="images/icono_ticket_of.png" width="34" height="26" />
- </li>
-   <li>
-   <div class="cantidades_detalle_paquete_of_mini"> 0 </div>
- <img src="images/icono_video_of.png" width="34" height="26" />
- </li>
- </ul>
- </div>
-  
- <input type="radio" style="margin-left:100px;" name="RadioGroup1"  value="radio" id="RadioGroup1_0" />
- </label>
- 
-</div>
-
-
-
-
 <div class="paquetes_mini">
- <label>
-<div class="title_paquetes_mini">
-<div class="lateral_regular_mini"></div>
-  <img src="images/perrito_regular.png" class="margen" width="29" height="29"/> <font class="title_paquetes_titilos_mini"> PAQUETE REGULAR </font>
+    <label>
+        <div class="title_paquetes_mini">
+            <div class="lateral_regular_mini"></div>
+            <img src="<?php echo base_url() ?>images/perrito_regular.png" class="margen" width="29"
+                 height="29"/>
+            <font class="title_paquetes_titilos_mini">
+                PAQUETE <?php echo strtoupper($paquetes[1]->nombrePaquete) ?> </font>
+        </div>
+        <div class="precio_paquete_regular_mini"> $<?php echo $paquetes[1]->precio ?></div>
 
+        <div class="descripcion_paquetes_mini">
+            <strong>Incluye:</strong>
+            <ul class="contenido_paquetes_mini">
+                <li>
+                    * <?php echo $paquetes[1]->cantFotos ?> fotos
+                </li>
+                <li>
+                    * Texto de <?php echo $paquetes[1]->caracteres ?> caracteres
+                </li>
+                <li>
+                    * <?php echo $paquetes[1]->videos ?> video
+                </li>
+                <li>
+                    * <?php echo $paquetes[1]->cupones ?> cupones
+                </li>
+                <li>
+                    * Vigencia de <?php echo $paquetes[1]->vigencia ?> días.
+                </li>
+            </ul>
+        </div>
+        <div class="iconos_paquetes_mini">
+            <ul>
+                <li>
+                    <?php if ($paquetes[1]->cantFotos > 0): ?>
+                        <div class="cantidades_detalle_paquete_regular_mini"><?php echo $paquetes[1]->cantFotos ?></div>
+                        <img src="<?php echo base_url() ?>images/icono_camara_regular.png" width="34" height="26"/>
+                    <?php else: ?>
+                        <div class="cantidades_detalle_paquete_of_mini"><?php echo $paquetes[1]->cantFotos ?></div>
+                        <img src="<?php echo base_url() ?>images/icono_camara_of.png" width="34" height="26"/>
+                    <?php endif; ?>
+                </li>
+                <li>
+                    <div class="cantidades_detalle_paquete_regular_mini"> <?php echo $paquetes[1]->caracteres ?></div>
+                    <img src="<?php echo base_url() ?>images/icono_texto_regular.png" width="34" height="26"/>
+                </li>
+                <li>
+                    <div class="cantidades_detalle_paquete_regular_mini"><?php echo $paquetes[1]->vigencia; ?></div>
+                    <img src="<?php echo base_url() ?>images/icono_calendario_regular.png" width="34" height="26"/>
+                </li>
+                <li>
+                    <?php if ($paquetes[1]->cupones > 0): ?>
+                        <div class="cantidades_detalle_paquete_regular_mini"><?php echo $paquetes[1]->cupones ?></div>
+                        <img src="<?php echo base_url() ?>images/icono_ticket_regular.png" width="34" height="26"/>
+                    <?php else: ?>
+                        <div class="cantidades_detalle_paquete_of_mini"><?php echo $paquetes[1]->cupones ?></div>
+                        <img src="<?php echo base_url() ?>images/icono_ticket_of.png" width="34" height="26"/>
+                    <?php endif; ?>
+                </li>
+                <li>
+                    <?php if ($paquetes[1]->videos > 0): ?>
+                        <div class="cantidades_detalle_paquete_regular_mini"><?php echo $paquetes[1]->videos ?></div>
+                        <img src="<?php echo base_url() ?>images/icono_video_regular.png" width="34" height="26"/>
+                    <?php else: ?>
+                        <div class="cantidades_detalle_paquete_of_mini"><?php echo $paquetes[1]->videos ?></div>
+                        <img src="<?php echo base_url() ?>images/icono_video_of.png" width="34" height="26"/>
+                    <?php endif; ?>
+                </li>
+            </ul>
+        </div>
+        <input type="radio" style="margin-left:100px;" data-vigencia="<?php echo $paquetes[1]->vigencia ?>"
+               data-np="<?php echo $paquetes[1]->nombrePaquete ?>" data-precio="<?php echo $paquetes[1]->precio ?>"
+               name="paquete"
+               value="<?php echo $paquetes[1]->paqueteID ?>" id="RadioGroup1_1"/>
+    </label>
 </div>
-<div class="precio_paquete_regular_mini"> $89.00 </div>
-
- <div class="descripcion_paquetes_mini">
- <strong>Incluye:</strong>
-<ul class="contenido_paquetes_mini">
-<li>
-* 5 fotos
-</li>
-<li>
-* Texto de 150 caracteres 
-</li>
-<li>
-* 1 video
-</li>
-<li>
- * 2 cupones
-</li>
-<li>
- * Vigencia de 30 días
-</li>
-</ul>
- </div>
- <div class="iconos_paquetes_mini">
- <ul>
- <li>
- <div class="cantidades_detalle_paquete_regular_mini"> 5 </div>
- <img src="images/icono_camara_regular.png" width="34" height="26"/>
- </li>
-  <li>
-   <div class="cantidades_detalle_paquete_regular_mini"> 150 </div>
- <img src="images/icono_texto_regular.png" width="34" height="26" >
- </li>
-  <li>
-   <div class="cantidades_detalle_paquete_regular_mini"> 30 </div>
- <img src="images/icono_calendario_regular.png" width="34" height="26"/>
- </li>
-  <li>
-   <div class="cantidades_detalle_paquete_regular_mini"> 2 </div>
- <img src="images/icono_ticket_regular.png" width="34" height="26" />
- </li>
-   <li>
-   <div class="cantidades_detalle_paquete_regular_mini"> 1 </div>
- <img src="images/icono_video_regular.png" width="34" height="26" />
- </li>
- </ul>
- </div>
- <input type="radio" style="margin-left:100px;" name="RadioGroup1" value="radio" id="RadioGroup1_1" />
-</label>
-</div>
-
-
-
 
 <div class="paquetes_derecha_mini">
-<label>
-<div class="title_paquetes_mini">
-<div class="lateral_premium_mini"></div>
-  <img src="images/perrito_premium.png" class="margen" width="29" height="29"/> <font class="title_paquetes_titilos_mini"> PAQUETE PREMIUM </font>
+    <label>
+        <div class="title_paquetes_mini">
+            <div class="lateral_premium_mini"></div>
+            <img src="<?php echo base_url() ?>images/perrito_premium.png" class="margen" width="29"
+                 height="29"/> <font class="title_paquetes_titilos_mini">
+                PAQUETE <?php echo strtoupper($paquetes[2]->nombrePaquete) ?> </font>
+        </div>
+        <div class="precio_paquete_premium_mini"> $<?php echo $paquetes[2]->precio ?></div>
 
-</div>
- <div class="precio_paquete_premium_mini"> $165.00 </div>
+        <div class="descripcion_paquetes_mini">
+            <strong>Incluye:</strong>
+            <ul class="contenido_paquetes_mini">
+                <li>
+                    * <?php echo $paquetes[2]->cantFotos ?> fotos
+                </li>
+                <li>
+                    * Texto de <?php echo $paquetes[2]->caracteres ?> caracteres
+                </li>
+                <li>
+                    * <?php echo $paquetes[2]->videos ?> video
+                </li>
+                <li>
+                    * <?php echo $paquetes[2]->cupones ?> cupones
+                </li>
+                <li>
+                    * Vigencia de <?php echo $paquetes[2]->vigencia ?> días
+                </li>
+            </ul>
+        </div>
+        <div class="iconos_paquetes_mini">
+            <ul>
+                <li>
+                    <div class="cantidades_detalle_paquete_premium_mini"> <?php echo $paquetes[2]->cantFotos ?></div>
+                    <img src="<?php echo base_url() ?>images/icono_camara_premium.png" width="34" height="26"/>
+                </li>
+                <li>
+                    <div class="cantidades_detalle_paquete_premium_mini"> <?php echo $paquetes[2]->caracteres ?></div>
+                    <img src="<?php echo base_url() ?>images/icono_texto_premium.png" width="34" height="26"/>
+                </li>
+                <li>
+                    <div class="cantidades_detalle_paquete_premium_mini"><?php echo $paquetes[2]->vigencia ?></div>
+                    <img src="<?php echo base_url() ?>images/icono_calendario_premium.png" width="34" height="26"/>
+                </li>
+                <li>
+                    <?php if ($paquetes[2]->cupones > 0): ?>
+                        <div class="cantidades_detalle_paquete_premium_mini"><?php echo $paquetes[2]->cupones ?></div>
+                        <img src="<?php echo base_url() ?>images/icono_ticket_premium.png" width="34" height="26"/>
 
- <div class="descripcion_paquetes_mini">
- <strong>Incluye:</strong>
-<ul class="contenido_paquetes_mini">
-<li>
-* 15 fotos
-</li>
-<li>
-* Caracteres ilimitados
-</li>
-<li>
-* 2 video
-</li>
-<li>
- * 5 cupones
-</li>
-<li>
- * Vigencia de 60 días
-</li>
-</ul>
- </div>
- <div class="iconos_paquetes_mini">
- <ul>
- <li>
- <div class="cantidades_detalle_paquete_premium_mini"> 15 </div>
- <img src="images/icono_camara_premium.png" width="34" height="26"/>
- </li>
-  <li>
-   <div class="cantidades_detalle_paquete_premium_mini"> ∞ </div>
- <img src="images/icono_texto_premium.png" width="34" height="26" >
- </li>
-  <li>
-   <div class="cantidades_detalle_paquete_premium_mini"> 60 </div>
- <img src="images/icono_calendario_premium.png" width="34" height="26"/>
- </li>
-  <li>
-   <div class="cantidades_detalle_paquete_premium_mini"> 5 </div>
- <img src="images/icono_ticket_premium.png" width="34" height="26" />
- </li>
-   <li>
-   <div class="cantidades_detalle_paquete_premium_mini"> 2 </div>
- <img src="images/icono_video_premium.png" width="34" height="26" />
- </li>
- </ul>
- </div>
-  <input type="radio" style="margin-left:100px;" name="RadioGroup1" value="radio" id="RadioGroup1_2" />
- </label>
- </div>
- 
-
-
- </div><!-- Contenedor de paquetes  -->
- 
-</br>
-<ul class="morado_mini">
-<li><a href="#" id="paso222">Continuar</a>
-</li>
-</ul> 
-
-
-</div>
-
-
-
-</div>
-
-</div> 
-
-<!-- FIN paso dos !-->
-
-<!-- INICIO paso TRES -->
-<div id="paso_tres" style="display:none;" >
-<div class="numeros_publicar_anuncio_mini">
-<ul class="listado_numeros_anuncio_mini">
-<li>1</li>
-<li>2</li>
-<li class="numero_seccion_mini">3</li>
-<li>4</li>
-<li>5</li>
-</ul>
- </div>
- 
-<div class="crerar_publicar_anuncio_mini">
-<img src="images/cerrar.png" onclick="oculta('contenedor_publicar_anuncio');"/>
-
- </div>
- </br>
-<div class="descipcion_pasos_largo_mini">
-<div class="titulo_de_pasos_mini"> PUBLICAR   ANUNCIO </div>
-<div class="instrucciones_pasos_mini"> Completa tu información</div>
-<div class="sub_instrucciones_pasos_mini"> Datos de contacto </div>
-<div class="contenido_indicacion_formulario_mini"> 
-<p class="margen_15_left_mini" >Nombre: <input type="text" class="background_morado_35_mini" readonly="readonly" /> Apellido: <input type="text" class="background_morado_35" readonly="readonly" />  Correo electrónico: <input type="text" class="background_morado" readonly="readonly" /> </p>
-</br>
-<p class="margen_15_left_mini"> Teléfono: <input type="text" class="background_gris_35_mini"/> Mostrar teléfono en el anuncio: <select class="background_gris_35_mini">
-<option>--</option>
-<option> Si </option>
-<option> No </option>
-</select>
-</p>
-</br>
-
-<div class="sub_instrucciones_pasos_mini"> Detalles del aunucio </div>
-</br>
-<p class="margen_15_left_mini" >Sección: <input type="text" class="background_morado_55_mini" readonly="readonly" /> Paquete: <input type="text" class="background_morado_55_mini" readonly="readonly" />  Vencimiento: <input type="text" class="background_morado_mini" readonly="readonly" /> </p>
-</br>
-<p class="margen_15_left_mini"> Titúlo: &nbsp;&nbsp;&nbsp; <input type="text" class="background_gris_55_mini"/> Estado  &nbsp;&nbsp;&nbsp;&nbsp;<select class="background_gris_100_mini">
-<option>--</option>
-<option> Chihuahua </option>
-<option> Quintana Roo </option>
-</select>
-
-Ciudad: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input class="background_gris_mini" type="text"/>
-</p>
-</br>
-
-<p class="margen_15_left_mini"> Genéro: <select type="text" class="background_gris_100_mini"/>
-<option> --- </option>
-<option> Hembra </option>
-<option> Macho </option>
-
-</select>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- Raza  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select class="background_gris_100_mini">
-<option>--</option>
-<option> Labrador </option>
-<option> Labrador</option>
-</select>
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Precio: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input class="background_gris_mini" type="text"/>
-</p>
-</br>
-<p class="margen_15_left_mini">
-Descripción:<textarea  class="background_gris_mini" cols="95" rows="3" > </textarea>
-</p>
-</br>
-<p class="margen_15_left_mini">
-Link de video <input type="text" size="98"/><img src="images/logo_youtube.png"/>
-</p>
-<p class="margen_15_left_mini"> <a href="#"> Tutorial para subir video a <img src="images/logo_youtube.png" width="43" height="16"/> </a> </p>
-</br>
-<p class="margen_15_left_mini"> 
-
-<!-- <iframe src="../subir_archivos/index.html" style="overflow:none;" scrolling="no" width="800" height="100"> </iframe> -->
- </p>
- 
- <div style="width:800px; height:150px;"> 
-
- TEXTO
- </div>
- 
-<ul class="morado_15_mini" style="margin-left:-15px;" >
-
-<li onclick="muestra('paso_cuatro'); oculta('paso_tres');">
-
-Continuar
-
-</li>
-
-</ul> 
-
+                    <?php else: ?>
+                        <div class="cantidades_detalle_paquete_of_mini"><?php echo $paquetes[2]->cupones ?></div>
+                        <img src="<?php echo base_url() ?>images/icono_ticket_of.png" width="34" height="26"/>
+                    <?php endif; ?>
+                </li>
+                <li>
+                    <?php if ($paquetes[2]->videos > 0): ?>
+                        <div class="cantidades_detalle_paquete_premium_mini"><?php echo $paquetes[2]->videos ?></div>
+                        <img src="<?php echo base_url() ?>images/icono_video_premium.png" width="34" height="26"/>
+                    <?php else: ?>
+                        <div class="cantidades_detalle_paquete_of_mini"><?php echo $paquetes[2]->videos ?></div>
+                        <img src="<?php echo base_url() ?>images/icono_video_of.png" width="34" height="26"/>
+                    <?php endif; ?>
+                </li>
+            </ul>
+        </div>
+        <input type="radio" style="margin-left:100px;" data-vigencia="<?php echo $paquetes[2]->vigencia ?>"
+               data-np="<?php echo $paquetes[2]->nombrePaquete ?>" data-precio="<?php echo $paquetes[2]->precio ?>"
+               name="paquete"
+               value="<?php echo $paquetes[2]->paqueteID ?>" id="RadioGroup1_2"/>
+    </label>
 </div>
 </div>
 </div>
-<!-- FIN paso TRES -->
 
-<div id="paso_cuatro" style="display:none;" > <!-- inicio del contendor paso 4 -->
- 
-<div class="numeros_publicar_anuncio_mini">
-<ul class="listado_numeros_anuncio_mini">
-<li>1</li>
-<li>2</li>
-<li >3</li>
-<li class="numero_seccion_mini">4</li>
-<li>5</li>
-</ul>
- </div>
+<!--paso tres descipcion_pasos_miniD -->
+<div id="paso_tres" class="paso contenido_indicacion_formulario_mini">
+    <p class="margen_15_left_mini">Nombre: <input required="required" type="text" name="nombre"
+                                                  class="background_morado_35_mini" readonly="readonly"
+                                                  value="<?php echo $this->session->userdata('nombre'); ?>"/>
+        Apellido:
+        <input required="required" type="text" name="apellido" class="background_morado_55_mini" readonly="readonly"
+               value="<?php echo $this->session->userdata('apellido') ?>"/>
+        Correo electrónico: <input required="required" type="text" name="correo" class="background_morado_55_mini"
+                                   readonly="readonly" value="<?php echo $this->session->userdata('correo') ?>"/></p>
+    <br/>
 
-<div class="crerar_publicar_anuncio_mini">
-<img src="images/cerrar.png" onclick="oculta('contenedor_publicar_anuncio');"/>
+    <p class="margen_15_left_mini"> Teléfono: <input name="telefono" type="text"
+                                                     class="background_gris_35_mini preview" value="<?php echo $this->session->userdata('telefono');?> " required="required"/> Mostrar
+        teléfono en el anuncio: <select required="required" name="mostrar_telefono" class="background_gris_35_mini preview">
+            <option value="">--</option>
+            <option value="1"> Si</option>
+            <option value="0"> No</option>
+        </select>
+    </p>
+    <br/>
 
- </div>
- </br>
-<div class="descipcion_pasos_largo_mini">
-<div class="titulo_de_pasos_mini"> PUBLICAR   ANUNCIO </div>
-<div class="instrucciones_pasos_mini"> Vista previa de tu anuncio</div>
-<div class="leer_anuncio_mini">
+    <div class="sub_instrucciones_pasos_mini"> Detalles del aunucio</div>
+    <br/>
 
+    <p class="margen_15_left_mini">Sección: <input required="required" type="text" name="seccion_texto" id="seccion" class="background_morado_55_mini" readonly="readonly"/> Paquete:
+        <input required="required" type="text" name="paquete_texto" id="paquete_texto" class="background_morado_55_mini"
+               readonly="readonly"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vencimiento: <input type="text" required="required" name="vigencia_texto" class="background_morado_mini" id="vigencia_texto"
+                                                                                                    readonly="readonly"/></p>
+    <br/>
 
-<div class="contenedor_galeria_mini">
- <div id="slideshow_publicar_anuncio" class="picse_mini">
-       <img src="images/anuncios/02/1.png" width="294" height="200"/>
-       <img src="images/anuncios/02/2.png" width="294" height="200"/>
-       <img src="images/anuncios/02/3.png" width="294" height="200"/>
-       <img src="images/anuncios/02/1.png" width="294" height="200"/>
+    <p class="margen_15_left_mini"> Titúlo: &nbsp;&nbsp;&nbsp; <input required="required" type="text" name="titulo" id="titulo" class="background_gris_55_mini preview"/> Estado
+        &nbsp;&nbsp;&nbsp;&nbsp;<select required="required" name="estado" class="background_gris_100_mini preview" id="estado">
+            <option value="">--</option>
+            <?php foreach ($estados as $edo): ?>
+                <option value="<?php echo $edo->estadoID ?>"><?php echo $edo->nombreEstado ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ciudad: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input required="required" class="background_gris_mini preview" name="ciudad" type="text" id="ciudad"/>
+    </p>
+    <br/>
+
+    <p class="margen_15_left_mini"> Genéro:
+        <select required="required" type="text" name="genero" class="background_gris_100_mini preview" id="generoP">
+            <option value=""> ---</option>
+            <option value="0"> Hembra</option>
+            <option value="1"> Macho</option>
+        </select>
+
+        Raza &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select required="required" name="raza" class="background_gris_100_mini preview" id="razaP">
+            <option value="">--</option>
+            <?php foreach ($razas as $r): ?>
+                <option value="<?php echo $r->razaID ?>"><?php echo $r->raza ?></option>
+            <?php endforeach; ?>
+        </select>
+        Precio: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input required="required" class="preview" name="precio" type="text" id="precio"/>
+    </p>
+    <br/>
+
+    <p class="margen_15_left_mini">
+        Descripción:<textarea required="required" class="background_gris_mini preview" name="descripcion" id="descripcion" cols="95" rows="3"></textarea><br />
+    Caracteres:<input name="meh" type="text" id="meh" size="3" readonly="readonly" />
+    <input name="caracteresN" type="text" id="caracteresN" size="3" readonly="readonly" />
+    </p>
+    <br/>
+
+    <p class="margen_15_left_mini">
+        Link de video <input type="text" name="url_video" id="url_video" size="98" class="preview"/><img
+            src="<?php echo base_url() ?>images/logo_youtube.png"/>
+    </p>
+
+    <p class="margen_15_left_mini"><a href="<?php echo base_url() ?>#"> Tutorial para subir video a <img
+                src="<?php echo base_url() ?>images/logo_youtube.png" width="43" height="16"/> </a></p>
+    <br/>
+
+    <p class="margen_15_left_mini">
+
+        <!-- <iframe src="<?php echo base_url() ?>../subir_archivos/index.html" style="overflow:none;" scrolling="no" width="800" height="100"> </iframe> -->
+    </p>
+	
+    <!--imagenes-->
+     <input type="file" id="files" name="files[]" multiple />
+<output id="list" class="preview"></output>
+
+<script>
+  function handleFileSelect(evt) {
+	 
+    var files = evt.target.files; // FileList object
+	console.log(files.length);
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+
+      var reader = new FileReader();
+
+      // Closure to capture the file information.
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+          span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                            '" title="', escape(theFile.name), '" width="50"/><a href="#" class="del">X</a>'].join('');
+          document.getElementById('list').insertBefore(span, null);
+        };
+      })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+    }
+	
+	//Preview
+	for (var i = 0, f; f = files[i]; i++) {
+
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+
+      var reader = new FileReader();
+
+      // Closure to capture the file information.
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+          var span = document.getElementById('slideshow_publicar_anuncio');
+          span.innerHTML = ['<img src="', e.target.result,
+                            '" title="', escape(theFile.name), '" width="294" height="200"/>'].join('');
+          document.getElementById('slideshow_publicar_anuncio').insertBefore(span, null);
+        };
+      })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+    }
+  }
+
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+</script>
+<br />
+    <!--imagenes-->
+    
+    
+    <div style="width:800px; height:auto;">
+       <?php  if ($banner !== null && !empty($banner)) {
+                    foreach ($banner as $contenido) {
+                        if ($contenido->zonaID == 9 && $contenido->posicion == 2 && $contenido->seccionID == $seccion) {
+                            ?>    
+                            <div>
+                                <h3><?php echo $contenido->texto; ?></h3>
+                            </div>
+                            <?php }
+                        }
+                    } ?>
     </div>
 
 </div>
-<div class="datos_general_mini">
+<!--paso cuatro-->
+<div id="paso_cuatro" class="paso leer_anuncio_mini">
+    <div class="contenedor_galeria_mini">
+        <div id="slideshow_publicar_anuncio" class="picse_mini">
+        
+           <!-- <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>
+            <img src="<?php echo base_url() ?>images/anuncios/02/2.png" width="294" height="200"/>
+            <img src="<?php echo base_url() ?>images/anuncios/02/3.png" width="294" height="200"/>
+            <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>-->
+            
+        </div>
+    </div>
+    <div class="datos_general_mini">
+        <div class="titulo_anuncio_publicado_mini">
+            <script>
+			jQuery(document).ready(function(){
+				
+				
+				$(".preview").change(function() {
+					console.log($(this).val(),$('#estado option:selected'));		 	
+				$("#tituloPrev").html($("#titulo").val());
+				$("#precioPrev").html($("#precio").val());
+				$("#seccionPrev").html($("#seccion").val());
+				var genero = $('#generoP option:selected').html();
+				$("#generoPrev").html(genero);
+				var raza = $('#razaP option:selected').html();
+				$("#razaPrev").html(raza);
+				var lugar = $('#estado').html();
+				$("#lugarPrev").html(lugar+'('+$("#ciudad").val()+')');
+				$("#descripcionPrev").html($("#descripcion").val());
+				var src = $("#url_video").val();
+				$("#videoPrev").html('<iframe class="youtube_video_mini" src="'+src+'"></iframe>');
+				var img = $("#list").val();
+				console.log(img);
+     			});
+			});
+			
+			</script>
+            
+         <input type="hidden" id="seccion" name="seccion" value="" />
+         <input type="hidden" id="titulo" name="titulo" value="" />
+         <input type="hidden" id="vigente" name="vigente" value="" />
+         <input type="hidden" id="fechaCreacion" name="fechaCreacion" value="" />
+         <input type="hidden" id="estadoID" name="estadoID" value="estadoID" />
+         <input type="hidden" id="genero" name="genero" value="" />
+         <input type="hidden" id="razaID" name="razaID" value="" />
+         <input type="hidden" id="precio" name="precio" value="" />
+         <input type="hidden" id="descripcion" name="descripcion" value="" />
+         <input type="hidden" id="muestraTelefono" name="muestraTelefono" value="" />
+         <input type="hidden" id="paqueteID" name="paqueteID" value="paqueteID" />
+         <label><p id="tituloPrev"></p></label>
+        </div>
+        <br/>
+        <strong>
+            Precio: <label id="precioPrev"></label>
+        </strong>
+        <br/>
+        <font> Fecha de publicacion:<label id="fechaPrev"><?=date('d-m-Y');?></label></font>
+        <br/>
+        <font>Sección: <label id="seccionPrev"></label></font>
+        <br/>
+        <font>Raza: <label id="razaPrev"></label></font>
+        <br/>
+        <font>Género: <label id="generoPrev"></label></font>
+        <br/>
+        <font>Lugar: <label id="lugarPrev"></label></font>
+        <br/>
+        <br/>
+        <ul class="boton_naranja_mini">
+            <li onclick="muestra('contenedor_contactar_previo');">
+                Contactar al anunciante
+            </li>
+        </ul>
+        <br/>
+        <ul class="boton_gris_mini">
+            <li>
+                <img src="<?php echo base_url() ?>images/favorito.png"/>Agregar a Favoritos
+            </li>
+        </ul>
+    </div>
+    <br/>
 
-<div class="titulo_anuncio_publicado_mini">
-VENDO BONITO PERRO
-</br>
-VENDO
+    <div class="contenedor_del_detalle_mini">
+
+        <div class="titulo_anuncio_publicado_mini">
+            MÁS DETALLES
+        </div>
+        <div class="descripcion_del_anuncio_mini">
+           <label id="descripcionPrev"></label>
+        </div>
+        <br/>
+        <ul class="boton_naranja_dos_mini">
+            <li id="ver_video" onclick="muestra('video_previo');">
+                Ver video
+            </li>
+        </ul>
+        <div id="video_previo" class="desplegar_detalles_mini" style="display:none;">
+            <br/>
+
+            <div class="titulo_anuncio_publicado_mini">
+                VIDEO
+            </div>
+            <div id="videoPrev">
+            
+            </div>
+        </div>
+        <ul class="boton_rojo_dos_mini">
+            <li>
+                <img src="<?php echo base_url() ?>images/alert.png"/>
+                Denunciar Anuncio
+            </li>
+        </ul>
+        <div class="consejos_advertencias_mini">
+            - QuierounPerro.com te invita a que antes de comprar pienses en adoptar, ya que hoy en día hay
+            millones de perros sin hogar que deben ser sacrificados.
+            <br/>
+            - Tener un perro conlleva una serie de responsabilidades, cuidados y atenciones que debes considerar
+            antes de comprar uno.
+            <br/>
+            - Infórmate de los cuidados especiales que debes de tener con la raza específica que estás
+            comprando.
+            <br/>
+            - NUNCA compres una nueva mascota sin verla físicamente antes.
+            <br/>
+            - NUNCA hagas depósitos o transferencias bancarias a través de medios donde tu dinero no pueda ser
+            rastreado, como lo son Money Gram y Western Union.
+            <br/>
+            - NUNCA pagues por un perro con registro de pedigree AKC si no te muestran los certificados, ya que
+            corres el riesgo de que sea una estafa y nunca te los entreguen. Exige ver los papeles y asegúrate
+            de que el nombre del criador esté en el certificado.
+            <br/>
+            - Cuando vayas a ver al vendedor, nunca vayas solo y revisa los alrededores.
+            <br/>
+            - El vendedor también debe estar interesado en ti y en manos de quién dejará a su perro.
+        </div>
+    </div>
+    <br/>
 </div>
-</br>
-<strong>
-Precio:
-</strong>
+<!--paso cinco-->
+<div id="paso_cinco" class="paso">
+    <div class="tipo_paquete_pago_mini">
+        <img src="<?php echo base_url() ?>images/pago_lite.png"/>
+    </div>
+    <div class="divisor_morado_mini"></div>
+    <div class="descripcion_paquete_pago_mini">
+        <div class="titulo_descripcion_paquete_mini"> INCLUYE</div>
+        <div style="padding:15px;">
+            <p> * 1 foto </p>
 
-</br>
-<font> Fecha de publicacion:12-06-2014</font>
-</br>
-<font>Sección: Venta</font>
-</br>
-<font>Raza: Cairn Terrier</font>
-</br>
-<font>Género: Macho</font>
-</br>
-<font>Lugar: Queretaro (Queretaro)</font>
+            <p>* Texto de 50 caracteres </p>
 
-</br>
-</br>
-<ul class="boton_naranja_mini">
-<li onclick="muestra('contenedor_contactar_previo');">
-Contactar al anunciante
-</li>
-</ul>
-</br>
-<ul class="boton_gris_mini">
-<li>
-<img src="images/favorito.png"/>Agregar a Favoritos
-</li>
-</ul>
+            <p>* Vigencia de 30 días. </p>
+        </div>
+    </div>
+    <div class="divisor_morado_mini"></div>
+    <div class="tipo_paquete_pago_mini">
+        <div class="titulo_descripcion_paquete_mini"> TOTAL</div>
+        <div class="total_compra_mini"><p> $ 89.00 <font class="moneda_mini"> MX </font></p>
+        </div>
+    </div>
+    <br/>
+    <br/>
 
+    <div style="margin-top:150px;">
+        <div class="sub_instrucciones_pasos_mini"><img style=" margin-left:15px;"
+                                                       src="<?php echo base_url() ?>images/mini_cupon.png"/>
+            Cupones<font> 2 </font></div>
+        <div style="padding:15px;">
+            <p>Si lo deseas pudes usar alguno de tus cupones</p>
+            <!--<form class="radios_cupones_mini" action="">-->
+            <input type="radio" name="descuento" value="10" id="radio_pago1" class="css-checkbox"/><label
+                for="radio_pago1" class="css-label radGroup2"> 10% de descuento</label>
+            <br/>
+            <input type="radio" name="descuento" value="5" id="radio_pago2" class="css-checkbox" checked="checked"/>
+            <label for="radio_pago2" class="css-label radGroup2">5% de descuento</label>
+            <br/>
+            <input type="radio" name="descuento" value="20" id="radio_pago3" class="css-checkbox"/><label
+                for="radio_pago3" class="css-label radGroup2"> 20% de descuento</label>
+            <br/>
+
+        </div>
+    </div>
+    <ul class="morado_15_mini">
+        <li onclick="">
+            Pagar
+        </li>
+    </ul>
 </div>
-</br>
+</form>
+<!--boton se siguiente paso-->
+<br/>
 
-<div class="contenedor_del_detalle_mini">
-
-<div class="titulo_anuncio_publicado_mini">
-MÁS DETALLES
+<div id="btn_sig" style="display: block; text-align: right; padding-right: 10px;">
+    <div id="msj_paso" style="font-size: 10px;display: inline-block; vertical-align: bottom; height: 38px;"></div>
+    <ul class="morado_mini" style="display: inline-block;margin-top:-200px;">
+        <li class="sig_paso">Continuar</li>
+    </ul>
 </div>
-
-<div class="descripcion_del_anuncio_mini">
-
-ksdjfkjslfk fdglksj gkfdsjg  jgfkdjgkfd gfdgkdf gfdskj fgsfkjg sdlkf gjkfdsg fdlkgjdfl glfdsjg dflkgj dfgj flkgjf gjfd gfdjg fdlg fdlg fjgfd gjdslf gkgj lgjfgk gjfdkg lkgjf gjjkgj s
+</div>
+</div>
 </div>
 <script>
     $(function () {

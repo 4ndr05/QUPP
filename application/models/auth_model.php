@@ -172,13 +172,14 @@ class Auth_model extends CI_Model {
         /*TODO datos de sesion*/
 		$userdata = array(
 			'logged' => true, 
-			'idUsuario' => $result->idUsuario,
-			'correo' => $result->correo,
+			'idUsuario' => $result->idUsuario, 
+			'correo' => $result->correo, 
 			'nombre' => $result->nombre,
 			'apellido' => $result->apellido,
+			'telefono' => $result->telefono,
 			'tipoUsuario' => $result->tipoUsuario,
 			'authKey' => $authKey,
-			'nivel' => $result->nivel
+			'nivel' => $result->nivel			
 		);
 
 		$tipoUsuario = $result->tipoUsuario;
