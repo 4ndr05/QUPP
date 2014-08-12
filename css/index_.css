@@ -598,6 +598,13 @@ body{
 	border:2px solid #762EA4;
 	margin-top:70px;
 	}
+.descipcion_pasos_miniD{
+	width:840px;
+	height:800px;
+	background-color: #FFF;
+	border:2px solid #762EA4;
+	margin-top:70px;
+	}
 .descipcion_pasos_largo_mini{
 	width:840px;
 	min-height:960px;
@@ -886,7 +893,8 @@ body{
 	color:#762EA4;
 	padding:10px;
 	text-align:left;
-	height:500px;
+	height:650px;
+	background-color: white;
 	}
 .margen_25_rigth_mini{
 	margin-right:25px;
@@ -897,13 +905,11 @@ body{
 	margin-left:10px;}
 .background_morado_35_mini{
 	color:#FFFFFF;
-	margin-right:35px;
 	background-color:#762EA4;
 	border:hidden;
 	}
 .background_morado_55_mini{
 	color:#FFFFFF;
-	margin-right:55px;
 	background-color:#762EA4;
 	border:hidden;
 	}
@@ -914,7 +920,6 @@ body{
 	}
 .background_gris_35_mini{
 	color:#762EA4;
-	margin-right:35px;
 	background-color:#D9DADB;
 	border:hidden;
 	}
@@ -926,7 +931,6 @@ body{
 	}
 .background_gris_100_mini{
 	color:#762EA4;
-	margin-right:100px;
 	background-color:#D9DADB;
 	border:hidden;
 	}
