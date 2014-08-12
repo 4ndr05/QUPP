@@ -285,6 +285,7 @@
 
 <!--paso tres descipcion_pasos_miniD -->
 <div id="paso_tres" class="paso contenido_indicacion_formulario_mini">
+    <input type="hidden" id="cantFotos" name="cantFotos" value=""/>
     <p class="margen_15_left_mini">Nombre: <input required="required" type="text" name="nombre"
                                                   class="background_morado_35_mini" readonly="readonly"
                                                   value="<?php echo $this->session->userdata('nombre'); ?>"/>
@@ -319,7 +320,7 @@
         &nbsp;&nbsp;&nbsp;&nbsp;<select required="required" name="estado" class="background_gris_100_mini preview" id="estado">
             <option value="">--</option>
             <?php foreach ($estados as $edo): ?>
-                <option value="<?php echo $edo->estadoID ?>"><?php echo $edo->nombreEstado ?></option>
+                <option value="<?php echo $edo->estadoID;?>"><?php echo $edo->nombreEstado;?></option>
             <?php endforeach; ?>
         </select>
 
@@ -365,16 +366,31 @@
 
         <!-- <iframe src="<?php echo base_url() ?>../subir_archivos/index.html" style="overflow:none;" scrolling="no" width="800" height="100"> </iframe> -->
     </p>
-	
+    
     <!--imagenes-->
+    <script>
+    jQuery(document).ready(function(){
+    $('#files').change(function() {
+        //$('#uploadImages').submit();
+        alert('meh');
+    });
+    });
+    </script>
+    
      <input type="file" id="files" name="files[]" multiple />
+
 <output id="list" class="preview"></output>
 
 <script>
   function handleFileSelect(evt) {
-	 
+     
     var files = evt.target.files; // FileList object
-	console.log(files.length);
+    console.log(files.length);
+	var fotos = document.getElementById('cantFotos').value;
+	if(files > fotos){
+		document.getElementById("msj_paso").innerHTML="Seleccionó más fotos de las permitidas"+"("+fotos+")";
+	}
+	console.log(files.length, fotos);
     // Loop through the FileList and render image files as thumbnails.
     for (var i = 0, f; f = files[i]; i++) {
 
@@ -399,9 +415,9 @@
       // Read in the image file as a data URL.
       reader.readAsDataURL(f);
     }
-	
-	//Preview
-	for (var i = 0, f; f = files[i]; i++) {
+    
+    //Preview
+    for (var i = 0, f; f = files[i]; i++) {
 
       // Only process image files.
       if (!f.type.match('image.*')) {
@@ -447,43 +463,44 @@
 
 </div>
 <!--paso cuatro-->
-<div id="paso_cuatro" class="paso leer_anuncio_mini">
+<div id="paso_cuatro" class="paso contenido_indicacion_formulario_mini">
+<div class="leer_anuncio_mini">
     <div class="contenedor_galeria_mini">
         <div id="slideshow_publicar_anuncio" class="picse_mini">
         
-           <!-- <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>
+           <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>
             <img src="<?php echo base_url() ?>images/anuncios/02/2.png" width="294" height="200"/>
             <img src="<?php echo base_url() ?>images/anuncios/02/3.png" width="294" height="200"/>
-            <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>-->
+            <!-- <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>-->
             
         </div>
     </div>
     <div class="datos_general_mini">
         <div class="titulo_anuncio_publicado_mini">
             <script>
-			jQuery(document).ready(function(){
-				
-				
-				$(".preview").change(function() {
-					console.log($(this).val(),$('#estado option:selected'));		 	
-				$("#tituloPrev").html($("#titulo").val());
-				$("#precioPrev").html($("#precio").val());
-				$("#seccionPrev").html($("#seccion").val());
-				var genero = $('#generoP option:selected').html();
-				$("#generoPrev").html(genero);
-				var raza = $('#razaP option:selected').html();
-				$("#razaPrev").html(raza);
-				var lugar = $('#estado').html();
-				$("#lugarPrev").html(lugar+'('+$("#ciudad").val()+')');
-				$("#descripcionPrev").html($("#descripcion").val());
-				var src = $("#url_video").val();
-				$("#videoPrev").html('<iframe class="youtube_video_mini" src="'+src+'"></iframe>');
-				var img = $("#list").val();
-				console.log(img);
-     			});
-			});
-			
-			</script>
+            jQuery(document).ready(function(){
+                
+                
+                $(".preview").change(function() {
+                    console.log($(this).val(),$('#estado option:selected'));            
+                $("#tituloPrev").html($("#titulo").val());
+                $("#precioPrev").html($("#precio").val());
+                $("#seccionPrev").html($("#seccion").val());
+                var genero = $('#generoP option:selected').html();
+                $("#generoPrev").html(genero);
+                var raza = $('#razaP option:selected').html();
+                $("#razaPrev").html(raza);
+                var lugar = $('#estado').html();
+                $("#lugarPrev").html(lugar+'('+$("#ciudad").val()+')');
+                $("#descripcionPrev").html($("#descripcion").val());
+                var src = $("#url_video").val();
+                $("#videoPrev").html('<iframe class="youtube_video_mini" src="'+src+'"></iframe>');
+                var img = $("#list").val();
+                console.log(img);
+                });
+            });
+            
+            </script>
             
          <input type="hidden" id="seccion" name="seccion" value="" />
          <input type="hidden" id="titulo" name="titulo" value="" />
@@ -538,7 +555,7 @@
         </div>
         <br/>
         <ul class="boton_naranja_dos_mini">
-            <li id="ver_video" onclick="muestra('video_previo');">
+            <li id="ver_video" onclick="$('#video_previo').toggle();">
                 Ver video
             </li>
         </ul>
@@ -583,6 +600,7 @@
         </div>
     </div>
     <br/>
+</div>
 </div>
 <!--paso cinco-->
 <div id="paso_cinco" class="paso">
@@ -711,8 +729,8 @@
         add_step_move();
 
         $('.paquete_comprar').on('click', function () {
-			<?php if (!is_logged()): ?>  
-             	muestra('contenedor_login');
+            <?php if (!is_logged()): ?>  
+                muestra('contenedor_login');
                 oculta('contenedor_publicar_anuncio');
             <?php else :?>               
            
@@ -721,47 +739,47 @@
             $('#paso_dos [data-np="' + paquete_val.nombre + '"]').prop('checked', true);
             $('#paso_tres [name=paquete_texto]').val(paquete_val.nombre);
             $('#paso_tres [name=vigencia_texto]').val(paquete_val.vigencia);
-            //$('#paso_tres [name=precio]').val(paquete_val.precio);
-			$('#paso_tres [name=caracteresN]').val(paquete_val.caracteres);
+            $('#paso_tres [name=cantFotos]').val(paquete_val.cantFotos);
+            $('#paso_tres [name=caracteresN]').val(paquete_val.caracteres);
             $('#contenedor_publicar_anuncio').fadeIn();
-			<?php endif;?>
+            <?php endif;?>
         });
 
-		$('textarea').keyup(function(e) {
-   			 var tval = $('#descripcion').val(),
-        	 tlength = tval.length,	
-			 set = $('#caracteresN').val(),
-        	remain = parseInt(set - tlength);
-			$('#meh').val(remain);
-			console.log(tval);
-    		console.log(tlength,remain,set);
-    		if (remain <= 0) {
-        		$('#descripcion').val((tval.substring(0,set)));
-   			 }
-		});
+        $('textarea').keyup(function(e) {
+             var tval = $('#descripcion').val(),
+             tlength = tval.length, 
+             set = $('#caracteresN').val(),
+            remain = parseInt(set - tlength);
+            $('#meh').val(remain);
+            console.log(tval);
+            console.log(tlength,remain,set);
+            if (remain <= 0) {
+                $('#descripcion').val((tval.substring(0,set)));
+             }
+        });
 
-		
+        
         $('#paso_dos [name=paquete]').on('change', function () {
             $('#paso_tres [name=paquete_texto]').val($(this).data('np'));
             $('#paso_tres [name=vigencia_texto]').val($(this).data('vigencia'));
             $('#paso_tres [name=precio]').val($(this).data('precio'));
         });
-		
-		 $('#paso_tres [name=paquete]').on('change', function () {
-			 /*var titulo = $('#titulo').val();
-			 console.log(titulo);*/
-			 alert('grrrr');
+        
+         $('#paso_tres [name=paquete]').on('change', function () {
+             /*var titulo = $('#titulo').val();
+             console.log(titulo);*/
+             alert('grrrr');
         });
 
         $('#paso_uno [name=seccion]').on('change', function() {
             $('#paso_tres [name=seccion_texto]').val($(this).next().text());
         });
-		
-		$("body").on("click",".del", function(e){
+        
+        $("body").on("click",".del", function(e){
             $(this).parent('span').remove(); 
         return false;
     });
 
     });
-	
+    
 </script>
