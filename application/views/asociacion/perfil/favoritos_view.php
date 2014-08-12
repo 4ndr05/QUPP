@@ -166,36 +166,18 @@ Denunciar Anuncio
 
 <div class="titulo_seccion_admin">
 <div class="perrito_perfil">
-<img src="images/favoritos_perfil.png" />
+<img src="<?php echo base_url();?>images/favoritos_perfil.png" />
 </div>
 <div class="admin_title"> Favoritos </div>
 </div>
 </br>
+  
+
+
+
   <ul id="itemContainer">
    <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li onclick="muestra('contenedor_anuncio_detalle');" >
-Ver detalle
-</li>
-</ul>
 
- </div> <!-- Fin contenedor annuncio -->
  
  
   <!-- Inicio margen falso -->
@@ -205,94 +187,7 @@ Ver detalle
   <!-- FIN margen falso -->
   
   
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
 
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-   <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
  
   </ul>
       
@@ -305,3 +200,48 @@ Ver detalle
     
     
       </div>
+
+
+
+
+<?php   foreach ($favoritos as $favorito) { ?>
+
+<div class="contenedor_anuncio">
+<div class="titulo_anuncio">
+<?php echo $favorito->titulo ?>
+
+</div>
+<div class="descripcion_anuncio">
+<font> Precio: <?php echo $favorito->precio ?> </font>
+<br/>
+<font> Raza: <?php echo $favorito->razaID ?></font>
+<br/>
+<font> Género: <?php echo $favorito->genero ?></font>
+<br/>
+<font> Ciudad: <?php echo $favorito-> ?></font>
+</div>
+<div class="contenedor_foto_anuncio">
+<img src="images/anuncios/01/perro.png" align="middle" width="128" height="80" />
+</div>
+<ul class="ver_detalle_anuncio">
+<li onclick="muestra('contenedor_anuncio_detalle');" >
+Ver detalle
+</li>
+</ul>
+
+ </div> <!-- Fin contenedor annuncio -->
+
+<div id="contenedor_ver_mensaje<?php echo $mensaje->mensajeID ?>" class="contenedor_publicar_anuncio" style="display:none;">
+<div class="cerrar_mensaje">
+<img src="<?php echo base_url()?>images/cerrar.png" onclick="oculta('contenedor_ver_mensaje<?php echo $mensaje->mensajeID ?>');"/>
+</div>
+<div id="ver_mensaje" class="ver_mensaje">
+<div class="contenedor_titulo_mensaje">
+<font class="titulo_mensaje"> MENSAJE </font>
+</div>
+<div class="mensaje"> 
+<strong> <?php echo $mensaje->asunto ?></strong>
+</br>
+<strong><?php echo substr($mensaje->mensaje,0,15); ?> </strong>
+</br></br>
+<?php echo $mensaje->mensaje ?>
