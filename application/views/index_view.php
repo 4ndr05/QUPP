@@ -94,7 +94,7 @@
 
         jQuery(document).ready(function () {
             // binds form submission and fields to the validation engine
-            jQuery("form").validationEngine({
+            jQuery(".validate").validationEngine({
                 promptPosition: "topRight",
                 scroll: false,
                 ajaxFormValidation: true,
@@ -171,7 +171,7 @@
 
 <!--		CONTENEDOR LOGIN							-->
 <!-- ------------------------------------------------------ -->
-<form action="<?= base_url() ?>sesion/login/principal/principal" id="login" method="post">
+<form action="<?= base_url() ?>sesion/login/principal/principal" id="login" class="validate" method="post">
     <div class="contenedor_login" id="contenedor_login" style="display:none;">
         <div class="cerrar_registro"><img src="<?php echo base_url() ?>images/cerrar.png"
                                           onclick="oculta('contenedor_login');"/></div>
@@ -244,7 +244,7 @@
 
 <!--		CONTENEDOR REGISTRO							-->
 <!-- ------------------------------------------------------ -->
-<form action="<?php echo base_url() ?>registro/registrar" id="registerNow" method="get" autocomplete="off"
+<form action="<?php echo base_url() ?>registro/registrar" id="registerNow" class="validate" method="get" autocomplete="off"
       enctype="multipart/form-data">
 <div class="contenedor_registro" id="contenedor_registro" style="display:none;"> <!-- Contenedor negro reistro-->
 <div class="cerrar_registro"><img src="<?php echo base_url() ?>images/cerrar.png"
@@ -840,7 +840,7 @@
 
     <!-- Inicio contenedor pap publicar anuncio aunucio !-->
     <div id="publicar_anuncio" class="pubicar_anuncio_mini">
-        <?php $this->load->view('partial/_pasos_anuncio', array('paquetes' => $paquetes, 'estados' => $estados, 'razas' => $razas)); ?>
+        <?php $this->load->view('partial/_pasos_anuncio', array('paquetes' => $paquetes, 'estados' => $estados, 'razas' => $razas,'cupones' => $cupones)); ?>
 
     </div>
 </div>
@@ -1025,7 +1025,7 @@
 <div id="contenedor_paquetes" class="contenedor_paquetes">
 
 <a href="#"  class="paquete_comprar reset"
-   data-paquete='{"id":"<?php echo $paquetes[0]->paqueteID ?>","nombre":"<?php echo $paquetes[0]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[0]->vigencia ?>","precio":"<?php echo $paquetes[0]->precio ?>","caracteres":"<?php echo $paquetes[0]->caracteres ?>","cantFotos":"<?php echo $paquetes[0]->cantFotos ?>"}'>
+   data-paquete='{"id":"<?php echo $paquetes[0]->paqueteID ?>","nombre":"<?php echo $paquetes[0]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[0]->vigencia ?>","precio":"<?php echo $paquetes[0]->precio ?>","caracteres":"<?php echo $paquetes[0]->caracteres ?>","cantFotos":"<?php echo $paquetes[0]->cantFotos ?>","videos":"<?php echo $paquetes[0]->videos ?>"}'>
     <div class="paquetes_izquierda">
         <div class="title_paquetes">
             <div class="lateral_lite"></div>

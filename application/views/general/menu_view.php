@@ -116,7 +116,7 @@ if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)):
                     <a href="<?php echo base_url() ?>"> Inicio </a>
                 </li>
                 <li>
-                    <a href="<?php echo base_url() ?>"> Venta </a>
+                    <a href="<?php echo base_url()?>venta"> Venta </a>
                 </li>
                 <li>
                     Cruza

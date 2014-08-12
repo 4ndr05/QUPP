@@ -421,4 +421,74 @@ class Carrito extends CI_Controller
             $this->session->set_flashdata('info', "<div class='alert alert-warning'>No se ha logrado la compra. Vuelva a intentarlo o contacte al administrador del sitio.</div>");
         }
     }
+
+    function anuncio(){
+        var_dump($_POST);
+        $paqueteID = $this->input->post('paquete');
+        $detallePaquete = $this->defaultdata_model->getPaquete($paqueteID);
+        
+        //SERVICIOS ADQUIRIDOS
+        $data = array(
+            'cantFotos' => $detallePaquete->cantFotos,
+            'caracteres' => $detallePaquete->caracteres,
+            'vigencia' => $detallePaquete->vigencia,
+            'cupones' => $detallePaquete->cupones,
+            'videos' => $detallePaquete->videos,
+            'precio' => $detallePaquete->precio, 
+            'detalleID' => $detallePaquete->detalleID,
+            'paqueteID' => $detallePaquete->paqueteID,
+            'idUsuario' => $this->session->userdata('idUsuario')
+        );    
+        $servicioID = $this->defaultdata_model->insertItem('serviciocontratado', $data);
+       
+        $cupones = $this->defaultdata_model->getCuponesPaquete($paqueteID);
+
+        if($cupones != null){
+            foreach ($cupones as $cupon) {
+                $dataCupon = 
+                array(
+                    'descripcion' => $cupon->descripcion, 
+                    'valor' =>   $cupon->valor,
+                    'tipoCupon' =>  $cupon->tipoCupon,
+                    'vigente' => 1,
+                    'usado' => 0,
+                    'servicioID' =>  $servicioID,
+                    'detalleID' =>  $detallePaquete->detalleID,
+                    'paqueteID' =>  $paqueteID,
+                    'cuponDetalleID' =>  $cupon->cuponDetalleID,
+                    'cuponID' =>   $cupon->cuponID
+                );
+                $idCuponAdquirido = $this->defaultdata_model->insertItem('cuponadquirido', $dataCupon);    
+            }
+
+        }
+
+        //PUBLICACION      
+        $fecha = date('Y-m-d');
+        $dias = $this->input->post('vigencia_texto');
+        $fechaCierre = strtotime ( '+'.$dias.' day' , strtotime($fecha)) ;
+        $fechaCierre = date ( 'Y-m-j' , $fechaCierre );
+        $dataPublicacion = array(
+            'seccion' => $this->input->post('seccion'),
+            'titulo' => $this->input->post('titulo'),
+            'vigente' => 1, 
+            'fechaCreacion' => date('Y-m-d'),
+            'fechaVencimiento' => $fechaCierre,
+            'numeroVisitas' => 0,
+            'estadoID' => $this->input->post('estado'), 
+            'genero' => $this->input->post('genero'),
+            'razaID' => $this->input->post('raza'),
+            'precio' => $this->input->post('precio'), 
+            'descripcion' => $this->input->post('descripcion'),
+            'muestraTelefono' => $this->input->post('mostrar_telefono'),
+            'aprobada' => 0,
+            'servicioID' => $servicioID,
+            'detalleID' =>  $detallePaquete->detalleID,
+            'paqueteID' => $paqueteID
+        );
+
+         $publicacionID = $this->defaultdata_model->insertItem('publicaciones', $dataPublicacion);
+
+         
+    }
 }

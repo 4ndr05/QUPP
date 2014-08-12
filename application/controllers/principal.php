@@ -7,6 +7,7 @@ class Principal extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		$this->load->model('defaultdata_model');
 		$this->load->model('admin_model');
+		$this->load->model('usuario_model');
 		$this->load->model('file_model');
 		$this->load->library('googlemaps');
 		$this -> load -> library('pagination');
@@ -78,6 +79,10 @@ class Principal extends CI_Controller {
         //razas
         $data['razas'] = $this->defaultdata_model->getRazas();
         $data['banner'] = $this->defaultdata_model->getTable('banner');
+        if(is_logged()){
+        	$cupones = $this->usuario_model->getCuponesUsuario($this->session->userdata('idUsuario'));
+        	$data['cupones'] = $cupones;
+        }
         $data['seccion'] = 1;
         $data['posicion'] = 1;
         $data['zona'] = 9;
@@ -273,7 +278,7 @@ class Principal extends CI_Controller {
 	}
 
 	function miPerfil(){
-		var_dump($this->session->userdata('tipoUsuario'));
+		
 		if($this->session->userdata('tipoUsuario')==1){
                 			redirect('usuario/cuenta/myProfile');
                 		} 
