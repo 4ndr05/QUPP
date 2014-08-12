@@ -164,5 +164,24 @@ class Defaultdata_model extends CI_Model {
 
         return $resultSet->result();
     }
+
+    function getPaquete($paqueteID){
+      $this->db->where('paquete.paqueteID',$paqueteID);
+      $this->db->join('detallepaquete','detallepaquete.paqueteID = paquete.paqueteID');
+      return $this->db->get($this->tablas['paquete'])->row();
+    }
+
+    function getCuponesPaquete($paqueteID){
+      $this->db->where('cupon.paqueteID',$paqueteID);
+      $this->db->join('cupondetalle','cupondetalle.cuponID = cupon.cuponID');
+      return $this->db->get($this->tablas['cupon'])->result();
+    }
+
+   function insertItem($tabla, $data)
+    {
+        $this->db->insert($this->tablas[$tabla], $data);
+        $itemID = $this->db->insert_id();
+        return $itemID;
+    }
 }
 ?>
