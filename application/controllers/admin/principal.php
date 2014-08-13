@@ -18,6 +18,7 @@ class Principal extends CI_Controller {
         $this->load->helper(array('form', 'url'));
         $this->load->model('defaultdata_model');
         $this->load->model('file_model');
+        $this->load->model('email_model');
         $this->load->library('googlemaps');
         $this->load->model('admin_model');
 
@@ -236,7 +237,6 @@ class Principal extends CI_Controller {
     }
 
     function uploadArticulo(){
-    	var_dump($_POST);
     	$texto = $this->input->post('textoContentN');
     	$seccionID = $this->input->post('seccionContentN');
 
@@ -332,15 +332,15 @@ class Principal extends CI_Controller {
 
     function anuncios_lista() {
         $aprobado = $this->input->post('validacion_admin');
-
+       
         switch ($aprobado) {
-            case "e_aprobacion":
+            case 'e_aprobacion':
                 $aprobado = 0;
                 break;
-            case "aprobados":
+            case 'aprobados':
                 $aprobado = 1;
                 break;
-            case "rechazados":
+            case 'rechazados':
                 $aprobado = 2;
                 break;
             default:
@@ -350,7 +350,7 @@ class Principal extends CI_Controller {
         $zonas = $this->input->post('zonas');
 
         if (empty($zonas) || $zonas == null) {
-            $zona = null;
+            $zona = 9;
         }
 
         $seccion = $this->input->post('seccion');
@@ -369,8 +369,72 @@ class Principal extends CI_Controller {
             default:
                 $seccion = 1;
         }
-
         echo json_encode($this->admin_model->getAnuncios($aprobado, $seccion, $zonas));
+    }
+
+    function aprobarAnuncio() {
+        $publicacionID = $this->input->post('publicacionID');
+        $aprobar =  $this->admin_model->updateItem('publicacionID', $publicacionID, $data = array('aprobada' => 1), 'publicaciones');
+        $datos = $this->admin_model->getDatosAnunciante($publicacionID);
+
+        $mensaje = '<link rel="stylesheet" href="'.base_url().'css/general.css" type="text/css" media="screen" /><table width="647" align="center"><tr>
+<td width="231" rowspan="2"><img src="'.base_url().'images/logo_mail.jpg"/></td>
+<td height="48" colspan="6" style="font-family: "titulos"; font-size:50px; color:#72A937; margin:0px; padding:0px; margin-bottom:-10px;">
+Bienvenido</td></tr>
+<tr style="font-size:14px; background-color:#72A937; color:#FFFFFF;" valign="top">
+<td width="60" height="23"><a> &nbsp;Inicio</a></td>
+<td width="57"><a>&nbsp;Venta</a></td>
+<td width="52"><a>&nbsp;Cruza</a></td>
+<td width="78"><a>&nbsp;Adopción</a></td>
+<td width="64"><a>&nbsp;Tienda</a></td>
+<td width="73"><a>&nbsp;Directorio</a></td>
+</tr>
+<tr>
+<td colspan="7" ><p>&nbsp;  </p><font style="margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" >Hola: '.$datos->nombre.'!! </font>
+</br></br><font> Tu anuncio "'.$datos->titulo.'"" en Quierounperro.com ha sido aprobado.</font>
+<br/>
+<p> </p>
+</td></tr><tr bgcolor="#6A2C91" ><td colspan="7" ><font style=" font-size:14px; padding-left:15px; color:#FFFFFF;"> Bienvenido </font>
+<br/><font style=" font-size:12px; padding-left:15px; color:#FFFFFF;"> Equipo QUP </font></td>
+</tr>
+</table>';
+$this->email_model->send_email('', $datos->correo, 'Ha sido aprobado tu anuncio en QUP: '.$datos->titulo, $mensaje);
+
+
+        echo json_encode($aprobar);
+    }
+
+
+    function declinarAnuncio() {
+        $publicacionID = $this->input->post('publicacionID');
+        $aprobar =  $this->admin_model->updateItem('publicacionID', $publicacionID, $data = array('aprobada' => 2), 'publicaciones');
+        $datos = $this->admin_model->getDatosAnunciante($publicacionID);
+
+        $mensaje = '<link rel="stylesheet" href="'.base_url().'css/general.css" type="text/css" media="screen" /><table width="647" align="center"><tr>
+<td width="231" rowspan="2"><img src="'.base_url().'images/logo_mail.jpg"/></td>
+<td height="48" colspan="6" style="font-family: "titulos"; font-size:50px; color:#72A937; margin:0px; padding:0px; margin-bottom:-10px;">
+Bienvenido</td></tr>
+<tr style="font-size:14px; background-color:#72A937; color:#FFFFFF;" valign="top">
+<td width="60" height="23"><a> &nbsp;Inicio</a></td>
+<td width="57"><a>&nbsp;Venta</a></td>
+<td width="52"><a>&nbsp;Cruza</a></td>
+<td width="78"><a>&nbsp;Adopción</a></td>
+<td width="64"><a>&nbsp;Tienda</a></td>
+<td width="73"><a>&nbsp;Directorio</a></td>
+</tr>
+<tr>
+<td colspan="7" ><p>&nbsp;  </p><font style="margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" >Hola: '.$datos->nombre.'!! </font>
+</br></br><font> Tu anuncio "'.$datos->titulo.'"" en Quierounperro.com ha sido declinado.</font>
+<br/>
+<p> Puedes revisar tu publicación en el perfil de tu cuenta</p>
+</td></tr><tr bgcolor="#6A2C91" ><td colspan="7" ><font style=" font-size:14px; padding-left:15px; color:#FFFFFF;"> Bienvenido </font>
+<br/><font style=" font-size:12px; padding-left:15px; color:#FFFFFF;"> Equipo QUP </font></td>
+</tr>
+</table>';
+$this->email_model->send_email('', $datos->correo, 'Ha sido declinado tu anuncio en QUP: '.$datos->titulo, $mensaje);
+
+
+        echo json_encode($aprobar);
     }
 
 

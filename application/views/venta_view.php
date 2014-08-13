@@ -1085,17 +1085,20 @@ VENTA
 </div>
 <div class="contenedor_buscador">
 <div class="buscador">
+ <form id="filtro_venta">
 <div class="fondo_select">
-<select   class="estilo_select" id="raza">
+<select   class="estilo_select" id="raza" name="raza">
 <option > Selecciona un raza </option>
-<option style="background-color: #BCBEC0;">Labrador </option>
-<option style="background-color: #BCBEC0;">Chihuahua </option>
-
+<?php if($razas != null):
+	foreach($razas as $raza):?>
+<option style="background-color: #BCBEC0;" value="<?=$raza->razaID?>"><?=$raza->raza?></option>
+<?php endforeach;
+		endif;?>
 </select>
 </div>
 
 <div class="fondo_select">
-<select   class="estilo_select" id="genero">
+<select   class="estilo_select" id="genero" name="genero">
 <option > Selecciona un género </option>
 <option style="background-color: #BCBEC0;">Macho </option>
 <option style="background-color: #BCBEC0;">Hembra </option>
@@ -1104,26 +1107,29 @@ VENTA
 </div>
 
 <div class="fondo_select">
-<select   class="estilo_select" id="estado">
+<select   class="estilo_select" id="estado" name="estado">
 <option > Selecciona un Estado </option>
-<option style="background-color: #BCBEC0;"> Colima </option>
-<option style="background-color: #BCBEC0;">Chihuahua </option>
+<?php if($estados != null):
+	foreach($estados as $estado):?>
+<option style="background-color: #BCBEC0;" value="<?=$estado->estadoID?>"><?=$estado->nombreEstado?></option>
+<?php endforeach;
+		endif;?>
 
 </select>
 </div>
 <div class="fondo_select">
-<select   class="estilo_select" id="Precio">
+<select   class="estilo_select" id="Precio" name="precio">
 <option > Ordenar por precio </option>
-<option style="background-color: #BCBEC0;"> De menor a mayor </option>
-<option style="background-color: #BCBEC0;"> De mayor a menor </option>
+<option style="background-color: #BCBEC0;" value="asc"> De menor a mayor </option>
+<option style="background-color: #BCBEC0;" value="desc"> De mayor a menor </option>
 
 </select>
 </div>
 <div class="contenedor_buscar">
-<input type="text" class="buscar" size="4" value="Palabras clave" />
+<input type="text" class="buscar" size="4" value="Palabras clave" name="palabra_clave" id="palabra_clave"/>
 <input type="button" height="40" value="   " class="boton_palabras_clave" />
 </div>
-
+</form>
 </div>
 
 </div>
@@ -1144,19 +1150,21 @@ VENTA
 
       <!-- item container -->
       <ul id="itemContainer">
+<?php if($publicaciones != null):
+		foreach($publicaciones as $publicacion):?>
    <!-- INICIO contenedor anuncio  -->
 <div class="contenedor_anuncio">
 <div class="titulo_anuncio">
-Firulais
+<?=$publicacion->titulo?>
 </div>
 <div class="descripcion_anuncio">
-<font> Precio: </font>
+<font> Precio: <?=$publicacion->precio?></font>
 <br/>
-<font> Raza: </font>
+<font> Raza: <?=$publicacion->raza?> </font>
 <br/>
-<font> Género: </font>
+<font> Género: <?=$publicacion->genero?> </font>
 <br/>
-<font> Ciudad: </font>
+<font> Ciudad: <?=$publicacion->ciudad?></font>
 </div>
 <div class="contenedor_foto_anuncio">
 <img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
@@ -1175,1446 +1183,10 @@ Ver detalle
 
 </div>
   <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-   <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-   <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
- 
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-   <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-   <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
-  
- 
-    <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Bobby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Bobby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Bobby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-   <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Bobby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Bobby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Bobby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Bobby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-   <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Bobby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
- 
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Bobby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Bobby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Bobby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-   <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Bobby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Bobby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Bobby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Bobby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-   <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Bobby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-    <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Scooby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Scooby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Scooby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-   <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Scooby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Scooby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Scooby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Scooby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-   <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Scooby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
- 
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Scooby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Scooby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Scooby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-   <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Scooby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
+ <?php endforeach;
+ 		endif;?>
  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Scooby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Scooby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Scooby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-   <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Scooby
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
 
- </div> <!-- Fin contenedor annuncio -->
       </ul>
       
       <div style=" margin: 0px auto; padding:10px; text-align:center;">
@@ -2633,6 +1205,106 @@ Ver detalle
 </li>
 </ul>
 </div>
+
+<script>
+    $(function() {
+
+        /* initiate the plugin */
+        $("div.holder").jPages({
+            containerID: "itemContainer_negocio",
+            perPage: 25,
+            startPage: 1,
+            startRange: 1,
+            midRange: 5,
+            endRange: 1
+        });
+
+        $("#filtro_venta select[name]").on('change', function(e) {
+            e.preventDefault();
+            var form = $("#filtro_venta");
+            search_data(form);
+        });
+        $("#filtro_venta [name]").keyup(function() {
+            if ($(this).val().length > 2 || $(this).val().length === 0) {
+                var form = $("#filtro_venta");
+                search_data(form);
+            }
+        });
+
+        function search_data(form) {
+            $.ajax({
+                url: '<?php echo base_url('venta/lista') ?>',
+                data: form.serialize(),
+                dataType: 'json',
+                type: 'post',
+                beforeSend: function() {
+                    $("#itemContainer").empty().html('<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
+                },
+                success: function(result)
+                {
+                    $("#itemContainer").empty();
+                    var data = result.data;
+                    var separator = 1;
+
+                    if (result.count < 1) {
+                        $("#itemContainer").append('<div class="alert alert-warning">No hay resultados.</div>');
+                    }
+
+                    for (var i = 0; i < result.count; i++)
+                    {
+                        var cont_neg = $('<div class="contenedor_negocio"></div>');
+                        cont_neg.data('object', data[i]);
+
+                        var cont_imagen = $('<div class="contenedor_imagen_negocio"></div>');
+                        var logo = data[i].logo !== null ? data[i].logo : 'adistramiento_canino.png';
+                        cont_imagen.append('<img src="images/giros_negocio/' + logo + '" alt="logo"/>');
+                        cont_neg.append(cont_imagen);
+
+                        var cont_nombre = $('<div class="contenedor_nombre_negocio"></div>');
+                        cont_nombre.append('<strong>' + data[i].nombreNegocio + '</strong>');
+                        cont_neg.append(cont_nombre);
+                        var cont_descrip = $('<div class="contenedor_descripcion_negocio"></div>');
+                        cont_descrip.append(data[i].nombreGiro + '<br/>' + data[i].telefono);
+                        cont_neg.append(cont_descrip);
+<?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
+                            var ver_mas = $('<ul class="ver_mas_negocio"><li onclick=" javascript:window.location.href=\'<?php echo base_url() ?>directorio/detalles/' + data[i].idUsuario + '\'">Ver más...</li></ul>');
+<?php else: ?>
+                            var ver_mas = $('<ul class="ver_mas_negocio"><li onclick="javascript:alert(\'Favor de iniciar sesión.\')">Ver más...</li></ul>');
+
+<?php endif; ?>
+                        cont_neg.append(ver_mas);
+
+                        $("#itemContainer_negocio").append(cont_neg);
+                        if (3 > separator++)
+                        {
+                            $("#itemContainer_negocio").append('<div class="margen_derecho_20"></div>');
+                        }
+                        else {
+                            separator = 1;
+                        }
+                    }
+
+                },
+                complete: function() {
+                    $("div.holder").jPages({
+                        containerID: "itemContainer_negocio",
+                        perPage: 25,
+                        startPage: 1,
+                        startRange: 1,
+                        midRange: 5,
+                        endRange: 1
+                    });
+                }
+            });
+        }
+
+        function show_details(data) {
+
+
+        }
+
+    });
+</script>
 </div>
 
 

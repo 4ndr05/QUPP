@@ -352,10 +352,10 @@
     <input name="caracteresN" type="text" id="caracteresN" size="3" readonly="readonly" />
     </p>
     <br/>
-
-    <p class="margen_15_left_mini">
-        Link de video <input type="text" name="url_video" id="url_video" size="98" class="preview"/><img
-            src="<?php echo base_url() ?>images/logo_youtube.png"/>
+	
+    <p class="margen_15_left_mini" id="videoY">
+        Link de video <input type="text" name="url_video[]" id="url_video" size="98" class="preview"/><img
+            src="<?php echo base_url() ?>images/logo_youtube.png"/><a href="#" id="addVid" class="addVid" style="font-size:9px; margin-top:8px;" data-rel="">Agregar</a><br />
     </p>
 
     <p class="margen_15_left_mini"><a href="<?php echo base_url() ?>#"> Tutorial para subir video a <img
@@ -375,7 +375,7 @@
    	 	});
     });
     </script>
-    
+ 
      <input type="file" id="files" name="files[]" multiple />
 
 <output id="list" class="preview"></output>
@@ -620,7 +620,7 @@
     <div style="margin-top:150px;">
         <div class="sub_instrucciones_pasos_mini"><img style=" margin-left:15px;"
                                                        src="<?php echo base_url() ?>images/mini_cupon.png"/>
-            Cupones<font>(<?=count($cupones)?>)</font></div>
+            Cupones<font></font></div>
         <div style="padding:15px;">
             <p>Si lo deseas pudes usar alguno de tus cupones:</p>
             <!--<form class="radios_cupones_mini" action="">-->
@@ -643,6 +643,7 @@
 			endif;	?>
         </div>
     </div>
+   
     <ul class="morado_15_mini">
         <li onclick="">
            <input type="submit" value="Pagar">
@@ -760,7 +761,24 @@
             $('#nfotos').html(paquete_val.cantFotos);
             $('#ncaracteres').html(paquete_val.caracteres);
 			$('#nprecio').html(paquete_val.precio);
-			$('#nvideos').html(paquete_val.videos);
+			//$('#nvideos').val(paquete_val.videos);
+			var cantidadVideos = paquete_val.videos;
+			var contador = 0; 
+			$(".addVid").click(function(e){
+        		e.preventDefault(); 
+				
+				console.log(contador,cantidadVideos);
+				
+		$('<p id="video"> Link de video <input type="text" name="url_video[]" id="url_video" class="url_video" size="98" class="preview"/><img src="<?php echo base_url() ?>images/logo_youtube.png"/> <a href="#" id="eliminar" class="eliminar" style="font-size:9px;">Eliminar</a><br /></p>').appendTo('#videoY');
+
+		contador++;
+        
+   	 	});
+		$("body").on("click",".eliminar", function(e){
+            $(this).parent('p').remove(); 
+        return false;
+   		 });
+			console.log(paquete_val.videos);
             $('#contenedor_publicar_anuncio').fadeIn();
             <?php endif;?>
         });
