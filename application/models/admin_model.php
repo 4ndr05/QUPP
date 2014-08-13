@@ -169,7 +169,7 @@ class Admin_model extends CI_Model
     {
         $this->db->select("*");
         $this->db->from("publicaciones p");
-        $this->db->join("fotospublicacion fp", "p.detalleID=fp.detalleID AND p.paqueteID=fp.paqueteID AND p.publicacionID=fp.publicacionID AND p.servicioID=fp.servicioID");
+        //$this->db->join("fotospublicacion fp", "p.detalleID=fp.detalleID AND p.paqueteID=fp.paqueteID AND p.publicacionID=fp.publicacionID AND p.servicioID=fp.servicioID");
         $this->db->join("serviciocontratado sc", "p.detalleID=sc.detalleID AND p.paqueteID=sc.paqueteID AND p.servicioID=sc.servicioID");
         $this->db->join("detallepaquete dp", "sc.paqueteID=dp.paqueteID AND sc.detalleID=dp.detalleID");
         $this->db->join("raza r", "p.razaID=r.razaID");
@@ -194,6 +194,8 @@ class Admin_model extends CI_Model
         if ($seccion != null) {
             $this->db->where("p.seccion", $seccion);
         }
+
+        $this->db->where("p.vigente", 1);
 
         $resultSet = $this->db->get();
 
@@ -265,6 +267,17 @@ class Admin_model extends CI_Model
         $this -> db -> where('paqueteID', $paquete);
         $this -> db -> delete($this -> tablas['cupon']);
         return true;
+    }
+
+    function getDatosAnunciante($publicacionID){
+        $query = $this->db->query("SELECT * FROM (`publicaciones` p) JOIN `serviciocontratado` sc ON `p`.`detalleID`=`sc`.`detalleID` AND p.paqueteID=sc.paqueteID AND p.servicioID=sc.servicioID 
+        JOIN `detallepaquete` dp ON `sc`.`paqueteID`=`dp`.`paqueteID` AND sc.detalleID=dp.detalleID 
+        JOIN `usuario` u ON `sc`.`idUsuario`=`u`.`idUsuario` 
+        WHERE `p`.`publicacionID` = ".$publicacionID);
+         if ($query->num_rows() == 1)
+            return $query->row();
+        return null;
+
     }
 
 

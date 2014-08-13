@@ -12,6 +12,12 @@ class Principal extends CI_Controller {
 		$this->load->library('googlemaps');
 		$this -> load -> library('pagination');
 
+		$CI = & get_instance();
+        $CI->config->load("mercadopago", TRUE);
+        $config = $CI->config->item('mercadopago');
+        $this->load->library('Mercadopago', $config);
+        $this->mercadopago->sandbox_mode(TRUE);
+
 		/*if(is_logged()&&$this->session->userdata('tipoUsuario')==1){
                 redirect('usuario/cuenta/activado');
                 } 

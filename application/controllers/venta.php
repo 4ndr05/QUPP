@@ -12,6 +12,7 @@ class Venta extends CI_Controller
 
         $this->load->model('defaultdata_model');
         $this->load->model('admin_model');
+        $this->load->model('venta_model');
         $this->load->model('usuario_model');
         $this->load->helper(array('form', 'url'));
         $this->load->library('googlemaps');
@@ -45,7 +46,8 @@ class Venta extends CI_Controller
         $data['paquetes']    = $this->defaultdata_model->getPaquetes();
         $data['razas']       = $this->defaultdata_model->getRazas();
         $data['giros']       = $this->defaultdata_model->getGiros();
-        
+        $data['publicaciones']       = $this->venta_model->getAnuncios();
+        var_dump($data['publicaciones']);
         $this->load->view('venta_view', $data);
     }
 
@@ -189,6 +191,7 @@ class Venta extends CI_Controller
             'fechaVencimiento' => $fechaCierre,
             'numeroVisitas' => 0,
             'estadoID' => $this->input->post('estado'), 
+            'ciudad' => $this->input->post('ciudad'), 
             'genero' => $this->input->post('genero'),
             'razaID' => $this->input->post('raza'),
             'precio' => $this->input->post('precio'), 
@@ -203,5 +206,17 @@ class Venta extends CI_Controller
          $publicacionID = $this->defaultdata_model->insertItem('publicaciones', $dataPublicacion);
          redirect('principal/miPerfil');
          
+    }
+
+     function lista() {
+
+        $raza          = $this->input->post('raza') === ''?NULL:intval($this->input->post('giro'));
+        $genero          = $this->input->post('genero') === ''?NULL:intval($this->input->post('genero'));
+        $estado        = $this->input->post('estado') === ''?NULL:intval($this->input->post('estado'));
+        $precio          = $this->input->post('precio') === ''?NULL:$this->input->post('precio');
+        $palabra_clave = $this->input->post('palabra_clave') === ''?NULL:$this->input->post('palabra_clave');
+
+        echo json_encode($this->venta_model->getPublicaciones($raza,$genero,$estado,$precio,$palabra_clave));
+
     }
 }
