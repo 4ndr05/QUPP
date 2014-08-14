@@ -1,41 +1,17 @@
 <?php
-$this->load->view('general/general_header_view', array('title' => 'Directorio',
+$this->load->view('general/general_header_view', array('title' => 'Asociaciones protectoras',
     'scripts' => array('funciones_venta', 'funciones_'), 'links' => array('venta',
         'directorio')))
 ?>
 <?php $this->load->view('general/menu_view', array('seccion' => $seccion)) ?>
 <div class="titulo_seccion">
-    DIRECTORIO
-
-
-    <div class="contenedor_anunciar_negocio" onclick="muestra('contenedor_publicar_anuncio_negocio');">
-        <div class="titulo_anunciate">
-            ANUNCIATE
-        </div>
-        <div class="descripcion_anunciar_negocio">
-            en nuestro Directorio
-        </div>
-        <div class="el_click">
-            <img src="<?php echo base_url() ?>images/click.png" width="60" height="60"/>
-        </div>
-    </div>
+ASOCIACIONES PROTECTORAS
 </div>
 <div class="contenedor_buscador">
-    <form id="filtro_directorio">
-        <div class="fondo_select_directorio" style=" margin-left:5px;">
-            <?php if (isset($giros)): ?>
-                <select name="giro" class="estilo_select_directorio" id="giro">
-                    <option value=""> Selecciona un Giro </option>
-                    <?php foreach ($giros as $g): ?>
-                        <option value="<?php echo $g->giroID ?>" style="background-color: #BCBEC0;"><?php echo $g->nombreGiro ?></option>
-                    <?php endforeach; ?>
-                </select>
-            <?php endif; ?>
-        </div>
-
-        <div class="fondo_select_directorio">
+    <form id="filtro_asociacion">
+        <div class="fondo_select_directorio" style="margin-left: 5px;">
             <?php if (isset($estados)): ?>
-                <select name="estado"  class="estilo_select_directorio" id="estado">
+                <select name="estado"  class="estilo_select_directorio" id="estado" >
                     <option value="" > Selecciona un Estado </option>
                     <?php foreach ($estados as $edo): ?>
                         <option value="<?php echo $edo->estadoID ?>" ><?php echo $edo->nombreEstado; ?></option>
@@ -45,8 +21,8 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
         </div>
 
         <div class="contenedor_buscar_directorio">
-            <input type="text" class="buscar_directorio" name="palabra_clave" size="4" placeholder="Palabras clave" />
-            <input type="button" height="40" value="" placeholder="Palabras clave" class="boton_palabras_clave" />
+            <input type="text" class="buscar_directorio" name="palabra_clave" size="4" placeholder="Palabras clave">
+            <input type="button" height="40" value="   " class="boton_palabras_clave">
         </div>
     </form>
 </div>
@@ -74,7 +50,7 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
 
                 <div class="contenedor_negocio" data-object='<?php echo json_encode($directorio) ?>'>
                     <div class="contenedor_imagen_negocio">
-                        <img src="<?php echo base_url() ?>images/giros_negocio/adistramiento_canino.png"/>
+                        <img src="<?php echo base_url() ?>images/giros_negocio/protectora.png"/>
                     </div>
                     <div class="contenedor_nombre_negocio">
                         <strong>
