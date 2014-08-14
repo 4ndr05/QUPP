@@ -238,10 +238,8 @@ class Cuenta extends CI_Controller {
     }
 
     function soporte(){
-        $data['myInfo']    = $this->usuario_model->getMyInfo($this->session->userdata('idUsuario'));
-        $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
-        $data['estados']    = $this->defaultdata_model->getEstados();
-
+        $data['banner'] = $this->defaultdata_model->getTable('banner');
+        $data['seccion'] = 5;
         if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
             $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
             $data['giro'] = $this->usuario_model->getGiro($this->session->userdata('idUsuarioDetalle'));
@@ -249,10 +247,72 @@ class Cuenta extends CI_Controller {
         $this->load->view('usuario/perfil/soporte_view',$data);
     }
 
+    function correoSoporte(){
+        $correo = $this->session->userdata('correo');
+        $asunto = $this->input->post('asunto');
+        $descripcion = $this->input->post('descripcion');
+        $destino = 'marthahdez2@gmail.com';//'administrador.soporte@quierounperro.com';
+        $mensaje = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <title>Bienvenido-QuieroUnPerro.com</title>
+            <link rel="stylesheet" href="http://quierounperro.com/quiero_un_perro/css/general.css" type="text/css" media="screen" />
+        </head>
+
+        <body>
+            <table width="647" align="center">
+                <tr>
+                    <td width="231" rowspan="2">
+                        <img src="http://quierounperro.com/quiero_un_perro/images/logo_mail.jpg"/>
+                    </td>
+                    <td height="48" colspan="6" style="font-family: \'titulos\'; font-size:50px; color:#72A937; margin:0px; padding:0px; margin-bottom:-10px;">
+                        QUP Contacto
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="7" >
+                        <p>&nbsp;  </p>
+                        <font style="margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" >Hola!! </font>
+                    </br>
+                </br>
+
+                <font> El usuario ' . $this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido') . ' ha enviado el siguiente correo:</font>
+            </br>
+        </br>
+
+        <font color="#000066"><strong> Asunto: ' . $asunto . '</strong></font><br>
+        <font color="#000066"><strong>Mensaje: </strong><br/>' . $descripcion . '</font>
+        <br/>
+        <p> </p>
+    </td>
+</tr>
+
+<tr bgcolor="#6A2C91" >
+    <td colspan="7" >
+        <font style=" font-size:14px; padding-left:15px; color:#FFFFFF;">Gracias por tu preferencia </font>
+        <br/>
+        <font style=" font-size:12px; padding-left:15px; color:#FFFFFF;"> Equipo QUP </font>
+    </td>
+</tr>
+</table>
+</body>
+</html>';
+    
+    if($this->email_model->send_email($correo, $destino, $asunto,$mensaje)){
+        $data['response'] = true;
+    } else {
+        $data['response'] = false;
+    }
+         echo json_encode($data);
+
+    }
+
     function facturas(){
         $data['myInfo']    = $this->usuario_model->getMyInfo($this->session->userdata('idUsuario'));
         $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
         $data['estados']    = $this->defaultdata_model->getEstados();
+        $data['facturas'] = $this->perfil_model->getFacturas($this->session->userdata('idUsuario'));
 
         if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
             $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
