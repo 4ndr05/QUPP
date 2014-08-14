@@ -1,15 +1,20 @@
 <?php $this->load->view('admin/menu_view'); ?>
 <body>
+
+
+
+
+
 <div class="contenedor_anuncio_detalle" id="contenedor_anuncio_detalle" style=" display:none;">
     <div class="contenedor_cerrar_anuncio">
-        <img src="<?php echo base_url() ?>images/cerrar_anuncio.png" onclick="oculta('contenedor_anuncio_detalle');"/>
+        <img src="<?php echo base_url() ?>images/cerrar_anuncio.png" onClick="oculta('contenedor_anuncio_detalle');"/>
     </div>
     <div class="validar_anuncio">
         <ul class="boton_azul">
-            <li>Aprobar</li>
+            <li id="aprobar" class="aprobar">Aprobar</li>
         </ul>
         <ul class="boton_azul">
-            <li>Declinar</li>
+            <li id="declinar" class="declinar">Declinar</li>
         </ul>
     </div>
     <div class="leer_anuncio">
@@ -22,6 +27,8 @@
             </div>
         </div>
         <div class="datos_general">
+        <input type="hidden" name="publicacionID" id="publicacionID" value="" class="publicacion_ID"/>
+        <input type="hidden" name="idUsuario" id="idUsuario" value="" class="usuario_ID"/>
             <div class="titulo_anuncio_publicado">
                 VENDO BONITO PERRO VENDO
             </div>
@@ -43,7 +50,7 @@
             <br/>
             <br/>
             <ul class="boton_naranja">
-                <li onclick="muestra('contenedor_contactar');">
+                <li onClick="muestra('contenedor_contactar');">
                     Contactar al anunciante
                 </li>
             </ul>
@@ -65,7 +72,7 @@
             </div>
             <br/>
             <ul class="boton_naranja_dos">
-                <li id="ver_video" onclick="muestra('video');">
+                <li id="ver_video" onClick="muestra('video');">
                     Ver video
                 </li>
             </ul>
@@ -186,6 +193,41 @@
 </div>
 <script>
     $(function() {
+		$(".aprobar").on('click', function() {
+			var publicacionID = $('#publicacionID').val();
+			console.log(publicacionID);
+			 $.ajax({
+                url: 'aprobarAnuncio',
+                data: 'publicacionID=' +publicacionID,
+                type: 'POST',
+                dataType: 'json',
+				success: function(response) {
+					oculta('contenedor_anuncio_detalle');
+					alert('El anuncio ha sido aprobado');
+					
+				}
+				
+			 });			
+		
+		});
+		
+		$(".declinar").on('click', function() {
+			var publicacionID = $('#publicacionID').val();
+			console.log(publicacionID);
+			 $.ajax({
+                url: 'declinarAnuncio',
+                data: 'publicacionID=' +publicacionID,
+                type: 'POST',
+                dataType: 'json',
+				success: function(response) {
+					oculta('contenedor_anuncio_detalle');
+					alert('El anuncio ha sido aprobado');
+					
+				}
+				
+			 });			
+		
+		});
         function load_data_filter() {
             var form_filter = $("#filtro_anuncios");
             $.ajax({
@@ -226,6 +268,7 @@
                             row.data('genero', response.data[i].genero);
                             row.data('descripcion', response.data[i].descripcion);
                             row.data('publicacion_id', response.data[i].publicacionID);
+							row.data('idUsuario', response.data[i].idUsuario);
                             //falta lugar
 
                             row.append('<td>' + ('0000' + response.data[i].publicacionID).slice(-4) + '</td>');
@@ -244,7 +287,7 @@
 
                             row.append('<td> <img width="99" heigth="50" src="<?php echo base_url() ?>' + image_paquete + '" alt=' + response.data[i].nombrePaquete + ' /></td>');
                             row.append('<td></td>');
-                            row.append('<td><a class="ver_anuncio" href="#">ver anuncio</a></td>');
+                            row.append('<td><a class="ver_anuncio" href="#" id="'+response.data[i].publicacionID+'">ver anuncio</a></td>');
                             table_data.append(row).slideDown();
                             show_detalles_publicacion();
 
@@ -273,6 +316,8 @@
                 var anuncio_div = $('#contenedor_anuncio_detalle');
                 $('.titulo_anuncio_publicado', anuncio_div).text(row_data.data('titulo'));
                 $('.precio', anuncio_div).text(parseFloat(row_data.data('precio')).toFixed(2));
+				$('.publicacion_ID', anuncio_div).val(row_data.data('publicacion_id'));
+				$('.usuario_ID', anuncio_div).val(row_data.data('idUsuario'));
                 $('.f_pub', anuncio_div).text(row_data.data('fechaCreacion'));
                 $('.seccion', anuncio_div).text(row_data.data('seccionNombre'));
                 $('.raza', anuncio_div).text(row_data.data('raza'));

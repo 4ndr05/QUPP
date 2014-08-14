@@ -1,4 +1,11 @@
-<div id="contenedor_ver_mensaje" class="contenedor_publicar_anuncio" style="display:none;">
+<div class="titulo_seccion_admin">
+<div class="perrito_perfil">
+<img src="<?php echo base_url()?>images/sobre_perfil.png" />
+</div>
+<div class="admin_title"> Tienes <?php echo count($mensajes);?> mensajes </div>
+</div>
+<?php if ($mensajes != Null) {?>
+<?php   foreach ($mensajes as $mensaje) { ?>
 
 <div class="cerrar_mensaje">
 <img src="images/cerrar.png" onclick="oculta('contenedor_ver_mensaje');"/>
@@ -38,6 +45,8 @@ En nuestro directorio es posible la consulta de todos los datos de Purina Dog Ch
  <font class="ver_mas" onclick="muestra('contenedor_ver_mensaje');"> Ver más... </font>
   </td>
   </tr>
+            
+  <?php } ?><?php } ?>
 
   <tr>
   <td> 

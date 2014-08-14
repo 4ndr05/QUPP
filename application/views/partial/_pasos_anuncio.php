@@ -31,7 +31,7 @@
 <div class="titulo_de_pasos_mini"> PUBLICAR ANUNCIO</div>
 <div class="instrucciones_pasos_mini">Selecciona la sección de publicación</div>
 <div class="contenido_indicacion_mini">
-<form id="p_form" name="p_form" method="post" action="#">
+<form id="p_form" name="p_form" method="post" action="<?=base_url()?>venta/anuncio" enctype="multipart/form-data">
 <!--pasos-->
 <!--paso uno-->
 <div id="paso_uno" class="paso view_step" style="height: 190px;">
@@ -39,16 +39,16 @@
         <img src="<?php echo base_url() ?>images/pero_paso_uno.png" class="perro_paso_uno_mini"/>
 
         <div class="radios_secciones_mini">
-            <input type="radio" id="radio4" name="seccion" value="cruza" class="css-checkbox"/>
+            <input type="radio" id="radio4" name="seccion" value="3" class="css-checkbox"/>
             <label for="radio4" class="css-label radGroup2">Cruza</label>
             <br/>
-            <input type="radio" id="radio5" name="seccion" value="venta" class="css-checkbox"/>
+            <input type="radio" id="radio5" name="seccion" value="2" class="css-checkbox"/>
             <label for="radio5" class="css-label radGroup2">Venta</label>
             <br/>
-            <input type="radio" id="radio6" name="seccion" value="adopcion" class="css-checkbox"/>
+            <input type="radio" id="radio6" name="seccion" value="6" class="css-checkbox"/>
             <label for="radio6" class="css-label radGroup2">Adopción</label>
             <br/>
-            <input type="radio" id="radio7" name="seccion" value="perdidos" class="css-checkbox"/>
+            <input type="radio" id="radio7" name="seccion" value="7" class="css-checkbox"/>
             <label for="radio7" class="css-label radGroup2">Perros perdidos</label>
         </div>
     </div>
@@ -285,6 +285,7 @@
 
 <!--paso tres descipcion_pasos_miniD -->
 <div id="paso_tres" class="paso contenido_indicacion_formulario_mini">
+    <input type="hidden" id="cantFotos" name="cantFotos" value=""/>
     <p class="margen_15_left_mini">Nombre: <input required="required" type="text" name="nombre"
                                                   class="background_morado_35_mini" readonly="readonly"
                                                   value="<?php echo $this->session->userdata('nombre'); ?>"/>
@@ -319,7 +320,7 @@
         &nbsp;&nbsp;&nbsp;&nbsp;<select required="required" name="estado" class="background_gris_100_mini preview" id="estado">
             <option value="">--</option>
             <?php foreach ($estados as $edo): ?>
-                <option value="<?php echo $edo->estadoID ?>"><?php echo $edo->nombreEstado ?></option>
+                <option value="<?php echo $edo->estadoID;?>"><?php echo $edo->nombreEstado;?></option>
             <?php endforeach; ?>
         </select>
 
@@ -351,10 +352,10 @@
     <input name="caracteresN" type="text" id="caracteresN" size="3" readonly="readonly" />
     </p>
     <br/>
-
-    <p class="margen_15_left_mini">
-        Link de video <input type="text" name="url_video" id="url_video" size="98" class="preview"/><img
-            src="<?php echo base_url() ?>images/logo_youtube.png"/>
+	
+    <p class="margen_15_left_mini" id="videoY">
+        Link de video <input type="text" name="url_video[]" id="url_video" size="98" class="preview"/><img
+            src="<?php echo base_url() ?>images/logo_youtube.png"/><a href="#" id="addVid" class="addVid" style="font-size:9px; margin-top:8px;" data-rel="">Agregar</a><br />
     </p>
 
     <p class="margen_15_left_mini"><a href="<?php echo base_url() ?>#"> Tutorial para subir video a <img
@@ -365,16 +366,29 @@
 
         <!-- <iframe src="<?php echo base_url() ?>../subir_archivos/index.html" style="overflow:none;" scrolling="no" width="800" height="100"> </iframe> -->
     </p>
-	
+    
     <!--imagenes-->
+    <script>
+    jQuery(document).ready(function(){
+    	$('#files').change(function() {
+ 			// $('#p_form').submit();     
+   	 	});
+    });
+    </script>
+ 
      <input type="file" id="files" name="files[]" multiple />
+
 <output id="list" class="preview"></output>
 
 <script>
   function handleFileSelect(evt) {
-	 
+     
     var files = evt.target.files; // FileList object
-	console.log(files.length);
+	var fotos = parseInt(document.getElementById('cantFotos').value);
+	if(files > fotos){
+		document.getElementById("msj_paso").innerHTML="Seleccionó más fotos de las permitidas"+"("+fotos+")";
+	}
+	console.log(files.length, fotos);
     // Loop through the FileList and render image files as thumbnails.
     for (var i = 0, f; f = files[i]; i++) {
 
@@ -399,9 +413,9 @@
       // Read in the image file as a data URL.
       reader.readAsDataURL(f);
     }
-	
-	//Preview
-	for (var i = 0, f; f = files[i]; i++) {
+    
+    //Preview
+    for (var i = 0, f; f = files[i]; i++) {
 
       // Only process image files.
       if (!f.type.match('image.*')) {
@@ -447,55 +461,46 @@
 
 </div>
 <!--paso cuatro-->
-<div id="paso_cuatro" class="paso leer_anuncio_mini">
+<div id="paso_cuatro" class="paso contenido_indicacion_formulario_mini">
+<div class="leer_anuncio_mini">
     <div class="contenedor_galeria_mini">
         <div id="slideshow_publicar_anuncio" class="picse_mini">
         
-           <!-- <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>
+           <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>
             <img src="<?php echo base_url() ?>images/anuncios/02/2.png" width="294" height="200"/>
             <img src="<?php echo base_url() ?>images/anuncios/02/3.png" width="294" height="200"/>
-            <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>-->
+            <!-- <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>-->
             
         </div>
     </div>
     <div class="datos_general_mini">
         <div class="titulo_anuncio_publicado_mini">
             <script>
-			jQuery(document).ready(function(){
-				
-				
-				$(".preview").change(function() {
-					console.log($(this).val(),$('#estado option:selected'));		 	
-				$("#tituloPrev").html($("#titulo").val());
-				$("#precioPrev").html($("#precio").val());
-				$("#seccionPrev").html($("#seccion").val());
-				var genero = $('#generoP option:selected').html();
-				$("#generoPrev").html(genero);
-				var raza = $('#razaP option:selected').html();
-				$("#razaPrev").html(raza);
-				var lugar = $('#estado').html();
-				$("#lugarPrev").html(lugar+'('+$("#ciudad").val()+')');
-				$("#descripcionPrev").html($("#descripcion").val());
-				var src = $("#url_video").val();
-				$("#videoPrev").html('<iframe class="youtube_video_mini" src="'+src+'"></iframe>');
-				var img = $("#list").val();
-				console.log(img);
-     			});
-			});
-			
-			</script>
+            jQuery(document).ready(function(){
+                
+                
+                $(".preview").change(function() {
+                    console.log($(this).val(),$('#estado option:selected'));            
+                $("#tituloPrev").html($("#titulo").val());
+                $("#precioPrev").html($("#precio").val());
+                $("#seccionPrev").html($("#seccion").val());
+                var genero = $('#generoP option:selected').html();
+                $("#generoPrev").html(genero);
+                var raza = $('#razaP option:selected').html();
+                $("#razaPrev").html(raza);
+                var lugar = $('#estado').html();
+                $("#lugarPrev").html(lugar+'('+$("#ciudad").val()+')');
+                $("#descripcionPrev").html($("#descripcion").val());
+                var src = $("#url_video").val();
+                $("#videoPrev").html('<iframe class="youtube_video_mini" src="'+src+'"></iframe>');
+                var img = $("#list").val();
+                console.log(img);
+                });
+            });
             
-         <input type="hidden" id="seccion" name="seccion" value="" />
-         <input type="hidden" id="titulo" name="titulo" value="" />
-         <input type="hidden" id="vigente" name="vigente" value="" />
-         <input type="hidden" id="fechaCreacion" name="fechaCreacion" value="" />
-         <input type="hidden" id="estadoID" name="estadoID" value="estadoID" />
-         <input type="hidden" id="genero" name="genero" value="" />
-         <input type="hidden" id="razaID" name="razaID" value="" />
-         <input type="hidden" id="precio" name="precio" value="" />
-         <input type="hidden" id="descripcion" name="descripcion" value="" />
-         <input type="hidden" id="muestraTelefono" name="muestraTelefono" value="" />
-         <input type="hidden" id="paqueteID" name="paqueteID" value="paqueteID" />
+            </script>
+            
+        
          <label><p id="tituloPrev"></p></label>
         </div>
         <br/>
@@ -538,7 +543,7 @@
         </div>
         <br/>
         <ul class="boton_naranja_dos_mini">
-            <li id="ver_video" onclick="muestra('video_previo');">
+            <li id="ver_video" onclick="$('#video_previo').toggle();">
                 Ver video
             </li>
         </ul>
@@ -581,29 +586,32 @@
             <br/>
             - El vendedor también debe estar interesado en ti y en manos de quién dejará a su perro.
         </div>
+       
     </div>
     <br/>
+</div>
 </div>
 <!--paso cinco-->
 <div id="paso_cinco" class="paso">
     <div class="tipo_paquete_pago_mini">
-        <img src="<?php echo base_url() ?>images/pago_lite.png"/>
+    
+        <div id="nimagenpaquete"></div>
     </div>
     <div class="divisor_morado_mini"></div>
     <div class="descripcion_paquete_pago_mini">
         <div class="titulo_descripcion_paquete_mini"> INCLUYE</div>
         <div style="padding:15px;">
-            <p> * 1 foto </p>
+            <p> * <label id="nfotos"></label> fotos </p>
 
-            <p>* Texto de 50 caracteres </p>
+            <p>* Texto de <label id="ncaracteres"></label> caracteres </p>
 
-            <p>* Vigencia de 30 días. </p>
+            <p>* Vigencia de <label id="nvigencia"></label> días. </p>
         </div>
     </div>
     <div class="divisor_morado_mini"></div>
     <div class="tipo_paquete_pago_mini">
         <div class="titulo_descripcion_paquete_mini"> TOTAL</div>
-        <div class="total_compra_mini"><p> $ 89.00 <font class="moneda_mini"> MX </font></p>
+        <div class="total_compra_mini"><p> $ <label id="nprecio"></label> <font class="moneda_mini"> MX </font></p>
         </div>
     </div>
     <br/>
@@ -612,25 +620,33 @@
     <div style="margin-top:150px;">
         <div class="sub_instrucciones_pasos_mini"><img style=" margin-left:15px;"
                                                        src="<?php echo base_url() ?>images/mini_cupon.png"/>
-            Cupones<font> 2 </font></div>
+            Cupones<font></font></div>
         <div style="padding:15px;">
-            <p>Si lo deseas pudes usar alguno de tus cupones</p>
+            <p>Si lo deseas pudes usar alguno de tus cupones:</p>
             <!--<form class="radios_cupones_mini" action="">-->
-            <input type="radio" name="descuento" value="10" id="radio_pago1" class="css-checkbox"/><label
-                for="radio_pago1" class="css-label radGroup2"> 10% de descuento</label>
+            <?php if($cupones != null):
+					foreach($cupones as $cupon):
+					if($cupon->tipoCupon == 2):?>
+            <input type="radio" name="descuento" value="<?=$cupon->valor;?>" id="radio_pago1" class="css-checkbox"/><label
+                for="radio_pago1" class="css-label radGroup2"> <?=$cupon->valor;?>% de descuento</label>
             <br/>
-            <input type="radio" name="descuento" value="5" id="radio_pago2" class="css-checkbox" checked="checked"/>
+           <!-- <input type="radio" name="descuento" value="5" id="radio_pago2" class="css-checkbox" checked="checked"/>
             <label for="radio_pago2" class="css-label radGroup2">5% de descuento</label>
             <br/>
             <input type="radio" name="descuento" value="20" id="radio_pago3" class="css-checkbox"/><label
                 for="radio_pago3" class="css-label radGroup2"> 20% de descuento</label>
-            <br/>
-
+            <br/>-->
+			<?php endif;
+				endforeach;
+			else:
+			echo 'No hay cupones disponibles';
+			endif;	?>
         </div>
     </div>
+   
     <ul class="morado_15_mini">
         <li onclick="">
-            Pagar
+           <input type="submit" value="Pagar">
         </li>
     </ul>
 </div>
@@ -644,6 +660,8 @@
         <li class="sig_paso">Continuar</li>
     </ul>
 </div>
+
+
 </div>
 </div>
 </div>
@@ -654,6 +672,11 @@
 
         $('#btn_sig .sig_paso').on('click', function () {
             var sig_paso = $('.paso_show').next('.paso');
+			console.log($('.paso_show').next('.paso').prop('id'));
+			var num_paso = $('.paso_show').next('.paso').prop('id');
+			if(num_paso == 'paso_cinco'){
+				oculta('btn_sig');
+			}
             if (revision_step($('.paso_show'))) {
                 $('.paso_show').removeClass('paso_show').hide();
                 sig_paso.show().addClass('paso_show');
@@ -711,8 +734,8 @@
         add_step_move();
 
         $('.paquete_comprar').on('click', function () {
-			<?php if (!is_logged()): ?>  
-             	muestra('contenedor_login');
+            <?php if (!is_logged()): ?>  
+                muestra('contenedor_login');
                 oculta('contenedor_publicar_anuncio');
             <?php else :?>               
            
@@ -721,47 +744,82 @@
             $('#paso_dos [data-np="' + paquete_val.nombre + '"]').prop('checked', true);
             $('#paso_tres [name=paquete_texto]').val(paquete_val.nombre);
             $('#paso_tres [name=vigencia_texto]').val(paquete_val.vigencia);
-            //$('#paso_tres [name=precio]').val(paquete_val.precio);
-			$('#paso_tres [name=caracteresN]').val(paquete_val.caracteres);
+            $('#paso_tres [name=cantFotos]').val(paquete_val.cantFotos);
+            $('#paso_tres [name=caracteresN]').val(paquete_val.caracteres);
+			
+			if(paquete_val.id == 1){
+				var imagen = '<img src="<?php echo base_url() ?>images/pago_lite.png"/>';			}
+			
+			if(paquete_val.id == 2){
+				var imagen = '<img src="<?php echo base_url() ?>images/pago_regular.png"/>';			}
+				
+			if(paquete_val.id == 3){
+				var imagen = '<img src="<?php echo base_url() ?>images/pago_premium.png"/>';			}
+			
+            $('#nimagenpaquete').html(imagen);
+			$('#nvigencia').html(paquete_val.vigencia);
+            $('#nfotos').html(paquete_val.cantFotos);
+            $('#ncaracteres').html(paquete_val.caracteres);
+			$('#nprecio').html(paquete_val.precio);
+			//$('#nvideos').val(paquete_val.videos);
+			var cantidadVideos = paquete_val.videos;
+			var contador = 0; 
+			$(".addVid").click(function(e){
+        		e.preventDefault(); 
+				
+				console.log(contador,cantidadVideos);
+				
+		$('<p id="video"> Link de video <input type="text" name="url_video[]" id="url_video" class="url_video" size="98" class="preview"/><img src="<?php echo base_url() ?>images/logo_youtube.png"/> <a href="#" id="eliminar" class="eliminar" style="font-size:9px;">Eliminar</a><br /></p>').appendTo('#videoY');
+
+		contador++;
+        
+   	 	});
+		$("body").on("click",".eliminar", function(e){
+            $(this).parent('p').remove(); 
+        return false;
+   		 });
+			console.log(paquete_val.videos);
             $('#contenedor_publicar_anuncio').fadeIn();
-			<?php endif;?>
+            <?php endif;?>
         });
 
-		$('textarea').keyup(function(e) {
-   			 var tval = $('#descripcion').val(),
-        	 tlength = tval.length,	
-			 set = $('#caracteresN').val(),
-        	remain = parseInt(set - tlength);
-			$('#meh').val(remain);
-			console.log(tval);
-    		console.log(tlength,remain,set);
-    		if (remain <= 0) {
-        		$('#descripcion').val((tval.substring(0,set)));
-   			 }
-		});
+        $('textarea').keyup(function(e) {
+             var tval = $('#descripcion').val(),
+             tlength = tval.length, 
+             set = $('#caracteresN').val(),
+            remain = parseInt(set - tlength);
+            $('#meh').val(remain);
+            if (remain <= 0) {
+                $('#descripcion').val((tval.substring(0,set)));
+             }
+        });
 
-		
+        
         $('#paso_dos [name=paquete]').on('change', function () {
             $('#paso_tres [name=paquete_texto]').val($(this).data('np'));
             $('#paso_tres [name=vigencia_texto]').val($(this).data('vigencia'));
             $('#paso_tres [name=precio]').val($(this).data('precio'));
         });
-		
-		 $('#paso_tres [name=paquete]').on('change', function () {
-			 /*var titulo = $('#titulo').val();
-			 console.log(titulo);*/
-			 alert('grrrr');
+        
+         $('#paso_tres [name=paquete]').on('change', function () {
+            
         });
 
         $('#paso_uno [name=seccion]').on('change', function() {
             $('#paso_tres [name=seccion_texto]').val($(this).next().text());
         });
 		
-		$("body").on("click",".del", function(e){
+		$('#paso_cuatro [name=seccion]').on('change', function() {
+           alert('paso 4');
+        });
+        
+        $("body").on("click",".del", function(e){
             $(this).parent('span').remove(); 
         return false;
     });
 
     });
-	
+
+
+    
 </script>

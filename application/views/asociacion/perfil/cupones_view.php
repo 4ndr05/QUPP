@@ -13,40 +13,39 @@
  <th> Vencimiento </th>
  <th> Canjear </th>
  </tr>
- <tr>
- <td>  Descuento en 
-Establecimiento</td>
-<td>Tienda: Dog Company,
-servicio de hospedaje. </td>
-<td> 10% </td>
-<td> 07/08/2014 </td>
-<td> <ul class="boton_gris_perfil_tabla"><li> Canjear </li> </ul> </td>
-</tr>
-<tr>
- <td>  Descuento Paquetes</td>
-<td>En la compra de cualquier
- paquete</td>
-<td> 5% </td>
-<td> 08/08/2014</td>
-<td> Canjeable al comprar un paquete </td>
-</tr>
-<tr>
- <td> Descuento en Tienda </td>
-<td>Porducto: Charola 
-Codigo:10245</td>
-<td> 20% </td>
-<td> 25/08/2015</td>
-<td> Canjeable al comprar en linea </td>
-</tr>
-<tr>
- <td> Descuento en 
-Establecimiento </td>
-<td>Tienda: Dog Food.
-Alimento para cachorro</td>
-<td> 10% </td>
-<td> 07/08/2014</td>
-<td> <ul class="boton_gris_perfil_tabla"><li> Canjear </li> </ul> </td>
-</tr>
+ <?php if ($cupones !=Null){ ?>
+ <?php 
+  foreach ($cupones as $cupon) { ?>
+    <tr>
+            <?php if ($cupon->tipocupon ==1){?>
+              <td>  Descuento en Tienda  </td>              
+            <?php } elseif ($cupon->tipocupon == 2) {?>
+                <td>Descuento Paquetes</td>
+                
+            <?php  } elseif ($cupon->tipocupon == 3) {?>
+                <td>Descuento en Establecimiento</td>
+                
+            <?php } else {?>
+            	<td> Descuento en Directorio</td>
+            <?php } ?>
+            <td><?php echo $cupon->descripcion ?></td>
+            <td> <?php echo $cupon->valor.' %' ?> </td>
+            <td><?php echo $cupon->vigencia ?></td>
+            <?php if ($cupon->tipocupon ==1){?>
+              <td>  Canjeable al comprar en Tienda  </td>              
+            <?php } elseif ($cupon->tipocupon == 2) {?>
+                <td>Canjeable al comprar un Paquetes</td>
+                
+            <?php  } elseif ($cupon->tipocupon == 3) {?>
+                <td> <ul class="boton_gris_perfil_tabla"><li> Canjear </li> </ul> </td>
+                
+            <?php } else {?>
+            	<td> Canjeable al comprar un espacio en el Directorio</td>
+            <?php } ?>
+
+            
+  <?php } ?>
+  <?php } ?>
  </table>
     
     
