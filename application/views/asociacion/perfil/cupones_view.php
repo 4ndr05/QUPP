@@ -13,7 +13,7 @@
  <th> Vencimiento </th>
  <th> Canjear </th>
  </tr>
- 
+ <?php if ($cupones !=Null){ ?>
  <?php 
   foreach ($cupones as $cupon) { ?>
     <tr>
@@ -44,6 +44,7 @@
             <?php } ?>
 
             
+  <?php } ?>
   <?php } ?>
  </table>
     

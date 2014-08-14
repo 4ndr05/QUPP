@@ -47,7 +47,7 @@ FROM usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUs
     }
 
     function getAnuncios($idUsuario){
-    	$query = $this->db->query('SELECT a.NombrePaquete, c.seccionNombre, b.titulo, b.vigente, b.fechaVencimiento, b.numeroVisitas FROM Paquete a, publicaciones b, seccion c , serviciocontratado d, usuario e 
+    	$query = $this->db->query('SELECT distinct a.NombrePaquete, c.seccionNombre, b.titulo, b.vigente, b.fechaVencimiento, b.numeroVisitas FROM Paquete a, publicaciones b, seccion c , serviciocontratado d, usuario e 
     		WHERE a.paqueteID = b.paqueteID
 			AND b.seccion = c.seccionID
 			AND d.idusuario = e.idusuario
@@ -61,7 +61,7 @@ FROM usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUs
     }
 
     function getAnunciosAct($idUsuario){
-    	$query = $this->db->query('SELECT a.NombrePaquete, c.seccionNombre, b.titulo, b.vigente, b.fechaVencimiento, b.numeroVisitas FROM Paquete a, publicaciones b, seccion c , serviciocontratado d, usuario e 
+    	$query = $this->db->query('SELECT distinct a.NombrePaquete, c.seccionNombre, b.titulo, b.vigente, b.fechaVencimiento, b.numeroVisitas FROM Paquete a, publicaciones b, seccion c , serviciocontratado d, usuario e 
     		WHERE a.paqueteID = b.paqueteID
 			AND b.seccion = c.seccionID
 			AND d.idusuario = e.idusuario
@@ -76,7 +76,7 @@ FROM usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUs
     }
 
     function getAnunciosInAct($idUsuario){
-    	$query = $this->db->query('SELECT a.NombrePaquete, c.seccionNombre, b.titulo, b.vigente, b.fechaVencimiento, b.numeroVisitas FROM Paquete a, publicaciones b, seccion c , serviciocontratado d, usuario e 
+    	$query = $this->db->query('SELECT distinct a.NombrePaquete, c.seccionNombre, b.titulo, b.vigente, b.fechaVencimiento, b.numeroVisitas FROM Paquete a, publicaciones b, seccion c , serviciocontratado d, usuario e 
     		WHERE a.paqueteID = b.paqueteID
 			AND b.seccion = c.seccionID
 			AND d.idusuario = e.idusuario

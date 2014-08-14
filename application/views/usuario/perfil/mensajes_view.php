@@ -4,6 +4,7 @@
 </div>
 <div class="admin_title"> Tienes <?php echo count($mensajes);?> mensajes </div>
 </div>
+<?php if ($mensajes != Null) {?>
 <?php   foreach ($mensajes as $mensaje) { ?>
 
 <div id="contenedor_ver_mensaje<?php echo $mensaje->mensajeID ?>" class="contenedor_publicar_anuncio" style="display:none;">
@@ -41,7 +42,7 @@
   </td>
   </tr>
             
-  <?php } ?>
+  <?php } ?><?php } ?>
 
  
 

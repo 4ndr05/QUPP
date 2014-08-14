@@ -13,7 +13,7 @@
  <th> Vencimiento </th>
  <th> Canjear </th>
  </tr>
- 
+ <?php if ($cupones !=Null){ ?>
  <?php 
   foreach ($cupones as $cupon) { ?>
     <tr>
@@ -26,7 +26,7 @@
                 <td>Descuento en Establecimiento</td>
                 
             <?php } else {?>
-            	<td> Descuento en Directorio</td>
+                <td> Descuento en Directorio</td>
             <?php } ?>
             <td><?php echo $cupon->descripcion ?></td>
             <td> <?php echo $cupon->valor.' %' ?> </td>
@@ -40,10 +40,11 @@
                 <td> <ul class="boton_gris_perfil_tabla"><li> Canjear </li> </ul> </td>
                 
             <?php } else {?>
-            	<td> Canjeable al comprar un espacio en el Directorio</td>
+                <td> Canjeable al comprar un espacio en el Directorio</td>
             <?php } ?>
 
             
+  <?php } ?>
   <?php } ?>
  </table>
     

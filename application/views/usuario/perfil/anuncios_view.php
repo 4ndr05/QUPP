@@ -15,13 +15,14 @@
 <p style=" margin-top:3px; margin-left:5px;" onclick=" muestra('anunciosAct'); oculta('anuncios'); oculta('anunciosInAct');"> Activos (<?php echo count($anunciosAct)?>) </p>
 </li>
 <li>
-<p style=" margin-top:3px; margin-left:5px;" onclick="oculta('anuncios'); oculta('anunciosAct'); muestra('anunciosInAct');"> Expirados (<?php echo count($anunciosInAct)?>) </p>
+<p style=" margin-top:3px; margin-left:5px;" onclick="muestra('anunciosInAct');oculta('anuncios'); oculta('anunciosAct'); "> Expirados (<?php echo count($anunciosInAct)?>) </p>
 </li>
 </ul>
    </br>
   
+
  <div id="anuncios" style="display:block;">
-    <table class="tabla_perfil" width="795" >
+<table class="tabla_perfil" width="795" >
   <tr>
   <th width="76"> Paquete </th>
   <th width="71"> Sección </th>
@@ -31,7 +32,7 @@
   <th width="92"> Popularidad </th>
   <th width="142"> Renovar/</br>Cancelar </th>
   </tr>
-  
+  <?php if ($anuncios != Null) {?>
   <?php 
   foreach ($anuncios as $anuncio) { ?>
     <tr>
@@ -42,10 +43,10 @@
             <?php } elseif ($anuncio->NombrePaquete == 'Regular') {?>
                 <td><img src="<?php echo base_url()?>images/ico_regular.png" width="34" height="34"/>
                 </br>
-                <font class="lite"> Lite </font> </td>        
+                <font class="lite"> Regular </font> </td>        
             <?php  } else { ?>
                 <td><img src="<?php echo base_url()?>images/ico_premium.png" width="34" height="34"/>
-                </br><font class="lite"> Lite </font> </td>        
+                </br><font class="lite"> Premium </font> </td>        
             <?php } ?>
             
             <td> <?php echo $anuncio->seccionNombre ?> </td>
@@ -63,8 +64,9 @@
             <td> <ul class="boton_gris_perfil_tabla"> <li> Renovar </li> </ul> </td>
     </tr>
   <?php } ?>
+
+  <?php }?>
  </table>
- 
 </div>
 
 <div id="anunciosAct" style="display:none;"> 
@@ -78,7 +80,7 @@
   <th width="92"> Popularidad </th>
   <th width="142"> Renovar/</br>Cancelar </th>
   </tr>
-  
+<?php if ($anunciosAct != Null) {?>
   <?php 
   foreach ($anunciosAct as $anuncio) { ?>
     <tr>
@@ -89,10 +91,10 @@
             <?php } elseif ($anuncio->NombrePaquete == 'Regular') {?>
                 <td><img src="<?php echo base_url()?>images/ico_regular.png" width="34" height="34"/>
                 </br>
-                <font class="lite"> Lite </font> </td>        
+                <font class="lite"> Regular </font> </td>        
             <?php  } else { ?>
                 <td><img src="<?php echo base_url()?>images/ico_premium.png" width="34" height="34"/>
-                </br><font class="lite"> Lite </font> </td>        
+                </br><font class="lite"> Premium </font> </td>        
             <?php } ?>
             
             <td> <?php echo $anuncio->seccionNombre ?> </td>
@@ -110,10 +112,12 @@
             <td> <ul class="boton_gris_perfil_tabla"> <li> Renovar </li> </ul> </td>
     </tr>
   <?php } ?>
+  <?php }?>
  </table>
- <div>
+ </div>
 
 <div id="anunciosInAct" style="display:none;">  
+
   <table class="tabla_perfil" width="795" >
   <tr>
   <th width="76"> Paquete </th>
@@ -124,9 +128,10 @@
   <th width="92"> Popularidad </th>
   <th width="142"> Renovar/</br>Cancelar </th>
   </tr>
-  
+<?php if ($anunciosInAct != Null) {?>
   <?php 
   foreach ($anunciosInAct as $anuncio) { ?>
+  
     <tr>
             <?php if ($anuncio->NombrePaquete =='Lite'){?>
                 <td><img src="<?php echo base_url()?>images/ico_lite.png" width="34" height="34"/>
@@ -135,10 +140,10 @@
             <?php } elseif ($anuncio->NombrePaquete == 'Regular') {?>
                 <td><img src="<?php echo base_url()?>images/ico_regular.png" width="34" height="34"/>
                 </br>
-                <font class="lite"> Lite </font> </td>        
+                <font class="lite"> Regular </font> </td>        
             <?php  } else { ?>
                 <td><img src="<?php echo base_url()?>images/ico_premium.png" width="34" height="34"/>
-                </br><font class="lite"> Lite </font> </td>        
+                </br><font class="lite"> Premium </font> </td>        
             <?php } ?>
             
             <td> <?php echo $anuncio->seccionNombre ?> </td>
@@ -156,5 +161,7 @@
             <td> <ul class="boton_gris_perfil_tabla"> <li> Renovar </li> </ul> </td>
     </tr>
   <?php } ?>
+  <?php } ?>
+
  </table>
- <div>
+ </div>
