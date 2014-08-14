@@ -20,6 +20,7 @@
         <li data-titulo="Completa tu información" data-p="paso_tres">3</li>
         <li data-titulo="Vista previa de tu anuncio" data-p="paso_cuatro">4</li>
         <li data-titulo="Detalle de compra:" data-p="paso_cinco">5</li>
+        <li data-titulo="Pago de servicio:" data-p="paso_seis">6</li>
     </ul>
 </div>
 <div class="crerar_publicar_anuncio_mini">
@@ -354,6 +355,7 @@
     <br/>
 	
     <p class="margen_15_left_mini" id="videoY">
+    <input type="hidden" name="url_video[]" id="url_video" value="0" />
         Link de video <input type="text" name="url_video[]" id="url_video" size="98" class="preview"/><img
             src="<?php echo base_url() ?>images/logo_youtube.png"/><a href="#" id="addVid" class="addVid" style="font-size:9px; margin-top:8px;" data-rel="">Agregar</a><br />
     </p>
@@ -370,13 +372,24 @@
     <!--imagenes-->
     <script>
     jQuery(document).ready(function(){
-    	$('#files').change(function() {
- 			// $('#p_form').submit();     
+    	$('#images').submit(function() {
+ 			 var files = $('#files');
+			 $.ajax({
+                    url:'<?php echo base_url('venta/upload_file') ?>',
+                    type:'post',
+                    dataType: 'JSON',
+                    data: 'files=' + files,
+                    success: function(data){
+                       
+                    }
+            });     
    	 	});
     });
     </script>
- 
-     <input type="file" id="files" name="files[]" multiple />
+ 	<!--<form action="#" method="post" enctype="multipart/form-data" id="images">
+  -->   <input type="file" id="files" name="files[]" multiple />
+     <!--<input type="submit" value="Agregar" />-->
+<!--    </form>-->
 
 <output id="list" class="preview"></output>
 
@@ -384,6 +397,7 @@
   function handleFileSelect(evt) {
      
     var files = evt.target.files; // FileList object
+	   
 	var fotos = parseInt(document.getElementById('cantFotos').value);
 	if(files > fotos){
 		document.getElementById("msj_paso").innerHTML="Seleccionó más fotos de las permitidas"+"("+fotos+")";
@@ -622,12 +636,13 @@
                                                        src="<?php echo base_url() ?>images/mini_cupon.png"/>
             Cupones<font></font></div>
         <div style="padding:15px;">
-            <p>Si lo deseas pudes usar alguno de tus cupones:</p>
+            <p onclick="$('#contenidoCupones').toggle();">Si lo deseas pudes usar alguno de tus cupones:</p>
             <!--<form class="radios_cupones_mini" action="">-->
+            <div id="contenidoCupones" style="display:none">
             <?php if($cupones != null):
 					foreach($cupones as $cupon):
 					if($cupon->tipoCupon == 2):?>
-            <input type="radio" name="descuento" value="<?=$cupon->valor;?>" id="radio_pago1" class="css-checkbox"/><label
+            <input type="radio" name="descuento" value="<?=$cupon->cuponID;?>" id="radio_pago1" class="css-checkbox"/><label
                 for="radio_pago1" class="css-label radGroup2"> <?=$cupon->valor;?>% de descuento</label>
             <br/>
            <!-- <input type="radio" name="descuento" value="5" id="radio_pago2" class="css-checkbox" checked="checked"/>
@@ -641,14 +656,69 @@
 			else:
 			echo 'No hay cupones disponibles';
 			endif;	?>
+            </div>
         </div>
     </div>
    
-    <ul class="morado_15_mini">
-        <li onclick="">
-           <input type="submit" value="Pagar">
-        </li>
-    </ul>
+</div>
+
+<div id="paso_seis" class="paso" style="display:none;">
+                    <div class="descipcion_pasos_mediano">
+<?php 
+$preference_data = array(
+            "items" => array(
+                array(
+                    "title" => "Publicacion de anuncio",
+                    "quantity" => 1,
+                    "currency_id" => "MXN",
+                    "unit_price" => floatval(10.00)
+                )
+            ),
+            "payer" => array(
+                'name' => $this->session->userdata('nombre'),
+                'surname' => $this->session->userdata('apellido'),
+                'email' => $this->session->userdata('correo')
+            ),
+        );
+
+
+        $preference = $this->mercadopago->create_preference($preference_data);
+?>
+<ul class="boton_verde">
+ <li>
+  <script type="text/javascript" src="http://mp-tools.mlstatic.com/buttons/render.js"></script>
+<a href="<?php echo $preference['response']['sandbox_init_point']; ?>" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn" style="padding: 0px;">Pagar</a>
+
+ <script type="text/javascript">
+  function execute_my_onreturn(json) {
+    console.log(json.back_url, json.collection_id, json.collection_status, json.external_reference, json.preference_id);
+
+ if (json.collection_status == 'approved' || json.collection_status == 'in_process') {
+     
+                var form = $('#p_form');
+                $.ajax({
+                    url:'<?php echo base_url('venta/anuncio') ?>',
+                    type:'post',
+                    dataType: 'JSON',
+                    data: form.serialize(),
+                    success: function(data){
+                        window.location = '<?php echo base_url() ?>principal/miperfil';
+                    }
+                });
+
+
+} else if (json.collection_status == 'pending') {
+    alert('El usuario no completó el pago');
+	} else if (json.collection_status == 'rejected') {
+      alert('El pago fué rechazado, el usuario puede intentar nuevamente el pago');
+}
+}
+                                                                        </script>
+                                                                    </li>
+                                                                </ul>                        
+                        <!--<div id="iframe"></div>-->
+                        <br/>
+                    </div>
 </div>
 </form>
 <!--boton se siguiente paso-->
@@ -674,7 +744,7 @@
             var sig_paso = $('.paso_show').next('.paso');
 			console.log($('.paso_show').next('.paso').prop('id'));
 			var num_paso = $('.paso_show').next('.paso').prop('id');
-			if(num_paso == 'paso_cinco'){
+			if(num_paso == 'paso_seis'){
 				oculta('btn_sig');
 			}
             if (revision_step($('.paso_show'))) {
@@ -763,19 +833,20 @@
 			$('#nprecio').html(paquete_val.precio);
 			//$('#nvideos').val(paquete_val.videos);
 			var cantidadVideos = paquete_val.videos;
-			var contador = 0; 
+			var contador = 1; 
 			$(".addVid").click(function(e){
         		e.preventDefault(); 
-				
+				if(contador < cantidadVideos){
 				console.log(contador,cantidadVideos);
 				
 		$('<p id="video"> Link de video <input type="text" name="url_video[]" id="url_video" class="url_video" size="98" class="preview"/><img src="<?php echo base_url() ?>images/logo_youtube.png"/> <a href="#" id="eliminar" class="eliminar" style="font-size:9px;">Eliminar</a><br /></p>').appendTo('#videoY');
-
+				}
 		contador++;
         
    	 	});
 		$("body").on("click",".eliminar", function(e){
             $(this).parent('p').remove(); 
+			contador--;
         return false;
    		 });
 			console.log(paquete_val.videos);
@@ -809,9 +880,6 @@
             $('#paso_tres [name=seccion_texto]').val($(this).next().text());
         });
 		
-		$('#paso_cuatro [name=seccion]').on('change', function() {
-           alert('paso 4');
-        });
         
         $("body").on("click",".del", function(e){
             $(this).parent('span').remove(); 
