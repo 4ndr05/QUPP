@@ -129,7 +129,11 @@ FROM usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUs
 
     }
     function getFacturas($idUsuario){
-    	$query = $this->db->query();
+    	$query = $this->db->query('SELECT  a.compraID, c.detalle, a.total, a.fecha
+			FROM compra a, compradetalle b, productodetalle c
+			WHERE a.compraID = b.compraID 
+			AND b.productoID = c.productoID 
+			AND a.usuarioID ='.$idUsuario);
     	if ($query->num_rows() >= 1){
 			return $query->result();
 		} else {

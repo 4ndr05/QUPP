@@ -12,18 +12,20 @@
 <th width="105"> Total </th>
 <th width="185"> Fecha </th>
 </tr>
+<?php if ($facturas != null) {?>
+
+<?php foreach ($facturas as $factura) {?>
 <tr> 
-<td>00012364 </td>
-<td> Paquete lite </td>
-<td> $5000 </td>
-<td> 07/06/2014 </td>
+<td><?php echo $factura->compraID ?> </td>
+<td> <?php echo $factura->detalle?></td>
+<td> <?php echo $factura->total ?> </td>
+<td> <?php echo $factura->fecha ?> </td>
 </tr>
-<tr> 
-<td> 23569874 </td>
-<td> Charola, plato. </td>
-<td> $1000 </td>
-<td> 07/06/2014 </td>
-</tr>
+ 
+
+<?php }?>
+
+<?php }?>
 </table>
     
     
