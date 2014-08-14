@@ -819,7 +819,7 @@ MI PERFIL
 <p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>asociacion/principal/soporte/" style="text-decoration:none;" class="ajaxLink">Soporte Tecnico</a> </p>
 </li>
 <li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>usuario/cuenta/facturas/" style="text-decoration:none;" class="ajaxLink">Mis Facturas</a> </p>
+<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>asociacion/principal/facturas/" style="text-decoration:none;" class="ajaxLink">Mis Facturas</a> </p>
 </li>
 </ul>
 

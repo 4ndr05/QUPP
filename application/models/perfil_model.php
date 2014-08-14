@@ -128,7 +128,14 @@ FROM usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUs
 
 
     }
-
+    function getFacturas($idUsuario){
+    	$query = $this->db->query();
+    	if ($query->num_rows() >= 1){
+			return $query->result();
+		} else {
+			return null;
+		}
+    }
     function getRazas(){
     	$query = $this->db->query('SELECT * FROM raza');
     	if ($query->num_rows() >= 1){
