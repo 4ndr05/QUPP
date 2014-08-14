@@ -56,14 +56,12 @@ getView('<?=base_url()?>usuario/cuenta/miPerfil/');
                        'click',
                         function(e){                            
                             e.preventDefault();
-							var clase = $(this).attr('id');
-							$(".icono_seleccion").removeClass("icono_seleccion");
+							               var clase = $(this).attr('id');
+							               $(".icono_seleccion").removeClass("icono_seleccion");
                                 $('.'+clase).addClass("icono_seleccion");                       
                                 var gotoURL = $(this).attr('href');
                                 $("#appSectionContainer").html();
-                                getView(gotoURL);
-                                
-                                                                                                                
+                                getView(gotoURL);                                                             
                         }
                     );	
 	

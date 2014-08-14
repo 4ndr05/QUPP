@@ -254,32 +254,7 @@ class Venta extends CI_Controller
                 }
 
 
-                //REGISTRO FOTOS
-        $this->load->library('upload'); 
-
-      
-        $config['upload_path'] = 'images/anuncios';
-        $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['max_size'] = '5120';
-        $config['max_width'] = '1024';
-        $config['max_height'] = '768';
-        $this->upload->initialize($config);
-
-        if ($this->upload->do_multi_upload("files")) { 
-            $imagenes = $this->upload->get_multi_upload_data(); 
-            foreach ($imagenes as $imagen) {
-               $data = array(
-                     'foto' => $imagen['file_name'], 
-                     'publicacionID'   => $publicacionID,
-                     'servicioID' => $servicioID,
-                     'detalleID' =>  $detallePaquete->detalleID,
-                     'paqueteID' => $paqueteID,
-                );
-
-                $fotoID = $this->admin_model->insertItem('fotospublicacion',$data);
-            }
-        }
-
+               
 
          echo json_encode($publicacionID);
          

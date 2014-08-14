@@ -562,7 +562,7 @@
             </li>
         </ul>
         <div id="video_previo" class="desplegar_detalles_mini" style="display:none;">
-            <br/>
+        <br/>
 
             <div class="titulo_anuncio_publicado_mini">
                 VIDEO
@@ -607,58 +607,153 @@
 </div>
 <!--paso cinco-->
 <div id="paso_cinco" class="paso">
-    <div class="tipo_paquete_pago_mini">
-    
-        <div id="nimagenpaquete"></div>
-    </div>
-    <div class="divisor_morado_mini"></div>
-    <div class="descripcion_paquete_pago_mini">
-        <div class="titulo_descripcion_paquete_mini"> INCLUYE</div>
-        <div style="padding:15px;">
-            <p> * <label id="nfotos"></label> fotos </p>
+<div class="descipcion_pasos_mediano_mini">
 
-            <p>* Texto de <label id="ncaracteres"></label> caracteres </p>
+<table class="tabla_pago" style="margin-left:70px;" width="700">
+<tr> 
+<th width="158">
+PRODUCTO
+</th>
+<th width="345">
+DETALLE
+</th>
+<th width="181">
+COSTO
+</th>
+</tr>
+<tr>
+<td>
+<div id="nimagenpaquete"></div>
+</td>
+<td>
+<p>* <label id="nfotos"></label> fotos</p>
+<p>* Texto de <label id="ncaracteres"></label> caracteres</p> 
+<p>* Vigencia de <label id="nvigencia"></label> días</p>
+<p>* <label id="ncupones"></label> cupones</p>
+<p>* <label id="nvideos"></label> video</p>
+</td>
+<td>
+<p class="totales">$<label id="nprecio" class="nprecio"></label></p>
+</td>
+</tr>
+<tr> 
+<td colspan="2">
+<p>SUBTOTAL:</p>
+</td>
+<td>
+<p class="totales"> $<label id="nprecio" class="nprecio"></label> </p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+ <img style="" src="images/mini_cupon.png"/> <font class="texto_de_cupon" >Cupones de descuento: </font> </br> <font id="ver_cupones" class="ver_cupones" onclick="muestra('los_cupones_disponibles');muestra('no_ver_cupones');
+ oculta('ver_cupones');"> Ver cupones </font> 
+  <font style="display:none;" id="no_ver_cupones" class="ver_cupones" onclick="oculta('los_cupones_disponibles');oculta('no_ver_cupones');muestra('ver_cupones');"> Ocultar cupones </font>
+<div id="los_cupones_disponibles" style="padding:15px; display:none;">
 
-            <p>* Vigencia de <label id="nvigencia"></label> días. </p>
-        </div>
-    </div>
-    <div class="divisor_morado_mini"></div>
-    <div class="tipo_paquete_pago_mini">
-        <div class="titulo_descripcion_paquete_mini"> TOTAL</div>
-        <div class="total_compra_mini"><p> $ <label id="nprecio"></label> <font class="moneda_mini"> MX </font></p>
-        </div>
-    </div>
-    <br/>
-    <br/>
-
-    <div style="margin-top:150px;">
-        <div class="sub_instrucciones_pasos_mini"><img style=" margin-left:15px;"
-                                                       src="<?php echo base_url() ?>images/mini_cupon.png"/>
-            Cupones<font></font></div>
-        <div style="padding:15px;">
-            <p onclick="$('#contenidoCupones').toggle();">Si lo deseas pudes usar alguno de tus cupones:</p>
-            <!--<form class="radios_cupones_mini" action="">-->
-            <div id="contenidoCupones" style="display:none">
-            <?php if($cupones != null):
+<?php if($cupones != null):
+$c = 0;
 					foreach($cupones as $cupon):
-					if($cupon->tipoCupon == 2):?>
-            <input type="radio" name="descuento" value="<?=$cupon->cuponID;?>" id="radio_pago1" class="css-checkbox"/><label
-                for="radio_pago1" class="css-label radGroup2"> <?=$cupon->valor;?>% de descuento</label>
-            <br/>
-           <!-- <input type="radio" name="descuento" value="5" id="radio_pago2" class="css-checkbox" checked="checked"/>
-            <label for="radio_pago2" class="css-label radGroup2">5% de descuento</label>
-            <br/>
-            <input type="radio" name="descuento" value="20" id="radio_pago3" class="css-checkbox"/><label
-                for="radio_pago3" class="css-label radGroup2"> 20% de descuento</label>
-            <br/>-->
+					$c++;
+					if($cupon->tipoCupon == 2):
+					?>
+                    
+            <input type="radio" name="radiog_dark" id="radio_pago<?=$c?>" class="css-checkbox cupon" value="<?=$cupon->valor;?>" data-rel="<?=$cupon->cuponID;?>"/>
+<label for="radio_pago<?=$c?>" class="css-label radGroup<?=$c?>"><?=$cupon->valor;?>% de descuento</label>
+			
 			<?php endif;
-				endforeach;
-			else:
+				endforeach; ?>
+			<input type="radio" name="radiog_dark" id="radio_pago<?=$c?>" class="css-checkbox cupon" checked="checked" value="0" data-rel="0>"><label for="radio_pago<?=$c?>" class="css-label radGroup2"> No usar cupones</label>
+			<?php else:
 			echo 'No hay cupones disponibles';
 			endif;	?>
-            </div>
-        </div>
-    </div>
+
+
+</div>
+
+
+</td>
+<td>
+<p class="totales">- $<label id="descuentoCupon">00.00</label> </p>
+</td>
+</tr>
+<tr>
+<th colspan="2">
+TOTAL
+</th>
+<th>
+<p class="totales" style="color: #FFF;">$<label id="totalConDescuento" class="nprecio"></label></p>
+</th>
+</tr>
+</table>
+
+</br>
+
+<!--<ul class="morado_15_mini" >
+
+<li onclick="">
+Pagar
+</li>
+
+</ul>-->
+
+<?php 
+$preference_data = array(
+            "items" => array(
+                array(
+                    "title" => "Publicacion de anuncio",
+                    "quantity" => 1,
+                    "currency_id" => "MXN",
+                    "unit_price" => floatval(10.00)
+                )
+            ),
+            "payer" => array(
+                'name' => $this->session->userdata('nombre'),
+                'surname' => $this->session->userdata('apellido'),
+                'email' => $this->session->userdata('correo')
+            ),
+        );
+
+
+        $preference = $this->mercadopago->create_preference($preference_data);
+?>
+<ul class="boton_verde">
+ <li>
+  <script type="text/javascript" src="http://mp-tools.mlstatic.com/buttons/render.js"></script>
+<a href="<?php echo $preference['response']['sandbox_init_point']; ?>" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn" style="padding: 0px;">Pagar</a>
+
+ <script type="text/javascript">
+  function execute_my_onreturn(json) {
+    console.log(json.back_url, json.collection_id, json.collection_status, json.external_reference, json.preference_id);
+
+ if (json.collection_status == 'approved' || json.collection_status == 'in_process') {
+     
+                var form = $('#p_form');
+                $.ajax({
+                    url:'<?php echo base_url('venta/anuncio') ?>',
+                    type:'post',
+                    dataType: 'JSON',
+                    data: form.serialize(),
+                    success: function(data){
+                        window.location = '<?php echo base_url() ?>principal/miperfil';
+                    }
+                });
+
+
+} else if (json.collection_status == 'pending') {
+    alert('El usuario no completó el pago');
+	} else if (json.collection_status == 'rejected') {
+      alert('El pago fué rechazado, el usuario puede intentar nuevamente el pago');
+}
+}
+                                                                        </script>
+                                                                    </li>
+                                                                </ul>
+
+</br>
+</br>
+ 
+</div>
    
 </div>
 
@@ -829,8 +924,11 @@ $preference_data = array(
             $('#nimagenpaquete').html(imagen);
 			$('#nvigencia').html(paquete_val.vigencia);
             $('#nfotos').html(paquete_val.cantFotos);
+			$('#nvideos').html(paquete_val.videos);
+			$('#ncupones').html(paquete_val.cupones);
             $('#ncaracteres').html(paquete_val.caracteres);
 			$('#nprecio').html(paquete_val.precio);
+			$('.nprecio').html(paquete_val.precio);
 			//$('#nvideos').val(paquete_val.videos);
 			var cantidadVideos = paquete_val.videos;
 			var contador = 1; 
@@ -885,6 +983,21 @@ $preference_data = array(
             $(this).parent('span').remove(); 
         return false;
     });
+	
+		$('.cupon').on('click', function () {
+			var valor = $(this).val();   
+			var cuponID = $(this).attr('data-rel');
+            var paquete_val = $(this).data('paquete');
+            var precio = $('#nprecio').html();
+            console.log(precio);
+            var descuentoCupon = (precio * (valor/100));
+            var total = precio - (descuentoCupon);
+            console.log('cupom');
+            $('#descuentoCupon').html(descuentoCupon);
+            $('#totalConDescuento').html(total);
+			
+        });
+	
 
     });
 
