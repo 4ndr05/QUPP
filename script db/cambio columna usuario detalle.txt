@@ -1,0 +1,3 @@
+--------------- SQL ---------------
+
+ALTER TABLE `usuariodetalle` ADD COLUMN `municipioC` VARCHAR(80) DEFAULT NULL;

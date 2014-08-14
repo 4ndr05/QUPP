@@ -52,17 +52,17 @@ getView('<?=base_url()?>negocio/principal/miPerfil/');
                    $(".ajaxLink").live(
                        'click',
                         function(e){                            
-                            e.preventDefault();                       
+                            e.preventDefault();
+                                var clase = $(this).attr('id');
+                                $(".icono_seleccion").removeClass("icono_seleccion");
+                                $('.'+clase).addClass("icono_seleccion");                       
                                 var gotoURL = $(this).attr('href');
-                                 console.log('dddddddddddddddddddd');
-                                $("#contenedor_menu_perfil ul li").removeClass("icono_seleccion");
-                                $(this).addClass("icono_seleccion");
                                 $("#appSectionContainer").html();
                                 getView(gotoURL);
                                 
                                                                                                                 
                         }
-                    );  
+                    );   
   
   
   
