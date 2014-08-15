@@ -108,6 +108,41 @@ class Principal extends CI_Controller {
 
     }
 
+    function getDatosCuriosos($seccion,$zona){
+         $data['zonageografica'] = $this->admin_model->getZonasG();
+         $data['contenido'] = $this->admin_model->getBanner();
+         $data['seccion'] = $seccion;
+         $data['zonaT'] = $zona;
+         $data['zonaNombre'] = $this->admin_model->getSingleItem('zonaID',$zona,'zonageografica');
+         $data['seccionNombre'] = $this->admin_model->getSingleItem('seccionID',$seccion,'seccion');
+        $this->load->view('admin/pantalla_curiosos_view', $data);
+    }
+
+    function getEventoMes($seccion,$zona){
+         $data['zonageografica'] = $this->admin_model->getZonasG();
+         $data['contenido'] = $this->admin_model->getBanner();
+         $data['seccion'] = $seccion;
+         $data['zonaT'] = $zona;
+         $data['zonaNombre'] = $this->admin_model->getSingleItem('zonaID',$zona,'zonageografica');
+         $data['seccionNombre'] = $this->admin_model->getSingleItem('seccionID',$seccion,'seccion');
+        $this->load->view('admin/pantalla_eventomes_view', $data);
+    }
+
+    function getRazaMes($seccion,$zona){
+         $data['zonageografica'] = $this->admin_model->getZonasG();
+         $data['contenido'] = $this->admin_model->getBanner();
+         $data['seccion'] = $seccion;
+         $data['zonaT'] = $zona;
+         $data['zonaNombre'] = $this->admin_model->getSingleItem('zonaID',$zona,'zonageografica');
+         $data['seccionNombre'] = $this->admin_model->getSingleItem('seccionID',$seccion,'seccion');
+        $this->load->view('admin/pantalla_raza_view', $data);
+    }
+
+    function getMensajes(){
+        $data['mensajes'] = $this->admin_model->getZonasG();
+        $this->load->view('admin/adimin_mensajes_view', $data);
+    }
+
     function getAdminT(){
         $this->load->view('admin/adminT_view');
     }

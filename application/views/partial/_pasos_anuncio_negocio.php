@@ -1,3 +1,20 @@
+Skip to content
+ 
+This repository 
+Explore
+Gist
+Blog
+Help
+marthahdez2 marthahdez2
+ 
+ 
+3  Unwatch 
+  Star 0
+ Fork 0 fraleiz17/qup
+ branch: MARTINEE  qup / application / views / partial / _pasos_anuncio_negocio.php
+Martin Estrada Soto pepetin44 3 days ago Se agregan los elementos que cambiaron en directorio
+2 contributors  Martin Estrada Soto  fraleiz17
+502 lines (450 sloc)  24.993 kb RawBlameHistory   
 <?php
 /**
  * requiere el listado de los giros, estados, planes, datos de myInfo de usuario

@@ -194,7 +194,7 @@ AGREGAR IMAGEN
 
 <!-- ---------------------------------------------------- contenedor_modificaciones_texto --------------- -->
 
-<form action="<?=base_url()?>admin/principal/uploadArticulo" method="post" enctype="multipart/form-data">
+<form action="<?=base_url()?>admin/principal/uploadText" method="post">
 <div class="contenedor_modificaciones" id="contenedor_texto_apoyo" style="display:none"> <!-- Contenedor negro imagenes-->
 <div class="cerrar_modificaciones"> <img src="<?php echo base_url()?>images/cerrar.png" onclick="oculta('contenedor_texto_apoyo');"/> </div>
 <input type="hidden" id="zonaContentN" name="zonaContentN" value="<?=$zonaT?>" />
@@ -206,13 +206,7 @@ AGREGAR IMAGEN
 AGREGAR TEXTO
 </div>
 <div class="contenido_intruciones">
-<p>Ingrese las imagenes para BP00001:</p>
-</br>
-<input type="file" name="imagenesArticulo[]" id="imagenesArticulo" multiple="multiple"/>
-
-</div>
-<div class="contenido_intruciones">
-<p> Introduzca el texto para el articulo </p>
+<p> Introduzca el texto para BC0001-0000001 </p>
 </brSS>
 <textarea cols="65" rows="7" name="textoContentN" id="textoContentN"></textarea>
 
@@ -511,12 +505,8 @@ BC00002
 
 </td>
 <td bgcolor="#E6E7E8">
-<div id="seleccionAticulo" style="display:none">
+
 <img src="<?php echo base_url()?>images/agregar.png" class="addContentText" data-rel="2"/>
-</div>
-<div id="seleccionApoyo" style="display:none">
-<img src="<?php echo base_url()?>images/agregar.png" class="addContentText" data-rel="2"/>
-</div>
 <img src="<?php echo base_url()?>images/baja_contenido.png" class="deleteContent" id="2"/>
 </td>
 

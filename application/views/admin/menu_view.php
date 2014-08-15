@@ -193,19 +193,19 @@ Pantallas
 <a href="<?php echo base_url()?>admin/principal/getPantalla/3/9" id="CRUZA" name="3" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Cruza</a>
 </li>
 <li>
-<a href="<?php echo base_url()?>admin/principal/getPantalla/10/9" id="DATOS CURIOSOS" name="10" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Datos curiosos</a>
+<a href="<?php echo base_url()?>admin/principal/getDatosCuriosos/10/9" id="DATOS CURIOSOS" name="10" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Datos curiosos</a>
 </li>
 <li>
 <a href="<?php echo base_url()?>admin/principal/getPantalla/4/9" id="DIRECTORIO" name="4" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Directorio</a>
 </li>
 <li>
-<a href="<?php echo base_url()?>admin/principal/getPantalla/9/9" id="EVENTO DEL MES" name="9" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Evento del mes</a>
+<a href="<?php echo base_url()?>admin/principal/getEventoMes/9/9" id="EVENTO DEL MES" name="9" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Evento del mes</a>
 </li>
 <li>
 <a href="<?php echo base_url()?>admin/principal/getPantalla/1/9" id="INICIO" name="1" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Inicio</a>
 </li>
 <li>
-<a href="<?php echo base_url()?>admin/principal/getPantalla/8/9" id="RAZA DEL MES" name="8" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> La raza del mes</a>
+<a href="<?php echo base_url()?>admin/principal/getRazaMes/8/9" id="RAZA DEL MES" name="8" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> La raza del mes</a>
 </li>
 <li>
 <a href="<?php echo base_url()?>admin/principal/getPantalla/7/9" id="PERROS PERDIDOS" name="7" class="seccion filtro"> <img src="<?php echo base_url()?>images/ciculo.png" /> Perros Perdidos</a>
@@ -253,15 +253,15 @@ Usuarios
 </ul>
 </li>
 <li>
-Mensajes
-<ul>
+<a href="<?php echo base_url()?>admin/principal/getMensajes" id="mensajes" name="mensajes" class="seccion filtro" style="text-decoration:none; color:#FFF;">Mensajes</a>
+<!--<ul>
 <li>
 <a href="<?php echo base_url()?>#"> <img src="<?php echo base_url()?>images/ciculo.png" /> Redactar mensaje</a>
 </li>
 <li>
 <a href="<?php echo base_url()?>#"> <img src="<?php echo base_url()?>images/ciculo.png" /> Enviar mensajes</a>
 </li>
-</ul>
+</ul>-->
 </li>
 <li><a href="<?php echo base_url()?>admin/principal/anuncios" style="color:#FFF;text-decoration:none;">Anuncios</a></li>
 <li><a href="<?php echo base_url()?>admin/tiendaAdmin" style="color:#FFF;text-decoration:none;">Tienda</a></li>

@@ -54,15 +54,13 @@ getView('<?=base_url()?>usuario/cuenta/miPerfil/');
                    $(".ajaxLink").live(
                        'click',
                         function(e){                            
-                            e.preventDefault();                       
+                            e.preventDefault();
+							               var clase = $(this).attr('id');
+							               $(".icono_seleccion").removeClass("icono_seleccion");
+                                $('.'+clase).addClass("icono_seleccion");                       
                                 var gotoURL = $(this).attr('href');
-                                 console.log('dddddddddddddddddddd');
-                                $("#contenedor_menu_perfil ul li").removeClass("icono_seleccion");
-                                $(this).addClass("icono_seleccion");
                                 $("#appSectionContainer").html();
-                                getView(gotoURL);
-                                
-                                                                                                                
+                                getView(gotoURL);                                                             
                         }
                     );	
 	
@@ -834,26 +832,26 @@ MI PERFIL
 </div>
 <div class="contenedor_menu_perfil">
 <ul class="menu_perfil">
-<li class="icono_seleccion">
-<p style="margin-top:13px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>usuario/cuenta/miPerfil/" style="text-decoration:none;color:" class="ajaxLink">Mi Perfil</a></p>
+<li class="icono_seleccion mi_perfil">
+<p style="margin-top:13px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>usuario/cuenta/miPerfil/" style="text-decoration:none;color:white;" class="ajaxLink">Mi Perfil</a></p>
 </li>
-<li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>usuario/cuenta/anuncios/" style="text-decoration:none;" class="ajaxLink"> Admin. Anuncios</a> </p>
+<li class="anuncios">
+<p style="margin-top:5px; margin-left:10px;"><a id="anuncios" href="<?=base_url()?>usuario/cuenta/anuncios/" style="text-decoration:none;color:white;" class="ajaxLink"> Admin. Anuncios</a> </p>
 </li>
-<li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>usuario/cuenta/mensajes/" style="text-decoration:none;" class="ajaxLink"> Mensajes</a> </p>
+<li class="mensajes">
+<p style="margin-top:5px; margin-left:10px;"><a id="mensajes" href="<?=base_url()?>usuario/cuenta/mensajes/" style="text-decoration:none;color:white;" class="ajaxLink"> Mensajes</a> </p>
 </li>
-<li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>usuario/cuenta/cupones/" style="text-decoration:none;" class="ajaxLink"> Cupones</a> </p>
+<li class="cupones">
+<p style="margin-top:5px; margin-left:10px;"><a id="cupones" href="<?=base_url()?>usuario/cuenta/cupones/" style="text-decoration:none;color:white;" class="ajaxLink"> Cupones</a> </p>
 </li>
-<li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>usuario/cuenta/favoritos/" style="text-decoration:none;" class="ajaxLink">Favoritos</a> </p>
+<li class="favoritos">
+<p style="margin-top:5px; margin-left:10px;"><a id="favoritos" href="<?=base_url()?>usuario/cuenta/favoritos/" style="text-decoration:none;color:white;" class="ajaxLink">Favoritos</a> </p>
 </li>
-<li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>usuario/cuenta/soporte/" style="text-decoration:none;" class="ajaxLink">Soporte Tecnico</a> </p>
+<li class="soporte">
+<p style="margin-top:5px; margin-left:10px;"><a id="soporte" href="<?=base_url()?>usuario/cuenta/soporte/" style="text-decoration:none;color:white;" class="ajaxLink">Soporte Tecnico</a> </p>
 </li>
-<li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>usuario/cuenta/facturas/" style="text-decoration:none;" class="ajaxLink">Mis Facturas</a> </p>
+<li class="facturas">
+<p style="margin-top:5px; margin-left:10px;"><a id="facturas" href="<?=base_url()?>usuario/cuenta/facturas/" style="text-decoration:none;color:white;" class="ajaxLink">Mis Facturas</a> </p>
 </li>
 </ul>
 

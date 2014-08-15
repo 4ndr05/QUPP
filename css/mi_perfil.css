@@ -7,7 +7,6 @@
 .menu_perfil li{
 	width:132px;
 	height:49px;
-	vertical-align: auto;
 	background-image:url(../images/boton_perfil.png);
 	display:inline-block;
 	margin-left:-1px;
@@ -40,7 +39,7 @@
 	float:left;
 	width:128px;
 	height:119px;
-	background-color:#030;}
+	}
 .bienvenido{
 	font-size:43px;
 	font-weight:bold;

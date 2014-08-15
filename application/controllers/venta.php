@@ -18,6 +18,7 @@ class Venta extends CI_Controller
         $this->load->library('googlemaps');
         $this->load->library('cart');
         $this->load->helper('date');
+        $this->load->library("UUID", true);
 
         $CI = & get_instance();
         $CI->config->load("mercadopago", TRUE);
@@ -47,7 +48,6 @@ class Venta extends CI_Controller
         $data['razas']       = $this->defaultdata_model->getRazas();
         $data['giros']       = $this->defaultdata_model->getGiros();
         $data['publicaciones']       = $this->venta_model->getAnuncios();
-        var_dump($data['publicaciones']);
         $this->load->view('venta_view', $data);
     }
 
@@ -138,6 +138,31 @@ class Venta extends CI_Controller
         }
     }
 
+    public function upload_file() {
+        $config['upload_path'] = 'images/temp/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '900';
+        $config['max_width'] = '400';
+        $config['max_height'] = '400';
+        $config['file_name'] = UUID::v4();
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('file_form')) {
+            $error = array('error' => $this->upload->display_errors());
+
+            echo json_encode($error);
+        } else {
+            $upload_data = $this->upload->data();
+            $values['orig_name'] = 'images/temp/' . $upload_data['orig_name'];
+            $values['url_logo'] = base_url() . 'images/temp/' . $upload_data['orig_name'];
+            $values['file_type'] = $upload_data['file_type'];
+
+            echo json_encode($values);
+        }
+    }
+
+
     function anuncio(){
         $paqueteID = $this->input->post('paquete');
         $detallePaquete = $this->defaultdata_model->getPaquete($paqueteID);
@@ -178,6 +203,8 @@ class Venta extends CI_Controller
 
         }
 
+       
+
         //PUBLICACION      
         $fecha = date('Y-m-d');
         $dias = $this->input->post('vigencia_texto');
@@ -204,7 +231,36 @@ class Venta extends CI_Controller
         );
 
          $publicacionID = $this->defaultdata_model->insertItem('publicaciones', $dataPublicacion);
-         redirect('principal/miPerfil');
+        
+        //VIDEOS PUBLICACION
+       
+        $precio_total = $this->input->post('total');
+
+           $preference_data = array(
+            "items" => array(
+                array(
+                    "title" => "Publicacion en directorio",
+                    "quantity" => 1,
+                    "currency_id" => "MXN",
+                    "unit_price" => floatval($precio_total)
+                )
+            ),
+            "payer" => array(
+                'name' => $this->session->userdata('nombre'),
+                'surname' => $this->session->userdata('apellido'),
+                'email' => $this->session->userdata('correo'),
+                'date_created' => date('Y-m-d')
+            ),
+            "back_urls" => array(
+                "success" => base_url('principal/miPerfil')
+            )
+        );
+
+        $preference = $this->mercadopago->create_preference($preference_data);
+        echo '<iframe src="' . $preference['response']['sandbox_init_point'] . '" name="MP-Checkout" width="740" height="600" frameborder="0"></iframe>';
+    
+
+         //echo json_encode($publicacionID);
          
     }
 
@@ -218,5 +274,9 @@ class Venta extends CI_Controller
 
         echo json_encode($this->venta_model->getPublicaciones($raza,$genero,$estado,$precio,$palabra_clave));
 
+    }
+
+    function preferencia(){
+        var_dump($_POST);
     }
 }

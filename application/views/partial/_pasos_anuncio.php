@@ -9,6 +9,9 @@
 
 
 ?>
+<link href="http://hayageek.github.io/jQuery-Upload-File/uploadfile.min.css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://hayageek.github.io/jQuery-Upload-File/jquery.uploadfile.min.js"></script>
 
 <div>
 <div class="numeros_publicar_anuncio_mini">
@@ -20,6 +23,7 @@
         <li data-titulo="Completa tu información" data-p="paso_tres">3</li>
         <li data-titulo="Vista previa de tu anuncio" data-p="paso_cuatro">4</li>
         <li data-titulo="Detalle de compra:" data-p="paso_cinco">5</li>
+        <li data-titulo="Pago de servicio:" data-p="paso_seis">6</li>
     </ul>
 </div>
 <div class="crerar_publicar_anuncio_mini">
@@ -109,7 +113,7 @@
                 <li>
 
                     <?php if ($paquetes[0]->cupones > 0): ?>
-                        <div class="cantidades_detalle_paquete_lite"> <?php echo $paquetes[0]->cupones ?></div>
+                        <div class="cantidades_detalle_paquete_lite_mini"> <?php echo $paquetes[0]->cupones ?></div>
                         <img src="<?php echo base_url() ?>images/icono_ticket.png" width="34" height="26"/>
                     <?php else: ?>
                         <div class="cantidades_detalle_paquete_of_mini"> <?php echo $paquetes[0]->cupones ?></div>
@@ -354,6 +358,7 @@
     <br/>
 	
     <p class="margen_15_left_mini" id="videoY">
+    <input type="hidden" name="url_video[]" id="url_video" value="0" />
         Link de video <input type="text" name="url_video[]" id="url_video" size="98" class="preview"/><img
             src="<?php echo base_url() ?>images/logo_youtube.png"/><a href="#" id="addVid" class="addVid" style="font-size:9px; margin-top:8px;" data-rel="">Agregar</a><br />
     </p>
@@ -361,87 +366,68 @@
     <p class="margen_15_left_mini"><a href="<?php echo base_url() ?>#"> Tutorial para subir video a <img
                 src="<?php echo base_url() ?>images/logo_youtube.png" width="43" height="16"/> </a></p>
     <br/>
-
+<script>
+$(document).ready(function()
+{
+	$("#fileuploader").uploadFile({
+                url: "<?php echo base_url('venta/upload_file') ?>",
+                allowedTypes: "png,jpg,jpeg",
+                fileName: "file_form",
+                multiple: false,
+                showFileCounter: false,
+                returnType: 'json',
+                showStatusAfterSuccess: false,
+                onSuccess: function(files, data, xhr)
+                {
+                    $('#error_logo').fadeOut();
+                    $('#logo_image').fadeOut();
+                    if (data.error === undefined) {
+                        $('#logo_image').prop('src', data.url_logo);
+                        $('[name=name_logo_form]').val(data.orig_name).trigger('change');
+                        $('#name_logo_form').prop('src', data.url_logo);
+                        $('#logo_image').fadeIn();
+                    } else {
+                        $('#error_logo').fadeIn().text(data.error);
+                    }
+                }
+            });
+});
+</script>
     <p class="margen_15_left_mini">
-
+		 <div id="fileuploader" >Seleccionar Imagenes</div>
+         <input name="name_logo_form" value="" type="hidden"/>
+                            <div class="row-fluid">
+                                <span id="error_logo" style="display:none;" class="alert alert-error"></span>
+                                <img id="logo_image" class="span6 thumbnail" src=""/>
+                            </div>
         <!-- <iframe src="<?php echo base_url() ?>../subir_archivos/index.html" style="overflow:none;" scrolling="no" width="800" height="100"> </iframe> -->
     </p>
     
     <!--imagenes-->
-    <script>
+    <!--<script>
     jQuery(document).ready(function(){
-    	$('#files').change(function() {
- 			// $('#p_form').submit();     
+    	$('#images').submit(function() {
+ 			 var files = $('#files');
+			 $.ajax({
+                    url:'<?php echo base_url('venta/upload_file') ?>',
+                    type:'post',
+                    dataType: 'JSON',
+                    data: 'files=' + files,
+                    success: function(data){
+                       
+                    }
+            });     
    	 	});
     });
-    </script>
- 
-     <input type="file" id="files" name="files[]" multiple />
+    </script>-->
+ 	<!--<form action="#" method="post" enctype="multipart/form-data" id="images">
+  -->   <!--<input type="file" id="files" name="files[]" multiple />-->
+     <!--<input type="submit" value="Agregar" />-->
+<!--    </form>-->
 
-<output id="list" class="preview"></output>
+<!--<output id="list" class="preview"></output>-->
 
-<script>
-  function handleFileSelect(evt) {
-     
-    var files = evt.target.files; // FileList object
-	var fotos = parseInt(document.getElementById('cantFotos').value);
-	if(files > fotos){
-		document.getElementById("msj_paso").innerHTML="Seleccionó más fotos de las permitidas"+"("+fotos+")";
-	}
-	console.log(files.length, fotos);
-    // Loop through the FileList and render image files as thumbnails.
-    for (var i = 0, f; f = files[i]; i++) {
 
-      // Only process image files.
-      if (!f.type.match('image.*')) {
-        continue;
-      }
-
-      var reader = new FileReader();
-
-      // Closure to capture the file information.
-      reader.onload = (function(theFile) {
-        return function(e) {
-          // Render thumbnail.
-          var span = document.createElement('span');
-          span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                            '" title="', escape(theFile.name), '" width="50"/><a href="#" class="del">X</a>'].join('');
-          document.getElementById('list').insertBefore(span, null);
-        };
-      })(f);
-
-      // Read in the image file as a data URL.
-      reader.readAsDataURL(f);
-    }
-    
-    //Preview
-    for (var i = 0, f; f = files[i]; i++) {
-
-      // Only process image files.
-      if (!f.type.match('image.*')) {
-        continue;
-      }
-
-      var reader = new FileReader();
-
-      // Closure to capture the file information.
-      reader.onload = (function(theFile) {
-        return function(e) {
-          // Render thumbnail.
-          var span = document.getElementById('slideshow_publicar_anuncio');
-          span.innerHTML = ['<img src="', e.target.result,
-                            '" title="', escape(theFile.name), '" width="294" height="200"/>'].join('');
-          document.getElementById('slideshow_publicar_anuncio').insertBefore(span, null);
-        };
-      })(f);
-
-      // Read in the image file as a data URL.
-      reader.readAsDataURL(f);
-    }
-  }
-
-  document.getElementById('files').addEventListener('change', handleFileSelect, false);
-</script>
 <br />
     <!--imagenes-->
     
@@ -548,7 +534,7 @@
             </li>
         </ul>
         <div id="video_previo" class="desplegar_detalles_mini" style="display:none;">
-            <br/>
+        <br/>
 
             <div class="titulo_anuncio_publicado_mini">
                 VIDEO
@@ -593,74 +579,131 @@
 </div>
 <!--paso cinco-->
 <div id="paso_cinco" class="paso">
-    <div class="tipo_paquete_pago_mini">
-    
-        <div id="nimagenpaquete"></div>
-    </div>
-    <div class="divisor_morado_mini"></div>
-    <div class="descripcion_paquete_pago_mini">
-        <div class="titulo_descripcion_paquete_mini"> INCLUYE</div>
-        <div style="padding:15px;">
-            <p> * <label id="nfotos"></label> fotos </p>
+<div class="descipcion_pasos_mediano_mini">
 
-            <p>* Texto de <label id="ncaracteres"></label> caracteres </p>
+<table class="tabla_pago" style="margin-left:70px;" width="700">
+<tr> 
+<th width="158">
+PRODUCTO
+</th>
+<th width="345">
+DETALLE
+</th>
+<th width="181">
+COSTO
+</th>
+</tr>
+<tr>
+<td>
+<div id="nimagenpaquete"></div>
+</td>
+<td>
+<p>* <label id="nfotos"></label> fotos</p>
+<p>* Texto de <label id="ncaracteres"></label> caracteres</p> 
+<p>* Vigencia de <label id="nvigencia"></label> días</p>
+<p>* <label id="ncupones"></label> cupones</p>
+<p>* <label id="nvideos"></label> video</p>
+</td>
+<td>
+<p class="totales">$<label id="nprecio" class="nprecio"></label></p>
+</td>
+</tr>
+<tr> 
+<td colspan="2">
+<p>SUBTOTAL:</p>
+</td>
+<td>
+<p class="totales"> $<label id="nprecio" class="nprecio"></label> </p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+ <img style="" src="images/mini_cupon.png"/> <font class="texto_de_cupon" >Cupones de descuento: </font> </br> <font id="ver_cupones" class="ver_cupones" onclick="muestra('los_cupones_disponibles');muestra('no_ver_cupones');
+ oculta('ver_cupones');"> Ver cupones </font> 
+  <font style="display:none;" id="no_ver_cupones" class="ver_cupones" onclick="oculta('los_cupones_disponibles');oculta('no_ver_cupones');muestra('ver_cupones');"> Ocultar cupones </font>
+<div id="los_cupones_disponibles" style="padding:15px; display:none;">
 
-            <p>* Vigencia de <label id="nvigencia"></label> días. </p>
-        </div>
-    </div>
-    <div class="divisor_morado_mini"></div>
-    <div class="tipo_paquete_pago_mini">
-        <div class="titulo_descripcion_paquete_mini"> TOTAL</div>
-        <div class="total_compra_mini"><p> $ <label id="nprecio"></label> <font class="moneda_mini"> MX </font></p>
-        </div>
-    </div>
-    <br/>
-    <br/>
-
-    <div style="margin-top:150px;">
-        <div class="sub_instrucciones_pasos_mini"><img style=" margin-left:15px;"
-                                                       src="<?php echo base_url() ?>images/mini_cupon.png"/>
-            Cupones<font></font></div>
-        <div style="padding:15px;">
-            <p>Si lo deseas pudes usar alguno de tus cupones:</p>
-            <!--<form class="radios_cupones_mini" action="">-->
-            <?php if($cupones != null):
+<?php if($cupones != null):
+$c = 0;
 					foreach($cupones as $cupon):
-					if($cupon->tipoCupon == 2):?>
-            <input type="radio" name="descuento" value="<?=$cupon->valor;?>" id="radio_pago1" class="css-checkbox"/><label
-                for="radio_pago1" class="css-label radGroup2"> <?=$cupon->valor;?>% de descuento</label>
-            <br/>
-           <!-- <input type="radio" name="descuento" value="5" id="radio_pago2" class="css-checkbox" checked="checked"/>
-            <label for="radio_pago2" class="css-label radGroup2">5% de descuento</label>
-            <br/>
-            <input type="radio" name="descuento" value="20" id="radio_pago3" class="css-checkbox"/><label
-                for="radio_pago3" class="css-label radGroup2"> 20% de descuento</label>
-            <br/>-->
+					$c++;
+					if($cupon->tipoCupon == 2):
+					?>
+             <input type="hidden" name="cuponUsado" id="cuponUsado" value=""/>     
+            <input type="radio" name="radiog_dark" id="radio_pago<?=$c?>" class="css-checkbox cupon" value="<?=$cupon->valor;?>" data-rel="<?=$cupon->cuponID;?>"/>
+<label for="radio_pago<?=$c?>" class="css-label radGroup<?=$c?>"><?=$cupon->valor;?>% de descuento</label>
+			
 			<?php endif;
-				endforeach;
-			else:
+				endforeach; ?>
+			<input type="radio" name="radiog_dark" id="radio_pago<?=$c?>" class="css-checkbox cupon" checked="checked" value="0" data-rel="0>"><label for="radio_pago<?=$c?>" class="css-label radGroup2"> No usar cupones</label>
+			<?php else:
 			echo 'No hay cupones disponibles';
 			endif;	?>
-        </div>
-    </div>
-   
-    <ul class="morado_15_mini">
-        <li onclick="">
-           <input type="submit" value="Pagar">
-        </li>
-    </ul>
+
+
 </div>
+
+
+</td>
+<td>
+<p class="totales">- $<label id="descuentoCupon">00.00</label> </p>
+</td>
+</tr>
+<tr>
+<th colspan="2">
+TOTAL
+</th>
+<th>
+<p class="totales" style="color: #FFF;">$<label id="totalConDescuento" class="nprecio"></label></p>
+<input type="hidden" name="total" id="total" value=""/>
+</th>
+</tr>
+</table>
+
+</br>
+
+<div>
+                            <ul class="morado_directorio" id="btn_sig">
+                                <li class="sig_paso">
+                                  <input type="submit" value="Pagar"/>
+                                </li>
+                            </ul>
+              <br/>
+                            <br/>
+                            <div id="msj_paso" style="font-size: 10px;display: inline-block; vertical-align: bottom; height: 38px;"></div>
+                        </div>
+
+
+ 
+</div>
+   
+</div>
+
+
 </form>
 <!--boton se siguiente paso-->
+<div id="paso_seis" class="paso" style="display:none;">
+                    <div class="descipcion_pasos_mediano">
+                        <div class="titulo_de_pasos"> PUBLICAR EN DIRECTORIO </div>
+                        <div class="instrucciones_pasos"> Pago del directorio: </div>
+                        <div id="iframe"></div>
+                        <br/>
+                    </div>
+                </div>
 <br/>
 
-<div id="btn_sig" style="display: block; text-align: right; padding-right: 10px;">
+<!--<div id="btn_sig" style="display: block; text-align: right; padding-right: 10px;">
     <div id="msj_paso" style="font-size: 10px;display: inline-block; vertical-align: bottom; height: 38px;"></div>
     <ul class="morado_mini" style="display: inline-block;margin-top:-200px;">
         <li class="sig_paso">Continuar</li>
     </ul>
+</div>-->
+<div id="btn_sig" class="siguientePaso">
+    <div id="msj_paso"></div>
+    <ul class="morado_mini" style="display: inline-block;">
+        <li class="sig_paso">Continuar</li>
+    </ul>
 </div>
-
 
 </div>
 </div>
@@ -675,7 +718,7 @@
 			console.log($('.paso_show').next('.paso').prop('id'));
 			var num_paso = $('.paso_show').next('.paso').prop('id');
 			if(num_paso == 'paso_cinco'){
-				oculta('btn_sig');
+				$('.siguientePaso').hide();
 			}
             if (revision_step($('.paso_show'))) {
                 $('.paso_show').removeClass('paso_show').hide();
@@ -759,23 +802,27 @@
             $('#nimagenpaquete').html(imagen);
 			$('#nvigencia').html(paquete_val.vigencia);
             $('#nfotos').html(paquete_val.cantFotos);
+			$('#nvideos').html(paquete_val.videos);
+			$('#ncupones').html(paquete_val.cupones);
             $('#ncaracteres').html(paquete_val.caracteres);
 			$('#nprecio').html(paquete_val.precio);
+			$('.nprecio').html(paquete_val.precio);
 			//$('#nvideos').val(paquete_val.videos);
 			var cantidadVideos = paquete_val.videos;
-			var contador = 0; 
+			var contador = 1; 
 			$(".addVid").click(function(e){
         		e.preventDefault(); 
-				
+				if(contador < cantidadVideos){
 				console.log(contador,cantidadVideos);
 				
 		$('<p id="video"> Link de video <input type="text" name="url_video[]" id="url_video" class="url_video" size="98" class="preview"/><img src="<?php echo base_url() ?>images/logo_youtube.png"/> <a href="#" id="eliminar" class="eliminar" style="font-size:9px;">Eliminar</a><br /></p>').appendTo('#videoY');
-
+				}
 		contador++;
         
    	 	});
 		$("body").on("click",".eliminar", function(e){
             $(this).parent('p').remove(); 
+			contador--;
         return false;
    		 });
 			console.log(paquete_val.videos);
@@ -809,14 +856,44 @@
             $('#paso_tres [name=seccion_texto]').val($(this).next().text());
         });
 		
-		$('#paso_cuatro [name=seccion]').on('change', function() {
-           alert('paso 4');
-        });
         
         $("body").on("click",".del", function(e){
             $(this).parent('span').remove(); 
         return false;
     });
+	
+		$('.cupon').on('click', function () {
+			var valor = $(this).val();   
+			var cuponID = $(this).attr('data-rel');
+            var paquete_val = $(this).data('paquete');
+            var precio = $('#nprecio').html();
+            console.log(precio);
+            var descuentoCupon = (precio * (valor/100));
+            var total = precio - (descuentoCupon);
+            console.log(total);
+            $('#descuentoCupon').html(descuentoCupon);
+            $('#totalConDescuento').html(total);
+			$('#total').val(total);
+			$('#cuponUsado').val(cuponID);
+			
+        });
+
+		 $('#p_form').submit(function(e){
+                e.preventDefault();
+                var form = $(this);
+                $.ajax({
+                    url:'<?php echo base_url('venta/anuncio') ?>',
+                    type:'post',
+                    dataType: 'html',
+                    data: form.serialize(),
+                    success: function(data){
+						
+                        $('#iframe').append(data);
+                    }
+                });
+            });
+        
+	
 
     });
 

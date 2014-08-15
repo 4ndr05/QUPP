@@ -10,7 +10,7 @@
 	max-width:990px;
 	font-family:"titulos";
 	color:#7EA715;
-	margin-top: 10px;
+	margin-top: 15px;
     height: 60px;
     line-height: 1em;
 
@@ -39,23 +39,36 @@
 	padding-top:5px;
 	}
 
-.estilo_select{
-	background: transparent;
-	appearance:none;
-	
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	height:32px;
-	width:150px;
-	border:none;
-	border-radius: 10px;
-    font-family:"select";
-	font-size:20px;
-	color:#FFFFFF;
-	padding-left:5px;
-	outline: none;
-	line-height:1em;
-	}
+ span.customSelect {
+background: transparent;
+appearance: none;
+-webkit-appearance: none;
+-moz-appearance: none;
+height: 32px;
+width: 150px;
+border: none;
+border-radius: 10px;
+font-family: "select";
+font-size: 20px;
+color: #FFFFFF;
+outline: none;
+
+}
+span.customSelect.changed {
+	font-family: "select";
+	background-color: #f0dea4;
+}
+.customSelectInner {
+	max-height: 28px;
+    max-width: 146px;
+    background-repeat: no-repeat;
+	text-align:left;
+    margin-left: 3px;
+    padding-top: 6px;
+    font-family: "select";
+	line-height: 1.3em;
+    padding: auto 0;
+}
 
 
 .primer_indicio {
@@ -124,7 +137,7 @@
 	} 
 .margen_derecho_20{
 	height:232px;
-	width:17px;
+	width:19.5px;
 	float:left;
 	}
 .contenedor_buscar{
@@ -182,7 +195,7 @@
 	}
 	
 .datos_general{
-	width:247px;
+	width:246px;
 	min-height:243px;
 	display:inline-block;
 	margin-left:10px;
@@ -442,10 +455,13 @@ border: none;
 
 .boton_naranja_tres li{
 	float:right;
-	height:23px;
+	padding-left:5px;
+	padding-right:5px;
+	padding:5px;
+	height:13px;
 	background-color:#FF7C00;
 	text-align:center;
-	width:89px;
+	width:80px;
 	color:#FFF;
 	box-shadow: 2px 2px 7px #999;
 	list-style:none;
@@ -455,8 +471,9 @@ border: none;
 	}
 	
 .boton_naranja_tres li:hover{
-	width:90px;
-	height:23px;
+	width:80px;
+	padding:5px;
+	height:13px;
 	background-color:#FFF;
 	text-align:center;
 	color:#FF7C00;
