@@ -42,4 +42,5 @@
  $config['tablas']['carritototal'] = 'carritototal';
  $config['tablas']['seccion'] = 'seccion';
  $config['tablas']['fotoscontenido'] = 'fotoscontenido';
+ $config['tablas']['mensajesadmin'] = 'mensajesadmin';
 ?>

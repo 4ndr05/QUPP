@@ -194,7 +194,7 @@ AGREGAR IMAGEN
 
 <!-- ---------------------------------------------------- contenedor_modificaciones_texto --------------- -->
 
-<form action="<?=base_url()?>admin/principal/uploadText" method="post">
+<form action="<?=base_url()?>admin/principal/uploadArticulo" method="post" enctype="multipart/form-data">
 <div class="contenedor_modificaciones" id="contenedor_texto_apoyo" style="display:none"> <!-- Contenedor negro imagenes-->
 <div class="cerrar_modificaciones"> <img src="<?php echo base_url()?>images/cerrar.png" onclick="oculta('contenedor_texto_apoyo');"/> </div>
 <input type="hidden" id="zonaContentN" name="zonaContentN" value="<?=$zonaT?>" />
@@ -206,7 +206,13 @@ AGREGAR IMAGEN
 AGREGAR TEXTO
 </div>
 <div class="contenido_intruciones">
-<p> Introduzca el texto para BC0001-0000001 </p>
+<p>Ingrese las imagenes para BP00001:</p>
+</br>
+<input type="file" name="imagenesArticulo[]" id="imagenesArticulo" multiple="multiple"/>
+
+</div>
+<div class="contenido_intruciones">
+<p> Introduzca el texto para el articulo </p>
 </brSS>
 <textarea cols="65" rows="7" name="textoContentN" id="textoContentN"></textarea>
 
@@ -364,7 +370,59 @@ PANTALLAS- <label id="nombreSeccion"><label id="seccion"><?=$seccionNombre->secc
 ZONA- <label id="zonaNombre"><label id="nombreZona"><?=$zonaNombre->zona?></label></label>
 </div>
 
+<!--CONTENIDOS DEL EVENTO DEL MES-->
+<div class="contenedor_modificaciones" id="contenedor_agregar_evento" style="display:none"> <!-- Contenedor negro imagenes-->
+<div class="cerrar_modificaciones"> <img src="<?=base_url()?>images/cerrar.png" onclick="oculta('contenedor_agregar_evento');"/> </div>
 
+
+<div class="modificaciones"> 
+<div class="titulo_modificaciones"> 
+AGREGAR EVENTO
+</div>
+
+<div class="contenido_intruciones">
+<p>Ingrese los datos del evento</p>
+</br>
+
+<table width="420" height="221"> 
+<tr> 
+<td width="91"> Titulo: </td>
+<td width="317"> <input type="text"/> </td>
+</tr>
+<tr> 
+<td> Imagen: </td>
+<td> <input type="file"/> </td>
+</tr>
+<tr> 
+<td> Fecha: </td>
+<td> <input type="text" /> </td>
+</tr>
+<tr> 
+<td> Hora: </td>
+<td> <input type="text" />  </td>
+</tr>
+<tr>
+<td> Lugar: </td>
+<td> <input type="text"/> </td>
+</tr>
+<tr> 
+<td> Contenido: </td> 
+<td> <textarea></textarea> </td></tr>
+</table>
+
+
+
+</div>
+<ul class="morado_reg">
+<li>
+Guardar
+</li>
+</ul>
+
+</div>
+
+</div> <!-- Fin contenedor negro imagenes -->
+<!--FIN CONTENIDO DEL MES-->
 </br>
 
 <!--       CONTENIDO SUPERIOR       -->
@@ -461,124 +519,44 @@ Imagen
 <!--       CONTENIDO SUPERIOR       -->
 
 <!--       CONTENIDO MEDIO ARTICULO       -->
-<table class="tabla_carrito medioContenido" width="990" style="display:">
-<tr>
-<th width="84">
-Nivel 1
-</th>
-<th width="81">
-Nivel 2
-</th>
-<th width="88">
-Nivel 3
-</th>
-<th width="137">
-Tipo
-</th>
-<th width="136">
-Ubicación
-</th>
-<th width="310">
-Contenido
-</th>
-<th width="122">
-Ajustes
-</th>
+<table width="992" height="120" align="center" class="tabla_carrito"> 
+<tr> 
+<th width="128"> Titulo </th>
+<th width="104"> Imagen </th>
+<th width="50"> Fecha </th>
+<th width="58"> Hora </th>
+<th width="97"> Lugar </th>
+<th width="96"> Domicilio </th>
+<th width="320"> Contenido </th>
+<th width="103"> </th>
 </tr>
-<tr class="" style="display:">
-<td bgcolor="#E6E7E8" class="nivel">
-BC00002
-</td>
-<td bgcolor="#E6E7E8">
-
-</td>
-<td bgcolor="#E6E7E8">
-
-</td>
-<td bgcolor="#E6E7E8">
- Contenido
-</td>
-<td bgcolor="#E6E7E8">
-   Artículo / Texto Apoyo
-</td>
-<td bgcolor="#E6E7E8">
-
-</td>
-<td bgcolor="#E6E7E8">
-
-<img src="<?php echo base_url()?>images/agregar.png" class="addContentText" data-rel="2"/>
-<img src="<?php echo base_url()?>images/baja_contenido.png" class="deleteContent" id="2"/>
-</td>
-
+<tr> 
+<td height="74" bgcolor="#E6E7E8"> </td>
+<td bgcolor="#E6E7E8"> </td>
+<td bgcolor="#E6E7E8"> </td>
+<td bgcolor="#E6E7E8"> </td>
+<td bgcolor="#E6E7E8"> </td>
+<td bgcolor="#E6E7E8"> </td>
+<td bgcolor="#E6E7E8"> </td>
+<td bgcolor="#E6E7E8"> <img src="<?=base_url()?>images/agregar.png" onclick="muestra('contenedor_agregar_evento');"/> </td>
 </tr>
 
-
-<?php if($contenido != null):
-	  $contador = 0;
-	  foreach($contenido as $c):
-
-	  if($c->posicion == 2):
-	  ?>
-
-<?php if($c->seccionID == 7 ||$c->seccionID == 8 || $c->seccionID == 9 || $c->seccionID == 10 ):  ?>
-
-<tr class="imagenApoyo zona<?=$c->zonaID?><?=$c->seccionID?> row" style="display:none">
-<td>
-
+<tr> 
+<td>TALLER DE ADIESTRAMIENTO CANINO  </td>
+<td> <img src="<?=base_url()?>images/eventos/1.png" width="101" height="156"/> </td>
+<td> 27 Julio</td>
+<td> 9:30am</td>
+<td> Instalaciones de PerrosEnnes </td>
+<td> Venustiano Carranza esq. Benito Juárez , Centro Santa Rosa Jáuregui, Querétaro, Querétaro, México. </td>
+<td>Objetivo del taller: crear un vínculo de comunicación en el que tu perro sabrá con claridad qué esperas de él, cómo y cuándo. Tú como dueño sabrás claramente qué puedes esperar de tu perro en cualquier circunstancia y cómo manejarlo. 
+Tu perro aprenderá: Uso del Clicker Uso del Halter Parado Ordenes con señas Ordenes a distancia Ordenes corporales Quieto con distractor y fuera de vista Técnicas de refuerzo positiv 
+El taller de adiestramiento canino está dirigido a dueños de perros con interés en el adiestramiento canino, entrenadores caninos, protectoras de animales, veterinarios, paseadores de perros y público en general. 
+Impartido por: Néstor Fuentes, Terapeuta profesional en Conducta Canina, Fundador y Director de Perros Ennes. Es experto en comportamiento canino con más de 20 años de experiencia. 
 </td>
-<td>
-<?=++$contador?>
-</td>
-<td>
-<input type="hidden" id="bannerID" name="bannerID" value="<?=$c->bannerID?>"/>
-</td>
-<td>
-Imagen
-</td>
-<td>
-
-</td>
-<td>
-<img src="<?php echo base_url()?>images/<?php echo $c->imgbaner?>" width="122" height="74"/>
-</td>
-<td>
-<img src="<?php echo base_url()?>images/baja_contenido.png" class="deleteContent" data-rel="<?php echo $c->bannerID?>" id="2"/>
-<img src="<?php echo base_url()?>images/agregar.png" class="updateText" data-rel="<?php echo $c->bannerID?>" id="2"/>
-</td>
-
+<td> <img src="<?=base_url()?>images/editar.png" onclick="muestra('contenedor_agregar_evento');"/> </td>
 </tr>
-<?php endif; ?>
-<tr class="zona<?=$c->zonaID?><?=$c->seccionID?> row " style="display:none;">
-
-<td>
-
-</td>
-<td>
-
-</td>
-<td>
-<?=$n = $contador + 1;?>
-</td>
-<td>
-Texto de Apoyo
-</td>
-<td>
-
-</td>
-<td>
-<?php echo $c->texto?>
-</td>
-<td>
-<img src="<?php echo base_url()?>images/baja_contenido.png" class="deleteContentText" data-rel="<?php echo $c->bannerID?>" id="2" name="2"/>
-</td>
-
-</tr>
-	  <?php 
-	  endif;
-	  endforeach;
-	  endif; ?>
-
 </table>
+
 <!--       CONTENIDO MEDIO CONTENIDO       -->
 
 

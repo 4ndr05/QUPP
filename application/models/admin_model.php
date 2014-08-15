@@ -280,6 +280,11 @@ class Admin_model extends CI_Model
 
     }
 
+    function getMensajes()
+    {
+        return $this->db->get($this->tablas['mensajesadmin'])->result();
+    }
+
 
 }
 
