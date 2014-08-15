@@ -4,6 +4,8 @@ if (!defined('BASEPATH'))
 
 class Venta extends CI_Controller
 {
+    
+    static $seccion = 2;
 
     public function __construct()
     {
@@ -47,7 +49,9 @@ class Venta extends CI_Controller
         $data['paquetes']    = $this->defaultdata_model->getPaquetes();
         $data['razas']       = $this->defaultdata_model->getRazas();
         $data['giros']       = $this->defaultdata_model->getGiros();
-        $data['publicaciones']       = $this->venta_model->getAnuncios();
+        $data['publicaciones']       = $this->venta_model->getAnuncios(self::$seccion);
+        $data['seccion'] = self::$seccion;
+        
         $this->load->view('venta_view', $data);
     }
 
@@ -266,15 +270,93 @@ class Venta extends CI_Controller
 
      function lista() {
 
-        $raza          = $this->input->post('raza') === ''?NULL:intval($this->input->post('giro'));
+        $raza          = $this->input->post('raza') === ''?NULL:intval($this->input->post('raza'));
         $genero          = $this->input->post('genero') === ''?NULL:intval($this->input->post('genero'));
         $estado        = $this->input->post('estado') === ''?NULL:intval($this->input->post('estado'));
         $precio          = $this->input->post('precio') === ''?NULL:$this->input->post('precio');
         $palabra_clave = $this->input->post('palabra_clave') === ''?NULL:$this->input->post('palabra_clave');
+		$id_anuncio = $this->input->post('id_anuncio') === ''?NULL:$this->input->post('id_anuncio');
 
-        echo json_encode($this->venta_model->getPublicaciones($raza,$genero,$estado,$precio,$palabra_clave));
-
+        echo json_encode($this->venta_model->getPublicaciones($raza,$genero,$estado,$precio,$palabra_clave,$id_anuncio));
+	
     }
+    
+    public function contactar($id) {
+		$directorio = $this->venta_model->getIDusuario($id);
+	
+		$config = array(
+			'mailtype'  => 'html',
+			'priority'  => 2,
+			'useragent' => 'qup',
+			'wrapchars' => '300',
+			'wordwrap'  => true,
+			'protocol'  => 'sendmail',
+		);
+
+		$this->email->initialize($config);
+
+		$this->email->from($this->session->userdata('correo'), $this->session->userdata('nombre').' '.$this->session->userdata('apellido'));
+		$this->email->to($directorio->correo);
+
+		$this->email->subject($this->input->post('asunto_contacto'));
+
+		$msj = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <title>Bienvenido-QuieroUnPerro.com</title>
+            <link rel="stylesheet" href="http://quierounperro.com/quiero_un_perro/css/general.css" type="text/css" media="screen" />
+        </head>
+
+        <body>
+            <table width="647" align="center">
+                <tr>
+                    <td width="231" rowspan="2">
+                        <img src="http://quierounperro.com/quiero_un_perro/images/logo_mail.jpg"/>
+                    </td>
+                    <td height="48" colspan="6" style="font-family: \'titulos\'; font-size:50px; color:#72A937; margin:0px; padding:0px; margin-bottom:-10px;">
+                        QUP Contacto
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="7" >
+                        <p>&nbsp;  </p>
+                        <font style="margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" >Hola: '.$directorio->nombre." ".$directorio->apellido.'!! </font>
+                    </br>
+                </br>
+
+                <font> El usuario '.$this->session->userdata('nombre').' '.$this->session->userdata('apellido').' quiere contactase contigo...</font>
+            </br>
+        </br>
+
+        <font color="#000066"><strong> Asunto: '.$this->input->post('asunto_contacto').'</strong></font>
+        <font color="#000066"><strong>Mensaje: </strong><br/>'.$this->input->post('comentario_contacto').'</font>
+        <br/>
+        <p> </p>
+    </td>
+</tr>
+
+<tr bgcolor="#6A2C91" >
+    <td colspan="7" >
+        <font style=" font-size:14px; padding-left:15px; color:#FFFFFF;">Gracias por tu preferencia </font>
+        <br/>
+        <font style=" font-size:12px; padding-left:15px; color:#FFFFFF;"> Equipo QUP </font>
+    </td>
+</tr>
+</table>
+</body>
+</html>';
+
+		$this->email->message($msj);
+
+		if (!$this->email->send()) {
+			echo "<div class='alert alert-warning'>No se ha logrado envíar el correo al dueño de este directorio. Vuelva a intentarlo o contacte al administrador del sitio.</div>";
+		} else {
+			echo '<div class="alert alert-success">Se ha enviado correctamente el correo electrónico.</div>';
+		}
+
+
+	}
 
     function preferencia(){
         var_dump($_POST);

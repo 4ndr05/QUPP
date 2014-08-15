@@ -1,57 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Venta-Quierounperro.com</title>
-<link rel="shortcut icon" href="<?=base_url()?>images/ico.ico" />  
-<link type="text/css" rel="stylesheet" href="<?=base_url()?>css/reset.css" media="screen"></link>
-<link rel="stylesheet" href="<?=base_url()?>css/jPages.css">
-<link type="text/css" rel="stylesheet" href="<?=base_url()?>css/general.css" media="screen"></link> <link type="text/css" rel="stylesheet" href="<?=base_url()?>css/venta.css" media="screen"></link>
-   <script src="<?=base_url()?>js/jquery-1.10.2.js"></script>
-     <script src="<?=base_url()?>js/jPages.js"></script>
-     <script src="<?=base_url()?>js/funciones_venta.js"></script>
-   <script src="<?=base_url()?>js/jquery-ui.js"></script>
-   <script type="text/javascript" src="<?=base_url()?>js/jquery.cycle.all.js"></script>
-   <script src="<?=base_url()?>js/funciones_.js" type="text/javascript"></script>
-  <link type="text/css" rel="stylesheet" href="<?=base_url()?>css/general.css" media="screen"></link>
-  
-  
-
-
-</head>
-
-<body>
-
-<div id="mini_menu" >
-<input type="hidden" id="efecto" value="corre"/>
-<img style="float:left;" id="bajar_menu" src="<?=base_url()?>images/bajar_menu_dos.png" onclick="oculta('bajar_menu'); muestra('menu_oculto');"/>
-<div id="menu_oculto" class="menu_principal" style=" display:none;">
-<div id="contenedor_menu_principal" class="contenedor_menu_principal"> 
-<ul class="principal">
-<li>
-<a href="<?=base_url()?>index.html">
-Inicio
-</a>
-</li>
-<li>
-Venta
-</li>
-<li>
-Cruza
-</li>
-<li>
-Adopción
-</li>
-<li>
-Accesorios
-</li>
-<li>
-Directorio
-</li>
-</ul>
-</div>
-</div>
-</div>
+<?php $this->load->view('general/general_header_view', array('title'=> 'Venta', 'links' => array('venta'), 'scripts' => array('funciones_venta') )) ?>
 
 <div id="iconos_ocultos" class="iconos_ocultos">
 
@@ -77,21 +24,8 @@ Directorio
 </li>
 </ul>
 </div>
-<div id="contenedor_central_superior" class="contenedor_central_superior">
 
-<div id="banner_superior">
-<img src="<?=base_url()?>images/logo_superior.png" width="348" height="93" class="contenido_superior"/>
-
-<div class="slideshow">
-<img src="<?=base_url()?>images/banner_superior/1.png" width="638" height="93"/>
-<img src="<?=base_url()?>images/banner_superior/2.png" width="638" height="93"/>
-<img src="<?=base_url()?>images/banner_superior/3.png" width="638" height="93"/>
-  </div>
-
-
-
-</div>
-</div>
+<?php $this->load->view('general/menu_view') ?>
 
 <div class="contenedor_contactar" id="contenedor_contactar" style=" display:none;">
 <div class="contenedor_cerrar_contactar">
@@ -1053,33 +987,6 @@ Pagar
 </div> 
 <!-- Fin del contenedor publicar anucio fondo negro -->
 
-
-
-<div class="menu_principal" id="menu_principal" >
-<div id="contenedor_menu_principal" class="contenedor_menu_principal"> 
-<ul class="principal">
-<li>
-<a href="<?=base_url()?>index.html">
-Inicio
-</a>
-</li>
-<li>
-Venta
-</li>
-<li>
-Cruza
-</li>
-<li>
-Adopción
-</li>
-<li>Tienda</li>
-<li>
-Directorio
-</li>
-</ul>
-</div>
-</div>
-
 <div class="titulo_seccion">
 VENTA
 </div>
@@ -1154,8 +1061,8 @@ VENTA
      
 <?php
          
-    foreach($publicaciones as $publicacion):
-    ?>
+		foreach($publicaciones as $publicacion):
+		?>
    <!-- INICIO contenedor anuncio  -->
 <div class="contenedor_anuncio">
 <div class="titulo_anuncio">
@@ -1164,7 +1071,7 @@ VENTA
 <div class="descripcion_anuncio">
 <font> Precio: <?=$publicacion->precio?></font>
 <br/>
-<font> Raza: <?=$publicacion->genero?> </font>
+<font> Raza: <?=$publicacion->raza?> </font>
 <br/>
 <font> Género: <?=$publicacion->genero?> </font>
 <br/>
@@ -1176,7 +1083,7 @@ VENTA
  
           <ul class="ver_detalle_anuncio">
                         <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
-                            <li oonclick="muestra('contenedor_anuncio_detalle');">
+                            <li onclick="buscar_detalles('<?=$publicacion->publicacionID?>');">
                                 Ver detalle...
                             </li>
                         <?php else: ?>
@@ -1220,6 +1127,35 @@ VENTA
 </div>
 
 <script>
+function obten_id(id){
+	muestra('contenedor_contactar');
+	document.getElementById('enviando_id').value=id;
+	
+	}
+
+function enviar_mail(id){
+	id=document.getElementById('enviando_id').value
+	alert(id);
+           
+          $.ajax({
+                url:'<?php echo base_url('venta/contactar/');?>/'+id,
+                type: 'post',
+                dataType: 'html',
+                data: '',
+                beforeSend: function() {
+                $(".infouser").empty().html('<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
+                },
+                success: function(data) {
+                    $(".infouser").empty().append(data);
+
+                }
+		  });
+
+        }
+
+
+
+
     $(function() {
 
         /* initiate the plugin */
@@ -1235,7 +1171,7 @@ VENTA
         $("#filtro_venta select[name]").on('change', function(e) {
             e.preventDefault();
             var form = $("#filtro_venta");
-      
+			
             search_data(form);
         });
         $("#filtro_venta [name]").keyup(function() {
@@ -1246,7 +1182,7 @@ VENTA
         });
 
         function search_data(form) {
-    
+		
             $.ajax({
                 url: '<?php echo base_url('venta/lista') ?>',
                 data: form.serialize(),
@@ -1259,7 +1195,6 @@ VENTA
                 {
                     $("#itemContainer").empty();
                     var data = result.data;
-          
                     var separator = 1;
 
                     if (result.count < 1) {
@@ -1268,17 +1203,17 @@ VENTA
 
                     for (var i = 0; i < result.count; i++)
                     {
-            if (data[i].genero==0)
-            var el_genero="Hembra";
-            else  var el_genero="Macho";
-             
-            
+						if (data[i].genero==0)
+						var el_genero="Hembra";
+						else  var el_genero="Macho";
+						 
+						
                         var cont_anun = $('<div class="contenedor_anuncio"></div>');
-            var cont_titulo= $('<div class="titulo_anuncio"></div>');
-            cont_titulo.append(data[i].titulo);
-            cont_anun.append(cont_titulo);
-            
-          var cont_descripcion = $('<div class="descripcion_anuncio"></div>');
+						var cont_titulo= $('<div class="titulo_anuncio"></div>');
+						cont_titulo.append(data[i].titulo);
+						cont_anun.append(cont_titulo);
+						
+					var cont_descripcion = $('<div class="descripcion_anuncio"></div>');
                         cont_descripcion.append('<font> Precio:' + data[i].precio + '</font> </br> <font> Raza: '+data[i].raza.substring(0, 15) +' </font></br> <font>Género:'+el_genero+'</font></br> <font>Ciudad:'+data[i].nombreEstado+'</font> ');
                         cont_anun.append(cont_descripcion);
                         
@@ -1290,7 +1225,7 @@ VENTA
 <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
                             var ver_mas = $('<ul class="ver_detalle_anuncio"><li onclick="muestra(\'contenedr_anuncio_detalle\')">Ver detalle...</li></ul>');
 <?php else: ?>
-                            var ver_mas = $('<ul class="ver_mas_negocio"><li onclick="javascript:alert(\'Favor de iniciar sesión.\')">Ver detalle...</li></ul>');
+                            var ver_mas = $('<ul class="ver_detalle_anuncio"><li onclick="javascript:alert(\'Favor de iniciar sesión.\')">Ver detalle...</li></ul>');
 
 <?php endif; ?>
                         cont_anun.append(ver_mas);
@@ -1323,8 +1258,60 @@ VENTA
 
 
         }
-
+		
     });
+	
+	function buscar_detalles (id){
+	muestra('contenedor_anuncio_detalle');
+	  var  id_anuncio = "raza=&genero=&estado=&precio=&palabra_clave=&id_anuncio="+id;
+	 $.ajax({
+                url: '<?php echo base_url('venta/lista') ?>',
+                data: id_anuncio,
+                dataType: 'json',
+                type: 'post',
+                beforeSend: function() {
+					 $(".contenedor_galeria").empty().html('<div class="spinner" style="position:fixed;"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
+					$(".datos_general").empty().html('<div class="spinner" style="position:fixed;"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
+					$(".descripcion_del_anuncio").empty().html('<div class="spinner" style="position:fixed;"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
+					$(".youtube_video").empty().html('<div class="spinner" style="position:fixed;"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
+                    $(".contenedor_galeria").empty().html('<div class="spinner" style="position:fixed;"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
+                },
+                success: function(result)
+                {
+                    $(".contenedor_galeria").empty();
+					$(".datos_general").empty();
+					$(".descripcion_del_anuncio").empty();
+					$(".youtube_video").empty();
+                    var data = result.data;
+					
+					if (result.count < 1) {
+                        $(".contendor_galeria").append('<div class="alert alert-warning">No hay resultados.</div>');
+                    }
+					   for (var i = 0; i < result.count; i++)
+                    {
+						if (data[i].genero==0)
+						var el_genero="Hembra";
+						else  var el_genero="Macho";
+						
+						$(".contenedor_galeria").append("images");					
+						  var cont_datos = $('.datos_general');
+						  var cont_info= $(' <div class="titulo_anuncio_publicado">'+data[i].titulo+'</div></br><strong>Precio:'+data[i].precio+'</strong></br><font> Fecha de publicación:'+data[i].fechaCreacion+'</font></br><font>Sección: Venta</font></br><font>Raza:'+data[i].raza+'</font></br><font>Género:'+data[i].genero+'</font></br><font>Lugar: '+data[i].nombreEstado+'</font></br></br>');
+						cont_datos.append(cont_info);
+						var botones=$('<ul class="boton_naranja"><li onclick="obten_id(\''+data[i].publicacionID+'\')">Contactar al anunciante</li> </ul> </br> <ul class="boton_gris"><li><img src="images/favorito.png"/>Agregar a Favoritos</li></ul>');
+						cont_datos.append(botones);	
+						$('.descripcion_del_anuncio').append(data[i].descripcion);
+						var video=$('.youtube_video');
+						var direccion=$('<iframe src="'+data[i].link+'"></iframe>');
+						    video.append(direccion);
+						}
+					
+				}
+	});
+	}
+	
+
+
+	
 </script>
 </div>
 
