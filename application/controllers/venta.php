@@ -139,30 +139,29 @@ class Venta extends CI_Controller
     }
 
     public function upload_file() {
-       $this->load->library('upload'); 
+        $config['upload_path'] = 'images/temp/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '900';
+        $config['max_width'] = '400';
+        $config['max_height'] = '400';
+        $config['file_name'] = UUID::v4();
 
-      
-        $config['upload_path'] = 'images/temp';
-        $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['max_size'] = '5120';
-        $config['max_width'] = '1024';
-        $config['max_height'] = '768';
-        $this->upload->initialize($config);
+        $this->load->library('upload', $config);
 
-        if (!$this->upload->do_multi_upload("files")) { 
-            
+        if (!$this->upload->do_upload('file_form')) {
             $error = array('error' => $this->upload->display_errors());
 
             echo json_encode($error);
         } else {
-            $values['imagenes'] = $this->upload->get_multi_upload_data(); 
-            $values['orig_name'] = 'images/tmp/' . $upload_data['orig_name'];
-            $values['url_logo'] = base_url() . 'images/tmp/' . $upload_data['orig_name'];
+            $upload_data = $this->upload->data();
+            $values['orig_name'] = 'images/temp/' . $upload_data['orig_name'];
+            $values['url_logo'] = base_url() . 'images/temp/' . $upload_data['orig_name'];
             $values['file_type'] = $upload_data['file_type'];
 
             echo json_encode($values);
         }
     }
+
 
     function anuncio(){
         $paqueteID = $this->input->post('paquete');
@@ -234,29 +233,34 @@ class Venta extends CI_Controller
          $publicacionID = $this->defaultdata_model->insertItem('publicaciones', $dataPublicacion);
         
         //VIDEOS PUBLICACION
-        $video = $this->input->post('url_video');
-                if( $video != null){
-                    for($i=0;$i<=$detallePaquete->videos;$i++){
-                        
-                        if($video[$i] != '0'){
-                        $arrVideo= array(
-                            'paqueteID' => $paqueteID,
-                            'publicacionID'   => $publicacionID,
-                            'servicioID' => $servicioID,
-                            'detalleID' =>  $detallePaquete->detalleID,
-                            'link' =>$video[$i]
-                        );
-                            $video = $this->admin_model->insertItem('videos',$arrVideo);
-                            //var_dump($e);
-                        }
-                        $arrVideo = null;
-                    }
-                }
+       
+        $precio_total = $this->input->post('total');
 
+           $preference_data = array(
+            "items" => array(
+                array(
+                    "title" => "Publicacion en directorio",
+                    "quantity" => 1,
+                    "currency_id" => "MXN",
+                    "unit_price" => floatval($precio_total)
+                )
+            ),
+            "payer" => array(
+                'name' => $this->session->userdata('nombre'),
+                'surname' => $this->session->userdata('apellido'),
+                'email' => $this->session->userdata('correo'),
+                'date_created' => date('Y-m-d')
+            ),
+            "back_urls" => array(
+                "success" => base_url('principal/miPerfil')
+            )
+        );
 
-               
+        $preference = $this->mercadopago->create_preference($preference_data);
+        echo '<iframe src="' . $preference['response']['sandbox_init_point'] . '" name="MP-Checkout" width="740" height="600" frameborder="0"></iframe>';
+    
 
-         echo json_encode($publicacionID);
+         //echo json_encode($publicacionID);
          
     }
 

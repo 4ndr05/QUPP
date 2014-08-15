@@ -9,6 +9,9 @@
 
 
 ?>
+<link href="http://hayageek.github.io/jQuery-Upload-File/uploadfile.min.css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://hayageek.github.io/jQuery-Upload-File/jquery.uploadfile.min.js"></script>
 
 <div>
 <div class="numeros_publicar_anuncio_mini">
@@ -110,7 +113,7 @@
                 <li>
 
                     <?php if ($paquetes[0]->cupones > 0): ?>
-                        <div class="cantidades_detalle_paquete_lite"> <?php echo $paquetes[0]->cupones ?></div>
+                        <div class="cantidades_detalle_paquete_lite_mini"> <?php echo $paquetes[0]->cupones ?></div>
                         <img src="<?php echo base_url() ?>images/icono_ticket.png" width="34" height="26"/>
                     <?php else: ?>
                         <div class="cantidades_detalle_paquete_of_mini"> <?php echo $paquetes[0]->cupones ?></div>
@@ -363,14 +366,45 @@
     <p class="margen_15_left_mini"><a href="<?php echo base_url() ?>#"> Tutorial para subir video a <img
                 src="<?php echo base_url() ?>images/logo_youtube.png" width="43" height="16"/> </a></p>
     <br/>
-
+<script>
+$(document).ready(function()
+{
+	$("#fileuploader").uploadFile({
+                url: "<?php echo base_url('venta/upload_file') ?>",
+                allowedTypes: "png,jpg,jpeg",
+                fileName: "file_form",
+                multiple: false,
+                showFileCounter: false,
+                returnType: 'json',
+                showStatusAfterSuccess: false,
+                onSuccess: function(files, data, xhr)
+                {
+                    $('#error_logo').fadeOut();
+                    $('#logo_image').fadeOut();
+                    if (data.error === undefined) {
+                        $('#logo_image').prop('src', data.url_logo);
+                        $('[name=name_logo_form]').val(data.orig_name).trigger('change');
+                        $('#name_logo_form').prop('src', data.url_logo);
+                        $('#logo_image').fadeIn();
+                    } else {
+                        $('#error_logo').fadeIn().text(data.error);
+                    }
+                }
+            });
+});
+</script>
     <p class="margen_15_left_mini">
-
+		 <div id="fileuploader" >Seleccionar Imagenes</div>
+         <input name="name_logo_form" value="" type="hidden"/>
+                            <div class="row-fluid">
+                                <span id="error_logo" style="display:none;" class="alert alert-error"></span>
+                                <img id="logo_image" class="span6 thumbnail" src=""/>
+                            </div>
         <!-- <iframe src="<?php echo base_url() ?>../subir_archivos/index.html" style="overflow:none;" scrolling="no" width="800" height="100"> </iframe> -->
     </p>
     
     <!--imagenes-->
-    <script>
+    <!--<script>
     jQuery(document).ready(function(){
     	$('#images').submit(function() {
  			 var files = $('#files');
@@ -385,77 +419,15 @@
             });     
    	 	});
     });
-    </script>
+    </script>-->
  	<!--<form action="#" method="post" enctype="multipart/form-data" id="images">
-  -->   <input type="file" id="files" name="files[]" multiple />
+  -->   <!--<input type="file" id="files" name="files[]" multiple />-->
      <!--<input type="submit" value="Agregar" />-->
 <!--    </form>-->
 
-<output id="list" class="preview"></output>
+<!--<output id="list" class="preview"></output>-->
 
-<script>
-  function handleFileSelect(evt) {
-     
-    var files = evt.target.files; // FileList object
-	   
-	var fotos = parseInt(document.getElementById('cantFotos').value);
-	if(files > fotos){
-		document.getElementById("msj_paso").innerHTML="Seleccionó más fotos de las permitidas"+"("+fotos+")";
-	}
-	console.log(files.length, fotos);
-    // Loop through the FileList and render image files as thumbnails.
-    for (var i = 0, f; f = files[i]; i++) {
 
-      // Only process image files.
-      if (!f.type.match('image.*')) {
-        continue;
-      }
-
-      var reader = new FileReader();
-
-      // Closure to capture the file information.
-      reader.onload = (function(theFile) {
-        return function(e) {
-          // Render thumbnail.
-          var span = document.createElement('span');
-          span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                            '" title="', escape(theFile.name), '" width="50"/><a href="#" class="del">X</a>'].join('');
-          document.getElementById('list').insertBefore(span, null);
-        };
-      })(f);
-
-      // Read in the image file as a data URL.
-      reader.readAsDataURL(f);
-    }
-    
-    //Preview
-    for (var i = 0, f; f = files[i]; i++) {
-
-      // Only process image files.
-      if (!f.type.match('image.*')) {
-        continue;
-      }
-
-      var reader = new FileReader();
-
-      // Closure to capture the file information.
-      reader.onload = (function(theFile) {
-        return function(e) {
-          // Render thumbnail.
-          var span = document.getElementById('slideshow_publicar_anuncio');
-          span.innerHTML = ['<img src="', e.target.result,
-                            '" title="', escape(theFile.name), '" width="294" height="200"/>'].join('');
-          document.getElementById('slideshow_publicar_anuncio').insertBefore(span, null);
-        };
-      })(f);
-
-      // Read in the image file as a data URL.
-      reader.readAsDataURL(f);
-    }
-  }
-
-  document.getElementById('files').addEventListener('change', handleFileSelect, false);
-</script>
 <br />
     <!--imagenes-->
     
@@ -657,7 +629,7 @@ $c = 0;
 					$c++;
 					if($cupon->tipoCupon == 2):
 					?>
-                    
+             <input type="hidden" name="cuponUsado" id="cuponUsado" value=""/>     
             <input type="radio" name="radiog_dark" id="radio_pago<?=$c?>" class="css-checkbox cupon" value="<?=$cupon->valor;?>" data-rel="<?=$cupon->cuponID;?>"/>
 <label for="radio_pago<?=$c?>" class="css-label radGroup<?=$c?>"><?=$cupon->valor;?>% de descuento</label>
 			
@@ -683,149 +655,55 @@ TOTAL
 </th>
 <th>
 <p class="totales" style="color: #FFF;">$<label id="totalConDescuento" class="nprecio"></label></p>
+<input type="hidden" name="total" id="total" value=""/>
 </th>
 </tr>
 </table>
 
 </br>
 
-<!--<ul class="morado_15_mini" >
-
-<li onclick="">
-Pagar
-</li>
-
-</ul>-->
-
-<?php 
-$preference_data = array(
-            "items" => array(
-                array(
-                    "title" => "Publicacion de anuncio",
-                    "quantity" => 1,
-                    "currency_id" => "MXN",
-                    "unit_price" => floatval(10.00)
-                )
-            ),
-            "payer" => array(
-                'name' => $this->session->userdata('nombre'),
-                'surname' => $this->session->userdata('apellido'),
-                'email' => $this->session->userdata('correo')
-            ),
-        );
+<div>
+                            <ul class="morado_directorio" id="btn_sig">
+                                <li class="sig_paso">
+                                  <input type="submit" value="Pagar"/>
+                                </li>
+                            </ul>
+              <br/>
+                            <br/>
+                            <div id="msj_paso" style="font-size: 10px;display: inline-block; vertical-align: bottom; height: 38px;"></div>
+                        </div>
 
 
-        $preference = $this->mercadopago->create_preference($preference_data);
-?>
-<ul class="boton_verde">
- <li>
-  <script type="text/javascript" src="http://mp-tools.mlstatic.com/buttons/render.js"></script>
-<a href="<?php echo $preference['response']['sandbox_init_point']; ?>" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn" style="padding: 0px;">Pagar</a>
-
- <script type="text/javascript">
-  function execute_my_onreturn(json) {
-    console.log(json.back_url, json.collection_id, json.collection_status, json.external_reference, json.preference_id);
-
- if (json.collection_status == 'approved' || json.collection_status == 'in_process') {
-     
-                var form = $('#p_form');
-                $.ajax({
-                    url:'<?php echo base_url('venta/anuncio') ?>',
-                    type:'post',
-                    dataType: 'JSON',
-                    data: form.serialize(),
-                    success: function(data){
-                        window.location = '<?php echo base_url() ?>principal/miperfil';
-                    }
-                });
-
-
-} else if (json.collection_status == 'pending') {
-    alert('El usuario no completó el pago');
-	} else if (json.collection_status == 'rejected') {
-      alert('El pago fué rechazado, el usuario puede intentar nuevamente el pago');
-}
-}
-                                                                        </script>
-                                                                    </li>
-                                                                </ul>
-
-</br>
-</br>
  
 </div>
    
 </div>
 
-<div id="paso_seis" class="paso" style="display:none;">
-                    <div class="descipcion_pasos_mediano">
-<?php 
-$preference_data = array(
-            "items" => array(
-                array(
-                    "title" => "Publicacion de anuncio",
-                    "quantity" => 1,
-                    "currency_id" => "MXN",
-                    "unit_price" => floatval(10.00)
-                )
-            ),
-            "payer" => array(
-                'name' => $this->session->userdata('nombre'),
-                'surname' => $this->session->userdata('apellido'),
-                'email' => $this->session->userdata('correo')
-            ),
-        );
 
-
-        $preference = $this->mercadopago->create_preference($preference_data);
-?>
-<ul class="boton_verde">
- <li>
-  <script type="text/javascript" src="http://mp-tools.mlstatic.com/buttons/render.js"></script>
-<a href="<?php echo $preference['response']['sandbox_init_point']; ?>" name="MP-Checkout" class="lightblue-ar-s-ov" mp-mode="modal" onreturn="execute_my_onreturn" style="padding: 0px;">Pagar</a>
-
- <script type="text/javascript">
-  function execute_my_onreturn(json) {
-    console.log(json.back_url, json.collection_id, json.collection_status, json.external_reference, json.preference_id);
-
- if (json.collection_status == 'approved' || json.collection_status == 'in_process') {
-     
-                var form = $('#p_form');
-                $.ajax({
-                    url:'<?php echo base_url('venta/anuncio') ?>',
-                    type:'post',
-                    dataType: 'JSON',
-                    data: form.serialize(),
-                    success: function(data){
-                        window.location = '<?php echo base_url() ?>principal/miperfil';
-                    }
-                });
-
-
-} else if (json.collection_status == 'pending') {
-    alert('El usuario no completó el pago');
-	} else if (json.collection_status == 'rejected') {
-      alert('El pago fué rechazado, el usuario puede intentar nuevamente el pago');
-}
-}
-                                                                        </script>
-                                                                    </li>
-                                                                </ul>                        
-                        <!--<div id="iframe"></div>-->
-                        <br/>
-                    </div>
-</div>
 </form>
 <!--boton se siguiente paso-->
+<div id="paso_seis" class="paso" style="display:none;">
+                    <div class="descipcion_pasos_mediano">
+                        <div class="titulo_de_pasos"> PUBLICAR EN DIRECTORIO </div>
+                        <div class="instrucciones_pasos"> Pago del directorio: </div>
+                        <div id="iframe"></div>
+                        <br/>
+                    </div>
+                </div>
 <br/>
 
-<div id="btn_sig" style="display: block; text-align: right; padding-right: 10px;">
+<!--<div id="btn_sig" style="display: block; text-align: right; padding-right: 10px;">
     <div id="msj_paso" style="font-size: 10px;display: inline-block; vertical-align: bottom; height: 38px;"></div>
     <ul class="morado_mini" style="display: inline-block;margin-top:-200px;">
         <li class="sig_paso">Continuar</li>
     </ul>
+</div>-->
+<div id="btn_sig" class="siguientePaso">
+    <div id="msj_paso"></div>
+    <ul class="morado_mini" style="display: inline-block;">
+        <li class="sig_paso">Continuar</li>
+    </ul>
 </div>
-
 
 </div>
 </div>
@@ -839,8 +717,8 @@ $preference_data = array(
             var sig_paso = $('.paso_show').next('.paso');
 			console.log($('.paso_show').next('.paso').prop('id'));
 			var num_paso = $('.paso_show').next('.paso').prop('id');
-			if(num_paso == 'paso_seis'){
-				oculta('btn_sig');
+			if(num_paso == 'paso_cinco'){
+				$('.siguientePaso').hide();
 			}
             if (revision_step($('.paso_show'))) {
                 $('.paso_show').removeClass('paso_show').hide();
@@ -992,11 +870,29 @@ $preference_data = array(
             console.log(precio);
             var descuentoCupon = (precio * (valor/100));
             var total = precio - (descuentoCupon);
-            console.log('cupom');
+            console.log(total);
             $('#descuentoCupon').html(descuentoCupon);
             $('#totalConDescuento').html(total);
+			$('#total').val(total);
+			$('#cuponUsado').val(cuponID);
 			
         });
+
+		 $('#p_form').submit(function(e){
+                e.preventDefault();
+                var form = $(this);
+                $.ajax({
+                    url:'<?php echo base_url('venta/anuncio') ?>',
+                    type:'post',
+                    dataType: 'html',
+                    data: form.serialize(),
+                    success: function(data){
+						
+                        $('#iframe').append(data);
+                    }
+                });
+            });
+        
 	
 
     });
