@@ -1375,7 +1375,7 @@ Enviar
 
 <!-- Inician secciones de contenido -->
 <!-- perros perdidos -->
-<a href="<?php echo base_url() ?>#" style="text-decoration:none; color:#000;"
+<a href="<?php echo base_url() ?>perdidos" style="text-decoration:none; color:#000;"
    onmouseover="Mostrar('ver_perdidos');Ocultar('ver_raza');Ocultar('ver_mes');Ocultar('ver_curiosos');">
     <div id="perros_perdidos" class="seccion_inferior_izquierda">
 
@@ -1400,7 +1400,7 @@ Enviar
 </a>
 <!-- End perros perdidos -->
 <!-- Raza del mes -->
-<a href="<?php echo base_url() ?>#" style="text-decoration:none; color:#000;"
+<a href="<?php echo base_url() ?>raza" style="text-decoration:none; color:#000;"
    onmouseover="Mostrar('ver_raza'); Ocultar('ver_perdidos');Ocultar('ver_mes'); Ocultar('ver_curiosos')">
     <div id="la_raza_mes" class="seccion_inferior_izquierda">
         <div class="contenido_secciones">
@@ -1426,7 +1426,7 @@ Enviar
 <!-- End raza del mes -->
 
 <!-- Eventos del mes -->
-<a href="<?php echo base_url() ?>#" style="text-decoration:none; color:#000;"
+<a href="<?php echo base_url() ?>evento" style="text-decoration:none; color:#000;"
    onmouseover="Mostrar('ver_mes');Ocultar('ver_raza'); Ocultar('ver_perdidos');Ocultar('ver_curiosos');">
     <div id="eventos_mes" class="seccion_inferior">
         <div class="contenido_secciones">
@@ -1449,7 +1449,7 @@ Enviar
 </a>
 <!-- End eventos del mes -->
 <!-- Datos curiosos -->
-<a href="<?php echo base_url() ?>#" style="text-decoration:none; color:#000;"
+<a href="<?php echo base_url() ?>curiosos" style="text-decoration:none; color:#000;"
    onmouseover="Mostrar('ver_curiosos');Ocultar('ver_raza'); Ocultar('ver_perdidos');Ocultar('ver_mes');">
     <div id="datos_curiosos" class="seccion_inferior_derecha">
         <div class="contenido_secciones">
@@ -1487,7 +1487,7 @@ Enviar
 
         <div class="contenido_final">
             <ul class="sub_menu_inferior">
-                <li> - ¿Quiénes Somos?
+                <li onclick="window.location.href='<?=base_url()?>quienes'"> - ¿Quiénes Somos?
                 </li>
                 <li>- La comunidad QUP</li>
             </ul>
