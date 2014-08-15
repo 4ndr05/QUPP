@@ -18,6 +18,7 @@ class Venta extends CI_Controller
         $this->load->library('googlemaps');
         $this->load->library('cart');
         $this->load->helper('date');
+        $this->load->library("UUID", true);
 
         $CI = & get_instance();
         $CI->config->load("mercadopago", TRUE);
@@ -47,7 +48,6 @@ class Venta extends CI_Controller
         $data['razas']       = $this->defaultdata_model->getRazas();
         $data['giros']       = $this->defaultdata_model->getGiros();
         $data['publicaciones']       = $this->venta_model->getAnuncios();
-        var_dump($data['publicaciones']);
         $this->load->view('venta_view', $data);
     }
 
@@ -138,6 +138,32 @@ class Venta extends CI_Controller
         }
     }
 
+    public function upload_file() {
+       $this->load->library('upload'); 
+
+      
+        $config['upload_path'] = 'images/temp';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '5120';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '768';
+        $this->upload->initialize($config);
+
+        if (!$this->upload->do_multi_upload("files")) { 
+            
+            $error = array('error' => $this->upload->display_errors());
+
+            echo json_encode($error);
+        } else {
+            $values['imagenes'] = $this->upload->get_multi_upload_data(); 
+            $values['orig_name'] = 'images/tmp/' . $upload_data['orig_name'];
+            $values['url_logo'] = base_url() . 'images/tmp/' . $upload_data['orig_name'];
+            $values['file_type'] = $upload_data['file_type'];
+
+            echo json_encode($values);
+        }
+    }
+
     function anuncio(){
         $paqueteID = $this->input->post('paquete');
         $detallePaquete = $this->defaultdata_model->getPaquete($paqueteID);
@@ -178,6 +204,8 @@ class Venta extends CI_Controller
 
         }
 
+       
+
         //PUBLICACION      
         $fecha = date('Y-m-d');
         $dias = $this->input->post('vigencia_texto');
@@ -204,7 +232,31 @@ class Venta extends CI_Controller
         );
 
          $publicacionID = $this->defaultdata_model->insertItem('publicaciones', $dataPublicacion);
-         redirect('principal/miPerfil');
+        
+        //VIDEOS PUBLICACION
+        $video = $this->input->post('url_video');
+                if( $video != null){
+                    for($i=0;$i<=$detallePaquete->videos;$i++){
+                        
+                        if($video[$i] != '0'){
+                        $arrVideo= array(
+                            'paqueteID' => $paqueteID,
+                            'publicacionID'   => $publicacionID,
+                            'servicioID' => $servicioID,
+                            'detalleID' =>  $detallePaquete->detalleID,
+                            'link' =>$video[$i]
+                        );
+                            $video = $this->admin_model->insertItem('videos',$arrVideo);
+                            //var_dump($e);
+                        }
+                        $arrVideo = null;
+                    }
+                }
+
+
+               
+
+         echo json_encode($publicacionID);
          
     }
 
@@ -218,5 +270,9 @@ class Venta extends CI_Controller
 
         echo json_encode($this->venta_model->getPublicaciones($raza,$genero,$estado,$precio,$palabra_clave));
 
+    }
+
+    function preferencia(){
+        var_dump($_POST);
     }
 }

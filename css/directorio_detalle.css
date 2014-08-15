@@ -1,7 +1,7 @@
 .contenido_directorio{
 	margin-top:15px;
 	display:inline-block;
-	width:316px;
+	width:315px;
 	height:251px;
 	border: 3px solid #DED9D5;
 	-moz-border-radius: 15px; /* Firefox */
@@ -42,7 +42,7 @@
 .contenedor_descripcion_detalle{
 	display:inline-block;
 	margin-top:15px;
-	width:436px;
+	width:435px;
 	height:271px;
 	}
 .contenedor_del_mapa{

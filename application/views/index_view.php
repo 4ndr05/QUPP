@@ -1025,7 +1025,7 @@
 <div id="contenedor_paquetes" class="contenedor_paquetes">
 
 <a href="#"  class="paquete_comprar reset"
-   data-paquete='{"id":"<?php echo $paquetes[0]->paqueteID ?>","nombre":"<?php echo $paquetes[0]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[0]->vigencia ?>","precio":"<?php echo $paquetes[0]->precio ?>","caracteres":"<?php echo $paquetes[0]->caracteres ?>","cantFotos":"<?php echo $paquetes[0]->cantFotos ?>","videos":"<?php echo $paquetes[0]->videos ?>"}'>
+   data-paquete='{"id":"<?php echo $paquetes[0]->paqueteID ?>","nombre":"<?php echo $paquetes[0]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[0]->vigencia ?>","precio":"<?php echo $paquetes[0]->precio ?>","caracteres":"<?php echo $paquetes[0]->caracteres ?>","cantFotos":"<?php echo $paquetes[0]->cantFotos ?>","videos":"<?php echo $paquetes[0]->videos ?>","cupones":"<?php echo $paquetes[0]->cupones ?>"}'>
     <div class="paquetes_izquierda">
         <div class="title_paquetes">
             <div class="lateral_lite"></div>
@@ -1099,7 +1099,7 @@
     </div>
 </a>
 <a href="<?php echo base_url() ?>#" class="paquete_comprar reset"
-   data-paquete='{"id":"<?php echo $paquetes[1]->paqueteID ?>","nombre":"<?php echo $paquetes[1]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[1]->vigencia ?>","precio":"<?php echo $paquetes[1]->precio ?>","caracteres":"<?php echo $paquetes[1]->caracteres ?>","cantFotos":"<?php echo $paquetes[1]->cantFotos ?>","videos":"<?php echo $paquetes[0]->videos ?>"}'>
+   data-paquete='{"id":"<?php echo $paquetes[1]->paqueteID ?>","nombre":"<?php echo $paquetes[1]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[1]->vigencia ?>","precio":"<?php echo $paquetes[1]->precio ?>","caracteres":"<?php echo $paquetes[1]->caracteres ?>","cantFotos":"<?php echo $paquetes[1]->cantFotos ?>","videos":"<?php echo $paquetes[1]->videos ?>","cupones":"<?php echo $paquetes[1]->cupones ?>"}'>
     <div class="paquetes">
         <div class="title_paquetes">
             <div class="lateral_regular"></div>
@@ -1177,7 +1177,7 @@
 
 </a>
 <a href="<?php echo base_url() ?>#" class="paquete_comprar reset"
-   data-paquete='{"id":"<?php echo $paquetes[2]->paqueteID ?>","nombre":"<?php echo $paquetes[2]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[2]->vigencia ?>","precio":"<?php echo $paquetes[2]->precio ?>","caracteres":"<?php echo $paquetes[2]->caracteres ?>","cantFotos":"<?php echo $paquetes[2]->cantFotos ?>","videos":"<?php echo $paquetes[0]->videos ?>"}'>
+   data-paquete='{"id":"<?php echo $paquetes[2]->paqueteID ?>","nombre":"<?php echo $paquetes[2]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[2]->vigencia ?>","precio":"<?php echo $paquetes[2]->precio ?>","caracteres":"<?php echo $paquetes[2]->caracteres ?>","cantFotos":"<?php echo $paquetes[2]->cantFotos ?>","videos":"<?php echo $paquetes[2]->videos ?>","cupones":"<?php echo $paquetes[2]->cupones ?>"}'>
     <div class="paquetes_derecha">
         <div class="title_paquetes">
             <div class="lateral_premium"></div>

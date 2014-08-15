@@ -86,7 +86,7 @@ Directorio
 <img src="<?=base_url()?>images/banner_superior/1.png" width="638" height="93"/>
 <img src="<?=base_url()?>images/banner_superior/2.png" width="638" height="93"/>
 <img src="<?=base_url()?>images/banner_superior/3.png" width="638" height="93"/>
-	</div>
+  </div>
 
 
 
@@ -1088,18 +1088,18 @@ VENTA
  <form id="filtro_venta">
 <div class="fondo_select">
 <select   class="estilo_select" id="raza" name="raza">
-<option > Selecciona un raza </option>
+<option value="" > Selecciona un raza </option>
 <?php if($razas != null):
-	foreach($razas as $raza):?>
+  foreach($razas as $raza):?>
 <option style="background-color: #BCBEC0;" value="<?=$raza->razaID?>"><?=$raza->raza?></option>
 <?php endforeach;
-		endif;?>
+    endif;?>
 </select>
 </div>
 
 <div class="fondo_select">
 <select   class="estilo_select" id="genero" name="genero">
-<option > Selecciona un género </option>
+<option value="" > Selecciona un género </option>
 <option style="background-color: #BCBEC0;">Macho </option>
 <option style="background-color: #BCBEC0;">Hembra </option>
 
@@ -1108,26 +1108,26 @@ VENTA
 
 <div class="fondo_select">
 <select   class="estilo_select" id="estado" name="estado">
-<option > Selecciona un Estado </option>
+<option value=""> Selecciona un Estado </option>
 <?php if($estados != null):
-	foreach($estados as $estado):?>
+  foreach($estados as $estado):?>
 <option style="background-color: #BCBEC0;" value="<?=$estado->estadoID?>"><?=$estado->nombreEstado?></option>
 <?php endforeach;
-		endif;?>
+    endif;?>
 
 </select>
 </div>
 <div class="fondo_select">
 <select   class="estilo_select" id="Precio" name="precio">
-<option > Ordenar por precio </option>
+<option value="" > Ordenar por precio </option>
 <option style="background-color: #BCBEC0;" value="asc"> De menor a mayor </option>
 <option style="background-color: #BCBEC0;" value="desc"> De mayor a menor </option>
 
 </select>
 </div>
 <div class="contenedor_buscar">
-<input type="text" class="buscar" size="4" value="Palabras clave" name="palabra_clave" id="palabra_clave"/>
-<input type="button" height="40" value="   " class="boton_palabras_clave" />
+<input  type="text" class="buscar" size="4" name="palabra_clave" id="palabra_clave"/>
+<input type="button" height="40" value="  " class="boton_palabras_clave" />
 </div>
 </form>
 </div>
@@ -1149,9 +1149,13 @@ VENTA
 <div class="contenedor_central" style="margin-top:5px;">
 
       <!-- item container -->
-      <ul id="itemContainer">
-<?php if($publicaciones != null):
-		foreach($publicaciones as $publicacion):?>
+      <ul id="itemContainer" style="display:inline-block;">
+      <?php $fila = 1; ?>
+     
+<?php
+         
+    foreach($publicaciones as $publicacion):
+    ?>
    <!-- INICIO contenedor anuncio  -->
 <div class="contenedor_anuncio">
 <div class="titulo_anuncio">
@@ -1160,7 +1164,7 @@ VENTA
 <div class="descripcion_anuncio">
 <font> Precio: <?=$publicacion->precio?></font>
 <br/>
-<font> Raza: <?=$publicacion->raza?> </font>
+<font> Raza: <?=$publicacion->genero?> </font>
 <br/>
 <font> Género: <?=$publicacion->genero?> </font>
 <br/>
@@ -1169,23 +1173,32 @@ VENTA
 <div class="contenedor_foto_anuncio">
 <img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
 </div>
-<ul class="ver_detalle_anuncio">
-<li onclick="muestra('contenedor_anuncio_detalle');" >
-Ver detalle
-</li>
-</ul>
+ 
+          <ul class="ver_detalle_anuncio">
+                        <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
+                            <li oonclick="muestra('contenedor_anuncio_detalle');">
+                                Ver detalle...
+                            </li>
+                        <?php else: ?>
+                            <li onclick="javascript:alert('Favor de iniciar sesión.')">
+                                Ver detalle...
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
 
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
+                <!-- Fin contenedor annuncio -->
 
-</div>
-  <!-- FIN margen falso -->
- <?php endforeach;
- 		endif;?>
- 
+                <?php if (4 > $fila++): ?>
+                    <!-- Inicio margen falso -->
+                    <div class="margen_derecho_20">
+
+                    </div>
+                <?php else: ?>
+                    <?php $fila = 1; ?>
+                <?php endif; ?>
+                <!-- FIN margen falso -->
+            <?php endforeach; ?>
 
       </ul>
       
@@ -1211,7 +1224,7 @@ Ver detalle
 
         /* initiate the plugin */
         $("div.holder").jPages({
-            containerID: "itemContainer_negocio",
+            containerID: "itemContainer",
             perPage: 25,
             startPage: 1,
             startRange: 1,
@@ -1222,6 +1235,7 @@ Ver detalle
         $("#filtro_venta select[name]").on('change', function(e) {
             e.preventDefault();
             var form = $("#filtro_venta");
+      
             search_data(form);
         });
         $("#filtro_venta [name]").keyup(function() {
@@ -1232,6 +1246,7 @@ Ver detalle
         });
 
         function search_data(form) {
+    
             $.ajax({
                 url: '<?php echo base_url('venta/lista') ?>',
                 data: form.serialize(),
@@ -1244,6 +1259,7 @@ Ver detalle
                 {
                     $("#itemContainer").empty();
                     var data = result.data;
+          
                     var separator = 1;
 
                     if (result.count < 1) {
@@ -1252,32 +1268,37 @@ Ver detalle
 
                     for (var i = 0; i < result.count; i++)
                     {
-                        var cont_neg = $('<div class="contenedor_negocio"></div>');
-                        cont_neg.data('object', data[i]);
+            if (data[i].genero==0)
+            var el_genero="Hembra";
+            else  var el_genero="Macho";
+             
+            
+                        var cont_anun = $('<div class="contenedor_anuncio"></div>');
+            var cont_titulo= $('<div class="titulo_anuncio"></div>');
+            cont_titulo.append(data[i].titulo);
+            cont_anun.append(cont_titulo);
+            
+          var cont_descripcion = $('<div class="descripcion_anuncio"></div>');
+                        cont_descripcion.append('<font> Precio:' + data[i].precio + '</font> </br> <font> Raza: '+data[i].raza.substring(0, 15) +' </font></br> <font>Género:'+el_genero+'</font></br> <font>Ciudad:'+data[i].nombreEstado+'</font> ');
+                        cont_anun.append(cont_descripcion);
+                        
+                        var cont_imagen = $('<div class="contenedor_foto_anuncio"></div>');
+                        var logo = 'perro.png';
+                        cont_imagen.append('<img src="images/anuncios/01/' + logo + '" alt="logo" width="128" height="80"/>');
+                        cont_anun.append(cont_imagen);
 
-                        var cont_imagen = $('<div class="contenedor_imagen_negocio"></div>');
-                        var logo = data[i].logo !== null ? data[i].logo : 'adistramiento_canino.png';
-                        cont_imagen.append('<img src="images/giros_negocio/' + logo + '" alt="logo"/>');
-                        cont_neg.append(cont_imagen);
-
-                        var cont_nombre = $('<div class="contenedor_nombre_negocio"></div>');
-                        cont_nombre.append('<strong>' + data[i].nombreNegocio + '</strong>');
-                        cont_neg.append(cont_nombre);
-                        var cont_descrip = $('<div class="contenedor_descripcion_negocio"></div>');
-                        cont_descrip.append(data[i].nombreGiro + '<br/>' + data[i].telefono);
-                        cont_neg.append(cont_descrip);
 <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
-                            var ver_mas = $('<ul class="ver_mas_negocio"><li onclick=" javascript:window.location.href=\'<?php echo base_url() ?>directorio/detalles/' + data[i].idUsuario + '\'">Ver más...</li></ul>');
+                            var ver_mas = $('<ul class="ver_detalle_anuncio"><li onclick="muestra(\'contenedr_anuncio_detalle\')">Ver detalle...</li></ul>');
 <?php else: ?>
-                            var ver_mas = $('<ul class="ver_mas_negocio"><li onclick="javascript:alert(\'Favor de iniciar sesión.\')">Ver más...</li></ul>');
+                            var ver_mas = $('<ul class="ver_mas_negocio"><li onclick="javascript:alert(\'Favor de iniciar sesión.\')">Ver detalle...</li></ul>');
 
 <?php endif; ?>
-                        cont_neg.append(ver_mas);
+                        cont_anun.append(ver_mas);
 
-                        $("#itemContainer_negocio").append(cont_neg);
-                        if (3 > separator++)
+                        $("#itemContainer").append(cont_anun);
+                        if (4 > separator++)
                         {
-                            $("#itemContainer_negocio").append('<div class="margen_derecho_20"></div>');
+                            $("#itemContainer").append('<div class="margen_derecho_20"></div>');
                         }
                         else {
                             separator = 1;
@@ -1287,8 +1308,8 @@ Ver detalle
                 },
                 complete: function() {
                     $("div.holder").jPages({
-                        containerID: "itemContainer_negocio",
-                        perPage: 25,
+                        containerID: "itemContainer",
+                        perPage: 28,
                         startPage: 1,
                         startRange: 1,
                         midRange: 5,
@@ -1312,7 +1333,7 @@ Ver detalle
 <img src="<?=base_url()?>images/banner_inferior/1.png" width="638" height="93"/>
 <img src="<?=base_url()?>images/banner_inferior/2.png" width="638" height="93"/>
 <img src="<?=base_url()?>images/banner_inferior/3.png" width="638" height="93"/>
-	</div>
+  </div>
     
 <div class="division_menu_inferior"> </div>
 <div class="contenedor_menu_inferior" align="center"> 

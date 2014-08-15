@@ -65,8 +65,8 @@ color: #FFFFFF;
 	background-image:url(../images/ver_mas_evento.png);
 	background-repeat:no-repeat;
 	position:absolute;
-	margin-top: 18px;
-    margin-left: 276px;
+	margin-top: -23px;
+    margin-left: 408px;
 	text-align:right;
 	font-weight:bolder;
 }
@@ -93,9 +93,10 @@ color: #FFFFFF;
 	display:inline-block;
     margin-top: 78px;
     width: 238px;
-    height: 368px;
+    height: 370px;
     margin-left: 18px;
-	float:left;}
+	float:left;
+	margin-right:15px;}
 .contender_texto_descripcion{
 	margin-left:10px;
 	margin-top: 78px;
@@ -110,7 +111,8 @@ color: #FFFFFF;
 	height:609px;
 	border-left: 3px solid #707173;
 	margin-left:10px;
-	overflow-x:auto;
+	overflow-y:auto;
+	position:absolute;
 	 }
 .evento_proximo{
 	width:189px;
@@ -178,5 +180,12 @@ color: #FFFFFF;
 	background-color:#999;}
 .contenedor_texto_inferior{
 	width:573px;
-	background-color:#CCCCCC;
+	margin-top:-364px;
+	}
+.recuadro_rosa{
+	width:12px;
+	height:12px;
+	background-color:#D40050;
+	display: inline-block;
+    margin-top: 5px;
 	}
