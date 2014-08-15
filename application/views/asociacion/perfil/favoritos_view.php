@@ -171,15 +171,9 @@ Denunciar Anuncio
 <div class="admin_title"> Favoritos </div>
 </div>
 </br>
-  
-
-
-
   <ul id="itemContainer">
    <!-- INICIO contenedor anuncio  -->
 
- 
- 
   <!-- Inicio margen falso -->
  <div class="margen_derecho_20">
 
@@ -203,8 +197,8 @@ Denunciar Anuncio
 
 
 
-
-<?php   foreach ($favoritos as $favorito) { ?>
+<?php if ($favoritos != Null) { ?>
+<?php foreach ($favoritos as $favorito) { ?>
 
 <div class="contenedor_anuncio">
 <div class="titulo_anuncio">
@@ -218,7 +212,7 @@ Denunciar Anuncio
 <br/>
 <font> Género: <?php echo $favorito->genero ?></font>
 <br/>
-<font> Ciudad: <?php echo $favorito-> ?></font>
+<font> Ciudad: <?php echo  ($favorito->nombreEstado)  ?></font>
 </div>
 <div class="contenedor_foto_anuncio">
 <img src="images/anuncios/01/perro.png" align="middle" width="128" height="80" />
@@ -228,20 +222,6 @@ Denunciar Anuncio
 Ver detalle
 </li>
 </ul>
-
+<?php }?>
+<?php }?>
  </div> <!-- Fin contenedor annuncio -->
-
-<div id="contenedor_ver_mensaje<?php echo $mensaje->mensajeID ?>" class="contenedor_publicar_anuncio" style="display:none;">
-<div class="cerrar_mensaje">
-<img src="<?php echo base_url()?>images/cerrar.png" onclick="oculta('contenedor_ver_mensaje<?php echo $mensaje->mensajeID ?>');"/>
-</div>
-<div id="ver_mensaje" class="ver_mensaje">
-<div class="contenedor_titulo_mensaje">
-<font class="titulo_mensaje"> MENSAJE </font>
-</div>
-<div class="mensaje"> 
-<strong> <?php echo $mensaje->asunto ?></strong>
-</br>
-<strong><?php echo substr($mensaje->mensaje,0,15); ?> </strong>
-</br></br>
-<?php echo $mensaje->mensaje ?>

@@ -115,19 +115,19 @@ FROM usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUs
     }
 
     function getFavoritos($idUsuario){
-    	$query = $this->db->query('SELECT * from favoritos d, publicaciones a, serviciocontratado b, usuario c 
+    	$query = $this->db->query('SELECT * from favoritos d, publicaciones a, serviciocontratado b, usuario c, estado e
 			where a.servicioID = b.servicioID
 			and b.idUsuario = c.idUsuario
 			and d.publicacionID = a.publicacionID
+			and a.estadoID = e.estadoID
 			and d.idusuario =' .$idUsuario);
     	if ($query->num_rows() >= 1){
 			return $query->result();
 		} else {
 			return null;
 		}
-
-
     }
+
     function getFacturas($idUsuario){
     	$query = $this->db->query('SELECT  a.compraID, c.detalle, a.total, a.fecha
 			FROM compra a, compradetalle b, productodetalle c
