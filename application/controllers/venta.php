@@ -233,8 +233,50 @@ class Venta extends CI_Controller
          $publicacionID = $this->defaultdata_model->insertItem('publicaciones', $dataPublicacion);
         
         //VIDEOS PUBLICACION
+         $video = $this->input->post('url_video');
+                if( $video != null){
+                    for($i=0;$i<=count($video);$i++){                        
+                        if($video[$i] != '0' && $video[$i] != null){
+                        $arrVideo= array(
+                            'paqueteID' => $paqueteID,
+                            'publicacionID'   => $publicacionID,
+                            'servicioID' => $servicioID,
+                            'detalleID' =>  $detallePaquete->detalleID,
+                            'link' =>$video[$i]
+                        );
+                            $video = $this->admin_model->insertItem('videos',$arrVideo);
+                            //var_dump($e);
+                        }
+                        $arrVideo = null;
+                    }
+                }
 
+        //IMAGENES
+         $name_logo_form = $this->input->post('name_logo_form');
+                if( $name_logo_form != null){
+                    for($i=0;$i<=count($name_logo_form);$i++){     
+                        //Se mueve la imagen de tmp a negocio_logo
+                        $name_file = explode('/', $name_logo_form);
 
+                        if (!file_exists('images/anuncios/' . $name_file[2])) {
+                            rename($name_logo_form, 'images/anuncios/' . $name_file[2]);
+                        }
+                        $logo_form = 'images/anuncios/' . $name_file[2];                   
+                        
+                        $arrFoto= array(
+                            'paqueteID' => $paqueteID,
+                            'publicacionID'   => $publicacionID,
+                            'servicioID' => $servicioID,
+                            'detalleID' =>  $detallePaquete->detalleID,
+                            'foto' =>$logo_form
+                        );
+                            $fotoID = $this->admin_model->insertItem('fotospublicacion',$arrFoto);
+                                                   
+                        $arrVideo = null;
+                    }
+                }
+
+        
 
          //COMPRA
          $valorCupon = $this->input->post('radiog_dark');
@@ -252,20 +294,20 @@ class Venta extends CI_Controller
             'subtotal' => $detallePaquete->precio,
             'total' => $precio_total,
             'usuarioID' => $this->session->userdata('idUsuario'),
-            'pagado' => 1
+            'pagado' => 0
         );
         $compraID = $this->defaultdata_model->insertItem('compra', $compra);
 
         $compradetalle = array(
             'cantidad' => 1,
-            'color' => null,
-            'talla' => null,
+            'color' => '',
+            'talla' => '',
             'compraID' => $compraID,
             'nombre' => $detallePaquete->nombrePaquete,
             'precio' => $detallePaquete->precio,
-            'productoID' => NULL
+            'productoID' => $publicacionID
         );
-       
+        $compraDetalle = $this->defaultdata_model->insertItem('compradetalle', $compradetalle);
            $preference_data = array(
             "items" => array(
                 array(
@@ -282,7 +324,9 @@ class Venta extends CI_Controller
                 'date_created' => date('Y-m-d')
             ),
             "back_urls" => array(
-                "success" => base_url('principal/miPerfil')
+                "success" => base_url().'venta/updateCompra/'.$compraID.'/1/'.$servicioID,
+                "pending" => base_url().'venta/updateCompra/'.$compraID.'/1/'.$servicioID,
+                "failure" => base_url().'venta/updateCompra/'.$compraID.'/0/'.$servicioID
             )
         );
 
@@ -312,7 +356,9 @@ class Venta extends CI_Controller
 
     }
 
-    function preferencia(){
-        var_dump($_POST);
+    function updateCompra($compraID,$estado,$servicioID){
+        $this->defaultdata_model->updateItem('compraID', $compraID, $data = array('pagado' => $estado), 'compra');
+        $this->defaultdata_model->updateItem('servicioID', $servicioID, $data = array('pagado' => $estado), 'serviciocontratado');
+        redirect('principal/miPerfil');
     }
 }
