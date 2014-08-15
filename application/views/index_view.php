@@ -22,16 +22,7 @@
     <script src="<?php echo base_url() ?>js/funciones_.js" type="text/javascript"></script>
 
 
-    <script>
-        if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
-
-            document.write('<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/index_.css" media="screen"></link> <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/general.css" media="screen"></link> ');
-        }
-        if (navigator.appName == "Microsoft Internet Explorer") {
-
-            document.write('<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/index_explorer.css" media="screen"></link>');
-        }
-    </script>
+  <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/index_.css" media="screen"></link> <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/general.css" media="screen"></link> 
 
     <!-- [if lt IE ]>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/index_explorer.css" media="screen"></link>
@@ -167,6 +158,110 @@
 
     });
 </script>
+ <!-- /////   Contenedor publicidad -->
+ <!-- -->
+ <!-- -->
+<div id="publicidad" class="contenedor_negro" style="display:none;">
+<div class="cerrar_publi"> <img src="images/cerrar.png" onclick="oculta('publicidad');"/> </div>
+<div class="contenedor_publicidad">
+<div class="titulo_publicidad"> PUBLICIDAD </div>
+<div class="instrucciones"> ¿Quieres anunciar tu marca, producto, servicio o evento con nosotros? </div>
+<div class="contenedor_perrito_instrucciones"> <img src="images/pero_paso_uno.png" width="94" height="84" /><div class="instrucciones_perrito"> Envianos tus datos y nos ponemos en contacto contigo</div></div>
+</br>
+</br>
+<table class="tabla_contacto_publicidad"> 
+<tr> 
+<td height="30"> Contacto: </td>
+<td> <input class="input_bg_gris" type="text" placeholder=" Nombre"/> <input class="input_bg_gris" type="text" placeholder=" Apellidos"/></td>
+</tr>
+<tr>
+<td height="30"> E-mail: </td>
+<td><input class="input_bg_gris" placeholder="ejemplo@uno.com" type="text" /> </td>
+</tr>
+<tr>
+<td height="31"> Teléfono: </td>
+<td> <input class="input_bg_gris" type="text" /> </td>
+</tr>
+<tr> 
+<td height="30"> Empresa: </td>
+<td> <input class="input_bg_gris" type="text" /> </td>
+</tr>
+<tr> 
+<td height="30"> Sitio Web: </td>
+<td> <input class="input_bg_gris" type="text"/> </td>
+</tr>
+</table>
+<div class="separador_morado_publicidad"> </div>
+<table class="tabla_contacto_publicidad"> 
+<tr>
+<td height="30" >¿Como te enteraste de nosotros?: </td>
+<td > <select class="input_bg_gris">
+    <option> ---- </option>
+    <option> Redes sociales </option>
+    <option> Buscadores web </option>
+    <option> Publicidad Impresa </option>
+    <option> Evento </option>
+    <option> Otro </option>
+ </select> </td>
+</tr>
+<tr> 
+<td colspan="3">
+Comentarios: 
+</br>
+<textarea class="input_bg_gris" cols="40" rows="5"> </textarea>
+ </td>
+</tr>
+</table>
+
+<ul class="morado_pub">
+<li>
+Enviar
+</li>
+</ul>
+</div>
+ </div>
+ 
+ <!-- /////   Contenedor soporte -->
+ <!-- -->
+ <!-- -->
+ 
+ <div class="contenedor_negro" id="soporte" style="display:none;">
+ <div class="cerrar_publi"> <img src="images/cerrar.png" onclick="oculta('soporte');"/> </div>
+ <div class="contenedor_publicidad">
+ <div class="titulo_publicidad"> SOPORTE </div>
+<div class="instrucciones"> ¿Tienes problemas en nuestra pagina? </div>
+<div class="contenedor_perrito_instrucciones"> <img src="images/pero_paso_uno.png" width="94" height="84" /><div class="instrucciones_perrito_soporte"> Si estás teniendo problemas con la compra de algún paquete, la creación de tu anuncio o tienes cualquier comentario, contáctanos.</div>
+
+</div>
+</br>
+
+<table width="692" class="tabla_soporte">
+<tr> 
+<td width="115" height="30"> Contacto: </td>
+<td width="336"> <input type="text" class="input_bg_gris" placeholder=" Nombre" /> <input type="text" class="input_bg_gris" placeholder=" Apellidos" /> </td>
+<td width="73"> E-mail:</td>
+<td width="166"> <input type="text" class="input_bg_gris" placeholder="ejemplo@hotmail.com"/> </td>
+</tr>
+<tr>
+<td height="30"> Asunto: </td>
+<td colspan="3"><input type="text" class="input_bg_gris" /></td>
+ </tr>
+<tr> 
+<td height="30"> Comentarios: </td>
+<td colspan="3"> <textarea class="input_bg_gris" cols="67"> </textarea></td>
+</tr>
+ </table>
+ </br>
+ </br>
+ 
+ <ul class="morado_pub">
+<li>
+Enviar
+</li>
+</ul>
+ </div>
+ 
+  </div>
 
 
 <!--		CONTENEDOR LOGIN							-->
@@ -849,7 +944,7 @@
 
 
     <ul class="iconos_estatus">
-        <li>
+        <li >
 
             <img id="horizontal_compras_mini"
                  onmouseover="mostrar_icono('horizontal_compras'); ocultar_icono('horizontal_compras_mini');"
@@ -861,18 +956,19 @@
                  onclick="window.location='<?= base_url() ?>carrito';"/>
 
         </li>
-        <li>
+        <li <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
+       <?php else: ?> onclick="muestra('contenedor_login');oculta('envio_con');muestra('ingreso_normal');" <?php endif; ?>>
             <img id="horizontal_ingresar_mini"
                  onmouseover="mostrar_icono('horizontal_ingresar'); ocultar_icono('horizontal_ingresar_mini');"
                  class="iconos_flotantes" src="<?php echo base_url() ?>images/ingresar_horizontal_mini.png"/>
 
             <img class="iconos_flotantes2"
                  onmouseout="mostrar_icono('horizontal_ingresar_mini'); ocultar_icono('horizontal_ingresar');"
-                 onclick="muestra('contenedor_login');oculta('envio_con');muestra('ingreso_normal');" id="horizontal_ingresar"
+                id="horizontal_ingresar"
                  src="<?php echo base_url() ?>images/ingresar_horizontal.png"/>
         </li>
 
-        <li>
+        <li  <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>  <?php else: ?>onclick="muestra('contenedor_registro');" <?php endif; ?>>
             <img id="horizontal_registrate_mini"
                  onmouseover="mostrar_icono('horizontal_registrate'); ocultar_icono('horizontal_registrate_mini');"
                  class="iconos_flotantes" src="<?php echo base_url() ?>images/registrate_horizontal_mini.png"/>
@@ -897,11 +993,29 @@
             </div> 
 
             <img src="<?php echo base_url() ?>images/compras.png"/></li>
-        <li onclick="muestra('contenedor_login');oculta('envio_con');muestra('ingreso_normal');">
-            <div class="indicador"> <img src="images/indicador_no.png"> </div>
-            <img src="<?php echo base_url() ?>images/sesion.png"/></li>
-        <li onclick="muestra('contenedor_registro');">
-            <div class="indicador"> <img src="<?php echo base_url() ?>images/indicador_si.png"> </div>
+        <li 
+        <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
+       <?php else: ?> onclick="muestra('contenedor_login');oculta('envio_con');muestra('ingreso_normal');" <?php endif; ?>>
+        
+        
+        
+            <div class="indicador">
+             <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
+             <img src="images/indicador_si.png">
+             <?php else: ?>
+             <img src="images/indicador_no.png">
+             <?php endif; ?>
+              </div>
+            <img src="<?php echo base_url() ?>images/sesion.png"/></li> 
+            
+        <li <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>  <?php else: ?>onclick="muestra('contenedor_registro');" <?php endif; ?>>
+            <div class="indicador"> 
+            <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
+             <img src="images/indicador_si.png">
+             <?php else: ?>
+             <img src="images/indicador_no.png">
+             <?php endif; ?>
+             </div>
             <img src="<?php echo base_url() ?>images/registrate.png"/>
         </li>
     </ul>
@@ -980,15 +1094,25 @@
         <!-- MyFavoritePetShop -->
         <div id="fb-root"></div>
         <div id="fb-root"></div>
-        <script>(function (d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s);
-                js.id = id;
-                js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.0";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
-        <div class="fb-like-box" data-href="<?php echo base_url() ?>https://www.facebook.com/interKreativa"
+        <script>
+		   window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '343695012453981',
+          xfbml      : true,
+          version    : 'v2.0'
+        });
+      };
+		
+		
+		 (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+       </script>
+        <div class="fb-like-box" data-href="https://www.facebook.com/quierounperro.com.mx"
              data-height="192" data-width="215" data-colorscheme="light" data-show-faces="false" data-header="false"
              data-stream="true" data-show-border="false"></div>
     </div>
@@ -1025,7 +1149,7 @@
 <div id="contenedor_paquetes" class="contenedor_paquetes">
 
 <a href="#"  class="paquete_comprar reset"
-   data-paquete='{"id":"<?php echo $paquetes[0]->paqueteID ?>","nombre":"<?php echo $paquetes[0]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[0]->vigencia ?>","precio":"<?php echo $paquetes[0]->precio ?>","caracteres":"<?php echo $paquetes[0]->caracteres ?>","cantFotos":"<?php echo $paquetes[0]->cantFotos ?>","videos":"<?php echo $paquetes[0]->videos ?>","cupones":"<?php echo $paquetes[0]->cupones ?>"}'>
+   data-paquete='{"id":"<?php echo $paquetes[0]->paqueteID ?>","nombre":"<?php echo $paquetes[0]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[0]->vigencia ?>","precio":"<?php echo $paquetes[0]->precio ?>","caracteres":"<?php echo $paquetes[0]->caracteres ?>","cantFotos":"<?php echo $paquetes[0]->cantFotos ?>","videos":"<?php echo $paquetes[0]->videos ?>"}'>
     <div class="paquetes_izquierda">
         <div class="title_paquetes">
             <div class="lateral_lite"></div>
@@ -1099,7 +1223,7 @@
     </div>
 </a>
 <a href="<?php echo base_url() ?>#" class="paquete_comprar reset"
-   data-paquete='{"id":"<?php echo $paquetes[1]->paqueteID ?>","nombre":"<?php echo $paquetes[1]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[1]->vigencia ?>","precio":"<?php echo $paquetes[1]->precio ?>","caracteres":"<?php echo $paquetes[1]->caracteres ?>","cantFotos":"<?php echo $paquetes[1]->cantFotos ?>","videos":"<?php echo $paquetes[1]->videos ?>","cupones":"<?php echo $paquetes[1]->cupones ?>"}'>
+   data-paquete='{"id":"<?php echo $paquetes[1]->paqueteID ?>","nombre":"<?php echo $paquetes[1]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[1]->vigencia ?>","precio":"<?php echo $paquetes[1]->precio ?>","caracteres":"<?php echo $paquetes[1]->caracteres ?>","cantFotos":"<?php echo $paquetes[1]->cantFotos ?>","videos":"<?php echo $paquetes[0]->videos ?>"}'>
     <div class="paquetes">
         <div class="title_paquetes">
             <div class="lateral_regular"></div>
@@ -1177,7 +1301,7 @@
 
 </a>
 <a href="<?php echo base_url() ?>#" class="paquete_comprar reset"
-   data-paquete='{"id":"<?php echo $paquetes[2]->paqueteID ?>","nombre":"<?php echo $paquetes[2]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[2]->vigencia ?>","precio":"<?php echo $paquetes[2]->precio ?>","caracteres":"<?php echo $paquetes[2]->caracteres ?>","cantFotos":"<?php echo $paquetes[2]->cantFotos ?>","videos":"<?php echo $paquetes[2]->videos ?>","cupones":"<?php echo $paquetes[2]->cupones ?>"}'>
+   data-paquete='{"id":"<?php echo $paquetes[2]->paqueteID ?>","nombre":"<?php echo $paquetes[2]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[2]->vigencia ?>","precio":"<?php echo $paquetes[2]->precio ?>","caracteres":"<?php echo $paquetes[2]->caracteres ?>","cantFotos":"<?php echo $paquetes[2]->cantFotos ?>","videos":"<?php echo $paquetes[0]->videos ?>"}'>
     <div class="paquetes_derecha">
         <div class="title_paquetes">
             <div class="lateral_premium"></div>
@@ -1267,9 +1391,10 @@
 
             <img align="center" class="imagen_relleno" src="<?php echo base_url() ?>images/perros_perdidos/perro1.png"/>
 
-            <div id="ver_perdidos" class="ver_mas" style=" display:none;"> Ver más...</div>
+          
 
-        </div>
+        </div> 
+         <div id="ver_perdidos" class="ver_mas" style=" display:none;"> Ver más...</div>
     </div>
 </div>
 </a>
@@ -1292,9 +1417,10 @@
                  width="87" height="103"/>
 
 
-            <div id="ver_raza" class="ver_mas" style=" display:none;"> Ver más...</div>
-
+            
         </div>
+        <div id="ver_raza" class="ver_mas" style=" display:none;"> Ver más...</div>
+
     </div>
 </a>
 <!-- End raza del mes -->
@@ -1315,9 +1441,10 @@
             <img class="imagen_relleno" src="<?php echo base_url() ?>images/eventos/eventos_mes.jpg" width="144"
                  height="110"/>
 
-            <div id="ver_mes" class="ver_mas" style=" display:none;"> Ver más...</div>
-
+            
         </div>
+        <div id="ver_mes" class="ver_mas" style=" display:none;"> Ver más...</div>
+
     </div>
 </a>
 <!-- End eventos del mes -->
@@ -1337,11 +1464,13 @@
             <img class="imagen_relleno" src="<?php echo base_url() ?>images/curiosos/curiosos1.png" width="63"
                  height="119"/>
 
-            <div id="ver_curiosos" class="ver_mas" style=" display:none;"> Ver más...</div>
+           
+    </div>
+    
+     <div id="ver_curiosos" class="ver_mas" style=" display:none;"> Ver más...</div>
 
         </div>
 
-    </div>
 </a>
 <!-- End datos curioso -->
 
@@ -1381,8 +1510,8 @@
         <div class="contenido_final">
             <ul class="sub_menu_inferior">
                 <li>- Tutorial</li>
-                <li>- Publicidad</li>
-                <li>- Soporte</li>
+                <li onclick="muestra('publicidad');">- Publicidad</li>
+                <li onclick="muestra('soporte');">- Soporte</li>
                 <li>- Preguntas Frecuentes</li>
             </ul>
         </div>
