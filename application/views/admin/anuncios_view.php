@@ -285,8 +285,12 @@
                                 image_paquete = 'images/pago_premium.png';
                             }
 
+                            if (response.data[i].pagado === '1') {
+                                estadoPago = 'Pagado';
+                            } else { estadoPago = 'Declinado'; }
+
                             row.append('<td> <img width="99" heigth="50" src="<?php echo base_url() ?>' + image_paquete + '" alt=' + response.data[i].nombrePaquete + ' /></td>');
-                            row.append('<td></td>');
+                            row.append('<td>'+estadoPago+'</td>');
                             row.append('<td><a class="ver_anuncio" href="#" id="'+response.data[i].publicacionID+'">ver anuncio</a></td>');
                             table_data.append(row).slideDown();
                             show_detalles_publicacion();
