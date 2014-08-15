@@ -183,5 +183,13 @@ class Defaultdata_model extends CI_Model {
         $itemID = $this->db->insert_id();
         return $itemID;
     }
+
+
+    function updateItem($itemID, $ID, $data, $tabla)
+    {
+        $this->db->where($itemID, $ID);
+        $this->db->update($this->tablas[$tabla], $data);
+        return true;
+    }
 }
 ?>

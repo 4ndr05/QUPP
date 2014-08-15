@@ -321,7 +321,7 @@
     <br/>
 
     <p class="margen_15_left_mini"> Titúlo: &nbsp;&nbsp;&nbsp; <input required="required" type="text" name="titulo" id="titulo" class="background_gris_55_mini preview"/> Estado
-        &nbsp;&nbsp;&nbsp;&nbsp;<select required="required" name="estado" class="background_gris_100_mini preview" id="estado">
+        &nbsp;&nbsp;&nbsp;&nbsp;<select required="required" name="estado" class="background_gris_100_mini preview" id="estadoP">
             <option value="">--</option>
             <?php foreach ($estados as $edo): ?>
                 <option value="<?php echo $edo->estadoID;?>"><?php echo $edo->nombreEstado;?></option>
@@ -359,7 +359,7 @@
 	
     <p class="margen_15_left_mini" id="videoY">
     <input type="hidden" name="url_video[]" id="url_video" value="0" />
-        Link de video <input type="text" name="url_video[]" id="url_video" size="98" class="preview"/><img
+        Link de video <input type="text" name="url_video[]" id="url_video[]" size="98" class="preview one"/><img
             src="<?php echo base_url() ?>images/logo_youtube.png"/><a href="#" id="addVid" class="addVid" style="font-size:9px; margin-top:8px;" data-rel="">Agregar</a><br />
     </p>
 
@@ -466,7 +466,6 @@ $(document).ready(function()
                 
                 
                 $(".preview").change(function() {
-                    console.log($(this).val(),$('#estado option:selected'));            
                 $("#tituloPrev").html($("#titulo").val());
                 $("#precioPrev").html($("#precio").val());
                 $("#seccionPrev").html($("#seccion").val());
@@ -474,13 +473,13 @@ $(document).ready(function()
                 $("#generoPrev").html(genero);
                 var raza = $('#razaP option:selected').html();
                 $("#razaPrev").html(raza);
-                var lugar = $('#estado').html();
-                $("#lugarPrev").html(lugar+'('+$("#ciudad").val()+')');
+                var lugar = $('#estadoP option:selected').html();
+                $("#lugarPrev").html(lugar+' ('+$("#ciudad").val()+')');
                 $("#descripcionPrev").html($("#descripcion").val());
-                var src = $("#url_video").val();
+                var src = $(".one").val();
                 $("#videoPrev").html('<iframe class="youtube_video_mini" src="'+src+'"></iframe>');
                 var img = $("#list").val();
-                console.log(img);
+                console.log(lugar);
                 });
             });
             
@@ -629,7 +628,7 @@ $c = 0;
 					$c++;
 					if($cupon->tipoCupon == 2):
 					?>
-             <input type="hidden" name="cuponUsado" id="cuponUsado" value=""/>     
+             <input type="hidden" name="cuponUsado" id="cuponUsado" value="0"/>     
             <input type="radio" name="radiog_dark" id="radio_pago<?=$c?>" class="css-checkbox cupon" value="<?=$cupon->valor;?>" data-rel="<?=$cupon->cuponID;?>"/>
 <label for="radio_pago<?=$c?>" class="css-label radGroup<?=$c?>"><?=$cupon->valor;?>% de descuento</label>
 			
@@ -678,11 +677,7 @@ TOTAL
 </div>
    
 </div>
-
-
-</form>
-<!--boton se siguiente paso-->
-<div id="paso_seis" class="paso" style="display:none;">
+<div id="paso_seis" class="paso">
                     <div class="descipcion_pasos_mediano">
                         <div class="titulo_de_pasos"> PUBLICAR EN DIRECTORIO </div>
                         <div class="instrucciones_pasos"> Pago del directorio: </div>
@@ -691,6 +686,10 @@ TOTAL
                     </div>
                 </div>
 <br/>
+
+</form>
+<!--boton se siguiente paso-->
+
 
 <!--<div id="btn_sig" style="display: block; text-align: right; padding-right: 10px;">
     <div id="msj_paso" style="font-size: 10px;display: inline-block; vertical-align: bottom; height: 38px;"></div>
@@ -809,6 +808,9 @@ TOTAL
 			$('.nprecio').html(paquete_val.precio);
 			//$('#nvideos').val(paquete_val.videos);
 			var cantidadVideos = paquete_val.videos;
+			if(cantidadVideos == 0){
+				$('#videoY').hide();
+			}
 			var contador = 1; 
 			$(".addVid").click(function(e){
         		e.preventDefault(); 
