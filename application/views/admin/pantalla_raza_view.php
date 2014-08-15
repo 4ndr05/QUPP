@@ -194,7 +194,7 @@ AGREGAR IMAGEN
 
 <!-- ---------------------------------------------------- contenedor_modificaciones_texto --------------- -->
 
-<form action="<?=base_url()?>admin/principal/uploadText" method="post">
+<form action="<?=base_url()?>admin/principal/uploadArticulo" method="post" enctype="multipart/form-data">
 <div class="contenedor_modificaciones" id="contenedor_texto_apoyo" style="display:none"> <!-- Contenedor negro imagenes-->
 <div class="cerrar_modificaciones"> <img src="<?php echo base_url()?>images/cerrar.png" onclick="oculta('contenedor_texto_apoyo');"/> </div>
 <input type="hidden" id="zonaContentN" name="zonaContentN" value="<?=$zonaT?>" />
@@ -206,7 +206,13 @@ AGREGAR IMAGEN
 AGREGAR TEXTO
 </div>
 <div class="contenido_intruciones">
-<p> Introduzca el texto para BC0001-0000001 </p>
+<p>Ingrese las imagenes para BP00001:</p>
+</br>
+<input type="file" name="imagenesArticulo[]" id="imagenesArticulo" multiple="multiple"/>
+
+</div>
+<div class="contenido_intruciones">
+<p> Introduzca el texto para el articulo </p>
 </brSS>
 <textarea cols="65" rows="7" name="textoContentN" id="textoContentN"></textarea>
 
@@ -363,8 +369,68 @@ PANTALLAS- <label id="nombreSeccion"><label id="seccion"><?=$seccionNombre->secc
 <div class="subtitulo">
 ZONA- <label id="zonaNombre"><label id="nombreZona"><?=$zonaNombre->zona?></label></label>
 </div>
+<!--la raza del mes-->
+<div class="contenedor_modificaciones" id="contenedor_agregar_raza" style="display:none"> <!-- Contenedor negro imagenes-->
+<div class="cerrar_modificaciones"> <img src="<?=base_url()?>images/cerrar.png" onclick="oculta('contenedor_agregar_raza');"/> </div>
 
 
+<div class="modificaciones"> 
+<div class="titulo_modificaciones"> 
+AGREGAR RAZA
+</div>
+
+<div class="contenido_intruciones">
+</br>
+
+<table > 
+<tr> 
+<td width="105"> Nombre: </td>
+<td width="317"> <input type="text"/> </td>
+</tr>
+<tr> 
+<td> Mes: </td>
+<td> <select> <option> --- </option> </select> </td>
+</tr>
+<tr> 
+<td> Imagenes: </td> 
+<td> <input type="file"/> </td>
+</tr>
+<tr> 
+<td> Origenes: </td>
+<td> <textarea> </textarea> </td>
+</tr>
+<tr> 
+<td> Caracter: </td>
+<td> <textarea> </textarea> </td>
+</tr>
+<tr> 
+<td> Cualidades: </td>
+<td> <textarea></textarea></td>
+</tr>
+<tr> 
+<td> Colores: </td>
+<td> <textarea></textarea> </td>
+ </tr>
+ <tr> 
+ <td> Sobre la raza: </td>
+ <td> <textarea> </textarea> </td>
+ 
+ </tr>
+</table>
+
+
+
+</div>
+<ul class="morado_reg">
+<li>
+Guardar
+</li>
+</ul>
+
+</div>
+
+</div> <!-- Fin contenedor negro imagenes -->
+<!--la raza del mes-->
 </br>
 
 <!--       CONTENIDO SUPERIOR       -->
@@ -461,123 +527,47 @@ Imagen
 <!--       CONTENIDO SUPERIOR       -->
 
 <!--       CONTENIDO MEDIO ARTICULO       -->
-<table class="tabla_carrito medioContenido" width="990" style="display:">
-<tr>
-<th width="84">
-Nivel 1
-</th>
-<th width="81">
-Nivel 2
-</th>
-<th width="88">
-Nivel 3
-</th>
-<th width="137">
-Tipo
-</th>
-<th width="136">
-Ubicación
-</th>
-<th width="310">
-Contenido
-</th>
-<th width="122">
-Ajustes
-</th>
+<table width="992" height="537" align="center" class="tabla_carrito"> 
+<tr> 
+<th width="66"> Nombre </th>
+<th width="66"> Mes </th>
+<th width="131"> Imagen </th>
+<th width="76"> Origenes </th>
+<th width="174"> Caracter y Temperamento</th>
+<th width="71"> Cualidades</th>
+<th width="98"> Colores caracteristicos </th>
+<th width="303"> Sobre la raza </th>
+<th width="37"> </th>
 </tr>
-<tr class="" style="display:">
-<td bgcolor="#E6E7E8" class="nivel">
-BC00002
-</td>
-<td bgcolor="#E6E7E8">
+<tr> 
+<td height="74" bgcolor="#E6E7E8"> </td>
+<td bgcolor="#E6E7E8"> </td>
+<td bgcolor="#E6E7E8"> </td>
+<td bgcolor="#E6E7E8"> </td>
+<td bgcolor="#E6E7E8"> </td>
+<td bgcolor="#E6E7E8"> </td>
+<td bgcolor="#E6E7E8"> </td>
+<td bgcolor="#E6E7E8"> </td>
 
-</td>
-<td bgcolor="#E6E7E8">
-
-</td>
-<td bgcolor="#E6E7E8">
- Contenido
-</td>
-<td bgcolor="#E6E7E8">
-   Artículo / Texto Apoyo
-</td>
-<td bgcolor="#E6E7E8">
-
-</td>
-<td bgcolor="#E6E7E8">
-
-<img src="<?php echo base_url()?>images/agregar.png" class="addContentText" data-rel="2"/>
-<img src="<?php echo base_url()?>images/baja_contenido.png" class="deleteContent" id="2"/>
-</td>
-
+<td bgcolor="#E6E7E8"> <img src="<?=base_url()?>images/agregar.png" onclick="muestra('contenedor_agregar_raza');"/> </td>
 </tr>
 
-
-<?php if($contenido != null):
-	  $contador = 0;
-	  foreach($contenido as $c):
-
-	  if($c->posicion == 2):
-	  ?>
-
-<?php if($c->seccionID == 7 ||$c->seccionID == 8 || $c->seccionID == 9 || $c->seccionID == 10 ):  ?>
-
-<tr class="imagenApoyo zona<?=$c->zonaID?><?=$c->seccionID?> row" style="display:none">
-<td>
-
+<tr> 
+<td height="307">BOBTAIL  </td>
+<td height="307">ENERO  </td>
+<td> <img src="<?=base_url()?>images/raza_mes/1.png" width="124" height="151" />
+<img src="<?=base_url()?>images/raza_mes/2.png" width="124" height="151" />
+ </td>
+<td>Es originario de Gran Bretaña donde fue utilizado como perro pastor.
 </td>
-<td>
-<?=++$contador?>
+<td> Es un perro muy fiel e inteligente al que le encanta pasar tiempo con su familia y participar de sus actividades. Tiene un fuerte instinto de pastoreo y hay que hacerle entender que no necesita pastorear a las personas; si no se le marcan bien las pautas que debe seguir puede volverse caprichoso, como ocurre con todas las razas. Son perros muy alegres, afectuosos, cariñosos con los niños que siguen comportándose como cachorros durante bastante tiempo. No es difícil de adiestrar y le encanta jugar. </td>
+<td>   
+Fidelidad y gusto por compartir con su familia.
 </td>
-<td>
-<input type="hidden" id="bannerID" name="bannerID" value="<?=$c->bannerID?>"/>
-</td>
-<td>
-Imagen
-</td>
-<td>
-
-</td>
-<td>
-<img src="<?php echo base_url()?>images/<?php echo $c->imgbaner?>" width="122" height="74"/>
-</td>
-<td>
-<img src="<?php echo base_url()?>images/baja_contenido.png" class="deleteContent" data-rel="<?php echo $c->bannerID?>" id="2"/>
-<img src="<?php echo base_url()?>images/agregar.png" class="updateText" data-rel="<?php echo $c->bannerID?>" id="2"/>
-</td>
-
+<td> AZULADOGRIS</td>
+<td>  El Bobtail o antiguo pastor inglés es un perro grande, macizo y de forma cuadrada. Tiene una doble capa de pelaje espeso que le protege del frío y la humedad durante las largas jornadas de pastoreo. La cabeza es grande con un stop pronunciado en el hocico, la nariz negra, las orejas medianas y pegadas a la cabeza, y los ojos marrones o azules (o en ocasiones uno de cada color). El nombre Bobtail viene del inglés y significa "sin cola", lo cual es una destacada característica de esta raza; normalmente nacen ya sin cola.</td>
+<td> <img src="<?=base_url()?>images/editar.png" onclick="muestra('contenedor_agregar_raza');"/> </td>
 </tr>
-<?php endif; ?>
-<tr class="zona<?=$c->zonaID?><?=$c->seccionID?> row " style="display:none;">
-
-<td>
-
-</td>
-<td>
-
-</td>
-<td>
-<?=$n = $contador + 1;?>
-</td>
-<td>
-Texto de Apoyo
-</td>
-<td>
-
-</td>
-<td>
-<?php echo $c->texto?>
-</td>
-<td>
-<img src="<?php echo base_url()?>images/baja_contenido.png" class="deleteContentText" data-rel="<?php echo $c->bannerID?>" id="2" name="2"/>
-</td>
-
-</tr>
-	  <?php 
-	  endif;
-	  endforeach;
-	  endif; ?>
-
 </table>
 <!--       CONTENIDO MEDIO CONTENIDO       -->
 
