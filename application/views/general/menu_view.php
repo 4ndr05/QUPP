@@ -39,7 +39,7 @@ if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)):
                 <?php } ?>
             </ul>
             <?php if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)): ?>
-                <div class="close_sesion" style="text-align: right; padding-right: 5px;"><a  href="<?php echo base_url('sesion/logout/principal') ?>"><img style="height: 30px;" src="/images/logout.png" alt="Cerrar sesión"/></a></div>
+                <div class="close_sesion" style="text-align: right; padding-right: 5px;"><a  href="<?php echo base_url('sesion/logout/principal') ?>"><img style="height: 30px;" src="<?php echo base_url() ?>images/logout.png" alt="Cerrar sesión"/></a></div>
             <?php endif; ?>
         </div>
     </div>
@@ -136,7 +136,7 @@ if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)):
                 </li>
                 <?php } ?>
                 <?php if ($keyUser !== FALSE && $tipoUsuario !==0): ?>
-                    <div class="close_sesion" style="text-align: right; padding-right: 5px;"><a  href="<?php echo base_url('sesion/logout/principal') ?>"><img style="height: 30px;" src="/images/logout.png" alt="Cerrar sesión"/></a></div>
+                    <div class="close_sesion" style="text-align: right; padding-right: 5px;"><a  href="<?php echo base_url('sesion/logout/principal') ?>"><img style="height: 30px;" src="<?php echo base_url() ?>images/logout.png" alt="Cerrar sesión"/></a></div>
                 <?php endif; ?>
             </ul>
         </div>
@@ -229,7 +229,7 @@ if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)):
                 </li>
             </ul>
             <?php if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !==0)): ?>
-                <div class="close_sesion" style="text-align: right; padding-right: 5px;"><a  href="<?php echo base_url('sesion/logout/principal') ?>"><img style="height: 30px;" src="/images/logout.png" alt="Cerrar sesión"/></a></div>
+                <div class="close_sesion" style="text-align: right; padding-right: 5px;"><a  href="<?php echo base_url('sesion/logout/principal') ?>"><img style="height: 30px;" src="<?php echo base_url() ?>images/logout.png" alt="Cerrar sesión"/></a></div>
             <?php endif; ?>
         </div>
     </div>
