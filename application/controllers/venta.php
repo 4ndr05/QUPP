@@ -233,13 +233,43 @@ class Venta extends CI_Controller
          $publicacionID = $this->defaultdata_model->insertItem('publicaciones', $dataPublicacion);
         
         //VIDEOS PUBLICACION
-       
-        $precio_total = $this->input->post('total');
 
+
+
+         //COMPRA
+         $valorCupon = $this->input->post('radiog_dark');
+         $cuponID = $this->input->post('cuponUsado');
+         $precio_total = $detallePaquete->precio - ($detallePaquete->precio * ($valorCupon / 100));
+
+         if($cuponID != 0){
+            $this->defaultdata_model->updateItem('cuponID', $cuponID, $data = array('usado' => 1), 'cuponadquirido');
+         }
+        
+        $compra = array(
+            'descuento' => $valorCupon,
+            'fecha' => date('Y-m-d H:i:s'),
+            'idCuponAdquirido' => $cuponID,
+            'subtotal' => $detallePaquete->precio,
+            'total' => $precio_total,
+            'usuarioID' => $this->session->userdata('idUsuario'),
+            'pagado' => 1
+        );
+        $compraID = $this->defaultdata_model->insertItem('compra', $compra);
+
+        $compradetalle = array(
+            'cantidad' => 1,
+            'color' => null,
+            'talla' => null,
+            'compraID' => $compraID,
+            'nombre' => $detallePaquete->nombrePaquete,
+            'precio' => $detallePaquete->precio,
+            'productoID' => NULL
+        );
+       
            $preference_data = array(
             "items" => array(
                 array(
-                    "title" => "Publicacion en directorio",
+                    "title" => "Publicacion en Anuncios",
                     "quantity" => 1,
                     "currency_id" => "MXN",
                     "unit_price" => floatval($precio_total)
@@ -257,8 +287,14 @@ class Venta extends CI_Controller
         );
 
         $preference = $this->mercadopago->create_preference($preference_data);
-        echo '<iframe src="' . $preference['response']['sandbox_init_point'] . '" name="MP-Checkout" width="740" height="600" frameborder="0"></iframe>';
-    
+         if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            echo 'rollback';
+            } else {
+            $this->db->trans_commit();
+            //TODO hay que cambiar a init_point
+           echo '<iframe src="' . $preference['response']['sandbox_init_point'] . '" name="MP-Checkout" width="740" height="600" frameborder="0"></iframe>';
+        }
 
          //echo json_encode($publicacionID);
          
