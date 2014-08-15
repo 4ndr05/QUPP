@@ -93,6 +93,7 @@
 							'font-family':'select',
                             '-webkit-appearance': 'menulist-button',
 							'max-width':'146px',
+							'padding': '10px',
                             position:             'absolute',
                             opacity:              0,
                             height:               selectBoxHeight,

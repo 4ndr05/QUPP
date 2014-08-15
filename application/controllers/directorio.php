@@ -423,7 +423,10 @@ class Directorio extends CI_Controller {
                 'date_created' => date('Y-m-d')
             ),
             "back_urls" => array(
-                "success" => base_url('directorio/procesar_pago')
+                "success" => base_url("directorio/procesar_pago/$key_compra/1/$key_servicio"),
+                "pending" => base_url("directorio/procesar_pago/$key_compra/1/$key_servicio"),
+                "failure" => base_url("directorio/procesar_pago/$key_compra/0/$key_servicio"),
+                
             ),
             "external_reference" => "$key_compra"
         );
@@ -441,8 +444,10 @@ class Directorio extends CI_Controller {
         }
     }
 
-    public function procesar_pago() {
-        
+    public function procesar_pago($compraID,$estado,$servicioID) {
+        $this->defaultdata_model->updateItem('compraID', $compraID, array('pagado' => $estado), 'compra');
+        $this->defaultdata_model->updateItem('servicioID', $servicioID, array('pagado' => $estado), 'serviciocontratado');
+        redirect('principal/miPerfil');
     }
 
 }

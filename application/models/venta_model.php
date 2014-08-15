@@ -17,7 +17,7 @@ class Venta_model extends CI_Model {
         $this->tablas = $this->config->item('tablas', 'tables');
     }
 
-    function getAnuncios() {
+    function getAnuncios($seccion = null) {
         $this->db->select("*");
         $this->db->from("publicaciones p");
         //$this->db->join("fotospublicacion fp", "p.detalleID=fp.detalleID AND p.paqueteID=fp.paqueteID AND p.publicacionID=fp.publicacionID AND p.servicioID=fp.servicioID");
@@ -34,6 +34,10 @@ class Venta_model extends CI_Model {
 
         $this->db->where("p.aprobada", 1);
         $this->db->where("p.vigente", 1);
+        
+        if(!is_null($seccion)){
+             $this->db->where("p.seccion", $seccion);
+        }
 
         $resultSet = $this->db->get();
 
@@ -110,7 +114,7 @@ class Venta_model extends CI_Model {
         return null;
     }
 
-    function getPublicaciones($raza = null, $genero = null, $estado = null, $precio = null, $palabra_clave = null, $id_anuncio = null) {
+    function getPublicaciones($raza = null, $genero = null, $estado = null, $precio = null, $palabra_clave = null, $id_anuncio = null, $seccion = null) {
         /*
          * 
          * Posible recomentacion para pasarlo a una vista
@@ -147,6 +151,10 @@ class Venta_model extends CI_Model {
         if (!is_null($id_anuncio)) {
             $this->db->where("p.publicacionID", $id_anuncio);
         }
+        
+        if(!is_null($seccion)){
+             $this->db->where("p.seccion", $seccion);
+        }
 
         if (!is_null($palabra_clave)) {
 
@@ -161,7 +169,7 @@ class Venta_model extends CI_Model {
         }
 
         $resultSet = $this->db->get();
-        
+//        $this->output->enable_profiler(TRUE);
 
         return array('data' => $resultSet->result(), 'count' => $resultSet->num_rows);
     }

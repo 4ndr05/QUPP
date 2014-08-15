@@ -194,7 +194,7 @@ class Defaultdata_model extends CI_Model {
         $this->db->from('zonageograficaestado');
         $this->db->where('estadoID', $id_estado);
         return $this->db->get()->row();
-
+    }
 
     function updateItem($itemID, $ID, $data, $tabla)
     {

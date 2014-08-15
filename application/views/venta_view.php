@@ -791,7 +791,7 @@ $this->load->view('general/general_header_view', array('title' => 'Venta',
                         </ul>
                         </br>
                         <ul class="boton_gris">
-                            <li>
+                            <li class="btn_fvt">
                                 <img src="<?= base_url() ?>images/favorito.png"/>Agregar a Favoritos
                             </li>
                         </ul>
@@ -830,7 +830,7 @@ $this->load->view('general/general_header_view', array('title' => 'Venta',
 
 
                         <ul class="boton_rojo_dos">
-                            <li>
+                            <li class="btn_den" >
                                 <img src="<?= base_url() ?>images/alert.png"/>
                                 Denunciar Anuncio
                             </li>
@@ -1095,7 +1095,7 @@ $this->load->view('general/general_header_view', array('title' => 'Venta',
                         <br/>
                         <font> Raza: <?= $publicacion->raza ?> </font>
                         <br/>
-                        <font> Género: <?= $publicacion->genero ?> </font>
+                        <font> Género: <?= $publicacion->genero ? 'Macho' : 'Hembra' ?> </font>
                         <br/>
                         <font> Ciudad: <?= $publicacion->ciudad ?></font>
                     </div>
@@ -1225,7 +1225,7 @@ $this->load->view('general/general_header_view', array('title' => 'Venta',
 
                         for (var i = 0; i < result.count; i++)
                         {
-                            if (data[i].genero == 0)
+                            if (data[i].genero === '0')
                                 var el_genero = "Hembra";
                             else
                                 var el_genero = "Macho";
@@ -1312,27 +1312,77 @@ $this->load->view('general/general_header_view', array('title' => 'Venta',
                     }
                     for (var i = 0; i < result.count; i++)
                     {
-                        if (data[i].genero == 0)
+                        if (data[i].genero === '0')
                             var el_genero = "Hembra";
                         else
                             var el_genero = "Macho";
 
-                        $(".contenedor_galeria").append("images");
+                        $(".contenedor_galeria").append('<img src="' + data[i].foto + '" width="294" height="200" style=" top: 0px; left: 0px; display: block; z-index: 5; opacity: 1;"/>');
                         var cont_datos = $('.datos_general');
-                        var cont_info = $(' <div class="titulo_anuncio_publicado">' + data[i].titulo + '</div></br><strong>Precio:' + data[i].precio + '</strong></br><font> Fecha de publicación:' + data[i].fechaCreacion + '</font></br><font>Sección: Venta</font></br><font>Raza:' + data[i].raza + '</font></br><font>Género:' + data[i].genero + '</font></br><font>Lugar: ' + data[i].nombreEstado + '</font></br></br>');
+                        var cont_info = $(' <div class="titulo_anuncio_publicado">' + data[i].titulo + '</div></br><strong>Precio:' + data[i].precio + '</strong></br><font> Fecha de publicación:' + data[i].fechaCreacion + '</font></br><font>Sección: Venta</font></br><font>Raza:' + data[i].raza + '</font></br><font>Género:' + (data[i].genero ? 'Macho' : 'Hembra') + '</font></br><font>Lugar: ' + data[i].nombreEstado + '</font></br></br>');
                         cont_datos.append(cont_info);
-                        var botones = $('<ul class="boton_naranja"><li onclick="obten_id(\'' + data[i].publicacionID + '\')">Contactar al anunciante</li> </ul> </br> <ul class="boton_gris"><li><img src="images/favorito.png"/>Agregar a Favoritos</li></ul>');
+                        var botones = $('<ul class="boton_naranja"><li onclick="obten_id(\'' + data[i].publicacionID + '\')">Contactar al anunciante</li> </ul> </br> <ul class="boton_gris"><li data-pub="' + data[i].publicacionID + '" class="btn_fvt"><img src="images/favorito.png"/>Agregar a Favoritos</li></ul>');
                         cont_datos.append(botones);
                         $('.descripcion_del_anuncio').append(data[i].descripcion);
                         var video = $('.youtube_video');
                         var direccion = $('<iframe src="' + data[i].link + '"></iframe>');
                         video.append(direccion);
+                        
+                        $('.btn_den' ).data('pub',data[i].publicacionID );
                     }
-
+                    
+                    add_favorite();
+                    denunciar_pub();
                 }
+            });
+
+        }
+
+
+        function add_favorite() {
+            $('.btn_fvt').on('click', function() {
+
+                var pub = $(this).data("pub");
+
+                $.ajax({
+                    url: '<?php echo base_url('venta/add_favorite') ?>',
+                    data: 'pub=' + pub,
+                    dataType: 'html',
+                    type: 'post',
+                    before: function() {
+
+                    },
+                    success: function() {
+
+                    },
+                    complete: function() {
+
+                    }
+                });
             });
         }
 
+        function denunciar_pub() {
+            $('.btn_den').on('click', function() {
+                var pub = $(this).data("pub");
+
+                $.ajax({
+                    url: '<?php echo base_url('venta/denunciar') ?>',
+                    data: 'pub=' + pub,
+                    dataType: 'html',
+                    type: 'post',
+                    before: function() {
+
+                    },
+                    success: function() {
+
+                    },
+                    complete: function() {
+
+                    }
+                });
+            });
+        }
 
 
 

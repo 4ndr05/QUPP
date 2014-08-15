@@ -6,7 +6,7 @@ if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !== 0)):
     ?>
     <style>
         .principal li:hover{
-            
+
             background-color:#762EA4;
             cursor:pointer;}
         .principal li ul a{
@@ -49,17 +49,17 @@ if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !== 0)):
             position: absolute;
             z-index: 10;
         }
-        
+
         .principal li:hover >  li a {
             background-color:#300;
         }
-        
+
     </style>
     <div id="mini_menu" class="menu">
         <input type="hidden" id="efecto" value="corre"/>
         <img src="<?php echo base_url() ?>images/bajar_menu_dos.png" id="bajar_menu" style="float:left; margin-left:10px;"
              onclick="oculta('bajar_menu');
-                     muestra('menu_oculto');"/>
+                         muestra('menu_oculto');"/>
 
         <div id="menu_oculto" class="menu_principal" style=" display:none;">
             <div id="contenedor_menu_principal" class="contenedor_menu_principal">
@@ -68,13 +68,13 @@ if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !== 0)):
                         <a href="<?php echo base_url() ?>"> Inicio</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url() ?>venta.html"> Venta </a>
+                        <a href="<?php echo base_url() ?>venta"> Venta </a>
                     </li>
                     <li>
-                        Cruza
+                        <a href="<?php echo base_url() ?>cruza"> Cruza </a>                        
                     </li>
                     <li>
-                        Adopción
+                        <a href="<?php echo base_url() ?>adopcion"> Adopción </a>                        
                         <ul>
                             <li><a href="<?php echo base_url('asociacion') ?>">Asociaciones</a></li>
                         </ul>
@@ -104,26 +104,26 @@ if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !== 0)):
             <li>
 
                 <img id="horizontal_compras_mini"  onmouseover="mostrar_icono('horizontal_compras');
-                        ocultar_icono('horizontal_compras_mini');"class="iconos_flotantes" src="<?php echo base_url() ?>images/compras_horizontal_mini.png"/>
+                            ocultar_icono('horizontal_compras_mini');"class="iconos_flotantes" src="<?php echo base_url() ?>images/compras_horizontal_mini.png"/>
 
                 <img class="iconos_flotantes2" onmouseout="mostrar_icono('horizontal_compras_mini');
-                        ocultar_icono('horizontal_compras');"  id="horizontal_compras" src="<?php echo base_url() ?>images/compras_horizontal.png"/>
+                            ocultar_icono('horizontal_compras');"  id="horizontal_compras" src="<?php echo base_url() ?>images/compras_horizontal.png"/>
 
             </li>
             <li>
                 <img id="horizontal_ingresar_mini" onmouseover="mostrar_icono('horizontal_ingresar');
-                        ocultar_icono('horizontal_ingresar_mini');" class="iconos_flotantes" src="<?php echo base_url() ?>images/ingresar_horizontal_mini.png"/>
+                            ocultar_icono('horizontal_ingresar_mini');" class="iconos_flotantes" src="<?php echo base_url() ?>images/ingresar_horizontal_mini.png"/>
 
                 <img class="iconos_flotantes2" onmouseout="mostrar_icono('horizontal_ingresar_mini');
-                        ocultar_icono('horizontal_ingresar');" id="horizontal_ingresar" src="<?php echo base_url() ?>images/ingresar_horizontal.png"/>
+                            ocultar_icono('horizontal_ingresar');" id="horizontal_ingresar" src="<?php echo base_url() ?>images/ingresar_horizontal.png"/>
             </li>
 
             <li>
                 <img id="horizontal_registrate_mini" onmouseover="mostrar_icono('horizontal_registrate');
-                        ocultar_icono('horizontal_registrate_mini');"class="iconos_flotantes" src="<?php echo base_url() ?>images/registrate_horizontal_mini.png"/>
+                            ocultar_icono('horizontal_registrate_mini');"class="iconos_flotantes" src="<?php echo base_url() ?>images/registrate_horizontal_mini.png"/>
 
                 <img class="iconos_flotantes2" onmouseout="mostrar_icono('horizontal_registrate_mini');
-                        ocultar_icono('horizontal_registrate');" id="horizontal_registrate" src="<?php echo base_url() ?>images/registrate_horizontal.png"/>
+                            ocultar_icono('horizontal_registrate');" id="horizontal_registrate" src="<?php echo base_url() ?>images/registrate_horizontal.png"/>
             </li>
         </ul>
     </div>
@@ -139,27 +139,40 @@ if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !== 0)):
                     if ($banner != null) {
 
                         foreach ($banner as $contenido) {
-                            if ($this->session->userdata('zonaID') == $contenido->zonaID && $contenido->posicion == 1 && $contenido->seccionID == $seccion) {
+                            if ($this->session->userdata('zonaID') == $contenido->zonaID && $contenido->posicion == 2 && $contenido->seccionID == $seccion) {
                                 ?>
-                                <img src="<?php echo base_url() ?>images/<?php echo $contenido->imgbaner; ?>" width="638"
-                                     height="93"/>
+                                <div class="item"><a href="<?php echo base_url() ?>#" target="_blank"><img
+                                            src="<?php echo base_url() ?>images/<?php echo $contenido->imgbaner; ?>" alt="Model 2"></a>
+
+                                    <div class="carousel-caption">
+                                        <?php echo $contenido->texto; ?>
+                                    </div>
+
+                                </div>
 
                                 <?php
                             }
                         }
                     }
                 } else {
+
                     if ($banner !== null && !empty($banner)) {
                         foreach ($banner as $contenido) {
-                            if ($contenido->zonaID == 9 && $contenido->posicion == 1 && $contenido->seccionID == $seccion) {
-                                ?>    <img src="<?php echo base_url() ?>images/<?php echo $contenido->imgbaner; ?>" width="638"
-                                     height="93"/>
-                                     <?php
-                                 }
-                             }
-                         }
-                     }
-                     ?>
+                            if ($contenido->zonaID == 9 && $contenido->posicion == 2 && $contenido->seccionID == $seccion) {
+                                ?>    <div class="item"><a href="<?php echo base_url() ?>#" target="_blank"><img
+                                            src="<?php echo base_url() ?>images/<?php echo $contenido->imgbaner; ?>" alt="Model 2"></a>
+
+                                    <div class="carousel-caption">
+                                        <?php echo $contenido->texto; ?>
+                                    </div>
+
+                                </div>
+                                <?php
+                            }
+                        }
+                    }
+                }
+                ?>
             </div>
 
 
@@ -175,10 +188,10 @@ if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !== 0)):
                     <a href="<?php echo base_url() ?>venta"> Venta </a>
                 </li>
                 <li>
-                    Cruza
+                    <a href="<?php echo base_url() ?>cruza"> Cruza </a>                        
                 </li>
                 <li>
-                    Adopción
+                    <a href="<?php echo base_url() ?>adopcion"> Adopción </a>
                     <ul style="display: block;">
                         <li><a href="<?php echo base_url('asociacion') ?>">Asociaciones</a></li>
                     </ul>
