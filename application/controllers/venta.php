@@ -1,16 +1,15 @@
 <?php
+
 if (!defined('BASEPATH'))
     die();
 
-class Venta extends CI_Controller
-{
-    
+class Venta extends CI_Controller {
+
     static $seccion = 2;
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
-         // checamos si existe una sesión activa           
+        // checamos si existe una sesión activa           
 
         $this->load->model('defaultdata_model');
         $this->load->model('admin_model');
@@ -33,76 +32,65 @@ class Venta extends CI_Controller
             $this->session->set_flashdata('error', 'userNotAutorized');
             redirect('principal');
         }
-
     }
 
     //is_authorized($nivelesReq, $idPermiso, $nivelUsuario, $rolUsuario)
 
 
-    public function index()
-    {
+    public function index() {
         $data['SYS_metaTitle'] = '';
         $data['SYS_metaKeyWords'] = '';
         $data['SYS_metaDescription'] = '';
-        $data['estados']     = $this->defaultdata_model->getEstados();
-        $data['paises']      = $this->defaultdata_model->getPaises();
-        $data['paquetes']    = $this->defaultdata_model->getPaquetes();
-        $data['razas']       = $this->defaultdata_model->getRazas();
-        $data['giros']       = $this->defaultdata_model->getGiros();
-        $data['publicaciones']       = $this->venta_model->getAnuncios(self::$seccion);
+        $data['estados'] = $this->defaultdata_model->getEstados();
+        $data['paises'] = $this->defaultdata_model->getPaises();
+        $data['paquetes'] = $this->defaultdata_model->getPaquetes();
+        $data['razas'] = $this->defaultdata_model->getRazas();
+        $data['giros'] = $this->defaultdata_model->getGiros();
+        $data['publicaciones'] = $this->venta_model->getAnuncios(self::$seccion);
         $data['seccion'] = self::$seccion;
-        
+
         $this->load->view('venta_view', $data);
     }
 
-   
-
-    
-    
-
-
-    function factura()
-    {
+    function factura() {
 
         $data['response'] = "true";
         echo json_encode($data);
     }
 
-    function pagos()
-    {
-
+    function pagos() {
+        
     }
 
-    function guardar_compra()
-    {
+    function guardar_compra() {
         $this->db->trans_start();
-        try{
+        try {
             $usuario = $this->session->userdata('idUsuario');
-            $carrito= $this->admin_model->getCarrito($usuario);
+            $carrito = $this->admin_model->getCarrito($usuario);
             $carritototal = $this->admin_model->getSingleItem('usuarioID', $usuario, 'carritototal');
 
             $compra = array();
 
-            if($carritototal instanceof stdClass){
-                $compra[0] = array (
+            if ($carritototal instanceof stdClass) {
+                $compra[0] = array(
                     'usuarioID' => $usuario,
                     'subtotal' => $carritototal->subtotal,
                     'idCuponAdquirido' => null,
                     'descuento' => $carritototal->descuento,
                     'total' => $carritototal->totalPrecio,
                     'fecha' => date('Y-m-d H:i:s'),
-                    );
-            }else{
+                );
+            } else {
                 foreach ($carritototal as $value) {
-            //Se asigna al indice cero por que solo debe ser un carrito de compra por usuario
-                    $compra[0] = array (
+                    //Se asigna al indice cero por que solo debe ser un carrito de compra por usuario
+                    $compra[0] = array(
                         'usuarioID' => $usuario,
                         'subtotal' => $value->subtotal,
                         'idCuponAdquirido' => null,
                         'descuento' => $value->descuento,
                         'total' => $value->totalPrecio,
                         'fecha' => date('Y-m-d H:i:s'),
-                        );
+                    );
                 }
             }
 
@@ -116,7 +104,7 @@ class Venta extends CI_Controller
                     'nombre' => $value->nombre,
                     'talla' => $value->talla,
                     'color' => $value->color,
-                    );
+                );
             }
 
             $this->usuario_model->addCompra($compra, $compra_detalle);
@@ -125,18 +113,16 @@ class Venta extends CI_Controller
 
             $this->usuario_model->save_cupones($this->session->userdata('cuponusuario'));
 
-            if ($this->db->trans_status() === FALSE)
-            {
+            if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
                 $this->session->set_flashdata('info', "<div class='alert alert-warning'>No se ha logrado la compra. Vuelva a intentarlo o contacte al administrador del sitio.</div>");
             } else {
                 $this->db->trans_commit();
                 $this->session->set_flashdata('info', '<div class="alert alert-success">La compra se realizo correctamente.</div>');
-
             }
-        //TODO Debe de redirigir a las compras
+            //TODO Debe de redirigir a las compras
             redirect('principal/tienda');
-        }catch(Exception $n){
+        } catch (Exception $n) {
             $this->db->trans_rollback();
             $this->session->set_flashdata('info', "<div class='alert alert-warning'>No se ha logrado la compra. Vuelva a intentarlo o contacte al administrador del sitio.</div>");
         }
@@ -166,11 +152,10 @@ class Venta extends CI_Controller
         }
     }
 
-
-    function anuncio(){
+    function anuncio() {
         $paqueteID = $this->input->post('paquete');
         $detallePaquete = $this->defaultdata_model->getPaquete($paqueteID);
-        
+
         //SERVICIOS ADQUIRIDOS
         $data = array(
             'cantFotos' => $detallePaquete->cantFotos,
@@ -178,69 +163,67 @@ class Venta extends CI_Controller
             'vigencia' => $detallePaquete->vigencia,
             'cupones' => $detallePaquete->cupones,
             'videos' => $detallePaquete->videos,
-            'precio' => $detallePaquete->precio, 
+            'precio' => $detallePaquete->precio,
             'detalleID' => $detallePaquete->detalleID,
             'paqueteID' => $detallePaquete->paqueteID,
             'idUsuario' => $this->session->userdata('idUsuario')
-        );    
+        );
         $servicioID = $this->defaultdata_model->insertItem('serviciocontratado', $data);
-       
+
         $cupones = $this->defaultdata_model->getCuponesPaquete($paqueteID);
 
-        if($cupones != null){
+        if ($cupones != null) {
             foreach ($cupones as $cupon) {
-                $dataCupon = 
-                array(
-                    'descripcion' => $cupon->descripcion, 
-                    'valor' =>   $cupon->valor,
-                    'tipoCupon' =>  $cupon->tipoCupon,
-                    'vigente' => 1,
-                    'usado' => 0,
-                    'servicioID' =>  $servicioID,
-                    'detalleID' =>  $detallePaquete->detalleID,
-                    'paqueteID' =>  $paqueteID,
-                    'cuponDetalleID' =>  $cupon->cuponDetalleID,
-                    'cuponID' =>   $cupon->cuponID
+                $dataCupon = array(
+                            'descripcion' => $cupon->descripcion,
+                            'valor' => $cupon->valor,
+                            'tipoCupon' => $cupon->tipoCupon,
+                            'vigente' => 1,
+                            'usado' => 0,
+                            'servicioID' => $servicioID,
+                            'detalleID' => $detallePaquete->detalleID,
+                            'paqueteID' => $paqueteID,
+                            'cuponDetalleID' => $cupon->cuponDetalleID,
+                            'cuponID' => $cupon->cuponID
                 );
-                $idCuponAdquirido = $this->defaultdata_model->insertItem('cuponadquirido', $dataCupon);    
+                $idCuponAdquirido = $this->defaultdata_model->insertItem('cuponadquirido', $dataCupon);
             }
-
         }
 
-       
+
 
         //PUBLICACION      
         $fecha = date('Y-m-d');
         $dias = $this->input->post('vigencia_texto');
-        $fechaCierre = strtotime ( '+'.$dias.' day' , strtotime($fecha)) ;
-        $fechaCierre = date ( 'Y-m-j' , $fechaCierre );
+        $fechaCierre = strtotime('+' . $dias . ' day', strtotime($fecha));
+        $fechaCierre = date('Y-m-j', $fechaCierre);
         $dataPublicacion = array(
             'seccion' => $this->input->post('seccion'),
             'titulo' => $this->input->post('titulo'),
-            'vigente' => 1, 
+            'vigente' => 1,
             'fechaCreacion' => date('Y-m-d'),
             'fechaVencimiento' => $fechaCierre,
             'numeroVisitas' => 0,
-            'estadoID' => $this->input->post('estado'), 
-            'ciudad' => $this->input->post('ciudad'), 
+            'estadoID' => $this->input->post('estado'),
+            'ciudad' => $this->input->post('ciudad'),
             'genero' => $this->input->post('genero'),
             'razaID' => $this->input->post('raza'),
-            'precio' => $this->input->post('precio'), 
+            'precio' => $this->input->post('precio'),
             'descripcion' => $this->input->post('descripcion'),
             'muestraTelefono' => $this->input->post('mostrar_telefono'),
             'aprobada' => 0,
             'servicioID' => $servicioID,
-            'detalleID' =>  $detallePaquete->detalleID,
+            'detalleID' => $detallePaquete->detalleID,
             'paqueteID' => $paqueteID
         );
 
-         $publicacionID = $this->defaultdata_model->insertItem('publicaciones', $dataPublicacion);
-        
+        $publicacionID = $this->defaultdata_model->insertItem('publicaciones', $dataPublicacion);
+
         //VIDEOS PUBLICACION
-       
+
         $precio_total = $this->input->post('total');
 
-           $preference_data = array(
+        $preference_data = array(
             "items" => array(
                 array(
                     "title" => "Publicacion en directorio",
@@ -262,45 +245,43 @@ class Venta extends CI_Controller
 
         $preference = $this->mercadopago->create_preference($preference_data);
         echo '<iframe src="' . $preference['response']['sandbox_init_point'] . '" name="MP-Checkout" width="740" height="600" frameborder="0"></iframe>';
-    
 
-         //echo json_encode($publicacionID);
-         
+
+        //echo json_encode($publicacionID);
     }
 
-     function lista() {
+    function lista() {
 
-        $raza          = $this->input->post('raza') === ''?NULL:intval($this->input->post('raza'));
-        $genero          = $this->input->post('genero') === ''?NULL:intval($this->input->post('genero'));
-        $estado        = $this->input->post('estado') === ''?NULL:intval($this->input->post('estado'));
-        $precio          = $this->input->post('precio') === ''?NULL:$this->input->post('precio');
-        $palabra_clave = $this->input->post('palabra_clave') === ''?NULL:$this->input->post('palabra_clave');
-		$id_anuncio = $this->input->post('id_anuncio') === ''?NULL:$this->input->post('id_anuncio');
+        $raza = $this->input->post('raza') === '' ? NULL : intval($this->input->post('raza'));
+        $genero = $this->input->post('genero') === '' ? NULL : intval($this->input->post('genero'));
+        $estado = $this->input->post('estado') === '' ? NULL : intval($this->input->post('estado'));
+        $precio = $this->input->post('precio') === '' ? NULL : $this->input->post('precio');
+        $palabra_clave = $this->input->post('palabra_clave') === '' ? NULL : $this->input->post('palabra_clave');
+        $id_anuncio = $this->input->post('id_anuncio') === '' ? NULL : $this->input->post('id_anuncio');
 
-        echo json_encode($this->venta_model->getPublicaciones($raza,$genero,$estado,$precio,$palabra_clave,$id_anuncio));
-	
+        echo json_encode($this->venta_model->getPublicaciones($raza, $genero, $estado, $precio, $palabra_clave, $id_anuncio));
     }
-    
+
     public function contactar($id) {
-		$directorio = $this->venta_model->getIDusuario($id);
-	
-		$config = array(
-			'mailtype'  => 'html',
-			'priority'  => 2,
-			'useragent' => 'qup',
-			'wrapchars' => '300',
-			'wordwrap'  => true,
-			'protocol'  => 'sendmail',
-		);
+        $directorio = $this->venta_model->getIDusuario($id);
 
-		$this->email->initialize($config);
+        $config = array(
+            'mailtype' => 'html',
+            'priority' => 2,
+            'useragent' => 'qup',
+            'wrapchars' => '300',
+            'wordwrap' => true,
+            'protocol' => 'sendmail',
+        );
 
-		$this->email->from($this->session->userdata('correo'), $this->session->userdata('nombre').' '.$this->session->userdata('apellido'));
-		$this->email->to($directorio->correo);
+        $this->email->initialize($config);
 
-		$this->email->subject($this->input->post('asunto_contacto'));
+        $this->email->from($this->session->userdata('correo'), $this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido'));
+        $this->email->to($directorio->correo);
 
-		$msj = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        $this->email->subject($this->input->post('asunto_contacto'));
+
+        $msj = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
         <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -321,16 +302,16 @@ class Venta extends CI_Controller
                 <tr>
                     <td colspan="7" >
                         <p>&nbsp;  </p>
-                        <font style="margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" >Hola: '.$directorio->nombre." ".$directorio->apellido.'!! </font>
+                        <font style="margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" >Hola: ' . $directorio->nombre . " " . $directorio->apellido . '!! </font>
                     </br>
                 </br>
 
-                <font> El usuario '.$this->session->userdata('nombre').' '.$this->session->userdata('apellido').' quiere contactase contigo...</font>
+                <font> El usuario ' . $this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido') . ' quiere contactase contigo...</font>
             </br>
         </br>
 
-        <font color="#000066"><strong> Asunto: '.$this->input->post('asunto_contacto').'</strong></font>
-        <font color="#000066"><strong>Mensaje: </strong><br/>'.$this->input->post('comentario_contacto').'</font>
+        <font color="#000066"><strong> Asunto: ' . $this->input->post('asunto_contacto') . '</strong></font>
+        <font color="#000066"><strong>Mensaje: </strong><br/>' . $this->input->post('comentario_contacto') . '</font>
         <br/>
         <p> </p>
     </td>
@@ -347,18 +328,17 @@ class Venta extends CI_Controller
 </body>
 </html>';
 
-		$this->email->message($msj);
+        $this->email->message($msj);
 
-		if (!$this->email->send()) {
-			echo "<div class='alert alert-warning'>No se ha logrado envíar el correo al dueño de este directorio. Vuelva a intentarlo o contacte al administrador del sitio.</div>";
-		} else {
-			echo '<div class="alert alert-success">Se ha enviado correctamente el correo electrónico.</div>';
-		}
+        if (!$this->email->send()) {
+            echo "<div class='alert alert-warning'>No se ha logrado envíar el correo al dueño de este directorio. Vuelva a intentarlo o contacte al administrador del sitio.</div>";
+        } else {
+            echo '<div class="alert alert-success">Se ha enviado correctamente el correo electrónico.</div>';
+        }
+    }
 
-
-	}
-
-    function preferencia(){
+    function preferencia() {
         var_dump($_POST);
     }
+
 }

@@ -161,6 +161,7 @@ class Venta_model extends CI_Model {
         }
 
         $resultSet = $this->db->get();
+        
 
         return array('data' => $resultSet->result(), 'count' => $resultSet->num_rows);
     }
@@ -174,7 +175,7 @@ class Venta_model extends CI_Model {
 
         return $this->db->get()->row();
 
-        //$this->output->enable_profiler(TRUE);
+        
     }
 
 }
