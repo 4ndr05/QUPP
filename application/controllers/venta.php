@@ -220,13 +220,85 @@ class Venta extends CI_Controller {
         $publicacionID = $this->defaultdata_model->insertItem('publicaciones', $dataPublicacion);
 
         //VIDEOS PUBLICACION
+         $video = $this->input->post('url_video');
+                if( $video != null){
+                    for($i=0;$i<=count($video);$i++){                        
+                        if($video[$i] != '0' && $video[$i] != null){
+                        $arrVideo= array(
+                            'paqueteID' => $paqueteID,
+                            'publicacionID'   => $publicacionID,
+                            'servicioID' => $servicioID,
+                            'detalleID' =>  $detallePaquete->detalleID,
+                            'link' =>$video[$i]
+                        );
+                            $video = $this->admin_model->insertItem('videos',$arrVideo);
+                            //var_dump($e);
+                        }
+                        $arrVideo = null;
+                    }
+                }
 
-        $precio_total = $this->input->post('total');
+        //IMAGENES
+         $name_logo_form = $this->input->post('name_logo_form');
+                if( $name_logo_form != null){
+                    for($i=0;$i<=count($name_logo_form);$i++){     
+                        //Se mueve la imagen de tmp a negocio_logo
+                        $name_file = explode('/', $name_logo_form);
 
-        $preference_data = array(
+                        if (!file_exists('images/anuncios/' . $name_file[2])) {
+                            rename($name_logo_form, 'images/anuncios/' . $name_file[2]);
+                        }
+                        $logo_form = 'images/anuncios/' . $name_file[2];                   
+                        
+                        $arrFoto= array(
+                            'paqueteID' => $paqueteID,
+                            'publicacionID'   => $publicacionID,
+                            'servicioID' => $servicioID,
+                            'detalleID' =>  $detallePaquete->detalleID,
+                            'foto' =>$logo_form
+                        );
+                            $fotoID = $this->admin_model->insertItem('fotospublicacion',$arrFoto);
+                                                   
+                        $arrVideo = null;
+                    }
+                }
+
+        
+
+         //COMPRA
+         $valorCupon = $this->input->post('radiog_dark');
+         $cuponID = $this->input->post('cuponUsado');
+         $precio_total = $detallePaquete->precio - ($detallePaquete->precio * ($valorCupon / 100));
+
+         if($cuponID != 0){
+            $this->defaultdata_model->updateItem('cuponID', $cuponID, $data = array('usado' => 1), 'cuponadquirido');
+         }
+        
+        $compra = array(
+            'descuento' => $valorCupon,
+            'fecha' => date('Y-m-d H:i:s'),
+            'idCuponAdquirido' => $cuponID,
+            'subtotal' => $detallePaquete->precio,
+            'total' => $precio_total,
+            'usuarioID' => $this->session->userdata('idUsuario'),
+            'pagado' => 0
+        );
+        $compraID = $this->defaultdata_model->insertItem('compra', $compra);
+
+        $compradetalle = array(
+            'cantidad' => 1,
+            'color' => '',
+            'talla' => '',
+            'compraID' => $compraID,
+            'nombre' => $detallePaquete->nombrePaquete,
+            'precio' => $detallePaquete->precio,
+            'productoID' => $publicacionID
+        );
+        $compraDetalle = $this->defaultdata_model->insertItem('compradetalle', $compradetalle);
+           $preference_data = array(
             "items" => array(
                 array(
-                    "title" => "Publicacion en directorio",
+                    "title" => "Publicacion en Anuncios",
                     "quantity" => 1,
                     "currency_id" => "MXN",
                     "unit_price" => floatval($precio_total)
@@ -239,12 +311,21 @@ class Venta extends CI_Controller {
                 'date_created' => date('Y-m-d')
             ),
             "back_urls" => array(
-                "success" => base_url('principal/miPerfil')
+                "success" => base_url().'venta/updateCompra/'.$compraID.'/1/'.$servicioID,
+                "pending" => base_url().'venta/updateCompra/'.$compraID.'/1/'.$servicioID,
+                "failure" => base_url().'venta/updateCompra/'.$compraID.'/0/'.$servicioID
             )
         );
 
         $preference = $this->mercadopago->create_preference($preference_data);
-        echo '<iframe src="' . $preference['response']['sandbox_init_point'] . '" name="MP-Checkout" width="740" height="600" frameborder="0"></iframe>';
+         if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            echo 'rollback';
+            } else {
+            $this->db->trans_commit();
+            //TODO hay que cambiar a init_point
+           echo '<iframe src="' . $preference['response']['sandbox_init_point'] . '" name="MP-Checkout" width="740" height="600" frameborder="0"></iframe>';
+        }
 
 
         //echo json_encode($publicacionID);
@@ -337,8 +418,10 @@ class Venta extends CI_Controller {
         }
     }
 
-    function preferencia() {
-        var_dump($_POST);
+    function updateCompra($compraID,$estado,$servicioID){
+        $this->defaultdata_model->updateItem('compraID', $compraID, $data = array('pagado' => $estado), 'compra');
+        $this->defaultdata_model->updateItem('servicioID', $servicioID, $data = array('pagado' => $estado), 'serviciocontratado');
+        redirect('principal/miPerfil');
     }
 
 }
