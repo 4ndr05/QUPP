@@ -17,7 +17,7 @@ class datatest extends CI_Controller {
         $data['usuariodato'] = array();
         $data['ubicacionusuario'] = array();
 
-        $rows = 201;
+        $rows = 401;
         for ($i = $rows; $i <= $rows + 30; $i++) {
             $data['usuario'][$i] = array(
                 'idUsuario' => $i,
@@ -34,7 +34,7 @@ class datatest extends CI_Controller {
                 'recepcionCorreo' => '1',
                 'status' => '1',
                 'telefono' => '1231231234',
-                'tipoUsuario' => '3',
+                'tipoUsuario' => 4,
                 'useragent' => NULL,
             );
 
@@ -54,7 +54,7 @@ class datatest extends CI_Controller {
                 'numero' => '00' . $i,
                 'paginaWeb' => 'ninguna.',
                 'telefono' => '1231231231',
-                'tipoUsuario' => 3
+                'tipoUsuario' => 4
             );
 
             $data['usuariodato'][$i] = array(

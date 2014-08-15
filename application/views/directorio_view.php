@@ -67,53 +67,57 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
         <!-- item container -->
         <ul id="itemContainer_negocio" style="min-height:100px; display:inline-block;">
             <!-- Inicio FILA -->
-            <?php $fila = 1; ?>
-            <?php $data = $directorios['data'] ?>
-            <?php foreach ($data as $directorio): ?>
-                <!-- INICIO contenedor anuncio  -->
+            <?php if ($directorios['count'] > 0): ?>
+                <?php $fila = 1; ?>
+                <?php $data = $directorios['data'] ?>
+                <?php foreach ($data as $directorio): ?>
+                    <!-- INICIO contenedor anuncio  -->
 
-                <div class="contenedor_negocio" data-object='<?php echo json_encode($directorio) ?>'>
-                    <div class="contenedor_imagen_negocio">
-                        <img src="<?php echo base_url() ?>images/giros_negocio/adistramiento_canino.png"/>
+                    <div class="contenedor_negocio" data-object='<?php echo json_encode($directorio) ?>'>
+                        <div class="contenedor_imagen_negocio">
+                            <img src="<?php echo base_url() ?>images/giros_negocio/adistramiento_canino.png"/>
+                        </div>
+                        <div class="contenedor_nombre_negocio">
+                            <strong>
+                                <?php echo $directorio->nombreNegocio; ?>
+                            </strong>
+                        </div>
+
+                        <div class="contenedor_descripcion_negocio">
+                            <?php echo $directorio->nombreGiro ?><br/>
+                            <?php echo $directorio->telefono ?>
+                        </div>
+
+                        <ul class="ver_mas_negocio">
+                            <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
+                                <li onclick="javascript:window.location.href = '<?php echo base_url('directorio/detalles/' . $directorio->idUsuario) ?>'">
+                                    Ver más...
+                                </li>
+                            <?php else: ?>
+                                <li onclick="javascript:alert('Favor de iniciar sesión.')">
+                                    Ver más...
+                                </li>
+                            <?php endif; ?>
+                        </ul>
                     </div>
-                    <div class="contenedor_nombre_negocio">
-                        <strong>
-                            <?php echo $directorio->nombreNegocio; ?>
-                        </strong>
-                    </div>
 
-                    <div class="contenedor_descripcion_negocio">
-                        <?php echo $directorio->nombreGiro ?><br/>
-                        <?php echo $directorio->telefono ?>
-                    </div>
+                    <!-- Fin contenedor annuncio -->
 
-                    <ul class="ver_mas_negocio">
-                        <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
-                            <li onclick="javascript:window.location.href = '<?php echo base_url('directorio/detalles/' . $directorio->idUsuario) ?>'">
-                                Ver más...
-                            </li>
-                        <?php else: ?>
-                            <li onclick="javascript:alert('Favor de iniciar sesión.')">
-                                Ver más...
-                            </li>
-                        <?php endif; ?>
-                    </ul>
-                </div>
+                    <?php if (3 > $fila++): ?>
+                        <!-- Inicio margen falso -->
+                        <div class="margen_derecho_20">
 
+                        </div>
+                    <?php else: ?>
+                        <?php $fila = 1; ?>
+                    <?php endif; ?>
+                    <!-- FIN margen falso -->
+                <?php endforeach; ?>
                 <!-- Fin contenedor annuncio -->
-
-                <?php if (3 > $fila++): ?>
-                    <!-- Inicio margen falso -->
-                    <div class="margen_derecho_20">
-
-                    </div>
-                <?php else: ?>
-                    <?php $fila = 1; ?>
-                <?php endif; ?>
-                <!-- FIN margen falso -->
-            <?php endforeach; ?>
-            <!-- Fin contenedor annuncio -->
-            <!-- FIN FILA ---->
+                <!-- FIN FILA ---->
+            <?php else: ?>
+                <div class="alert alert-warning">No hay resultados.</div>
+            <?php endif; ?>
         </ul>
         <br/>
         <br/>

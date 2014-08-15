@@ -5,7 +5,7 @@ $this->load->view('general/general_header_view', array('title' => 'Asociaciones 
 ?>
 <?php $this->load->view('general/menu_view', array('seccion' => $seccion)) ?>
 <div class="titulo_seccion">
-ASOCIACIONES PROTECTORAS
+    ASOCIACIONES PROTECTORAS
 </div>
 <div class="contenedor_buscador">
     <form id="filtro_asociacion">
@@ -14,7 +14,7 @@ ASOCIACIONES PROTECTORAS
                 <select name="estado"  class="estilo_select_directorio" id="estado" >
                     <option value="" > Selecciona un Estado </option>
                     <?php foreach ($estados as $edo): ?>
-                        <option value="<?php echo $edo->estadoID ?>" ><?php echo $edo->nombreEstado; ?></option>
+                        <option value="<?php echo $edo->estadoID ?>"><?php echo $edo->nombreEstado; ?></option>
                     <?php endforeach; ?>
                 </select>
             <?php endif; ?>
@@ -43,53 +43,57 @@ ASOCIACIONES PROTECTORAS
         <!-- item container -->
         <ul id="itemContainer_negocio" style="min-height:100px; display:inline-block;">
             <!-- Inicio FILA -->
-            <?php $fila = 1; ?>
-            <?php $data = $directorios['data'] ?>
-            <?php foreach ($data as $directorio): ?>
-                <!-- INICIO contenedor anuncio  -->
+            <?php if ($directorios['count'] > 0): ?>
+                <?php $fila = 1; ?>
+                <?php $data = $directorios['data'] ?>
+                <?php foreach ($data as $directorio): ?>
+                    <!-- INICIO contenedor anuncio  -->
 
-                <div class="contenedor_negocio" data-object='<?php echo json_encode($directorio) ?>'>
-                    <div class="contenedor_imagen_negocio">
-                        <img src="<?php echo base_url() ?>images/giros_negocio/protectora.png"/>
+                    <div class="contenedor_negocio" data-object='<?php echo json_encode($directorio) ?>'>
+                        <div class="contenedor_imagen_negocio">
+                            <img src="<?php echo base_url() ?>images/giros_negocio/protectora.png"/>
+                        </div>
+                        <div class="contenedor_nombre_negocio">
+                            <strong>
+                                <?php echo $directorio->nombreNegocio; ?>
+                            </strong>
+                        </div>
+
+                        <div class="contenedor_descripcion_negocio">
+                            <?php echo $directorio->nombreGiro ?><br/>
+                            <?php echo $directorio->telefono ?>
+                        </div>
+
+                        <ul class="ver_mas_negocio">
+                            <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
+                                <li onclick="javascript:window.location.href = '<?php echo base_url('asociacion/detalles/' . $directorio->idUsuario) ?>'">
+                                    Ver más...
+                                </li>
+                            <?php else: ?>
+                                <li onclick="javascript:alert('Favor de iniciar sesión.')">
+                                    Ver más...
+                                </li>
+                            <?php endif; ?>
+                        </ul>
                     </div>
-                    <div class="contenedor_nombre_negocio">
-                        <strong>
-                            <?php echo $directorio->nombreNegocio; ?>
-                        </strong>
-                    </div>
 
-                    <div class="contenedor_descripcion_negocio">
-                        <?php echo $directorio->nombreGiro ?><br/>
-                        <?php echo $directorio->telefono ?>
-                    </div>
+                    <!-- Fin contenedor annuncio -->
 
-                    <ul class="ver_mas_negocio">
-                        <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
-                            <li onclick="javascript:window.location.href = '<?php echo base_url('directorio/detalles/' . $directorio->idUsuario) ?>'">
-                                Ver más...
-                            </li>
-                        <?php else: ?>
-                            <li onclick="javascript:alert('Favor de iniciar sesión.')">
-                                Ver más...
-                            </li>
-                        <?php endif; ?>
-                    </ul>
-                </div>
+                    <?php if (3 > $fila++): ?>
+                        <!-- Inicio margen falso -->
+                        <div class="margen_derecho_20">
 
+                        </div>
+                    <?php else: ?>
+                        <?php $fila = 1; ?>
+                    <?php endif; ?>
+                    <!-- FIN margen falso -->
+                <?php endforeach; ?>
                 <!-- Fin contenedor annuncio -->
-
-                <?php if (3 > $fila++): ?>
-                    <!-- Inicio margen falso -->
-                    <div class="margen_derecho_20">
-
-                    </div>
-                <?php else: ?>
-                    <?php $fila = 1; ?>
-                <?php endif; ?>
-                <!-- FIN margen falso -->
-            <?php endforeach; ?>
-            <!-- Fin contenedor annuncio -->
-            <!-- FIN FILA ---->
+                <!-- FIN FILA ---->
+            <?php else: ?>
+                <div class="alert alert-warning">No hay resultados.</div>
+            <?php endif; ?>
         </ul>
         <br/>
         <br/>
@@ -333,21 +337,21 @@ $this->load->view('partial/_pasos_anuncio', array('paquetes' => $paquetes,
             endRange: 1
         });
 
-        $("#filtro_directorio select[name]").on('change', function(e) {
+        $("#filtro_asociacion select[name]").on('change', function(e) {
             e.preventDefault();
-            var form = $("#filtro_directorio");
+            var form = $("#filtro_asociacion");
             search_data(form);
         });
-        $("#filtro_directorio [name]").keyup(function() {
+        $("#filtro_asociacion [name]").keyup(function() {
             if ($(this).val().length > 2 || $(this).val().length === 0) {
-                var form = $("#filtro_directorio");
+                var form = $("#filtro_asociacion");
                 search_data(form);
             }
         });
 
         function search_data(form) {
             $.ajax({
-                url: '<?php echo base_url('directorio/lista') ?>',
+                url: '<?php echo base_url('asociacion/lista') ?>',
                 data: form.serialize(),
                 dataType: 'json',
                 type: 'post',
@@ -370,7 +374,7 @@ $this->load->view('partial/_pasos_anuncio', array('paquetes' => $paquetes,
                         cont_neg.data('object', data[i]);
 
                         var cont_imagen = $('<div class="contenedor_imagen_negocio"></div>');
-                        var logo = data[i].logo !== null ? data[i].logo : 'adistramiento_canino.png';
+                        var logo = data[i].logo !== null ? data[i].logo : 'protectora.png';
                         cont_imagen.append('<img src="<?php echo base_url() ?>images/giros_negocio/' + logo + '" alt="logo"/>');
                         cont_neg.append(cont_imagen);
 
@@ -381,7 +385,7 @@ $this->load->view('partial/_pasos_anuncio', array('paquetes' => $paquetes,
                         cont_descrip.append(data[i].nombreGiro + '<br/>' + data[i].telefono);
                         cont_neg.append(cont_descrip);
 <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
-                            var ver_mas = $('<ul class="ver_mas_negocio"><li onclick=" javascript:window.location.href=\'<?php echo base_url() ?>directorio/detalles/' + data[i].idUsuario + '\'">Ver más...</li></ul>');
+                            var ver_mas = $('<ul class="ver_mas_negocio"><li onclick=" javascript:window.location.href=\'<?php echo base_url() ?>asociacion/detalles/' + data[i].idUsuario + '\'">Ver más...</li></ul>');
 <?php else: ?>
                             var ver_mas = $('<ul class="ver_mas_negocio"><li onclick="javascript:alert(\'Favor de iniciar sesión.\')">Ver más...</li></ul>');
 
@@ -410,11 +414,6 @@ $this->load->view('partial/_pasos_anuncio', array('paquetes' => $paquetes,
                     });
                 }
             });
-        }
-
-        function show_details(data) {
-
-
         }
 
     });

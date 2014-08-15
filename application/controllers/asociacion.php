@@ -27,10 +27,29 @@ class Asociacion extends CI_Controller {
         $data['razas'] = $this->defaultdata_model->getRazas();
         $data['giros'] = $this->defaultdata_model->getGiros();
         $data['seccion'] = 11;
-        $data['directorios'] = $this->usuario_model->getDirectorios();
+        $data['directorios'] = $this->usuario_model->getDirectorios(3);
         $data['user'] = $this->usuario_model->myInfo($this->session->userdata('idUsuario'));
-        
+
         $this->load->view('asociacion_view', $data);
+    }
+
+    public function lista() {
+
+        $giro = $this->input->post('giro') === '' ? NULL : intval($this->input->post('giro'));
+        $estado = $this->input->post('estado') === '' ? NULL : intval($this->input->post('estado'));
+        $palabra_clave = $this->input->post('palabra_clave') === '' ? NULL : $this->input->post('palabra_clave');
+
+        echo json_encode($this->usuario_model->getDirectorios(3, NULL, $estado, $palabra_clave));
+    }
+    
+    public function detalles($id) {
+
+        $data['detalles'] = $this->usuario_model->getDirectorios(3,null, null, null, intval($id));
+        
+        $data['giros'] = $this->usuario_model->getGirosUsuario(intval($id));
+
+        $data['seccion'] = 11;
+        $this->load->view('d_directorio_view', $data);
     }
 
 }

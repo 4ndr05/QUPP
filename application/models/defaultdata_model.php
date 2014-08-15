@@ -188,6 +188,7 @@ class Defaultdata_model extends CI_Model {
         $this->db->insert($this->tablas[$tabla], $data);
         $itemID = $this->db->insert_id();
         return $itemID;
+    }
     
     public function get_zona_geografica($id_estado){
         $this->db->from('zonageograficaestado');

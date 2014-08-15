@@ -403,7 +403,16 @@ class Usuario_model extends CI_Model {
         return $this->db->get()->result();
     }
 
-    function getDirectorios($giro = null, $estado = null, $palabraclave = null, $id = null) {
+    /**
+     * 
+     * @param int $tipo_usuario
+     * @param int $giro
+     * @param int $estado
+     * @param string $palabraclave
+     * @param int $id
+     * @return mixed
+     */
+    function getDirectorios($tipo_usuario = null, $giro = null, $estado = null, $palabraclave = null, $id = null) {
         /*
          * 
          * Posible recomentacion para pasarlo a una vista
@@ -417,8 +426,10 @@ class Usuario_model extends CI_Model {
 
         $this->db->where('u.status', 1);
 
-        $this->db->where('u.tipoUsuario', 3);
-        $this->db->where('ud.tipoUsuario', 3);
+        if (!is_null($tipo_usuario)) {
+            $this->db->where('u.tipoUsuario', $tipo_usuario);
+            $this->db->where('ud.tipoUsuario', $tipo_usuario);
+        }
 
         if (!is_null($giro)) {
             $this->db->where('g.giroID', $giro);
@@ -465,27 +476,26 @@ class Usuario_model extends CI_Model {
      * @param array $data
      * @param int $key
      */
-    function update_values($table, $data, $field_key = array()) {        
-            
-            foreach ($field_key as $field => $key){
-                $this->db->where($field, $key);
-            }
-            $this->db->update($table, $data);
-        
+    function update_values($table, $data, $field_key = array()) {
+
+        foreach ($field_key as $field => $key) {
+            $this->db->where($field, $key);
+        }
+        $this->db->update($table, $data);
     }
-    
-    function insert_values($data){
-        foreach ($data as $table => $rows) {            
+
+    function insert_values($data) {
+        foreach ($data as $table => $rows) {
             foreach ($rows as $row) {
                 $this->db->insert($table, $row);
-            }            
+            }
         }
     }
-    
-    function delete_values($table, $field_key= array()){
-       foreach ($field_key as $field => $key){
-                $this->db->where($field, $key);
-            }
+
+    function delete_values($table, $field_key = array()) {
+        foreach ($field_key as $field => $key) {
+            $this->db->where($field, $key);
+        }
         $this->db->delete($table);
     }
 

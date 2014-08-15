@@ -27,10 +27,9 @@
     }
 </style>
 <div id="contenedor_publicar_anuncio_negocio" class="contenedor_publicar_anuncio" style=" display:none;">
-
     <!-- Inicio contenedor pap publicar anuncio anuncio !-->
     <div id="publicar_anuncio_negocio" class="pubicar_anuncio">
-        <?php if (is_logged()): ?>
+        <?php if (is_logged() && $this->session->userdata('tipoUsuario') == 2): ?>
             <form method="post" name="form_anuncio_negocio" id="form_anuncio_negocio">
                 <div class="numeros_publicar_anuncio">
                     <ul class="listado_numeros_anuncio">
@@ -40,7 +39,7 @@
                         <li data-titulo="Vista previa de tu anuncio" data-p="paso_cuatro_negocio">4</li>
                         <li data-titulo="Detalle de compra:" data-p="paso_cinco_negocio">5</li>
                         <li data-titulo="Pago:" data-p="paso_seis_negocio">6</li>
-                        
+
                     </ul>
                 </div>
                 <div class="crerar_publicar_anuncio">
@@ -60,7 +59,7 @@
                                 <?php foreach ($giros as $index => $giro): ?>
                                     <?php if ($index % 2 !== 0): ?>
                                         <label style="display: inline-block; margin-bottom: 2px;">
-                                            <input class="validate[required]" type="checkbox" name="giro_<?php echo ($index + 1) ?>_form" value="<?php echo $giro->giroID ?>" id="CheckboxGiro_0" />
+                                            <input class="giro_form validate[required]" type="checkbox" name="giro_<?php echo ($index + 1) ?>_form" value="<?php echo $giro->giroID ?>" id="CheckboxGiro_0" />
                                             <?php echo $giro->nombreGiro; ?>
                                         </label>
                                         <br />
@@ -72,7 +71,7 @@
                                 <?php foreach ($giros as $index => $giro): ?>
                                     <?php if ($index % 2 === 0): ?>
                                         <label style="display: inline-block; margin-bottom: 2px;">
-                                            <input class="validate[required]" type="checkbox" name="giro_<?php echo ($index + 1) ?>_form" value="<?php echo $giro->giroID ?>" id="CheckboxGiro_0" />
+                                            <input class="giro_form validate[required]" type="checkbox" name="giro_<?php echo ($index + 1) ?>_form" value="<?php echo $giro->giroID ?>" id="CheckboxGiro_0" />
                                             <?php echo $giro->nombreGiro; ?>
                                         </label>
                                         <br />
@@ -114,7 +113,7 @@
                                     <tr>
                                         <td>
                                             <label>
-                                                <input type="radio" name="plan_form" class="validate[required]" value="<?php echo $plan->paqueteID ?>" id="RadioGroup2_0" />
+                                                <input data-vigencia="<?php echo intval($plan->vigencia / 30) ?>" data-descuento="<?php echo $plan->valor ?>" data-precio="<?php echo $plan->precio ?>" type="radio" name="plan_form" class="validate[required]" value="<?php echo $plan->paqueteID ?>" id="RadioGroup2_0" />
                                                 <?php echo intval($plan->vigencia / 30) ?>&nbsp;<?php echo ($plan->vigencia / 30 > 1) ? 'meses' : 'mes' ?></label>
                                         </td>
                                         <td><?php echo $plan->valor ?>% </td>
@@ -180,7 +179,7 @@
                                     <label>Estado:</label><select name="estado_negocio" class="background_gris_100 validate[required]">
                                         <option value=""> --- </option>
                                         <?php foreach ($estados as $edo) : ?>
-                                            <option value="<?php echo $edo->estadoID ?>" <?php echo $user->idEstado === $edo->estadoID ? 'selected' : ''; ?>> <?php echo $edo->nombreEstado ?> </option>
+                                            <option value="<?php echo $edo->estadoID ?>" <?php echo $user->estadoID === $edo->estadoID ? 'selected' : ''; ?>> <?php echo $edo->nombreEstado ?> </option>
                                         <?php endforeach; ?>
                                     </select>
                                     <label>Municipio:</label><input name="ciudad_negocio" value="<?php echo $user->municipio; ?>" class="background_gris_100 validate[required]"/>
@@ -195,9 +194,9 @@
                                 <br/>
 
                                 <p class="margen_15_left"> 
-                                    <label>CP:</label><input name="cp_negocio" value="<?php echo $user->cp; ?>" type="text" class="background_gris_55 validate[required]"/> 
+                                    <label>CP:</label><input name="cp_negocio" value="<?php echo $user->cp; ?>" type="text" class="background_gris_55 validate[required,maxSize[5],minSize[5],custom[integer]]"/> 
                                     <label>E-mail:</label><input name="email_negocio" type="text" value="<?php echo $user->correo; ?>" class="background_gris validate[required]"/>
-                                    <label>Pagina Web:</label><input name="pagina_web_negocio" value="<?php echo $user->paginaWeb; ?>" class="background_gris validate[required]" type="text"/>
+                                    <label>Pagina Web:</label><input name="pagina_web_negocio" value="<?php echo $user->paginaWeb; ?>" class="background_gris validate[required,custom[url]]" type="text"/>
                                 </p>
                             </div>
                             <br/>
@@ -333,16 +332,16 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Publicación en directorio por 6 meses
+                                    Publicación en directorio por <span class="descripcion_plan">6</span> meses
                                 </td>
-                                <td>
+                                <td id="detalle_plan">
                                     <p>* Datos de contacto </p>
                                     <p>* Envio de correo de contacto</p>
                                     <p>* Ubicación google maps</p>
-                                    <p>* Vigencia 6 meses</p>
+                                    <p>* Vigencia <span class="descripcion_plan">6</span> meses</p>
                                 </td>
                                 <td>
-                                    <p class="totales">$435.00</p>
+                                    <p id="totales" class="totales">$435.00</p>
                                 </td>
                             </tr>
                             <tr>
@@ -350,7 +349,7 @@
                                     <p>SUBTOTAL:</p>
                                 </td>
                                 <td>
-                                    <p class="totales"> $435.00 </p>
+                                    <p id="subtotal" class="totales"> $435.00 </p>
                                 </td>
                             </tr>
                             <tr>
@@ -358,7 +357,7 @@
                                     TOTAL
                                 </th>
                                 <th>
-                            <p class="totales" style="color: #FFF;">$435.00</p>
+                            <p class="totales" id="total" style="color: #FFF;">$435.00</p>
                             </th>
                             </tr>
                         </table>
@@ -413,6 +412,9 @@
         var g;
         var myLatlng;
 
+        var latitudField = document.getElementById('latitud_negocio');
+        var longitudField = document.getElementById('longitud_negocio');
+
         function initialize() {
             g = google.maps.event;
             myLatlng = new google.maps.LatLng(<?php echo $this->session->userdata('latitud') !== FALSE ? $this->session->userdata('latitud') : '20.5593958' ?>, <?php echo $this->session->userdata('longitud') !== FALSE ? $this->session->userdata('longitud') : '-100.4190292' ?>);
@@ -452,6 +454,9 @@
             });
 
 
+            latitudField.value = myLatlng.lat();
+            longitudField.value = myLatlng.lng();
+
             google.maps.event.addListener(marker, 'click', toggleBounce);
             google.maps.event.addListener(marker, 'dragend', getPositionMarker);
 
@@ -468,9 +473,6 @@
 
         function getPositionMarker() {
             var position = marker.getPosition();
-
-            var latitudField = document.getElementById('latitud_negocio');
-            var longitudField = document.getElementById('longitud_negocio');
 
             latitudField.value = position.lat();
             longitudField.value = position.lng();
@@ -498,21 +500,21 @@
 
             $('.sig_paso', form_negocio).on('click', function() {
                 var sig_paso = $('.paso_show', form_negocio).next('.paso');
-                //if (revision_step($('.paso_show', form_negocio))) {
-                $('.paso_show', form_negocio).removeClass('paso_show').hide();
-                sig_paso.show(function() {
-                    g.trigger(map, 'resize');
-                    map.setCenter(marker.getPosition());
-                    g.trigger(mapSelected, 'resize');
-                    mapSelected.setCenter(markerSelected.getPosition());
-                }).addClass('paso_show');
-                $('.listado_numeros_anuncio li.numero_seccion', form_negocio).removeClass('numero_seccion');
-                var sel_paso = $('.listado_numeros_anuncio', form_negocio).find('[data-p="' + sig_paso.prop('id') + '"]');
-                sel_paso.addClass('numero_seccion view_step');
-                $('.instrucciones_pasos', form_negocio).text(sel_paso.data('titulo'));
-                $('#msj_paso').text("");
-                add_step_move();
-                // }
+                if (revision_step($('.paso_show', form_negocio))) {
+                    $('.paso_show', form_negocio).removeClass('paso_show').hide();
+                    sig_paso.show(function() {
+                        g.trigger(map, 'resize');
+                        map.setCenter(marker.getPosition());
+                        g.trigger(mapSelected, 'resize');
+                        mapSelected.setCenter(markerSelected.getPosition());
+                    }).addClass('paso_show');
+                    $('.listado_numeros_anuncio li.numero_seccion', form_negocio).removeClass('numero_seccion');
+                    var sel_paso = $('.listado_numeros_anuncio', form_negocio).find('[data-p="' + sig_paso.prop('id') + '"]');
+                    sel_paso.addClass('numero_seccion view_step');
+                    $('.instrucciones_pasos', form_negocio).text(sel_paso.data('titulo'));
+                    $('#msj_paso').text("");
+                    //add_step_move();
+                }
             });
 
             function add_step_move() {
@@ -539,8 +541,8 @@
             function revision_step(element) {
                 if (element.prop('id') === 'paso_uno_negocio') {
                     $('#msj_paso', form_negocio).text("Debe seleccionar una sección");
-                    $('[name=giro_form]', form_negocio).validationEngine('validate');
-                    return $('input[name=giro_form]:checked', form_negocio).val() === undefined ? false : true;
+                    $('.giro_form', form_negocio).validationEngine('validate');
+                    return $('.giro_form:checked', form_negocio).val() === undefined ? false : true;
                 }
 
                 if (element.prop('id') === 'paso_dos_negocio') {
@@ -552,7 +554,7 @@
                 if (element.prop('id') === 'paso_tres_negocio') {
                     $('#msj_paso', form_negocio).text("Debe completar todos los campos requeridos");
                     var obj = $('#paso_tres_negocio [name]:required', form_negocio).serialize().split('&');
-                    $('#paso_tres_negocio [name]', form_negocio).validationEngine('validate');
+                    $('#paso_tres_negocio [name]:required', form_negocio).validationEngine('validate');
                     for (var i = 0; i < obj.length; i++) {
                         var field = obj[i].split('=');
                         if (field[1] === '') {
@@ -560,10 +562,6 @@
                         }
                     }
                     return true;
-                }
-
-                if (element.prop('id') === 'paso_cuatro_negocio') {
-
                 }
 
                 return true;
@@ -580,6 +578,21 @@
                 var selectfield = $(this);
                 var optionfield = $('option:selected', selectfield);
                 $('#' + selectfield.prop('name')).text(optionfield.text());
+            });
+
+            $('[name=plan_form]').on('change', function() {
+                //vigencia descuento precio
+                var field = $(this);
+
+                $('[name=vencimiento_negocio]', form_negocio).val(field.data('vigencia') + ' meses');
+                $('.descripcion_plan', form_negocio).text(field.data('vigencia'));
+
+                //totales, subtotal, total
+                var total_val = field.data('precio') - (field.data('precio') * (field.data('descuento') / 100));
+                $('#totales', form_negocio).text('$ ' + (total_val.toFixed(2)));
+                $('#subtotal', form_negocio).text('$ ' + (total_val.toFixed(2)));
+                $('#total', form_negocio).text('$ ' + (total_val.toFixed(2)));
+
             });
 
             $("#fileuploader").uploadFile({
@@ -604,17 +617,18 @@
                     }
                 }
             });
-            
-            $('#form_anuncio_negocio').submit(function(e){
+
+            $('#form_anuncio_negocio').submit(function(e) {
                 e.preventDefault();
                 var form = $(this);
                 $.ajax({
-                    url:'<?php echo base_url('directorio/nuevo') ?>',
-                    type:'post',
+                    url: '<?php echo base_url('directorio/nuevo') ?>',
+                    type: 'post',
                     dataType: 'html',
                     data: form.serialize(),
-                    success: function(data){
-                        $('#iframe').append(data);
+                    success: function(data) {
+
+                        $('#iframe').empty().append(data);
                     }
                 });
             });

@@ -45,7 +45,7 @@ class Directorio extends CI_Controller {
         $data['razas'] = $this->defaultdata_model->getRazas();
         $data['giros'] = $this->defaultdata_model->getGiros();
         $data['seccion'] = 4;
-        $data['directorios'] = $this->usuario_model->getDirectorios();
+        $data['directorios'] = $this->usuario_model->getDirectorios(2);
         $data['user'] = $this->usuario_model->myInfo($this->session->userdata('idUsuario'));
         $data['planes'] = $this->defaultdata_model->getPaquetesCupon(2);
 
@@ -59,12 +59,12 @@ class Directorio extends CI_Controller {
         $estado = $this->input->post('estado') === '' ? NULL : intval($this->input->post('estado'));
         $palabra_clave = $this->input->post('palabra_clave') === '' ? NULL : $this->input->post('palabra_clave');
 
-        echo json_encode($this->usuario_model->getDirectorios($giro, $estado, $palabra_clave));
+        echo json_encode($this->usuario_model->getDirectorios(2, $giro, $estado, $palabra_clave));
     }
 
     public function detalles($id) {
 
-        $data['detalles'] = $this->usuario_model->getDirectorios(null, null, null, intval($id));
+        $data['detalles'] = $this->usuario_model->getDirectorios(2, null, null, null, intval($id));
         $data['giros'] = $this->usuario_model->getGirosUsuario(intval($id));
 
         $data['seccion'] = 4;
@@ -72,7 +72,7 @@ class Directorio extends CI_Controller {
     }
 
     public function contactar($id) {
-        $directorio = $this->usuario_model->getDirectorios(null, null, null, intval($id));
+        $directorio = $this->usuario_model->getDirectorios(2, null, null, null, intval($id));
 
         $config = array(
             'mailtype' => 'html',
@@ -225,15 +225,19 @@ class Directorio extends CI_Controller {
 
         //Se mueve la imagen de tmp a negocio_logo
         $name_file = explode('/', $name_logo_form);
+        if (count($name_file) > 1) {
 
-        if (!file_exists('./images/negocio_logo/' . $name_file[2])) {
-            rename('./' . $name_logo_form, './images/negocio_logo/' . $name_file[2]);
+            if (!file_exists('./images/negocio_logo/' . $name_file[2])) {
+                rename('./' . $name_logo_form, './images/negocio_logo/' . $name_file[2]);
+            }
+            $logo_form = './images/negocio_logo/' . $name_file[2];
+        } else {
+            $logo_form = null;
         }
-        $logo_form = './images/negocio_logo/' . $name_file[2];
 
-        
+
         $this->db->trans_start();
-        
+
         $data['usuario'] = array();
         $data['usuariodetalle'] = array();
         $data['usuariodato'] = array();
@@ -262,7 +266,7 @@ class Directorio extends CI_Controller {
             'numero' => $numero_negocio,
             'paginaWeb' => $pagina_web_negocio,
             'telefono' => $telefono_negocio,
-            'tipoUsuario' => 3
+            //'tipoUsuario' => 3
         );
 
         $data['usuariodato'] = array(
@@ -279,21 +283,24 @@ class Directorio extends CI_Controller {
             'estadoID' => $estado_negocio,
             'latitud' => $latitud_negocio,
             'longitud' => $longitud_negocio,
-            'tipoUsuario' => 3,
+            //'tipoUsuario' => 3,
             'zonageograficaID' => $zona_geo->zonageograficaID
         );
 
-        $this->usuario_model->update_values('usuario', $data['usuario'], array('idUsuario'=> $myinfo->idUsuario));
-        $this->usuario_model->update_values('usuariodetalle', $data['usuariodetalle'], array('idUsuario'=> $myinfo->idUsuario));
-        $this->usuario_model->update_values('usuariodato', $data['usuariodato'], array('idUsuario'=> $myinfo->idUsuario));
-        $this->usuario_model->update_values('ubicacionusuario', $data['ubicacionusuario'], array('idUsuarioDato'=> $myinfo->idUsuarioDato));
+        $this->usuario_model->update_values('usuario', $data['usuario'], array('idUsuario' => $myinfo->idUsuario));
+        $this->usuario_model->update_values('usuariodetalle', $data['usuariodetalle'], array(
+            'idUsuario' => $myinfo->idUsuario));
+        $this->usuario_model->update_values('usuariodato', $data['usuariodato'], array(
+            'idUsuario' => $myinfo->idUsuario));
+        $this->usuario_model->update_values('ubicacionusuario', $data['ubicacionusuario'], array(
+            'idUsuarioDato' => $myinfo->idUsuarioDato));
 
         //reset
         $data = array();
-        
+
         $obj_date = new DateTime(date('Y-m-d H:i:s'));
         $obj_date_end = new DateTime($obj_date->format('Y-m-d H:i:s'));
-        $obj_date_end->add(new DateInterval('P'.$detalles_plan->vigencia.'D'));
+        $obj_date_end->add(new DateInterval('P' . $detalles_plan->vigencia . 'D'));
 
         $data['serviciocontratado'][] = array(
             'cantFotos' => $detalles_plan->cantFotos,
@@ -334,7 +341,6 @@ class Directorio extends CI_Controller {
         //reset
         $data = array();
 
-        
         $data['publicaciones'][] = array(
             'seccion' => 4,
             'titulo' => 'publicacion de directorio',
@@ -370,11 +376,7 @@ class Directorio extends CI_Controller {
 
         $this->usuario_model->insert_values($data);
 
-        $key_foto_pub = $this->db->insert_id();
-
-
         $precio_total = $detalles_plan->precio - ($detalles_plan->precio * ($detalles_plan->valor / 100));
-
 
         $data = array();
         $data['compra'][] = array(
@@ -428,18 +430,18 @@ class Directorio extends CI_Controller {
 
         $preference = $this->mercadopago->create_preference($preference_data);
 
-        
+
         if ($this->db->trans_status() === FALSE) {
             $this->db->trans_rollback();
             echo 'rollback';
-            } else {
+        } else {
             $this->db->trans_commit();
             //TODO hay que cambiar a init_point
-           echo '<iframe src="' . $preference['response']['sandbox_init_point'] . '" name="MP-Checkout" width="740" height="600" frameborder="0"></iframe>';
+            echo '<iframe src="' . $preference['response']['sandbox_init_point'] . '" name="MP-Checkout" width="840" height="450" frameborder="0"></iframe>';
         }
     }
-    
-    public function procesar_pago(){
+
+    public function procesar_pago() {
         
     }
 
