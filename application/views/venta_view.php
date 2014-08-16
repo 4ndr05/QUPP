@@ -1011,12 +1011,12 @@ $this->load->view('general/general_header_view', array('title' => 'Venta',
         <form id="filtro_venta">
             <input type="hidden" name="id_anuncio" id="id_anuncio" value=""/>
             <div class="fondo_select">
-                <select   class="estilo_select" id="raza" name="raza">
+                <select   class="styled" id="raza" name="raza">
                     <option value="" > Selecciona un raza </option>
                     <?php if ($razas != null): ?>
                         <?php foreach ($razas as $raza): ?>
                             ?>
-                            <option style="background-color: #BCBEC0;" value="<?php $raza->razaID ?>"><?php $raza->raza ?></option>
+                            <option style="background-color: #BCBEC0;" value="<?php echo $raza->razaID ?>"><?php echo $raza->raza ?></option>
                         <?php endforeach; ?>
                     <?php endif; ?>
                     ?>
@@ -1024,7 +1024,7 @@ $this->load->view('general/general_header_view', array('title' => 'Venta',
             </div>
 
             <div class="fondo_select">
-                <select   class="estilo_select" id="genero" name="genero">
+                <select   class=" styled estilo_select" id="genero" name="genero">
                     <option value="" > Selecciona un género </option>
                     <option style="background-color: #BCBEC0;">Macho </option>
                     <option style="background-color: #BCBEC0;">Hembra </option>
@@ -1033,7 +1033,7 @@ $this->load->view('general/general_header_view', array('title' => 'Venta',
             </div>
 
             <div class="fondo_select">
-                <select   class="estilo_select" id="estado" name="estado">
+                <select   class="styled estilo_select" id="estado" name="estado">
                     <option value=""> Selecciona un Estado </option>
                     <?php
                     if ($estados != null):
@@ -1048,7 +1048,7 @@ $this->load->view('general/general_header_view', array('title' => 'Venta',
                 </select>
             </div>
             <div class="fondo_select">
-                <select   class="estilo_select" id="Precio" name="precio">
+                <select   class="styled estilo_select" id="Precio" name="precio">
                     <option value="" > Ordenar por precio </option>
                     <option style="background-color: #BCBEC0;" value="asc"> De menor a mayor </option>
                     <option style="background-color: #BCBEC0;" value="desc"> De mayor a menor </option>
@@ -1056,7 +1056,7 @@ $this->load->view('general/general_header_view', array('title' => 'Venta',
                 </select>
             </div>
             <div class="contenedor_buscar">
-                <input  type="text" class="buscar" size="4" name="palabra_clave" id="palabra_clave"/>
+                <input  type="text" class="buscar" placeholder="palabras clave" size="4" name="palabra_clave" id="palabra_clave"/>
                 <input type="button" height="40" value="  " class="boton_palabras_clave" />
             </div>
         </form>

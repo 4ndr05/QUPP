@@ -266,7 +266,7 @@ class Directorio extends CI_Controller {
             'numero' => $numero_negocio,
             'paginaWeb' => $pagina_web_negocio,
             'telefono' => $telefono_negocio,
-            //'tipoUsuario' => 3
+                //'tipoUsuario' => 3
         );
 
         $data['usuariodato'] = array(
@@ -426,7 +426,6 @@ class Directorio extends CI_Controller {
                 "success" => base_url("directorio/procesar_pago/$key_compra/1/$key_servicio"),
                 "pending" => base_url("directorio/procesar_pago/$key_compra/1/$key_servicio"),
                 "failure" => base_url("directorio/procesar_pago/$key_compra/0/$key_servicio"),
-                
             ),
             "external_reference" => "$key_compra"
         );
@@ -444,7 +443,7 @@ class Directorio extends CI_Controller {
         }
     }
 
-    public function procesar_pago($compraID,$estado,$servicioID) {
+    public function procesar_pago($compraID, $estado, $servicioID) {
         $this->defaultdata_model->updateItem('compraID', $compraID, array('pagado' => $estado), 'compra');
         $this->defaultdata_model->updateItem('servicioID', $servicioID, array('pagado' => $estado), 'serviciocontratado');
         redirect('principal/miPerfil');

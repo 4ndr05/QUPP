@@ -466,9 +466,10 @@ class Usuario_model extends CI_Model {
             return $this->db->get()->row();
         }
 
-
+//$this->output->enable_profiler(TRUE);
         $resultSet = $this->db->get();
         return array('data' => $resultSet->result(), 'count' => $resultSet->num_rows);
+        
     }
 
     /**
