@@ -5,6 +5,7 @@
 <title>Venta-Quierounperro.com</title>
 <link rel="shortcut icon" href="<?=base_url()?>images/ico.ico" />  
 <link type="text/css" rel="stylesheet" href="<?=base_url()?>css/reset.css" media="screen"></link>
+<link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/index_.css" media="screen"></link>
 <link rel="stylesheet" href="<?=base_url()?>css/jPages.css">
 <link type="text/css" rel="stylesheet" href="<?=base_url()?>css/general.css" media="screen"></link> <link type="text/css" rel="stylesheet" href="<?=base_url()?>css/venta.css" media="screen"></link>
    <script src="<?=base_url()?>js/jquery-1.10.2.js"></script>
@@ -1336,60 +1337,7 @@ VENTA
   </div>
     
 <div class="division_menu_inferior"> </div>
-<div class="contenedor_menu_inferior" align="center"> 
-
-<ul class="menu_inferior">
-<li>
-Acerca de Nosotros
-<ul>
-<li> - ¿Quiénes Somos? 
-</li>
-<li> - La comunidad QUP </li>
-</ul>
-</li>
-
-</ul>
-
-
-<ul class="menu_inferior">
-<li>
-Políticas
-<ul>
-<li> - Aviso de Privacidad </li>
-<li>  - Política de Provacidad </li>
-<li> - Términos y Condiciones </li>
-</ul>
-</li>
-
-</ul>
-
-
-<ul class="menu_inferior">
-<li>
-Contacto
-<ul>
-<li>- Tutorial</li>
-<li>- Publicidad </li>
-<li>- Soporte </li>
-<li>- Preguntas Frecuentes </li>
-</ul>
-</li>
-
-</ul>
-</div>
-    
-    
-<div class="footer">
-<img src="<?=base_url()?>images/perro_final.png" width="46" height="42"/>
-<a href="<?=base_url()?>#" ><img  src="<?=base_url()?>images/ico_fb.png" width="32" height="32" style="margin-top:10px;"/></a>
-<a href="<?=base_url()?>#" class="margen"><img src="<?=base_url()?>images/ico_tw.png" width="32" height="32" style="margin-top:10px;"/></a>
-</div>
-<div class="division_final">
-
-</div>
-<div class="pie_pagina">
-Copyright © 2014 QuieroUnPerro.com
-</div>
+<?php $this->load->view('general/footer_view'); ?>
 
 </body>
 </html>

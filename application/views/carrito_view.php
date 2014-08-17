@@ -7,6 +7,7 @@
         <link rel="shortcut icon" href="<?php echo base_url() ?>images/ico.ico"/>
         <link type="text/css" rel="stylesheet" href="<?php echo base_url() ?>css/reset.css" media="screen"></link>
         <link rel="stylesheet" href="<?php echo base_url() ?>css/jPages.css">
+        <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/index_.css" media="screen"></link>
             <link rel="stylesheet" href="<?php echo base_url() ?>css/validator/validationEngine.jquery.css" type="text/css"/>
             <script>
                 if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
@@ -1134,61 +1135,7 @@
                                                                 </div>
 
                                                                 <div class="division_menu_inferior"></div>
-                                                                <div class="contenedor_menu_inferior" align="center">
-
-                                                                    <ul class="menu_inferior">
-                                                                        <li>
-                                                                            Acerca de Nosotros
-                                                                            <ul>
-                                                                                <li> - ¿Quiénes Somos?
-                                                                                </li>
-                                                                                <li> - La comunidad QUP</li>
-                                                                            </ul>
-                                                                        </li>
-
-                                                                    </ul>
-
-
-                                                                    <ul class="menu_inferior">
-                                                                        <li>
-                                                                            Políticas
-                                                                            <ul>
-                                                                                <li> - Aviso de Privacidad</li>
-                                                                                <li> - Política de Provacidad</li>
-                                                                                <li> - Términos y Condiciones</li>
-                                                                            </ul>
-                                                                        </li>
-                                                                    </ul>
-
-
-                                                                    <ul class="menu_inferior">
-                                                                        <li>
-                                                                            Contacto
-                                                                            <ul>
-                                                                                <li>- Tutorial</li>
-                                                                                <li>- Publicidad</li>
-                                                                                <li>- Soporte</li>
-                                                                                <li>- Preguntas Frecuentes</li>
-                                                                            </ul>
-                                                                        </li>
-
-                                                                    </ul>
-                                                                </div>
-
-
-                                                                <div class="footer">
-                                                                    <img src="<?php echo base_url() ?>images/perro_final.png" width="46" height="42"/>
-                                                                    <a href="<?php echo base_url() ?>#"><img src="<?php echo base_url() ?>images/ico_fb.png" width="32" height="32"
-                                                                                                             style="margin-top:10px;"/></a>
-                                                                    <a href="<?php echo base_url() ?>#" class="margen"><img src="<?php echo base_url() ?>images/ico_tw.png" width="32"
-                                                                                                                            height="32" style="margin-top:10px;"/></a>
-                                                                </div>
-                                                                <div class="division_final">
-
-                                                                </div>
-                                                                <div class="pie_pagina">
-                                                                    Copyright © 2014 QuieroUnPerro.com
-                                                                </div>
+                                                                <?php $this->load->view('general/footer_view'); ?>
                                                                 <script type="text/javascript">
                                                                     (function() {
                                                                         function $MPBR_load() {

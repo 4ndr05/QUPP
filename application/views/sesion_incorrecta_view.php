@@ -1,1 +1,1 @@
-<?php echo "Falló el nicio de Sesion Correcto"; ?>
+<?php echo "Falló el inicio de Sesion"; ?>
