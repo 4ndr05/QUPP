@@ -320,33 +320,33 @@
                                                                                                     readonly="readonly"/></p>
     <br/>
 
-    <p class="margen_15_left_mini"> Titúlo: &nbsp;&nbsp;&nbsp; <input required="required" type="text" name="titulo" id="titulo" class="background_gris_55_mini preview"/> Estado
-        &nbsp;&nbsp;&nbsp;&nbsp;<select required="required" name="estado" class="background_gris_100_mini preview" id="estadoP">
+    <p class="margen_15_left_mini"> Titúlo: &nbsp;&nbsp;&nbsp; <input required="required" type="text" name="titulo" id="titulo" class="background_gris_55_mini preview"/> Estado:&nbsp;
+        &nbsp;&nbsp;<select required="required" name="estado" class="background_gris_7_mini preview" id="estadoP">
             <option value="">--</option>
             <?php foreach ($estados as $edo): ?>
                 <option value="<?php echo $edo->estadoID;?>"><?php echo $edo->nombreEstado;?></option>
             <?php endforeach; ?>
         </select>
 
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ciudad: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input required="required" class="background_gris_mini preview" name="ciudad" type="text" id="ciudad"/>
+        &nbsp;&nbsp;&nbsp; Ciudad: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input required="required" class="background_gris_mini preview" name="ciudad" type="text" id="ciudad"/>
     </p>
     <br/>
 
-    <p class="margen_15_left_mini"> Genéro:
-        <select required="required" type="text" name="genero" class="background_gris_100_mini preview" id="generoP">
+    <p class="margen_15_left_mini"> Genéro:&nbsp;
+        <select required="required" type="text" name="genero" class="background_gris_78_mini preview" id="generoP">
             <option value=""> ---</option>
             <option value="0"> Hembra</option>
             <option value="1"> Macho</option>
         </select>
 
-        Raza &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select required="required" name="raza" class="background_gris_100_mini preview" id="razaP">
+        Raza &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select required="required" name="raza" class="background_gris_82_mini preview" id="razaP">
             <option value="">--</option>
             <?php foreach ($razas as $r): ?>
                 <option value="<?php echo $r->razaID ?>"><?php echo $r->raza ?></option>
             <?php endforeach; ?>
         </select>
         Precio: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input required="required" class="preview" name="precio" type="text" id="precio"/>
+        <input required="required" class="background_gris_100_mini preview preview" name="precio" type="text" id="precio"/>
     </p>
     <br/>
 
@@ -373,7 +373,7 @@ $(document).ready(function()
                 url: "<?php echo base_url('venta/upload_file') ?>",
                 allowedTypes: "png,jpg,jpeg",
                 fileName: "file_form",
-                multiple: false,
+                multiple: true,
                 showFileCounter: false,
                 returnType: 'json',
                 showStatusAfterSuccess: false,

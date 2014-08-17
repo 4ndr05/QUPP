@@ -214,8 +214,7 @@ Denunciar Anuncio
 <br/>
 <font> Ciudad: <?php echo  ($favorito->nombreEstado)  ?></font>
 </div>
-<div class="contenedor_foto_anuncio">
-<img src="<?php echo base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
+<div class="contenedor_foto_anuncio"><img src="<?php echo base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
 </div>
 <ul class="ver_detalle_anuncio">
 <li onclick="muestra('contenedor_anuncio_detalle');" >
