@@ -85,7 +85,7 @@
 
         jQuery(document).ready(function () {
             // binds form submission and fields to the validation engine
-            jQuery(".validate").validationEngine({
+            jQuery("form").validationEngine({
                 promptPosition: "topRight",
                 scroll: false,
                 ajaxFormValidation: true,
@@ -396,11 +396,11 @@ Enviar
                                                                                               onclick="obtener_usuario('datos_faltantes_asociacion'); oculta('datos_faltantes_usuario');oculta('datos_faltantes_negocio');oculta('ocultar_info_adicional');oculta('ocultar_info_adicional');muestra('llenar_info_adicional');">
         Asociación </label>
     </br>
-    <p><input name="recibirCorreo" type="checkbox" value="1"/> <label> Quiero recibir información acerca de
+    <p><input name="recibirCorreo" type="checkbox" value="1" checked="checked" /> <label> Quiero recibir información acerca de
             promociones </label></p>
 
 
-    <p><input name="terminosCondiciones" type="checkbox" value="1" class="validate[required]"/> <label> He leído y acepto los <a href="<?php echo base_url()?>content/terminos_y_condiciones.pdf" target="_blank" class="link_blanco">Términos y Condiciones</a> y <a href="<?php echo base_url()?>content/politica_de_privacidad.pdf" target="_blank" class="link_blanco">la Política de Privacidad</a> *  </label></p>
+    <p><input name="terminosCondiciones" type="checkbox" value="1" checked="checked" class="validate[required]"/> <label> He leído y acepto los <a href="<?php echo base_url()?>content/terminos_y_condiciones.pdf" target="_blank" class="link_blanco">Términos y Condiciones</a> y <a href="<?php echo base_url()?>content/politica_de_privacidad.pdf" target="_blank" class="link_blanco">la Política de Privacidad</a> *  </label></p>
 
 
     <font class="asterisco">Los datos marcados con un astrisco (*) son obligatorios </font>
@@ -1001,7 +1001,7 @@ Enviar
         
             <div class="indicador">
              <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
-             <img src="images/indicador_si.png">
+             <img src="images/indicador_si.png" title="Ya estas logueado">
              <?php else: ?>
              <img src="images/indicador_no.png">
              <?php endif; ?>
@@ -1011,7 +1011,7 @@ Enviar
         <li <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>  <?php else: ?>onclick="muestra('contenedor_registro');" <?php endif; ?>>
             <div class="indicador"> 
             <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
-             <img src="images/indicador_si.png">
+             <img src="images/indicador_si.png" title="Ya estas registrado">
              <?php else: ?>
              <img src="images/indicador_no.png">
              <?php endif; ?>
@@ -1223,7 +1223,7 @@ Enviar
     </div>
 </a>
 <a href="<?php echo base_url() ?>#" class="paquete_comprar reset"
-   data-paquete='{"id":"<?php echo $paquetes[1]->paqueteID ?>","nombre":"<?php echo $paquetes[1]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[1]->vigencia ?>","precio":"<?php echo $paquetes[1]->precio ?>","caracteres":"<?php echo $paquetes[1]->caracteres ?>","cantFotos":"<?php echo $paquetes[1]->cantFotos ?>","videos":"<?php echo $paquetes[0]->videos ?>"}'>
+   data-paquete='{"id":"<?php echo $paquetes[1]->paqueteID ?>","nombre":"<?php echo $paquetes[1]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[1]->vigencia ?>","precio":"<?php echo $paquetes[1]->precio ?>","caracteres":"<?php echo $paquetes[1]->caracteres ?>","cantFotos":"<?php echo $paquetes[1]->cantFotos ?>","videos":"<?php echo $paquetes[1]->videos ?>"}'>
     <div class="paquetes">
         <div class="title_paquetes">
             <div class="lateral_regular"></div>
@@ -1301,7 +1301,7 @@ Enviar
 
 </a>
 <a href="<?php echo base_url() ?>#" class="paquete_comprar reset"
-   data-paquete='{"id":"<?php echo $paquetes[2]->paqueteID ?>","nombre":"<?php echo $paquetes[2]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[2]->vigencia ?>","precio":"<?php echo $paquetes[2]->precio ?>","caracteres":"<?php echo $paquetes[2]->caracteres ?>","cantFotos":"<?php echo $paquetes[2]->cantFotos ?>","videos":"<?php echo $paquetes[0]->videos ?>"}'>
+   data-paquete='{"id":"<?php echo $paquetes[2]->paqueteID ?>","nombre":"<?php echo $paquetes[2]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[2]->vigencia ?>","precio":"<?php echo $paquetes[2]->precio ?>","caracteres":"<?php echo $paquetes[2]->caracteres ?>","cantFotos":"<?php echo $paquetes[2]->cantFotos ?>","videos":"<?php echo $paquetes[2]->videos ?>"}'>
     <div class="paquetes_derecha">
         <div class="title_paquetes">
             <div class="lateral_premium"></div>

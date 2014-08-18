@@ -182,6 +182,10 @@ class Venta extends CI_Controller
         $servicioID = $this->defaultdata_model->insertItem('serviciocontratado', $data);
        
         $cupones = $this->defaultdata_model->getCuponesPaquete($paqueteID);
+        $fecha = date('Y-m-d');
+        $dias = 30;
+        $fechaCierre = strtotime ( '+'.$dias.' day' , strtotime($fecha)) ;
+        $fechaCierre = date ( 'Y-m-j' , $fechaCierre );
 
         if($cupones != null){
             foreach ($cupones as $cupon) {
@@ -191,6 +195,7 @@ class Venta extends CI_Controller
                     'valor' =>   $cupon->valor,
                     'tipoCupon' =>  $cupon->tipoCupon,
                     'vigente' => 1,
+                    'vigencia' => $fechaCierre
                     'usado' => 0,
                     'servicioID' =>  $servicioID,
                     'detalleID' =>  $detallePaquete->detalleID,
@@ -233,10 +238,13 @@ class Venta extends CI_Controller
          $publicacionID = $this->defaultdata_model->insertItem('publicaciones', $dataPublicacion);
         
         //VIDEOS PUBLICACION
-         $video = $this->input->post('url_video');
+
+        
+          if(isset($_POST['url_video'])){
+             $video = $this->input->post('url_video');
                 if( $video != null){
-                    for($i=0;$i<=count($video);$i++){                        
-                        if($video[$i] != '0' && $video[$i] != null){
+                    for($i=0;$i<=count($video);$i++){               
+                        if($video[$i] != '0'){
                         $arrVideo= array(
                             'paqueteID' => $paqueteID,
                             'publicacionID'   => $publicacionID,
@@ -250,6 +258,7 @@ class Venta extends CI_Controller
                         $arrVideo = null;
                     }
                 }
+            }
 
         //IMAGENES
          $name_logo_form = $this->input->post('name_logo_form');
@@ -308,6 +317,25 @@ class Venta extends CI_Controller
             'productoID' => $publicacionID
         );
         $compraDetalle = $this->defaultdata_model->insertItem('compradetalle', $compradetalle);
+
+        if($precio_total <= 00.00){
+           echo '<div class="registro_normal"> <!-- Contenedor morado registro -->
+
+                <div class="titulo_registro">GRACIAS</div>
+                </br>
+                <div class="imagen_confirmacion">
+                    <img src="'.base_url().'images/palomita.png"/>
+                </div>
+                <div class="contenido_confirmacion">
+                    <strong> Gracias por publicar en QUP </strong>
+                    </br></br>
+                    <div> Tu anuncio ha pasado a la sección de aprobación, pronto recibirás un correo con la confirmación de la publicación.</div>
+                    <div id="confirm">
+                    </div>
+        
+                </div>
+            </div>';
+        } else {
            $preference_data = array(
             "items" => array(
                 array(
@@ -341,7 +369,7 @@ class Venta extends CI_Controller
         }
 
          //echo json_encode($publicacionID);
-         
+        }
     }
 
      function lista() {

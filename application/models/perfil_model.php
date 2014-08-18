@@ -47,11 +47,13 @@ FROM usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUs
     }
 
     function getAnuncios($idUsuario){
-    	$query = $this->db->query('SELECT distinct a.NombrePaquete, c.seccionNombre, b.titulo, b.vigente, b.fechaVencimiento, b.numeroVisitas FROM Paquete a, publicaciones b, seccion c , serviciocontratado d, usuario e 
-    		WHERE a.paqueteID = b.paqueteID
-			AND b.seccion = c.seccionID
-			AND d.idusuario = e.idusuario
-			And e.idusuario ='.$idUsuario);
+    	$query = $this->db->query('SELECT distinct a.NombrePaquete, c.seccionNombre, b.titulo, b.vigente, b.fechaVencimiento, b.numeroVisitas, d.idusuario
+									FROM publicaciones b
+									join paquete a on a.`paqueteID` = b.paqueteID
+									join seccion c on c.`seccionID` = `b`.`seccion`
+									join `serviciocontratado` d on `d`.`servicioID` = `b`.`servicioID`
+									join `usuario` e on `e`.`idUsuario` = `d`.`idUsuario`
+									where e.idusuario =  '.$idUsuario);
     	if ($query->num_rows() >= 1){
 			return $query->result();
 		} else {
@@ -61,12 +63,14 @@ FROM usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUs
     }
 
     function getAnunciosAct($idUsuario){
-    	$query = $this->db->query('SELECT distinct a.NombrePaquete, c.seccionNombre, b.titulo, b.vigente, b.fechaVencimiento, b.numeroVisitas FROM Paquete a, publicaciones b, seccion c , serviciocontratado d, usuario e 
-    		WHERE a.paqueteID = b.paqueteID
-			AND b.seccion = c.seccionID
-			AND d.idusuario = e.idusuario
-			AND b.vigente = 1
-			And e.idusuario ='.$idUsuario);
+    	$query = $this->db->query('SELECT distinct a.NombrePaquete, c.seccionNombre, b.titulo, b.vigente, b.fechaVencimiento, b.numeroVisitas, d.idusuario
+									FROM publicaciones b
+									join paquete a on a.`paqueteID` = b.paqueteID
+									join seccion c on c.`seccionID` = `b`.`seccion`
+									join `serviciocontratado` d on `d`.`servicioID` = `b`.`servicioID`
+									join `usuario` e on `e`.`idUsuario` = `d`.`idUsuario`
+									AND b.vigente = 1
+									And e.idusuario ='.$idUsuario);
     	if ($query->num_rows() >= 1){
 			return $query->result();
 		} else {
@@ -76,12 +80,14 @@ FROM usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUs
     }
 
     function getAnunciosInAct($idUsuario){
-    	$query = $this->db->query('SELECT distinct a.NombrePaquete, c.seccionNombre, b.titulo, b.vigente, b.fechaVencimiento, b.numeroVisitas FROM Paquete a, publicaciones b, seccion c , serviciocontratado d, usuario e 
-    		WHERE a.paqueteID = b.paqueteID
-			AND b.seccion = c.seccionID
-			AND d.idusuario = e.idusuario
-			AND b.vigente = 0
-			And e.idusuario ='.$idUsuario);
+    	$query = $this->db->query('SELECT distinct a.NombrePaquete, c.seccionNombre, b.titulo, b.vigente, b.fechaVencimiento, b.numeroVisitas, d.idusuario
+									FROM publicaciones b
+									join paquete a on a.`paqueteID` = b.paqueteID
+									join seccion c on c.`seccionID` = `b`.`seccion`
+									join `serviciocontratado` d on `d`.`servicioID` = `b`.`servicioID`
+									join `usuario` e on `e`.`idUsuario` = `d`.`idUsuario`
+									AND b.vigente = 0
+									And e.idusuario ='.$idUsuario);
     	if ($query->num_rows() >= 1){
 			return $query->result();
 		} else {
