@@ -195,7 +195,7 @@ class Venta extends CI_Controller
                     'valor' =>   $cupon->valor,
                     'tipoCupon' =>  $cupon->tipoCupon,
                     'vigente' => 1,
-                    'vigencia' => $fechaCierre
+                    'vigencia' => $fechaCierre,
                     'usado' => 0,
                     'servicioID' =>  $servicioID,
                     'detalleID' =>  $detallePaquete->detalleID,
@@ -263,12 +263,12 @@ class Venta extends CI_Controller
         //IMAGENES
          $name_logo_form = $this->input->post('name_logo_form');
                 if( $name_logo_form != null){
-                    for($i=0;$i<=count($name_logo_form);$i++){     
+                    for($i=0;$i<=count($name_logo_form) -1;$i++){     
                         //Se mueve la imagen de tmp a negocio_logo
-                        $name_file = explode('/', $name_logo_form);
-
+                        if($name_logo_form[$i] != null){
+                        $name_file = explode('/', $name_logo_form[$i]);                        
                         if (!file_exists('images/anuncios/' . $name_file[2])) {
-                            rename($name_logo_form, 'images/anuncios/' . $name_file[2]);
+                            rename($name_logo_form[$i], 'images/anuncios/' . $name_file[2]);
                         }
                         $logo_form = 'images/anuncios/' . $name_file[2];                   
                         
@@ -282,6 +282,7 @@ class Venta extends CI_Controller
                             $fotoID = $this->admin_model->insertItem('fotospublicacion',$arrFoto);
                                                    
                         $arrVideo = null;
+                        }
                     }
                 }
 
