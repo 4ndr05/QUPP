@@ -9,7 +9,6 @@
 <p class="usuario_bienvenido"><?=$myInfo->nombre.' '.$myInfo->apellido;?></p>
 </div>
 </br>
-<form style = "margin-top:-170px;" action="<?= base_url() ?>negocio/principal/updateMiPerfilB" id="mpB" method="post">
 <div class="contenedor_formulario">
 <p>Nombre:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<input name="nombre" type="text" class="background_morado" id="nombre" value="<?=$myInfo->nombre;?>" readonly="readonly"/> </p>
 </br>
@@ -43,11 +42,11 @@
 <div class="contenedor_boton"> 
 <ul class="boton_gris_perfil">
 <li>
-<input type="submit" value="Editar"/>
+Editar
 </li>
 </ul>
 </div>
-</form>
+
 <div class="contenedor_fiscales">
 <font class="espacios"> Datos fiscales</font>
 
@@ -61,7 +60,7 @@
 
 </div>
 
-<form style = "margin-top:0px;" action="<?= base_url() ?>negocio/principal/updateMiPerfilF" id="mpB" method="post">
+
 <div id="contenedor_fiscales_negocio" style="display:none;"> 
 
 <div class="texto_inputs" >
@@ -122,7 +121,6 @@
                     <?php endforeach;
                 endif; ?>
            </select> </p>
-
 
 
 </div>
@@ -228,12 +226,12 @@ Nombre:
 <div class="contendeor_inputs" >
 <p><input type="text" name="nombre_contacto" class="gris_input" value ="<?php echo $datConN->nombreContacto ?>"/> </p>
 <p style="margin-top:14px;"><input type="text" name="telefono" class="gris_input" value ="<?php echo $datConN->telefono ?>"/> </p>
-<p style="margin-top:14px;"><input type="text" name="calleDetalle" class="gris_input" value ="<?php echo $datConN->calle ?>"/> </p>
+<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input" value ="<?php echo $datConN->calle ?>"/> </p>
 <p style="margin-top:14px;"><input type="text" name="num" class="gris_input" value ="<?php echo $datConN->numero ?>"/> </p>
 <p style="margin-top:14px;"><input type="text" name="colonia" class="gris_input" value ="<?php echo $datConN->colonia ?>"/> </p>
-<p style="margin-top:14px;"><input type="text" name="municipioDetalle" class="gris_input" value ="<?php echo $datConN->municipioC ?>"/> </p>
+<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input" value ="<?php echo $datConN->municipioC ?>"/> </p>
 <p style="margin-top:14px;">  
-  <select name="estadoIDDetalle" class="gris_input" id="estadoIDDetalle">       
+  <select name="estadoID" class="gris_input" id="estadoID">       
   <option value="">Seleccione</option>
            <?php
 
@@ -246,7 +244,7 @@ Nombre:
                 endif; ?>
   </select> 
   </p>
-<p style="margin-top:14px;"><input type="text" name="cpD" class="gris_input" value ="<?php echo $datConN->cp ?>"/> </p>
+<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input" value ="<?php echo $datConN->cp ?>"/> </p>
 <p style="margin-top:14px;"><input type="text" name="e-mail" class="gris_input" value ="<?php echo $datConN->correo ?>"/> </p>
 <p style="margin-top:14px;"><input type="text" name="pagina_web" class="gris_input" value ="<?php echo $datConN->paginaWeb ?>"/> </p>
 <p style="margin-top:14px;"><input type="file" name="logo" class="gris_input" value ="<?php echo $datConN->Logo ?>"/> </p>
@@ -262,9 +260,8 @@ Nombre:
 <div class="contenedor_boton" id="guardar_fiscales" style=" display:none;"> 
 <ul class="boton_gris_perfil">
 <li>
-<input type="submit" value="Guardar"/>
+Guardar
 </li>
 </ul>
-</form>
 </div>
 </br>

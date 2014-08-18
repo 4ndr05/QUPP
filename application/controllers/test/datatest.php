@@ -17,7 +17,7 @@ class datatest extends CI_Controller {
         $data['usuariodato'] = array();
         $data['ubicacionusuario'] = array();
 
-        $rows = 201;
+        $rows = 601;
         for ($i = $rows; $i <= $rows + 30; $i++) {
             $data['usuario'][$i] = array(
                 'idUsuario' => $i,
@@ -34,7 +34,7 @@ class datatest extends CI_Controller {
                 'recepcionCorreo' => '1',
                 'status' => '1',
                 'telefono' => '1231231234',
-                'tipoUsuario' => '3',
+                'tipoUsuario' => 2,
                 'useragent' => NULL,
             );
 
@@ -54,7 +54,7 @@ class datatest extends CI_Controller {
                 'numero' => '00' . $i,
                 'paginaWeb' => 'ninguna.',
                 'telefono' => '1231231231',
-                'tipoUsuario' => 3
+                'tipoUsuario' => 2
             );
 
             $data['usuariodato'][$i] = array(
@@ -139,7 +139,8 @@ class datatest extends CI_Controller {
                 'aprobada' => rand(0, 1),
                 'servicioID' => $data['serviciocontratado'][$i]['servicioID'],
                 'detalleID' => $data['serviciocontratado'][$i]['detalleID'],
-                'paqueteID' => $data['serviciocontratado'][$i]['paqueteID']
+                'paqueteID' => $data['serviciocontratado'][$i]['paqueteID'],
+                'ciudad' => 'Guanasebi'
             );
 
             $data['fotospublicacion'][$i] = array(
@@ -147,7 +148,7 @@ class datatest extends CI_Controller {
                 'paqueteID' => $data['serviciocontratado'][$i]['paqueteID'],
                 'publicacionID' => $data['publicaciones'][$i]['publicacionID'],
                 'servicioID' => $data['serviciocontratado'][$i]['servicioID'],
-                'foto' => '',
+                'foto' => 'images/negocio_logo/mundo_mascotas.png',
             );
 
             $data['videos'][$i] = array(

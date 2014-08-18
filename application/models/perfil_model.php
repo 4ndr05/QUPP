@@ -39,12 +39,6 @@ FROM usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUs
 		}
 
 	}
-	function updateItem($itemID, $ID, $data, $tabla)
-    {
-        $this->db->where($itemID, $ID);
-        $this->db->update($this->tablas[$tabla], $data);
-        return true;
-    }
 
     function getAnuncios($idUsuario){
     	$query = $this->db->query('SELECT distinct a.NombrePaquete, c.seccionNombre, b.titulo, b.vigente, b.fechaVencimiento, b.numeroVisitas, d.idusuario

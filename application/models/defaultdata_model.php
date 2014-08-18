@@ -126,7 +126,7 @@ class Defaultdata_model extends CI_Model {
         return $this->db->get('giro')->result();
     }
     
-    function getPaquetesCupon($tipopaquete = NULL) {
+    function getPaquetesCupon($tipopaquete = NULL, $idpaquete = NULL) {
         /**
          * Se realiza asi el select por que en detallepaquete y detallecupon exite la columna vigencia y se reemplaza 
          * la columna vigencia de detallepaquete por la columna vigencia de detallecupon
@@ -159,6 +159,12 @@ class Defaultdata_model extends CI_Model {
         if(!is_null($tipopaquete)){
             $this->db->where('dp.tipoPaquete', $tipopaquete);
         }
+        
+        if(!is_null($idpaquete)){
+            $this->db->where('p.paqueteID', $idpaquete);
+            
+            return $this->db->get()->row();
+        }
 
         $resultSet = $this->db->get();
 
@@ -183,7 +189,12 @@ class Defaultdata_model extends CI_Model {
         $itemID = $this->db->insert_id();
         return $itemID;
     }
-
+    
+    public function get_zona_geografica($id_estado){
+        $this->db->from('zonageograficaestado');
+        $this->db->where('estadoID', $id_estado);
+        return $this->db->get()->row();
+    }
 
     function updateItem($itemID, $ID, $data, $tabla)
     {

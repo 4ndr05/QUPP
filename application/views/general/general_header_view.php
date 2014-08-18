@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title><?php echo isset($title) ? $title . ' - ' : '' ?> Quierounperro</title>
         <link rel="shortcut icon" href="<?php echo base_url() ?>images/ico.ico" />
         <link type="text/css" rel="stylesheet" href="<?php echo base_url() ?>css/reset.css" media="screen"/>
@@ -11,6 +12,7 @@
         <link rel="stylesheet" href="<?php echo base_url() ?>css/validator/validationEngine.jquery.css" type="text/css"/>
         <link rel="stylesheet" href="<?php echo base_url() ?>css/jPages.css"/>
         <link type="text/css" rel="stylesheet" href="<?php echo base_url() ?>css/general.css" media="screen"/>
+        <link href="<?php echo base_url() ?>css/uploadfile.css" rel="stylesheet"/>
 
         <?php if (isset($links)): ?>
             <?php foreach ($links as $l): ?>
@@ -24,6 +26,9 @@
         <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.cycle.all.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>js/validator/languages/jquery.validationEngine-es.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>js/validator/jquery.validationEngine.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.uploadfile.min.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>js/funcion_select.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>js/jquery.customSelect.js"></script>
         <script src="<?php echo base_url() ?>js/funciones_.js" type="text/javascript"></script>
 
         <?php if (isset($scripts)): ?>

@@ -36,17 +36,9 @@ if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
 </head>
 
 <body>
-  <?php
-  $contrasena = $this->session->userdata('recuperarusuario');
-  ?> 
 <script type="text/javascript">
 var busy = false;
-$(document).ready(function() { 
-<?php if($contrasena): ?>
-        $('#contrasenaActual').removeClass('validate[required]');
-        $('#contrasenaActual').attr('disabled', 'disabled');
-        muestra('contenedor_cambiar_contrasena');
-  <?php endif; ?>
+$(document).ready(function() {
 getView('<?=base_url()?>negocio/principal/miPerfil/');
  /****************************************/ 
                    $(".ajaxLink").live(
@@ -123,7 +115,7 @@ function getView(viewURL){
 
 <p> Nueva contraseña:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" class="background_morado validate[required],maxSize[8]" name="contrasena1" id="contrasena1"/> </p>
 
-<p id="contrasenaActualP"> Contraseña actual:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"  class="background_morado validate[required]" name="contrasenaActual" id="contrasenaActual" /> </p>
+<p> Confirmar contraseña: <input type="password" class="background_morado validate[required,equals[contrasena1]],maxSize[8]" name="contrasena2"/> </p>
 
 
 </div>
@@ -182,7 +174,59 @@ Se ha enviado una copia al email: <?=$this->session->userdata('correo');?>
 </div>
 </div>
 
-<?php $this->load->view('general/menu_view'); ?>
+
+<div id="mini_menu" >
+<input type="hidden" id="efecto" value="corre"/>
+<img style="float:left;" id="bajar_menu" src="<?php echo base_url()?>images/bajar_menu_dos.png" onclick="oculta('bajar_menu'); muestra('menu_oculto');"/>
+<div id="menu_oculto" class="menu_principal" style=" display:none;">
+<div id="contenedor_menu_principal" class="contenedor_menu_principal"> 
+<ul class="principal">
+<li>
+<a href="<?php echo base_url()?>index.html">
+Inicio
+</a>
+</li>
+<li>
+Venta
+</li>
+<li>
+Cruza
+</li>
+<li>
+Adopción
+</li>
+<li>
+Accesorios
+</li>
+<li>
+Directorio
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+ 
+<div id="contenedor_central_superior" class="contenedor_central_superior">
+
+<div id="banner_superior">
+<img src="<?php echo base_url()?>images/logo_superior.png" width="348" height="93" class="contenido_superior"/>
+
+<div class="slideshow">
+<img src="<?php echo base_url()?>images/banner_superior/1.png" width="638" height="93"/>
+<img src="<?php echo base_url()?>images/banner_superior/2.png" width="638" height="93"/>
+<img src="<?php echo base_url()?>images/banner_superior/3.png" width="638" height="93"/>
+  </div>
+
+
+
+</div>
+</div>
+
+
+
+
+
 
 
 
@@ -796,6 +840,30 @@ Pagar
 </div> 
 <!-- Fin del contenedor publicar anucio fondo negro -->
 
+<div class="menu_principal" id="menu_principal" >
+<div id="contenedor_menu_principal" class="contenedor_menu_principal"> 
+<ul class="principal">
+<li>
+<a href="<?php echo base_url()?>"> Inicio </a>
+</li>
+<li>
+<a href="<?php echo base_url()?>"> Venta </a>
+</li>
+<li>
+Cruza
+</li>
+<li>
+Adopción
+</li>
+<li>
+<a href="<?=base_url()?>principal/tienda">Tienda</a>
+</li>
+<li>
+Directorio
+</li>
+</ul>
+</div>
+</div>
 
 <div class="titulo_seccion">
 MI PERFIL

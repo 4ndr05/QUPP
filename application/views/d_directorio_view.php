@@ -4,7 +4,6 @@ $this->load->view('general/general_header_view', array('title' => 'Detalles Dire
         'directorio', 'directorio_detalle')));
 ?>
 <?php $this->load->view('general/menu_view', array('seccion' => $seccion)) ?>
-
 <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
     <div class="contenedor_contactar" id="contenedor_contactar" style="display: none;">
         <div class="contenedor_cerrar_contactar_negocio">

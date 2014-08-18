@@ -20,3 +20,7 @@ ADD CONSTRAINT `fk_tipoPaquete_paquete`
   REFERENCES `quieroun_perro_dev`.`tipopaquete` (`idtipopaquete`)
   ON DELETE RESTRICT
   ON UPDATE CASCADE;
+
+
+alter table `compra`
+add column `pagado` int(1) default '0' not null;

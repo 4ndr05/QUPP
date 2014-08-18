@@ -20,7 +20,6 @@ if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
      <script src="<?php echo base_url()?>js/funciones_venta.js"></script>
      <script src="<?php echo base_url()?>js/funciones_negocio.js"></script>
    <script src="<?php echo base_url()?>js/jquery-ui.js"></script>
-   <script src="<?php echo base_url()?>js/funciones_index.js"></script>
    <script type="text/javascript" src="<?php echo base_url()?>js/jquery.cycle.all.js"></script>
    <script src="<?php echo base_url()?>js/funciones_.js" type="text/javascript"></script>
   <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/general.css" media="screen"></link>

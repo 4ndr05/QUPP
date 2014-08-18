@@ -16,7 +16,7 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
             en nuestro Directorio
         </div>
         <div class="el_click">
-            <img src="images/click.png" width="60" height="60"/>
+            <img src="<?php echo base_url() ?>images/click.png" width="60" height="60"/>
         </div>
     </div>
 </div>
@@ -53,10 +53,10 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
 <div id="contenedor_central">
     <div id="espacio_izquierda" class="seccion_izquierda_secciones">
         <ul class="iconos">
-            <li> <img src="images/compras.png"/></li>
-            <li><img src="images/sesion.png"/></li>
+            <li> <img src="<?php echo base_url() ?>images/compras.png"/></li>
+            <li><img src="<?php echo base_url() ?>images/sesion.png"/></li>
             <li>
-                <img src="images/registrate.png"/>
+                <img src="<?php echo base_url() ?>images/registrate.png"/>
             </li>
         </ul>
     </div>
@@ -67,53 +67,57 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
         <!-- item container -->
         <ul id="itemContainer_negocio" style="min-height:100px; display:inline-block;">
             <!-- Inicio FILA -->
-            <?php $fila = 1; ?>
-            <?php $data = $directorios['data'] ?>
-            <?php foreach ($data as $directorio): ?>
-                <!-- INICIO contenedor anuncio  -->
+            <?php if ($directorios['count'] > 0): ?>
+                <?php $fila = 1; ?>
+                <?php $data = $directorios['data'] ?>
+                <?php foreach ($data as $directorio): ?>
+                    <!-- INICIO contenedor anuncio  -->
 
-                <div class="contenedor_negocio" data-object='<?php echo json_encode($directorio) ?>'>
-                    <div class="contenedor_imagen_negocio">
-                        <img src="images/giros_negocio/adistramiento_canino.png"/>
+                    <div class="contenedor_negocio" data-object='<?php echo json_encode($directorio) ?>'>
+                        <div class="contenedor_imagen_negocio">
+                            <img src="<?php echo base_url() ?>images/giros_negocio/adistramiento_canino.png"/>
+                        </div>
+                        <div class="contenedor_nombre_negocio">
+                            <strong>
+                                <?php echo $directorio->nombreNegocio; ?>
+                            </strong>
+                        </div>
+
+                        <div class="contenedor_descripcion_negocio">
+                            <?php echo $directorio->nombreGiro ?><br/>
+                            <?php echo $directorio->telefono ?>
+                        </div>
+
+                        <ul class="ver_mas_negocio">
+                            <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
+                                <li onclick="javascript:window.location.href = '<?php echo base_url('directorio/detalles/' . $directorio->idUsuario) ?>'">
+                                    Ver más...
+                                </li>
+                            <?php else: ?>
+                                <li onclick="javascript:alert('Favor de iniciar sesión.')">
+                                    Ver más...
+                                </li>
+                            <?php endif; ?>
+                        </ul>
                     </div>
-                    <div class="contenedor_nombre_negocio">
-                        <strong>
-                            <?php echo $directorio->nombreNegocio; ?>
-                        </strong>
-                    </div>
 
-                    <div class="contenedor_descripcion_negocio">
-                        <?php echo $directorio->nombreGiro ?><br/>
-                        <?php echo $directorio->telefono ?>
-                    </div>
+                    <!-- Fin contenedor annuncio -->
 
-                    <ul class="ver_mas_negocio">
-                        <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
-                            <li onclick="javascript:window.location.href = '<?php echo base_url('directorio/detalles/' . $directorio->idUsuario) ?>'">
-                                Ver más...
-                            </li>
-                        <?php else: ?>
-                            <li onclick="javascript:alert('Favor de iniciar sesión.')">
-                                Ver más...
-                            </li>
-                        <?php endif; ?>
-                    </ul>
-                </div>
+                    <?php if (3 > $fila++): ?>
+                        <!-- Inicio margen falso -->
+                        <div class="margen_derecho_20">
 
+                        </div>
+                    <?php else: ?>
+                        <?php $fila = 1; ?>
+                    <?php endif; ?>
+                    <!-- FIN margen falso -->
+                <?php endforeach; ?>
                 <!-- Fin contenedor annuncio -->
-
-                <?php if (3 > $fila++): ?>
-                    <!-- Inicio margen falso -->
-                    <div class="margen_derecho_20">
-
-                    </div>
-                <?php else: ?>
-                    <?php $fila = 1; ?>
-                <?php endif; ?>
-                <!-- FIN margen falso -->
-            <?php endforeach; ?>
-            <!-- Fin contenedor annuncio -->
-            <!-- FIN FILA ---->
+                <!-- FIN FILA ---->
+            <?php else: ?>
+                <div class="alert alert-warning">No hay resultados.</div>
+            <?php endif; ?>
         </ul>
         <br/>
         <br/>
@@ -138,13 +142,13 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
 
 <div id="contenedor_anuncio_negocio" class="contenedor_publicar_anuncio" style=" display:none;">
     <div class="contenedor_cerrar_anuncio_negocio">
-        <img src="images/cerrar_anuncio_gris.png" onclick="oculta('contenedor_anuncio_negocio');"/>
+        <img src="<?php echo base_url() ?>images/cerrar_anuncio_gris.png" onclick="oculta('contenedor_anuncio_negocio');"/>
     </div>
     <div class="leer_anuncio_directorio">
 
 
         <div class="contenedor_galeria">
-            <img src="images/negocio_logo/mundo_mascotas.png"/>
+            <img src="<?php echo base_url() ?>images/negocio_logo/mundo_mascotas.png"/>
         </div>
         <div class="datos_general">
 
@@ -180,7 +184,7 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
             <br/>
             <ul class="boton_gris">
                 <li>
-                    <img src="images/favorito.png"/>Agregar a Favoritos
+                    <img src="<?php echo base_url() ?>images/favorito.png"/>Agregar a Favoritos
                 </li>
             </ul>
 
@@ -215,7 +219,7 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
 
             <ul class="boton_rojo_dos">
                 <li>
-                    <img src="images/alert.png"/>
+                    <img src="<?php echo base_url() ?>images/alert.png"/>
                     Denunciar Anuncio
                 </li>
             </ul>
@@ -245,7 +249,7 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
 
 <div class="contenedor_contactar" id="contenedor_contactar"  style=" display:none;">
     <div class="contenedor_cerrar_contactar_negocio">
-        <img src="images/cerrar_anuncio_gris.png" onclick="oculta('contenedor_contactar');"/>
+        <img src="<?php echo base_url() ?>images/cerrar_anuncio_gris.png" onclick="oculta('contenedor_contactar');"/>
     </div>
     <div class="contactar_al_aunuciante_negocio">
         <font class="titulo_anuncio_publicado"> CONTACTA AL ANUNCIANTE </font>
@@ -279,9 +283,9 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
     </div>
 </div>
 <div class="slideshow_tres" >
-    <img src="images/banner_inferior/1.png" width="638" height="93"/>
-    <img src="images/banner_inferior/2.png" width="638" height="93"/>
-    <img src="images/banner_inferior/3.png" width="638" height="93"/>
+    <img src="<?php echo base_url() ?>images/banner_inferior/1.png" width="638" height="93"/>
+    <img src="<?php echo base_url() ?>images/banner_inferior/2.png" width="638" height="93"/>
+    <img src="<?php echo base_url() ?>images/banner_inferior/3.png" width="638" height="93"/>
 </div>
 <div class="division_menu_inferior"> </div>
 <div class="contenedor_menu_inferior" align="center">
@@ -334,9 +338,9 @@ $this->load->view('partial/_pasos_anuncio', array('paquetes' => $paquetes,
 <?php $this->load->view('partial/_pasos_anuncio_negocio'); ?>
 
 <div class="footer">
-    <img src="images/perro_final.png" width="46" height="42"/>
-    <a href="#" ><img  src="images/ico_fb.png" width="32" height="32" style="margin-top:10px;"/></a>
-    <a href="#" class="margen"><img src="images/ico_tw.png" width="32" height="32" style="margin-top:10px;"/></a>
+    <img src="<?php echo base_url() ?>images/perro_final.png" width="46" height="42"/>
+    <a href="#" ><img  src="<?php echo base_url() ?>images/ico_fb.png" width="32" height="32" style="margin-top:10px;"/></a>
+    <a href="#" class="margen"><img src="<?php echo base_url() ?>images/ico_tw.png" width="32" height="32" style="margin-top:10px;"/></a>
 </div>
 <div class="division_final">
 
@@ -395,7 +399,7 @@ $this->load->view('partial/_pasos_anuncio', array('paquetes' => $paquetes,
 
                         var cont_imagen = $('<div class="contenedor_imagen_negocio"></div>');
                         var logo = data[i].logo !== null ? data[i].logo : 'adistramiento_canino.png';
-                        cont_imagen.append('<img src="images/giros_negocio/' + logo + '" alt="logo"/>');
+                        cont_imagen.append('<img src="<?php echo base_url() ?>images/giros_negocio/' + logo + '" alt="logo"/>');
                         cont_neg.append(cont_imagen);
 
                         var cont_nombre = $('<div class="contenedor_nombre_negocio"></div>');
