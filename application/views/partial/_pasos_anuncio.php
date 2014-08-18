@@ -370,7 +370,9 @@
 <script>
 $(document).ready(function()
 {
+	
 	$("#fileuploader").uploadFile({
+		
                 url: "<?php echo base_url('venta/upload_file') ?>",
                 allowedTypes: "png,jpg,jpeg",
                 fileName: "file_form",
@@ -383,10 +385,13 @@ $(document).ready(function()
                     $('#error_logo').fadeOut();
                     $('#logo_image').fadeOut();
                     if (data.error === undefined) {
-                        $('#logo_image').prop('src', data.url_logo);
-                        $('[name=name_logo_form]').val(data.orig_name).trigger('change');
-                        $('#name_logo_form').prop('src', data.url_logo);
+                        console.log();
+                        //$('#logo_image').prop('src', data.url_logo);
+                        //$('[name=name_logo_form]').val(data.orig_name).trigger('change');
+                        //$('#name_logo_form').prop('src', data.url_logo);
                         $('#logo_image').fadeIn();
+                        $('<img id="logo_image" class="span6 thumbnail" src="'+data.url_logo+'"/><input name="name_logo_form[]" value="'+data.orig_name+'" type="hidden"/>').appendTo('.row-fluid');
+						<!--$('<img src="'+data.url_logo+'" width="294" height="200"/>').appendTo('.picse_mini');-->
                     } else {
                         $('#error_logo').fadeIn().text(data.error);
                     }
@@ -397,12 +402,13 @@ $(document).ready(function()
     <p class="margen_15_left_mini contenedorFotos">
     <label>Seleccione las imágenes para su anuncio</label>
 		 <div id="fileuploader" >Seleccionar Imagenes</div>
-         <input name="name_logo_form" value="" type="hidden"/>
+         
                             <div class="row-fluid">
                                 <span id="error_logo" style="display:none;" class="alert alert-error"></span>
-                                <img id="logo_image" class="span6 thumbnail" src=""/>
+                               
                             </div>
-        <!-- <iframe src="<?php echo base_url() ?>../subir_archivos/index.html" style="overflow:none;" scrolling="no" width="800" height="100"> </iframe> -->
+        <!--  <img id="logo_image" class="span6 thumbnail" src=""/>
+                                <input name="name_logo_form" value="" type="hidden"/><iframe src="<?php echo base_url() ?>../subir_archivos/index.html" style="overflow:none;" scrolling="no" width="800" height="100"> </iframe> -->
     </p>
     
     <!--imagenes-->
@@ -457,7 +463,7 @@ $(document).ready(function()
            <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>
             <img src="<?php echo base_url() ?>images/anuncios/02/2.png" width="294" height="200"/>
             <img src="<?php echo base_url() ?>images/anuncios/02/3.png" width="294" height="200"/>
-            <!-- <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>-->
+             <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>
             
         </div>
     </div>
