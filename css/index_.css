@@ -553,7 +553,7 @@ body{
 	overflow-X:hidden;-ms-overflow-X:hidden;
 	}
 .numeros_publicar_anuncio_mini{
-	width:740px;
+	width:765px;
 	height:85px;
 	background-image:url(../images/fondo_numeros.png);
 	float:left;
@@ -608,8 +608,7 @@ body{
 	width:840px;
 	min-height:650px;
 	background-color: #FFF;
-	border:2px solid #762EA4;
-	margin-top:70px;}
+	margin-top:30px;}
 .titulo_de_pasos_mini{
     width:840;
 	height:110px;
@@ -905,7 +904,7 @@ body{
 	}
 .background_morado_55_mini{
 	color:#FFFFFF;
-	margin-right:55px;
+	margin-right:14px;
 	background-color:#762EA4;
 	border:hidden;
 	}
@@ -922,13 +921,31 @@ body{
 	}
 .background_gris_55_mini{
 	color:#762EA4;
-	margin-right:55px;
+	margin-right:10px;
 	background-color:#D9DADB;
 	border:hidden;
 	}
 .background_gris_100_mini{
 	color:#762EA4;
-	margin-right:100px;
+	margin-right:0px;
+	background-color:#D9DADB;
+	border:hidden;
+	}
+.background_gris_7_mini{
+	color:#762EA4;
+	margin-right:55px;
+	background-color:#D9DADB;
+	border:hidden;
+	}
+.background_gris_82_mini{
+	color:#762EA4;
+	margin-right:10px;
+	background-color:#D9DADB;
+	border:hidden;
+	}
+.background_gris_78_mini{
+	color:#762EA4;
+	margin-right:87px;
 	background-color:#D9DADB;
 	border:hidden;
 	}

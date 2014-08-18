@@ -166,38 +166,14 @@ Denunciar Anuncio
 
 <div class="titulo_seccion_admin">
 <div class="perrito_perfil">
-<img src="images/favoritos_perfil.png" />
+<img src="<?php echo base_url();?>images/favoritos_perfil.png" />
 </div>
 <div class="admin_title"> Favoritos </div>
 </div>
 </br>
   <ul id="itemContainer">
    <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li onclick="muestra('contenedor_anuncio_detalle');" >
-Ver detalle
-</li>
-</ul>
 
- </div> <!-- Fin contenedor annuncio -->
- 
- 
   <!-- Inicio margen falso -->
  <div class="margen_derecho_20">
 
@@ -205,94 +181,7 @@ Ver detalle
   <!-- FIN margen falso -->
   
   
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
 
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-  
-  
-  <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
- 
- 
-  <!-- Inicio margen falso -->
- <div class="margen_derecho_20">
-
-</div>
-  <!-- FIN margen falso -->
-   <!-- INICIO contenedor anuncio  -->
-<div class="contenedor_anuncio">
-<div class="titulo_anuncio">
-Firulais
-</div>
-<div class="descripcion_anuncio">
-<font> Precio: </font>
-<br/>
-<font> Raza: </font>
-<br/>
-<font> Género: </font>
-<br/>
-<font> Ciudad: </font>
-</div>
-<div class="contenedor_foto_anuncio">
-<img src="images/anuncios/01/perro.png" align="middle" width="128" height="80" />
-</div>
-<ul class="ver_detalle_anuncio">
-<li  >
-Ver detalle
-</li>
-</ul>
-
- </div> <!-- Fin contenedor annuncio -->
  
   </ul>
       
@@ -305,3 +194,34 @@ Ver detalle
     
     
       </div>
+
+
+
+<?php if ($favoritos != Null) { ?>
+<?php foreach ($favoritos as $favorito) { ?>
+
+<div class="contenedor_anuncio">
+<div class="titulo_anuncio">
+<?php echo $favorito->titulo ?>
+
+</div>
+<div class="descripcion_anuncio">
+<font> Precio: <?php echo $favorito->precio ?> </font>
+<br/>
+<font> Raza: <?php echo $favorito->razaID ?></font>
+<br/>
+<font> Género: <?php echo $favorito->genero ?></font>
+<br/>
+<font> Ciudad: <?php echo  ($favorito->nombreEstado)  ?></font>
+</div>
+<div class="contenedor_foto_anuncio">
+<img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80" />
+</div>
+<ul class="ver_detalle_anuncio">
+<li onclick="muestra('contenedor_anuncio_detalle');" >
+Ver detalle
+</li>
+</ul>
+<?php }?>
+<?php }?>
+ </div> <!-- Fin contenedor annuncio -->

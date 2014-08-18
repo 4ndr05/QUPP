@@ -85,7 +85,7 @@
 
         jQuery(document).ready(function () {
             // binds form submission and fields to the validation engine
-            jQuery(".validate").validationEngine({
+            jQuery("form").validationEngine({
                 promptPosition: "topRight",
                 scroll: false,
                 ajaxFormValidation: true,
@@ -396,11 +396,11 @@ Enviar
                                                                                               onclick="obtener_usuario('datos_faltantes_asociacion'); oculta('datos_faltantes_usuario');oculta('datos_faltantes_negocio');oculta('ocultar_info_adicional');oculta('ocultar_info_adicional');muestra('llenar_info_adicional');">
         Asociación </label>
     </br>
-    <p><input name="recibirCorreo" type="checkbox" value="1"/> <label> Quiero recibir información acerca de
+    <p><input name="recibirCorreo" type="checkbox" value="1" checked="checked" /> <label> Quiero recibir información acerca de
             promociones </label></p>
 
 
-    <p><input name="terminosCondiciones" type="checkbox" value="1" class="validate[required]"/> <label> He leído y acepto los <a href="<?php echo base_url()?>content/terminos_y_condiciones.pdf" target="_blank" class="link_blanco">Términos y Condiciones</a> y <a href="<?php echo base_url()?>content/politica_de_privacidad.pdf" target="_blank" class="link_blanco">la Política de Privacidad</a> *  </label></p>
+    <p><input name="terminosCondiciones" type="checkbox" value="1" checked="checked" class="validate[required]"/> <label> He leído y acepto los <a href="<?php echo base_url()?>content/terminos_y_condiciones.pdf" target="_blank" class="link_blanco">Términos y Condiciones</a> y <a href="<?php echo base_url()?>content/politica_de_privacidad.pdf" target="_blank" class="link_blanco">la Política de Privacidad</a> *  </label></p>
 
 
     <font class="asterisco">Los datos marcados con un astrisco (*) son obligatorios </font>
@@ -1001,7 +1001,7 @@ Enviar
         
             <div class="indicador">
              <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
-             <img src="images/indicador_si.png">
+             <img src="images/indicador_si.png" title="Ya estas logueado">
              <?php else: ?>
              <img src="images/indicador_no.png">
              <?php endif; ?>
@@ -1011,7 +1011,7 @@ Enviar
         <li <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>  <?php else: ?>onclick="muestra('contenedor_registro');" <?php endif; ?>>
             <div class="indicador"> 
             <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
-             <img src="images/indicador_si.png">
+             <img src="images/indicador_si.png" title="Ya estas registrado">
              <?php else: ?>
              <img src="images/indicador_no.png">
              <?php endif; ?>
@@ -1223,7 +1223,7 @@ Enviar
     </div>
 </a>
 <a href="<?php echo base_url() ?>#" class="paquete_comprar reset"
-   data-paquete='{"id":"<?php echo $paquetes[1]->paqueteID ?>","nombre":"<?php echo $paquetes[1]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[1]->vigencia ?>","precio":"<?php echo $paquetes[1]->precio ?>","caracteres":"<?php echo $paquetes[1]->caracteres ?>","cantFotos":"<?php echo $paquetes[1]->cantFotos ?>","videos":"<?php echo $paquetes[0]->videos ?>"}'>
+   data-paquete='{"id":"<?php echo $paquetes[1]->paqueteID ?>","nombre":"<?php echo $paquetes[1]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[1]->vigencia ?>","precio":"<?php echo $paquetes[1]->precio ?>","caracteres":"<?php echo $paquetes[1]->caracteres ?>","cantFotos":"<?php echo $paquetes[1]->cantFotos ?>","videos":"<?php echo $paquetes[1]->videos ?>"}'>
     <div class="paquetes">
         <div class="title_paquetes">
             <div class="lateral_regular"></div>
@@ -1301,7 +1301,7 @@ Enviar
 
 </a>
 <a href="<?php echo base_url() ?>#" class="paquete_comprar reset"
-   data-paquete='{"id":"<?php echo $paquetes[2]->paqueteID ?>","nombre":"<?php echo $paquetes[2]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[2]->vigencia ?>","precio":"<?php echo $paquetes[2]->precio ?>","caracteres":"<?php echo $paquetes[2]->caracteres ?>","cantFotos":"<?php echo $paquetes[2]->cantFotos ?>","videos":"<?php echo $paquetes[0]->videos ?>"}'>
+   data-paquete='{"id":"<?php echo $paquetes[2]->paqueteID ?>","nombre":"<?php echo $paquetes[2]->nombrePaquete ?>","vigencia":"<?php echo $paquetes[2]->vigencia ?>","precio":"<?php echo $paquetes[2]->precio ?>","caracteres":"<?php echo $paquetes[2]->caracteres ?>","cantFotos":"<?php echo $paquetes[2]->cantFotos ?>","videos":"<?php echo $paquetes[2]->videos ?>"}'>
     <div class="paquetes_derecha">
         <div class="title_paquetes">
             <div class="lateral_premium"></div>
@@ -1375,7 +1375,7 @@ Enviar
 
 <!-- Inician secciones de contenido -->
 <!-- perros perdidos -->
-<a href="<?php echo base_url() ?>#" style="text-decoration:none; color:#000;"
+<a href="<?php echo base_url() ?>perdidos" style="text-decoration:none; color:#000;"
    onmouseover="Mostrar('ver_perdidos');Ocultar('ver_raza');Ocultar('ver_mes');Ocultar('ver_curiosos');">
     <div id="perros_perdidos" class="seccion_inferior_izquierda">
 
@@ -1400,7 +1400,7 @@ Enviar
 </a>
 <!-- End perros perdidos -->
 <!-- Raza del mes -->
-<a href="<?php echo base_url() ?>#" style="text-decoration:none; color:#000;"
+<a href="<?php echo base_url() ?>raza" style="text-decoration:none; color:#000;"
    onmouseover="Mostrar('ver_raza'); Ocultar('ver_perdidos');Ocultar('ver_mes'); Ocultar('ver_curiosos')">
     <div id="la_raza_mes" class="seccion_inferior_izquierda">
         <div class="contenido_secciones">
@@ -1426,7 +1426,7 @@ Enviar
 <!-- End raza del mes -->
 
 <!-- Eventos del mes -->
-<a href="<?php echo base_url() ?>#" style="text-decoration:none; color:#000;"
+<a href="<?php echo base_url() ?>evento" style="text-decoration:none; color:#000;"
    onmouseover="Mostrar('ver_mes');Ocultar('ver_raza'); Ocultar('ver_perdidos');Ocultar('ver_curiosos');">
     <div id="eventos_mes" class="seccion_inferior">
         <div class="contenido_secciones">
@@ -1449,7 +1449,7 @@ Enviar
 </a>
 <!-- End eventos del mes -->
 <!-- Datos curiosos -->
-<a href="<?php echo base_url() ?>#" style="text-decoration:none; color:#000;"
+<a href="<?php echo base_url() ?>curiosos" style="text-decoration:none; color:#000;"
    onmouseover="Mostrar('ver_curiosos');Ocultar('ver_raza'); Ocultar('ver_perdidos');Ocultar('ver_mes');">
     <div id="datos_curiosos" class="seccion_inferior_derecha">
         <div class="contenido_secciones">
@@ -1481,61 +1481,10 @@ Enviar
 
 </div>
 
-<div id="menu_inferior" align="center">
-    <div id="acerca_nosotros" class="menu_inferiror">
-        <p class="title_final">Acerca de nosotros</p>
 
-        <div class="contenido_final">
-            <ul class="sub_menu_inferior">
-                <li> - ¿Quiénes Somos?
-                </li>
-                <li>- La comunidad QUP</li>
-            </ul>
-        </div>
-    </div>
-    <div id="politicas" class="menu_inferiror">
-        <p class="title_final">Políticas</p>
 
-        <div class="contenido_final">
-            <ul class="sub_menu_inferior">
-                <li> - Aviso de Privacidad</li>
-                <li> - Política de Provacidad</li>
-                <li> - Términos y Condiciones</li>
-            </ul>
-        </div>
-    </div>
-    <div id="contacto" class="menu_inferiror">
-        <p class="title_final">Contacto</p>
+<?php $this->load->view('general/footer_view'); ?>
 
-        <div class="contenido_final">
-            <ul class="sub_menu_inferior">
-                <li>- Tutorial</li>
-                <li onclick="muestra('publicidad');">- Publicidad</li>
-                <li onclick="muestra('soporte');">- Soporte</li>
-                <li>- Preguntas Frecuentes</li>
-            </ul>
-        </div>
-    </div>
-</div>
-</br>
-</br>
-</br>
-</br></br>
-</br></br>
-</br>
-<div class="footer">
-    <img src="<?php echo base_url() ?>images/perro_final.png" width="46" height="42"/>
-    <a href="<?php echo base_url() ?>#"><img src="<?php echo base_url() ?>images/ico_fb.png" width="32" height="32"
-                                             style="margin-top:10px;"/></a>
-    <a href="<?php echo base_url() ?>#" class="margen"><img src="<?php echo base_url() ?>images/ico_tw.png" width="32"
-                                                            height="32" style="margin-top:10px;"/></a>
-</div>
-<div class="division_final">
-
-</div>
-<div class="pie_pagina">
-    Copyright © 2014 QuieroUnPerro.com
-</div>
 </center>
 <script src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
 <script>

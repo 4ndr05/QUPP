@@ -12,14 +12,22 @@
 <th width="105"> Total </th>
 <th width="185"> Fecha </th>
 </tr>
-<?php if ($facturas != null) {?>
+<?php if ($compras != null) {?>
 
-<?php foreach ($facturas as $factura) {?>
+<?php foreach ($compras as $compra) {?>
 <tr> 
-<td><?php echo $factura->compraID ?> </td>
-<td> <?php echo $factura->detalle?></td>
-<td> <?php echo $factura->total ?> </td>
-<td> <?php echo $factura->fecha ?> </td>
+<td><?php echo $compra->compraID ?> </td>
+<td>
+<?php if($facturas != null){
+		foreach ($facturas as $factura) {
+			if($factura->compraID == $compra->compraID){
+		?>
+ 			<?php echo 'Cantidad: '.$factura->cantidad.' Articulo: '.$factura->nombre.' '.$factura->talla.' '.$factura->color;
+ 		    }
+ 	}
+ }?></td>
+<td> <?php echo $compra->total ?> </td>
+<td> <?php echo $compra->fecha ?> </td>
 </tr>
  
 

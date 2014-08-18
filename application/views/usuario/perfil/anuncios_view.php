@@ -1,6 +1,6 @@
 <div class="titulo_seccion_admin hidden">
 <div class="perrito_perfil">
-<img src="images/perrito_perfil.png" />
+<img src="<?php echo base_url()?>images/perrito_perfil.png" />
 </div>
 <div class="admin_title"> Administrador de anuncios </div>
 </div>

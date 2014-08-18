@@ -27,7 +27,7 @@
     </ul>
 </div>
 <div class="crerar_publicar_anuncio_mini">
-    <img src="<?php echo base_url() ?>images/cerrar.png" onclick="oculta('contenedor_publicar_anuncio');"/>
+    <img src="<?php echo base_url() ?>images/cerrar.png" id="cerrarPublicacion"/>
 </div>
 <br/>
 
@@ -300,9 +300,9 @@
                                    readonly="readonly" value="<?php echo $this->session->userdata('correo') ?>"/></p>
     <br/>
 
-    <p class="margen_15_left_mini"> Teléfono: <input name="telefono" type="text"
-                                                     class="background_gris_35_mini preview" value="<?php echo $this->session->userdata('telefono');?> " required="required"/> Mostrar
-        teléfono en el anuncio: <select required="required" name="mostrar_telefono" class="background_gris_35_mini preview">
+    <p class="margen_15_left_mini"> Teléfono*: <input name="telefono" type="text"
+                                                     class="background_gris_35_mini preview validate[required,custom[onlyNumberSp],minSize[10]]" value="<?php echo $this->session->userdata('telefono');?> " required="required"/> Mostrar
+        teléfono en el anuncio*: <select required="required" name="mostrar_telefono" class="background_gris_35_mini preview validate[required]">
             <option value="">--</option>
             <option value="1"> Si</option>
             <option value="0"> No</option>
@@ -320,60 +320,63 @@
                                                                                                     readonly="readonly"/></p>
     <br/>
 
-    <p class="margen_15_left_mini"> Titúlo: &nbsp;&nbsp;&nbsp; <input required="required" type="text" name="titulo" id="titulo" class="background_gris_55_mini preview"/> Estado
-        &nbsp;&nbsp;&nbsp;&nbsp;<select required="required" name="estado" class="background_gris_100_mini preview" id="estadoP">
+    <p class="margen_15_left_mini"> Titúlo*: &nbsp;&nbsp; <input name="titulo" type="text" class="background_gris_55_mini preview validate[required]" id="titulo" maxlength="20" required="required"/> Estado*:
+        &nbsp;&nbsp;<select required="required" name="estado" class="background_gris_7_mini preview validate[required]" id="estadoP">
             <option value="">--</option>
             <?php foreach ($estados as $edo): ?>
                 <option value="<?php echo $edo->estadoID;?>"><?php echo $edo->nombreEstado;?></option>
             <?php endforeach; ?>
         </select>
 
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ciudad: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input required="required" class="background_gris_mini preview" name="ciudad" type="text" id="ciudad"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ciudad*: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input required="required" class="background_gris_mini preview validate[required]" name="ciudad" type="text" id="ciudad"/>
     </p>
     <br/>
 
-    <p class="margen_15_left_mini"> Genéro:
-        <select required="required" type="text" name="genero" class="background_gris_100_mini preview" id="generoP">
+    <p class="margen_15_left_mini"> Genéro*:&nbsp;
+        <select required="required" type="text" name="genero" class="background_gris_78_mini preview validate[required]" id="generoP">
             <option value=""> ---</option>
             <option value="0"> Hembra</option>
             <option value="1"> Macho</option>
         </select>
 
-        Raza &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select required="required" name="raza" class="background_gris_100_mini preview" id="razaP">
+        Raza*: &nbsp;&nbsp;&nbsp;&nbsp;<select required="required" name="raza" class="background_gris_82_mini preview" id="razaP">
             <option value="">--</option>
             <?php foreach ($razas as $r): ?>
                 <option value="<?php echo $r->razaID ?>"><?php echo $r->raza ?></option>
             <?php endforeach; ?>
         </select>
-        Precio: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input required="required" class="preview" name="precio" type="text" id="precio"/>
+        Precio*: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input required="required" class="background_gris_100_mini preview validate[required,custom[number]" name="precio" type="text" id="precio"/>
     </p>
     <br/>
 
     <p class="margen_15_left_mini">
-        Descripción:<textarea required="required" class="background_gris_mini preview" name="descripcion" id="descripcion" cols="95" rows="3"></textarea><br />
+        Descripción*:<textarea required="required" class="background_gris_mini preview validate[required]" name="descripcion" id="descripcion" cols="95" rows="3"></textarea><br />
     Caracteres:<input name="meh" type="text" id="meh" size="3" readonly="readonly" />
     <input name="caracteresN" type="text" id="caracteresN" size="3" readonly="readonly" />
     </p>
     <br/>
-	
+	<div id="links_videos">
     <p class="margen_15_left_mini" id="videoY">
     <input type="hidden" name="url_video[]" id="url_video" value="0" />
-        Link de video <input type="text" name="url_video[]" id="url_video[]" size="98" class="preview one"/><img
+        Link de video <input type="text" name="url_video[]" id="url_video[]" size="98" class="preview one validate[custom[url]]"/><img
             src="<?php echo base_url() ?>images/logo_youtube.png"/><a href="#" id="addVid" class="addVid" style="font-size:9px; margin-top:8px;" data-rel="">Agregar</a><br />
     </p>
 
     <p class="margen_15_left_mini"><a href="<?php echo base_url() ?>#"> Tutorial para subir video a <img
                 src="<?php echo base_url() ?>images/logo_youtube.png" width="43" height="16"/> </a></p>
+     </div>
     <br/>
 <script>
 $(document).ready(function()
 {
+	
 	$("#fileuploader").uploadFile({
+		
                 url: "<?php echo base_url('venta/upload_file') ?>",
                 allowedTypes: "png,jpg,jpeg",
                 fileName: "file_form",
-                multiple: false,
+                multiple: true,
                 showFileCounter: false,
                 returnType: 'json',
                 showStatusAfterSuccess: false,
@@ -382,10 +385,13 @@ $(document).ready(function()
                     $('#error_logo').fadeOut();
                     $('#logo_image').fadeOut();
                     if (data.error === undefined) {
-                        $('#logo_image').prop('src', data.url_logo);
-                        $('[name=name_logo_form]').val(data.orig_name).trigger('change');
-                        $('#name_logo_form').prop('src', data.url_logo);
+                        console.log();
+                        //$('#logo_image').prop('src', data.url_logo);
+                        //$('[name=name_logo_form]').val(data.orig_name).trigger('change');
+                        //$('#name_logo_form').prop('src', data.url_logo);
                         $('#logo_image').fadeIn();
+                        $('<img id="logo_image" class="span6 thumbnail" src="'+data.url_logo+'"/><input name="name_logo_form[]" value="'+data.orig_name+'" type="hidden"/>').appendTo('.row-fluid');
+						<!--$('<img src="'+data.url_logo+'" width="294" height="200"/>').appendTo('.picse_mini');-->
                     } else {
                         $('#error_logo').fadeIn().text(data.error);
                     }
@@ -393,14 +399,16 @@ $(document).ready(function()
             });
 });
 </script>
-    <p class="margen_15_left_mini">
+    <p class="margen_15_left_mini contenedorFotos">
+    <label>Seleccione las imágenes para su anuncio</label>
 		 <div id="fileuploader" >Seleccionar Imagenes</div>
-         <input name="name_logo_form" value="" type="hidden"/>
+         
                             <div class="row-fluid">
                                 <span id="error_logo" style="display:none;" class="alert alert-error"></span>
-                                <img id="logo_image" class="span6 thumbnail" src=""/>
+                               
                             </div>
-        <!-- <iframe src="<?php echo base_url() ?>../subir_archivos/index.html" style="overflow:none;" scrolling="no" width="800" height="100"> </iframe> -->
+        <!--  <img id="logo_image" class="span6 thumbnail" src=""/>
+                                <input name="name_logo_form" value="" type="hidden"/><iframe src="<?php echo base_url() ?>../subir_archivos/index.html" style="overflow:none;" scrolling="no" width="800" height="100"> </iframe> -->
     </p>
     
     <!--imagenes-->
@@ -455,7 +463,7 @@ $(document).ready(function()
            <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>
             <img src="<?php echo base_url() ?>images/anuncios/02/2.png" width="294" height="200"/>
             <img src="<?php echo base_url() ?>images/anuncios/02/3.png" width="294" height="200"/>
-            <!-- <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>-->
+             <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>
             
         </div>
     </div>
@@ -664,7 +672,7 @@ TOTAL
 <div>
                             <ul class="morado_directorio" id="btn_sig">
                                 <li class="sig_paso">
-                                  <input type="submit" value="Pagar"/>
+                                  <input type="submit" value="Publicar"/>
                                 </li>
                             </ul>
               <br/>
@@ -679,8 +687,8 @@ TOTAL
 </div>
 <div id="paso_seis" class="paso">
                     <div class="descipcion_pasos_mediano">
-                        <div class="titulo_de_pasos"> PUBLICAR EN DIRECTORIO </div>
-                        <div class="instrucciones_pasos"> Pago del directorio: </div>
+                        <div class="titulo_de_pasos"> PUBLICAR EN ANUNCIOS </div>
+                        <div class="instrucciones_pasos"> Pago del servicio: </div>
                         <div id="iframe"></div>
                         <br/>
                     </div>
@@ -698,7 +706,7 @@ TOTAL
     </ul>
 </div>-->
 <div id="btn_sig" class="siguientePaso">
-    <div id="msj_paso"></div>
+    <div id="msj_paso" class="msj_paso"></div>
     <ul class="morado_mini" style="display: inline-block;">
         <li class="sig_paso">Continuar</li>
     </ul>
@@ -719,6 +727,9 @@ TOTAL
 			if(num_paso == 'paso_cinco'){
 				$('.siguientePaso').hide();
 			}
+			if(num_paso == 'paso_tres'){
+			$('.msj_paso').html("*Debe completar todos los campos requeridos");
+			}
             if (revision_step($('.paso_show'))) {
                 $('.paso_show').removeClass('paso_show').hide();
                 sig_paso.show().addClass('paso_show');
@@ -726,7 +737,7 @@ TOTAL
                 var sel_paso = $('.listado_numeros_anuncio_mini').find('[data-p="' + sig_paso.prop('id') + '"]');
                 sel_paso.addClass('numero_seccion_mini view_step');
                 $('.instrucciones_pasos_mini').text(sel_paso.data('titulo'));
-                $('#msj_paso').text("");
+                $('.msj_paso').text("");
                 add_step_move();
             }
         });
@@ -741,7 +752,7 @@ TOTAL
                 $('.instrucciones_pasos_mini').text(titulo_paso);
 
                 $('.paso').removeClass('paso_show').hide();
-                $('#msj_paso').text('');
+                $('.msj_paso').text('');
                 $('#' + paso).show().addClass('paso_show');
                 $('.instrucciones_pasos_mini').text(titulo_paso);
             });
@@ -749,17 +760,17 @@ TOTAL
 
         function revision_step(element) {
             if (element.prop('id') === 'paso_uno') {
-                $('#msj_paso').text("Debe seleccionar una sección");
+                $('.msj_paso').text("Debe seleccionar una sección");
                 return $('#p_form input[name=seccion]:checked').val() === undefined ? false : true;
             }
 
             if (element.prop('id') === 'paso_dos') {
-                $('#msj_paso').text("Debe seleccionar un paquete");
+                $('.msj_paso').text("Debe seleccionar un paquete");
                 return $('#p_form input[name=paquete]:checked').val() === undefined ? false : true;
             }
 
            if (element.prop('id') === 'paso_tres') {
-                $('#msj_paso').text("Debe completar todos los campos requeridos");
+                $('.msj_paso').text("Debe completar todos los campos requeridos");
                 var obj = $('#paso_tres [name]:required').serialize().split('&');
 
                 for (var i = 0; i < obj.length; i++) {
@@ -807,10 +818,16 @@ TOTAL
 			$('#nprecio').html(paquete_val.precio);
 			$('.nprecio').html(paquete_val.precio);
 			//$('#nvideos').val(paquete_val.videos);
-			var cantidadVideos = paquete_val.videos;
-			if(cantidadVideos == 0){
-				$('#videoY').hide();
+			if(paquete_val.cantFotos == 0){
+				$('.contenedorFotos').hide();			
 			}
+			var cantidadVideos = paquete_val.videos;
+			console.log(cantidadVideos+' cantidad de videos')
+			if(cantidadVideos == 0){
+				$('#links_videos').hide();
+			}
+			
+			
 			var contador = 1; 
 			$(".addVid").click(function(e){
         		e.preventDefault(); 
@@ -858,7 +875,11 @@ TOTAL
             $('#paso_tres [name=seccion_texto]').val($(this).next().text());
         });
 		
-        
+        $('#cerrarPublicacion').on('click', function() {
+            oculta('contenedor_publicar_anuncio');
+			window.location.href="<?=base_url()?>";
+        });
+		
         $("body").on("click",".del", function(e){
             $(this).parent('span').remove(); 
         return false;
@@ -877,6 +898,18 @@ TOTAL
             $('#totalConDescuento').html(total);
 			$('#total').val(total);
 			$('#cuponUsado').val(cuponID);
+			
+        });
+		
+		$('#paso_uno [name=seccion]').on('click', function () {
+			var valor = $(this).val();   
+			if(valor == 6 || valor == 7){
+				$('#precio').val('0.00');
+				$('#precio').attr('disabled', 'disabled');
+			} else {
+				$('#precio').removeAttr('disabled');
+			}
+			console.log(valor+'seccionnnnnnnn')
 			
         });
 

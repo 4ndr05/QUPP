@@ -1,6 +1,6 @@
 <div class="titulo_seccion_admin">
 <div class="perrito_perfil">
-<img src="images/cupon_perfil.png" />
+<img src="<?php echo base_url()?>images/cupon_perfil.png" />
 </div>
 <div class="admin_title"> Tienes 4 cupones </div>
 </div>

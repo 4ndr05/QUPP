@@ -145,9 +145,6 @@ class Principal extends CI_Controller {
         $data['estados']    = $this->defaultdata_model->getEstados();
         $data['razas'] = $this->perfil_model->getRazas();
         $data['favoritos'] = $this->perfil_model->getFavoritos($this->session->userdata('idUsuario'));
-        
-
-        //var_dump($data['favoritos']);
 
         if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
             $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
@@ -163,7 +160,7 @@ class Principal extends CI_Controller {
         $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
         $data['estados']    = $this->defaultdata_model->getEstados();
         $data['facturas'] = $this->perfil_model->getFacturas($this->session->userdata('idUsuario'));
-        
+        $data['compras'] = $this->perfil_model->getCompras($this->session->userdata('idUsuario'));
 
         if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
             $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
