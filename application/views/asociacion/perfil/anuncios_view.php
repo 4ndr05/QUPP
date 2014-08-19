@@ -7,10 +7,12 @@
 </br>
 <ul class="menu_perfil_mini">
 <li class="icono_seleccion_mini">
-<p style=" margin-top:3px; margin-left:5px;"> Todos (4) </p>
+
+
+<p style=" margin-top:3px; margin-left:5px;" onclick="oculta('anunciosAct'); oculta('anunciosInAct'); muestra('anuncios');"> Todos (<?php echo count($anuncios)?>) </p>
 </li>
 <li>
-<p style=" margin-top:3px; margin-left:5px;"> Activos (4) </p>
+<p style=" margin-top:3px; margin-left:5px;" onclick=" muestra('anunciosAct'); oculta('anuncios'); oculta('anunciosInAct');"> Activos (<?php echo count($anunciosAct)?>) </p>
 </li>
 <li>
 <p style=" margin-top:3px; margin-left:5px;" onclick="muestra('anunciosInAct');oculta('anuncios'); oculta('anunciosAct'); "> Expirados (<?php echo count($anunciosInAct)?>) </p>

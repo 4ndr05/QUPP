@@ -2,7 +2,7 @@
 <div class="perrito_perfil">
 <img src="<?php echo base_url()?>images/cupon_perfil.png" />
 </div>
-<div class="admin_title"> Tienes 4 cupones </div>
+<div class="admin_title"> Tienes <?php echo count($cupones);?> cupones </div>
 </div>
 </br>
  <table class="tabla_perfil">

@@ -264,7 +264,7 @@ Enviar
   </div>
 
 
-<!--		CONTENEDOR LOGIN							-->
+<!--        CONTENEDOR LOGIN                            -->
 <!-- ------------------------------------------------------ -->
 <form action="<?= base_url() ?>sesion/login/principal/principal" id="login" class="validate" method="post">
     <div class="contenedor_login" id="contenedor_login" style="display:none;">
@@ -272,9 +272,9 @@ Enviar
                                           onclick="oculta('contenedor_login');"/></div>
 
         <div class="registro_normal">
-			
+            
             <div class="titulo_registro"> INGRESAR</div>
-			<div id="ingreso_normal">
+            <div id="ingreso_normal">
             <div class="texto_inputs">
                 <p> Usuario:</p>
 
@@ -297,15 +297,15 @@ Enviar
                     <input type="submit"/>
                 </li>
             </ul>
-			</div>
+            </div>
 </form>
 
             
             <div id="envio_con" class="envio_con">
             <form action="<?= base_url() ?>recuperarcontrasena/sendLink" id="recuperarcontrasena" method="post">
-				</br>
+                </br>
                 <div class="titulo_registro"></div>
-				<div class="texto_inputs">
+                <div class="texto_inputs">
                 <p> Ingresa tu correo:</p>
                 </div>
 
@@ -314,19 +314,19 @@ Enviar
             </div>
 
                 
-				<ul class="morado_reg">
+                <ul class="morado_reg">
                 <li>
                    <input type="submit" value="Recuperar contrase&ntilde;a"/>
                 </li>
             </ul>
                 
             </form>
-			</br>
+            </br>
             </div>
-			
-			<div id="confirmacionCambio" style="display:none;">
-			 Se ha enviado contraseña al correo electronico indicado.
-			</div>
+            
+            <div id="confirmacionCambio" style="display:none;">
+             Se ha enviado contraseña al correo electronico indicado.
+            </div>
             
 
         </div>
@@ -334,10 +334,10 @@ Enviar
     </div>
 <!--</form>-->
 <!-- ------------------------------------------------------ -->
-<!--		FIN    CONTENEDOR LOGIN							-->
+<!--        FIN    CONTENEDOR LOGIN                         -->
 
 
-<!--		CONTENEDOR REGISTRO							-->
+<!--        CONTENEDOR REGISTRO                         -->
 <!-- ------------------------------------------------------ -->
 <form action="<?php echo base_url() ?>registro/registrar" id="registerNow" class="validate" method="get" autocomplete="off"
       enctype="multipart/form-data">
@@ -864,11 +864,11 @@ Enviar
 <!-- Fin contenedor negro registro -->
 
 </form>
-<!--		FIN CONTENEDOR REGISTRO							-->
+<!--        FIN CONTENEDOR REGISTRO                         -->
 <!-- ------------------------------------------------------ -->
 
 
-<!--		EXITO REGISTRO							-->
+<!--        EXITO REGISTRO                          -->
 <!-- ------------------------------------------------------ -->
 <div class="contenedor_registro" id="contenedor_correcto" style="display:none;"> <!-- Contenedor negro reistro-->
     <div class="cerrar_registro"><img src="<?php echo base_url() ?>images/cerrar.png"
@@ -895,11 +895,11 @@ Enviar
 
 </div>
 
-<!--		FIN EXITO REGISTRO						-->
+<!--        FIN EXITO REGISTRO                      -->
 <!-- ------------------------------------------------------ -->
 
 
-<!--		ERROR REGISTRO							-->
+<!--        ERROR REGISTRO                          -->
 <!-- ------------------------------------------------------ -->
 
 <div class="contenedor_registro" id="contenedor_error" style="display:none;"> <!-- Contenedor negro reistro-->
@@ -927,7 +927,7 @@ Enviar
 
 
 
-<!--		FIN ERROR REGISTRO							-->
+<!--        FIN ERROR REGISTRO                          -->
 <!-- ------------------------------------------------------ -->
 
 
@@ -1095,16 +1095,16 @@ Enviar
         <div id="fb-root"></div>
         <div id="fb-root"></div>
         <script>
-		   window.fbAsyncInit = function() {
+           window.fbAsyncInit = function() {
         FB.init({
           appId      : '343695012453981',
           xfbml      : true,
           version    : 'v2.0'
         });
       };
-		
-		
-		 (function(d, s, id){
+        
+        
+         (function(d, s, id){
          var js, fjs = d.getElementsByTagName(s)[0];
          if (d.getElementById(id)) {return;}
          js = d.createElement(s); js.id = id;
