@@ -9,6 +9,7 @@
 <p class="usuario_bienvenido"><?=$myInfo->nombre.' '.$myInfo->apellido;?></p>
 </div>
 </br>
+<form style = "margin-top:-170px;" action="<?= base_url() ?>usuario/cuenta/updateMiPerfilB" id="mpB" method="post">
 <div class="contenedor_formulario">
 <p>Nombre:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<input name="nombre" type="text" class="background_morado" id="nombre" value="<?=$myInfo->nombre;?>" readonly="readonly"/> </p>
 </br>
@@ -18,6 +19,8 @@
 </div>
 <div class="margen_div">
 </div>
+
+
 <div class="contenedor_formulario">
 <p>Apellido: <input name="apellido" type="text" class="background_morado" id="apellido" value="<?=$myInfo->apellido;?>"/> </p>
 </br>
@@ -42,10 +45,12 @@
 <div class="contenedor_boton"> 
 <ul class="boton_gris_perfil">
 <li>
-Editar
+
+<input type="submit" value="Editar"/>
 </li>
 </ul>
 </div>
+</form>
 
 <div class="contenedor_fiscales">
 <font class="espacios"> Datos fiscales</font>
@@ -61,7 +66,7 @@ Editar
 </div>
 
 
-
+<form style = "margin-top:0px;" action="<?= base_url() ?>usuario/cuenta/updateMiPerfilF" id="mpB" method="post">
 <div id="contenedor_formu_detalle_user" style=" display:none;">
 <div class="texto_inputs" >
 <p> Razón Social:</p>
@@ -125,274 +130,12 @@ Editar
 </div>
 
 </div>
-<!--- 
-----  Fin contenedor fiscales usuario normal 
-   --->
-   
-   
-   <!--- 
-----  INICIO contenedor fiscales negocio; 
-   --->
-
-<div id="contenedor_fiscales_negocio" style="display:none;"> 
-
-<div class="texto_inputs" >
-<p> Razón Social:</p>
-
-<p style="margin-top:15px;">RFC:</p>
-
-<p style="margin-top:15px;">Calle:</p>
-
-<p style="margin-top:15px;">No. Exterior:</p>
-
-<p style="margin-top:15px;">CP:</p>
-
-<p style="margin-top:15px;">Municipio:</p>
-
-<p style="margin-top:15px;">Estado:</p>
-
-<p style="margin-top:15px;">País:</p>
-
-
- </div>
-
-<div class="contendeor_inputs" >
-<p><input type="text" name="razon" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="RFC" class="gris_input"/> </p>
-
-<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
-
-<p style="margin-top:14px;"><input type="text" name="no_exterior" class="gris_input"/></p>
-
-<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
-
-<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
-<p style="margin-top:14px;"><select name="estado" class="gris_input"/> <option> --- </option>  </select></p>
-<p style="margin-top:14px;"><select name="pais" class="gris_input"/> <option> --- </option> </select> </p>
-
-
-</div>
-
-<div class="contenedor_fiscales"> Datos del negocio </div>
-
-
-<div class="texto_inputs" >
-Nombre:
-</div>
-
-<div class="contendeor_inputs" >
-<p><input type="text" name="nombre_negocio" class="gris_input"/> </p>
-</div>
-</br>
-<div class="giro_negocio"> 
-
-<div class="contenedor_giros">
-    <label>
-      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_0" />
-      Accesorios para mascotas</label>
-    </br>
-    <label>
-      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_1" />
-      Veterinaria</label>
-  </br>
-  
-     <label>
-      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_2" />
-      Estetica canina</label>
-          <label>
-          </br>
-      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_3" />
-    Adiestramiento canino</label>
-    
-  
-  
-  </div>
-  
-  <div class="contenedor_giros">
-    <label>
-      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_4" />
-     Centro de sociabilización</label>
-    </br>
-    <label>
-      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_5" />
-     Criadero de perros</label>
-  </br>
-  
-     <label>
-      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_6" />
-      Hotel y pensión canina</label>
-          <label>
-          </br>
-      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_7" />
-   Alimento y medicamento </label>
-    
-  
-  
-  </div>
-   <div class="contenedor_giros">
-    <label>
-      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_8" />
-      Guarderia de perros</label>
-    </br>
-    <label>
-      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_9" />
-      Tienda de mascotas</label>
-  </br>
-  
-     <label>
-      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_10" />
-      Servicios funerarios</label>
-          <label>
-          </br>
-      <input type="checkbox" name="CheckboxGroup1" value="checkbox" id="CheckboxGroup1_11" />
-     Servico de paseo</label>
-    
-  
-  
-  </div>
-
-</div>
-
-
-<div class="texto_inputs" >
-<p>Contacto:</p>
-
-<p style="margin-top:15px;">Teléfono:</p>
-<p style="margin-top:15px;">Calle:</p>
-<p style="margin-top:15px;">Número:</p>
-<p style="margin-top:15px;">Colonia:</p>
-<p style="margin-top:15px;">Municipio:</p>
-<p style="margin-top:15px;">Estado:</p>
-<p style="margin-top:15px;">Código Postal:</p>
-<p style="margin-top:15px;">E-mail:</p>
-<p style="margin-top:15px;">Página web:</p>
-<p style="margin-top:15px;">Logo:</p>
-<p style="margin-top:15px;">Descripción:</p>
-<p style="margin-top:35px;">Ubicación:</p>
-</div>
-
-<div class="contendeor_inputs" >
-<p><input type="text" name="nombre_contacto" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="telefono" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="num" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="colonia" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="estado" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="e-mail" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="pagina_web" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="file" name="logo" class="gris_input"/> </p>
-<p style="margin-top:14px;"><textarea rows="3" cols="40" name="descricion" class="gris_input"/> </textarea> </p>
-
-    
-    
-</div>
-
-</div>
-<!--- 
-----  Fin contenedor fiscales negocio
- --->
-
-<!-- 
----- Inicio fiscales AC
-    -->
-<div id="datos_fiscales_AC" style="display:none;">
-<div class="texto_inputs" >
-<p> Razón Social:</p>
-
-<p style="margin-top:15px;">RFC:</p>
-
-<p style="margin-top:15px;">Calle:</p>
-
-<p style="margin-top:15px;">No. Exterior:</p>
-
-<p style="margin-top:15px;">CP:</p>
-
-<p style="margin-top:15px;">Municipio:</p>
-
-<p style="margin-top:15px;">Estado:</p>
-
-<p style="margin-top:15px;">País:</p>
-
-
- </div>
-
-<div class="contendeor_inputs" >
-<p><input type="text" name="razon" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="RFC" class="gris_input"/> </p>
-
-<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
-
-<p style="margin-top:14px;"><input type="text" name="no_exterior" class="gris_input"/></p>
-
-<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
-
-<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
-<p style="margin-top:14px;"><select name="estado" class="gris_input"/> <option> --- </option>  </select></p>
-<p style="margin-top:14px;"><select name="pais" class="gris_input"/> <option> --- </option> </select> </p>
-
-
-</div>
-
-<div class="contenedor_fiscales"> Datos de la Asociación </div>
-
-
-
-
-<div class="texto_inputs" >
-<p > Nombre: </p>
-<p style="margin-top:15px;">Contacto:</p>
-
-<p style="margin-top:15px;">Teléfono:</p>
-<p style="margin-top:15px;">Calle:</p>
-<p style="margin-top:15px;">Número:</p>
-<p style="margin-top:15px;">Colonia:</p>
-<p style="margin-top:15px;">Municipio:</p>
-<p style="margin-top:15px;">Estado:</p>
-<p style="margin-top:15px;">Código Postal:</p>
-<p style="margin-top:15px;">E-mail:</p>
-<p style="margin-top:15px;">Página web:</p>
-<p style="margin-top:15px;">Logo:</p>
-<p style="margin-top:15px;">Descripción:</p>
-<p style="margin-top:35px;">Ubicación:</p>
-</div>
-
-<div class="contendeor_inputs" >
-<p><input type="text" name="nombre_ac" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="nombre_contacto" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="telefono" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="calle" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="num" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="colonia" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="municipio" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="estado" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="cp" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="e-mail" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="text" name="pagina_web" class="gris_input"/> </p>
-<p style="margin-top:14px;"><input type="file" name="logo" class="gris_input"/> </p>
-<p style="margin-top:14px;"><textarea rows="3" cols="40" name="descricion" class="gris_input"/> </textarea> </p>
-
-
-
-    
-    
-    <div id="map-canvas_dos"></div>
-    
-</div>
-
-</div>
-
-    
-<!-- 
- --- Fin Fiscales AC
-  -->
-
+ 
 
 <div class="contenedor_boton" id="guardar_fiscales" style=" display:none;"> 
 <ul class="boton_gris_perfil">
 <li>
-Guardar
+<input type="submit" value="Guardar"/>
 </li>
 </ul>
 </div>

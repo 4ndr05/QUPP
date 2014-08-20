@@ -109,10 +109,67 @@ class Principal extends CI_Controller {
         $this->load->view('negocio/perfil/mi_perfil_view',$data);
     }
 
+    function updateMiPerfilB(){
+        //var_dump($_POST);
+         $data = array(
+            'nombre' => $this->input->post('nombre'), 
+            'apellido' => $this->input->post('apellido'), 
+            'correo' => $this->input->post('correo'), 
+            'telefono' => $this->input->post('telefono')
+        );
+
+         $this->perfil_model->updateItem('idUsuario', $this->session->userdata('idUsuario'), $data, 'usuario');
+
+        $dataD = array(
+            'estadoID' => $this->input->post('estadoID'), 
+        );
+        $this->perfil_model->updateItem('idUsuario', $this->session->userdata('idUsuario'), $dataD, 'usuariodato');
+        redirect('negocio/principal/myProfile');
+        //$this->perfil_model->updateItem($itemID, $ID, $data, $tabla)
+    }
+
+    function updateMiPerfilF(){
+        //var_dump($_POST);
+        $data= array(
+            'razonSocial'=> $this->input->post('razon'),
+            'rfc'=> $this->input->post('RFC'),
+            'calle'=> $this->input->post('calle'),
+            'noExterior'=> $this->input->post('no_exterior'),
+            'cp'=> $this->input->post('cp'),
+            'municipio'=> $this->input->post('municipio'),
+            'estadoID'=> $this->input->post('estadoID'),
+            'idPais'=> $this->input->post('paisID')
+        );
+        $this->perfil_model->updateItem('idUsuario', $this->session->userdata('idUsuario'), $data, 'usuariodato');
+
+        $dataDt = array(
+            'nombreNegocio' => $this->input->post ('nombre_negocio'),   
+            'nombreContacto' => $this->input->post ('nombre_contacto'),   
+            'telefono' => $this->input->post ('telefono'),   
+            'calle' => $this->input->post ('calleDetalle'),   
+            'numero' => $this->input->post ('num'),  
+            'colonia' => $this->input->post ('colonia'),   
+            'municipioC' => $this->input->post ('municipioDetalle'),
+            'idEstado'  => $this->input->post ('estadoIDDetalle'),
+            'correo' => $this->input->post ('e-mail'),   
+            'cp' => $this->input->post ('cpD'),  
+            'paginaWeb' => $this->input->post ('pagina_web'),   
+            'descripcion' => $this->input->post ('descripcion')   
+
+        );
+        $this->perfil_model->updateItem('idUsuario', $this->session->userdata('idUsuario'), $dataDt, 'usuariodetalle');
+        redirect('negocio/principal/myProfile');
+
+    }
+
     function anuncios(){
         $data['myInfo']    = $this->usuario_model->getMyInfo($this->session->userdata('idUsuario'));
         $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
         $data['estados']    = $this->defaultdata_model->getEstados();
+        $data['anuncios'] = $this->perfil_model->getAnuncios($this->session->userdata('idUsuario'));
+        $data['anunciosAct'] = $this->perfil_model->getAnunciosAct($this->session->userdata('idUsuario'));
+        $data['anunciosInAct'] = $this->perfil_model->getAnunciosInAct($this->session->userdata('idUsuario'));
+
 
         if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
             $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
@@ -125,6 +182,7 @@ class Principal extends CI_Controller {
         $data['myInfo']    = $this->usuario_model->getMyInfo($this->session->userdata('idUsuario'));
         $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
         $data['estados']    = $this->defaultdata_model->getEstados();
+        $data['mensajes'] = $this->perfil_model->getMensajes($this->session->userdata('idUsuario'));
 
         if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
             $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
@@ -137,6 +195,7 @@ class Principal extends CI_Controller {
         $data['myInfo']    = $this->usuario_model->getMyInfo($this->session->userdata('idUsuario'));
         $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
         $data['estados']    = $this->defaultdata_model->getEstados();
+        $data['cupones'] = $this->perfil_model->getCupones($this->session->userdata('idUsuario'));
 
         if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
             $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
