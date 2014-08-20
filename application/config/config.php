@@ -1,6 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /*
+ * TODO REVISAR CUANDO SE PASE A PRODUCTIVO
 |--------------------------------------------------------------------------
 | Base Site URL
 |--------------------------------------------------------------------------
@@ -263,6 +264,7 @@ $config['sess_time_to_update']	= 300;
 | 'cookie_domain' = Set to .your-domain.com for site-wide cookies
 | 'cookie_path'   =  Typically will be a forward slash
 | 'cookie_secure' =  Cookies will only be set if a secure HTTPS connection exists.
+TODO revisar
 |
 */
 $config['cookie_prefix']	= "";
@@ -277,7 +279,7 @@ $config['cookie_secure']	= FALSE;
 |
 | Determines whether the XSS filter is always active when GET, POST or
 | COOKIE data is encountered
-|
+ TODO REVISAR
 */
 $config['global_xss_filtering'] = FALSE;
 
@@ -292,6 +294,8 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_token_name' = The token name
 | 'csrf_cookie_name' = The cookie name
 | 'csrf_expire' = The number in seconds the token should expire.
+
+TODO REVISAR
 */
 $config['csrf_protection'] = FALSE;
 $config['csrf_token_name'] = 'csrf_test_name';
@@ -313,7 +317,7 @@ $config['csrf_expire'] = 7200;
 | even be a line of whitespace at the end of one of your scripts.  For
 | compression to work, nothing can be sent before the output buffer is called
 | by the output class.  Do not 'echo' any values with compression enabled.
-|
+|TODO REVISAR
 */
 $config['compress_output'] = FALSE;
 

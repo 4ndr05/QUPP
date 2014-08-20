@@ -1,20 +1,3 @@
-Skip to content
- 
-This repository 
-Explore
-Gist
-Blog
-Help
-marthahdez2 marthahdez2
- 
- 
-3  Unwatch 
-  Star 0
- Fork 0 fraleiz17/qup
- branch: MARTINEE  qup / application / views / partial / _pasos_anuncio_negocio.php
-Martin Estrada Soto pepetin44 3 days ago Se agregan los elementos que cambiaron en directorio
-2 contributors  Martin Estrada Soto  fraleiz17
-502 lines (450 sloc)  24.993 kb RawBlameHistory   
 <?php
 /**
  * requiere el listado de los giros, estados, planes, datos de myInfo de usuario
@@ -46,7 +29,7 @@ Martin Estrada Soto pepetin44 3 days ago Se agregan los elementos que cambiaron 
 <div id="contenedor_publicar_anuncio_negocio" class="contenedor_publicar_anuncio" style=" display:none;">
     <!-- Inicio contenedor pap publicar anuncio anuncio !-->
     <div id="publicar_anuncio_negocio" class="pubicar_anuncio">
-        <?php if (is_logged() && $this->session->userdata('tipoUsuario') == 2): ?>
+        <?php if (is_logged() /*&& $this->session->userdata('tipoUsuario') == 2*/): ?>
             <form method="post" name="form_anuncio_negocio" id="form_anuncio_negocio">
                 <div class="numeros_publicar_anuncio">
                     <ul class="listado_numeros_anuncio">

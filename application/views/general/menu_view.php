@@ -157,16 +157,11 @@ if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !== 0)):
                     if ($banner != null) {
 
                         foreach ($banner as $contenido) {
-                            if ($this->session->userdata('zonaID') == $contenido->zonaID && $contenido->posicion == 2 && $contenido->seccionID == $seccion) {
+                            if ($this->session->userdata('zonaID') == $contenido->zonaID && $contenido->posicion == 1 && $contenido->seccionID == $seccion) {
                                 ?>
                                 <div class="item"><a href="<?php echo base_url() ?>#" target="_blank"><img
                                             src="<?php echo base_url() ?>images/<?php echo $contenido->imgbaner; ?>"
                                             alt="Model 2"></a>
-
-                                    <div class="carousel-caption">
-                                        <?php echo $contenido->texto; ?>
-                                    </div>
-
                                 </div>
 
                             <?php
@@ -177,16 +172,11 @@ if ($keyUser === FALSE || ($keyUser !== FALSE && $tipoUsuario !== 0)):
 
                     if ($banner !== null && !empty($banner)) {
                         foreach ($banner as $contenido) {
-                            if ($contenido->zonaID == 9 && $contenido->posicion == 2 && $contenido->seccionID == $seccion) {
+                            if ($contenido->zonaID == 9 && $contenido->posicion == 1 && $contenido->seccionID == $seccion) {
                                 ?>
                                 <div class="item"><a href="<?php echo base_url() ?>#" target="_blank"><img
                                             src="<?php echo base_url() ?>images/<?php echo $contenido->imgbaner; ?>"
                                             alt="Model 2"></a>
-
-                                    <div class="carousel-caption">
-                                        <?php echo $contenido->texto; ?>
-                                    </div>
-
                                 </div>
                             <?php
                             }
