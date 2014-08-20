@@ -139,7 +139,8 @@ class Principal extends CI_Controller {
     }
 
     function getMensajes(){
-        $data['mensajes'] = $this->admin_model->getZonasG();
+        $data['mensajes'] = $this->admin_model->getMensajes();
+        $data['usuarios'] = $this->admin_model->getUsers();
         $this->load->view('admin/adimin_mensajes_view', $data);
     }
 
@@ -216,7 +217,7 @@ class Principal extends CI_Controller {
 
         $imagen = $this->file_model->uploadBanner($folder, $file_data, 'banner', true);
             if (is_array($imagen)) {                // $data['response'] = 'false';
-                // $data['error'] = $imagen['error'];
+                $data['error'] = $imagen['error'];
                 //$this -> session -> set_flashdata('custom_error', $imagen['error']);
                 echo 'error';
                 //var_dump($imagen);
@@ -231,8 +232,11 @@ class Principal extends CI_Controller {
 
                 $banner = $this->admin_model->insertBanner($data);
             }
-
+        if($seccionID == 10){
+            redirect('admin/principal/getDatosCuriosos/'.$seccionID.'/'.$zonaID);
+        }
          redirect('admin/principal/getPantalla/'.$seccionID.'/'.$zonaID);
+        
     }
 
 
@@ -470,6 +474,101 @@ $this->email_model->send_email('', $datos->correo, 'Ha sido declinado tu anuncio
 
 
         echo json_encode($aprobar);
+    }
+
+    //MENSAJES
+
+    function guardarMensaje($accion,$mensajeID = null){
+        $data = array(
+            'tipoMensaje' => $this->input->post('tipoMensaje'),
+            'asunto' => $this->input->post('asunto'),
+            'contenido' => $this->input->post('contenido')
+         );
+        if($accion == 1){
+        $numMensajes = count($this->admin_model->getMensajes());
+        if($numMensajes == 5){
+            $mensajeAnterior = $this->admin_model->topMensaje();
+            $eliminarMensaje = $this->admin_model->deleteItem('mensajeID', $mensajeAnterior, 'mensajesadmin');
+        }
+        $this->admin_model->insertItem('mensajesadmin', $data);
+        } else {
+            $this->admin_model->updateItem('mensajeID', $mensajeID, $data,'mensajesadmin');
+        }
+        redirect('admin/principal/getMensajes');
+        
+
+    }
+
+    function enviarMensaje(){
+        $mensajeID = $this->input->post('mensajeID');
+        $mensajeC = $this->admin_model->getMensaje($mensajeID);
+        $destinatario = $this->input->post('destinatario');
+        $usuarioID = $this->input->post('usuarioID');
+         $mensaje = '<link rel="stylesheet" href="'.base_url().'css/general.css" type="text/css" media="screen" /><table width="647" align="center"><tr>
+<td width="231" rowspan="2"><img src="'.base_url().'images/logo_mail.jpg"/></td>
+<td height="48" colspan="6" style="font-family: "titulos"; font-size:50px; color:#72A937; margin:0px; padding:0px; margin-bottom:-10px;">
+Bienvenido</td></tr>
+<tr style="font-size:14px; background-color:#72A937; color:#FFFFFF;" valign="top">
+<td width="60" height="23"><a> &nbsp;Inicio</a></td>
+<td width="57"><a>&nbsp;Venta</a></td>
+<td width="52"><a>&nbsp;Cruza</a></td>
+<td width="78"><a>&nbsp;Adopción</a></td>
+<td width="64"><a>&nbsp;Tienda</a></td>
+<td width="73"><a>&nbsp;Directorio</a></td>
+</tr>
+<tr>
+<td colspan="7" ><p>&nbsp;  </p><font style="margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" ></font>
+</br></br><font>'.$mensajeC->contenido.'</font>
+<br/>
+<p> Puedes revisar este mensaje en el perfil de tu cuenta</p>
+</td></tr><tr bgcolor="#6A2C91" ><td colspan="7" ><font style=" font-size:14px; padding-left:15px; color:#FFFFFF;"> Bienvenido </font>
+<br/><font style=" font-size:12px; padding-left:15px; color:#FFFFFF;"> Equipo QUP </font></td>
+</tr>
+</table>';
+
+        if($usuarioID != 0){
+           
+            $this->email_model->send_email('', $destinatario, $mensajeC->asunto, $mensaje);
+            $data = array(
+            'tipoMensaje' => $mensajeC->tipoMensaje,
+            'asunto' => $mensajeC->asunto,
+            'mensaje' => $mensajeC->contenido,
+            'idUsuario' => $usuarioID
+            );
+
+
+        $numMensajes = count($this->admin_model->getMensajesUsuario($usuarioID));
+        if($numMensajes == 5){
+            $mensajeAnterior = $this->admin_model->topMensajeUsuario($usuarioID);
+            $eliminarMensaje = $this->admin_model->deleteItem('mensajeID', $mensajeAnterior, 'mensajes');
+        }
+        $this->admin_model->insertItem('mensajes', $data);
+
+        } else {
+            $usuarios = $this->admin_model->getUsers();
+            if($usuarios != null){
+                foreach ($usuarios as $usuario) {
+                   $this->email_model->send_email('', $usuario->correo, $mensajeC->asunto, $mensaje);
+                    $data = array(
+                    'tipoMensaje' => $mensajeC->tipoMensaje,
+                    'asunto' => $mensajeC->asunto,
+                    'mensaje' => $mensajeC->contenido,
+                    'idUsuario' => $usuario->idUsuario
+                    );
+
+
+                    $numMensajes = count($this->admin_model->getMensajesUsuario($usuario->idUsuario));
+                    if($numMensajes == 5){
+                        $mensajeAnterior = $this->admin_model->topMensajeUsuario($usuario->idUsuario);
+                        $eliminarMensaje = $this->admin_model->deleteItem('mensajeID', $mensajeAnterior, 'mensajes');
+                    }
+                    $this->admin_model->insertItem('mensajes', $data);
+                }
+            } 
+        }
+
+         echo json_encode('true');
+
     }
 
 

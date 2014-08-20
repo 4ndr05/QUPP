@@ -285,6 +285,59 @@ class Admin_model extends CI_Model
         return $this->db->get($this->tablas['mensajesadmin'])->result();
     }
 
+    function getMensaje($mensajeID)
+    {
+        $this->db->where('mensajeID',$mensajeID);
+        return $this->db->get($this->tablas['mensajesadmin'])->row();
+    }
+
+    function topMensaje(){
+        $query = $this->db->query("select mensajeID
+                                from mensajesadmin
+                                limit 1");
+         if ($query->num_rows() == 1){
+            $query = $query->row();
+            return $query->mensajeID;
+         } else {
+            return null;
+         }
+            
+        
+    }
+
+    function getUsers(){
+        $this->db->where('recepcionCorreo',1);
+        $this->db->where('status',1);
+        $this->db->order_by('nombre', 'asc');
+        $query = $this->db->get('usuario');
+        if ($query->num_rows() >= 1)
+            return $query->result();
+        return null;
+    }
+
+    function topMensajeUsuario($usuarioID){
+        $query = $this->db->query("select mensajeID
+                                from mensajes
+                                where idUsuario = ".$usuarioID."
+                                limit 1");
+         if ($query->num_rows() == 1){
+            $query = $query->row();
+            return $query->mensajeID;
+         } else {
+            return null;
+         }
+            
+        
+    }
+
+    function getMensajesUsuario($usuarioID)
+    {
+        $this->db->where('idUsuario',$usuarioID);
+        return $this->db->get($this->tablas['mensajes'])->result();
+    }
+
+
+
 
 }
 
