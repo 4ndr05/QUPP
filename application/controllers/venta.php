@@ -480,9 +480,10 @@ class Venta extends CI_Controller {
         $this->email->initialize($config);
 
         $this->email->from($this->session->userdata('correo'), $this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido'));
-        $this->email->to($directorio->correo);
 
-        $this->email->subject($this->input->post('asunto_contacto'));
+        $this->email->to($this->config->item('mail_system'));
+
+        $this->email->subject('Denuncia de anuncio');
 
         $msj = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
         <html xmlns="http://www.w3.org/1999/xhtml">
@@ -496,7 +497,7 @@ class Venta extends CI_Controller {
             <table width="647" align="center">
                 <tr>
                     <td width="231" rowspan="2">
-                        <img src="http://quierounperro.com/quiero_un_perro/images/logo_mail.jpg"/>
+                        <img src="'.base_url().'images/logo_mail.jpg"/>
                     </td>
                     <td height="48" colspan="6" style="font-family: \'titulos\'; font-size:50px; color:#72A937; margin:0px; padding:0px; margin-bottom:-10px;">
                         QUP Contacto

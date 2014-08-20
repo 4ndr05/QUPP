@@ -1,10 +1,17 @@
 <?php
+
+/**
+ * TODO ELEMENTOS DE CONFIGURACION GLOBAL
+ */
+
+$config['mail_system'] = 'contacto@quierounperro.com';
+
 /*
  * 
  * TABLAS NECESARIAS
  * 
  */
- $config['tablas']['usuario'] = 'usuario';
+$config['tablas']['usuario'] = 'usuario';
  $config['tablas']['usuariodato'] = 'usuariodato';
  $config['tablas']['usuariodetalle'] = 'usuariodetalle';
  $config['tablas']['ataque'] = 'ataque'; 

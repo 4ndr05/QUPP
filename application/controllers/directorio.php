@@ -6,12 +6,15 @@ if (!defined('BASEPATH')) {
 
 class Directorio extends CI_Controller {
 
+    static $seccion = 4;
+
     public function __construct() {
         parent::__construct();
 
         $this->load->model('defaultdata_model');
         $this->load->model('admin_model');
         $this->load->model('usuario_model');
+        $this->load->model('venta_model');
         $this->load->helper(array('form', 'url'));
         $this->load->library('googlemaps');
         $this->load->library("UUID", true);
@@ -44,7 +47,7 @@ class Directorio extends CI_Controller {
         $data['paquetes'] = $this->defaultdata_model->getPaquetes();
         $data['razas'] = $this->defaultdata_model->getRazas();
         $data['giros'] = $this->defaultdata_model->getGiros();
-        $data['seccion'] = 4;
+        $data['seccion'] = self::$seccion;
         $data['directorios'] = $this->usuario_model->getDirectorios(2);
         $data['user'] = $this->usuario_model->myInfo($this->session->userdata('idUsuario'));
         $data['planes'] = $this->defaultdata_model->getPaquetesCupon(2);

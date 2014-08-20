@@ -17,8 +17,8 @@ class datatest extends CI_Controller {
         $data['usuariodato'] = array();
         $data['ubicacionusuario'] = array();
 
-        $rows = 601;
-        for ($i = $rows; $i <= $rows + 30; $i++) {
+        $rows = 801;
+        for ($i = $rows; $i <= $rows + 300; $i++) {
             $data['usuario'][$i] = array(
                 'idUsuario' => $i,
                 'apellido' => 'apellido ' . $i,
@@ -100,13 +100,13 @@ class datatest extends CI_Controller {
         $data['videos'] = array();
 
 
-        $rows = 201;
+        $rows = 801;
 
         $obj_date = new DateTime(date('Y-m-d H:i:s'));
         $obj_date_end = new DateTime($obj_date->format('Y-m-d H:i:s'));
         $obj_date_end->add(new DateInterval('P1M'));
 
-        for ($i = $rows; $i < $rows + 30; $i++) {
+        for ($i = $rows; $i < $rows + 300; $i++) {
             $paq = rand(1,3);
             
             $data['serviciocontratado'][$i] = array(
@@ -124,7 +124,7 @@ class datatest extends CI_Controller {
 
             $data['publicaciones'][$i] = array(
                 'publicacionID' => $i,
-                'seccion' => random_element(array(1,3,6,7,4)),
+                'seccion' => random_element(array(1,3,6,7,4,2)),
                 'titulo' => 'Titulo ' . $i,
                 'vigente' => 1,
                 'fechaCreacion' => $obj_date->format('Y-m-d H:i:s'),
