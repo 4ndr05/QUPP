@@ -43,10 +43,10 @@
         <img src="<?php echo base_url() ?>images/pero_paso_uno.png" class="perro_paso_uno_mini"/>
 
         <div class="radios_secciones_mini">
-            <input type="radio" id="radio4" name="seccion" value="3" class="css-checkbox"/>
+            <input type="radio" id="radio4" name="seccion" value="3" class="css-checkbox" <?=($this->session->userdata('tipoUsuario') == 3) ? 'disabled="disabled" title="Solo puede publicar en Adopción o Perros Perdidos"' : ''?>/>
             <label for="radio4" class="css-label radGroup2">Cruza</label>
             <br/>
-            <input type="radio" id="radio5" name="seccion" value="2" class="css-checkbox"/>
+            <input type="radio" id="radio5" name="seccion" value="2" class="css-checkbox" <?=($this->session->userdata('tipoUsuario') == 3) ? 'disabled="disabled" title="Solo puede publicar en Adopción o Perros Perdidos"' : ''?>/>
             <label for="radio5" class="css-label radGroup2">Venta</label>
             <br/>
             <input type="radio" id="radio6" name="seccion" value="6" class="css-checkbox"/>
@@ -281,7 +281,7 @@
         <input type="radio" style="margin-left:100px;" data-vigencia="<?php echo $paquetes[2]->vigencia ?>"
                data-np="<?php echo $paquetes[2]->nombrePaquete ?>" data-precio="<?php echo $paquetes[2]->precio ?>"
                name="paquete"
-               value="<?php echo $paquetes[2]->paqueteID ?>" id="RadioGroup1_2"/>
+               value="<?php echo $paquetes[2]->paqueteID ?>" id="RadioGroup1_2" <?=($this->session->userdata('tipoUsuario') == 3) ? 'disabled="disabled"' : ''?>/>
     </label>
 </div>
 </div>
@@ -356,7 +356,7 @@
     <input name="caracteresN" type="text" id="caracteresN" size="3" readonly="readonly" />
     </p>
     <br/>
-	<div id="links_videos">
+    <div id="links_videos">
     <p class="margen_15_left_mini" id="videoY">
     <input type="hidden" name="url_video[]" id="url_video" value="0" />
         Link de video <input type="text" name="url_video[]" id="url_video[]" size="98" class="preview one validate[custom[url]]"/><img
@@ -370,9 +370,9 @@
 <script>
 $(document).ready(function()
 {
-	
-	$("#fileuploader").uploadFile({
-		
+    
+    $("#fileuploader").uploadFile({
+        
                 url: "<?php echo base_url('venta/upload_file') ?>",
                 allowedTypes: "png,jpg,jpeg",
                 fileName: "file_form",
@@ -391,7 +391,7 @@ $(document).ready(function()
                         //$('#name_logo_form').prop('src', data.url_logo);
                         $('#logo_image').fadeIn();
                         $('<img id="logo_image" class="span6 thumbnail" src="'+data.url_logo+'"/><input name="name_logo_form[]" value="'+data.orig_name+'" type="hidden"/>').appendTo('.row-fluid');
-						<!--$('<img src="'+data.url_logo+'" width="294" height="200"/>').appendTo('.picse_mini');-->
+                        <!--$('<img src="'+data.url_logo+'" width="294" height="200"/>').appendTo('.picse_mini');-->
                     } else {
                         $('#error_logo').fadeIn().text(data.error);
                     }
@@ -401,7 +401,7 @@ $(document).ready(function()
 </script>
     <p class="margen_15_left_mini contenedorFotos">
     <label>Seleccione las imágenes para su anuncio</label>
-		 <div id="fileuploader" >Seleccionar Imagenes</div>
+         <div id="fileuploader" >Seleccionar Imagenes</div>
          
                             <div class="row-fluid">
                                 <span id="error_logo" style="display:none;" class="alert alert-error"></span>
@@ -414,9 +414,9 @@ $(document).ready(function()
     <!--imagenes-->
     <!--<script>
     jQuery(document).ready(function(){
-    	$('#images').submit(function() {
- 			 var files = $('#files');
-			 $.ajax({
+        $('#images').submit(function() {
+             var files = $('#files');
+             $.ajax({
                     url:'<?php echo base_url('venta/upload_file') ?>',
                     type:'post',
                     dataType: 'JSON',
@@ -425,10 +425,10 @@ $(document).ready(function()
                        
                     }
             });     
-   	 	});
+        });
     });
     </script>-->
- 	<!--<form action="#" method="post" enctype="multipart/form-data" id="images">
+    <!--<form action="#" method="post" enctype="multipart/form-data" id="images">
   -->   <!--<input type="file" id="files" name="files[]" multiple />-->
      <!--<input type="submit" value="Agregar" />-->
 <!--    </form>-->
@@ -620,7 +620,7 @@ COSTO
 <p>SUBTOTAL:</p>
 </td>
 <td>
-<p class="totales"> $<label id="nprecio" class="nprecio"></label> </p>
+<p class="totales"> $<label id="subtotal" class="nprecio"></label> </p>
 </td>
 </tr>
 <tr>
@@ -632,20 +632,20 @@ COSTO
 
 <?php if($cupones != null):
 $c = 0;
-					foreach($cupones as $cupon):
-					$c++;
-					if($cupon->tipoCupon == 2):
-					?>
+                    foreach($cupones as $cupon):
+                    $c++;
+                    if($cupon->tipoCupon == 2):
+                    ?>
              <input type="hidden" name="cuponUsado" id="cuponUsado" value="0"/>     
             <input type="radio" name="radiog_dark" id="radio_pago<?=$c?>" class="css-checkbox cupon" value="<?=$cupon->valor;?>" data-rel="<?=$cupon->cuponID;?>"/>
 <label for="radio_pago<?=$c?>" class="css-label radGroup<?=$c?>"><?=$cupon->valor;?>% de descuento</label>
-			
-			<?php endif;
-				endforeach; ?>
-			<input type="radio" name="radiog_dark" id="radio_pago<?=$c?>" class="css-checkbox cupon" checked="checked" value="0" data-rel="0>"><label for="radio_pago<?=$c?>" class="css-label radGroup2"> No usar cupones</label>
-			<?php else:
-			echo 'No hay cupones disponibles';
-			endif;	?>
+            
+            <?php endif;
+                endforeach; ?>
+            <input type="radio" name="radiog_dark" id="radio_pago<?=$c?>" class="css-checkbox cupon" checked="checked" value="0" data-rel="0>"><label for="radio_pago<?=$c?>" class="css-label radGroup2"> No usar cupones</label>
+            <?php else:
+            echo 'No hay cupones disponibles';
+            endif;  ?>
 
 
 </div>
@@ -656,12 +656,21 @@ $c = 0;
 <p class="totales">- $<label id="descuentoCupon">00.00</label> </p>
 </td>
 </tr>
+<tr> 
+<td colspan="2">
+<p>IVA:</p>
+</td>
+<td>
+<p class="iva"> $<label id="niva" class="niva"></label> </p>
+</td>
+</tr>
 <tr>
 <th colspan="2">
 TOTAL
 </th>
 <th>
 <p class="totales" style="color: #FFF;">$<label id="totalConDescuento" class="nprecio"></label></p>
+<input type="hidden" name="iva" id="iva" value=""/>
 <input type="hidden" name="total" id="total" value=""/>
 </th>
 </tr>
@@ -708,7 +717,7 @@ TOTAL
 <div id="btn_sig" class="siguientePaso">
     <div id="msj_paso" class="msj_paso"></div>
     <ul class="morado_mini" style="display: inline-block;">
-        <li class="sig_paso">Continuar</li>
+        <li class="sig_paso" onclick="$('#p_form').validationEngine('validate')">Continuar</li>
     </ul>
 </div>
 
@@ -722,14 +731,14 @@ TOTAL
 
         $('#btn_sig .sig_paso').on('click', function () {
             var sig_paso = $('.paso_show').next('.paso');
-			console.log($('.paso_show').next('.paso').prop('id'));
-			var num_paso = $('.paso_show').next('.paso').prop('id');
-			if(num_paso == 'paso_cinco'){
-				$('.siguientePaso').hide();
-			}
-			if(num_paso == 'paso_tres'){
-			$('.msj_paso').html("*Debe completar todos los campos requeridos");
-			}
+            console.log($('.paso_show').next('.paso').prop('id'));
+            var num_paso = $('.paso_show').next('.paso').prop('id');
+            if(num_paso == 'paso_cinco'){
+                $('.siguientePaso').hide();
+            }
+            if(num_paso == 'paso_tres'){
+            $('.msj_paso').html("*Debe completar todos los campos requeridos");
+            }
             if (revision_step($('.paso_show'))) {
                 $('.paso_show').removeClass('paso_show').hide();
                 sig_paso.show().addClass('paso_show');
@@ -799,52 +808,54 @@ TOTAL
             $('#paso_tres [name=vigencia_texto]').val(paquete_val.vigencia);
             $('#paso_tres [name=cantFotos]').val(paquete_val.cantFotos);
             $('#paso_tres [name=caracteresN]').val(paquete_val.caracteres);
-			
-			if(paquete_val.id == 1){
-				var imagen = '<img src="<?php echo base_url() ?>images/pago_lite.png"/>';			}
-			
-			if(paquete_val.id == 2){
-				var imagen = '<img src="<?php echo base_url() ?>images/pago_regular.png"/>';			}
-				
-			if(paquete_val.id == 3){
-				var imagen = '<img src="<?php echo base_url() ?>images/pago_premium.png"/>';			}
-			
+            
+            if(paquete_val.id == 1){
+                var imagen = '<img src="<?php echo base_url() ?>images/pago_lite.png"/>';           }
+            
+            if(paquete_val.id == 2){
+                var imagen = '<img src="<?php echo base_url() ?>images/pago_regular.png"/>';            }
+                
+            if(paquete_val.id == 3){
+                var imagen = '<img src="<?php echo base_url() ?>images/pago_premium.png"/>';            }
+            
             $('#nimagenpaquete').html(imagen);
-			$('#nvigencia').html(paquete_val.vigencia);
+            $('#nvigencia').html(paquete_val.vigencia);
             $('#nfotos').html(paquete_val.cantFotos);
-			$('#nvideos').html(paquete_val.videos);
-			$('#ncupones').html(paquete_val.cupones);
+            $('#nvideos').html(paquete_val.videos);
+            $('#ncupones').html(paquete_val.cupones);
             $('#ncaracteres').html(paquete_val.caracteres);
-			$('#nprecio').html(paquete_val.precio);
-			$('.nprecio').html(paquete_val.precio);
-			//$('#nvideos').val(paquete_val.videos);
-			if(paquete_val.cantFotos == 0){
-				$('.contenedorFotos').hide();			
-			}
-			var cantidadVideos = paquete_val.videos;
-			console.log(cantidadVideos+' cantidad de videos')
-			if(cantidadVideos == 0){
-				$('#links_videos').hide();
-			}
-			
-			
-			var contador = 1; 
-			$(".addVid").click(function(e){
-        		e.preventDefault(); 
-				if(contador < cantidadVideos){
-				console.log(contador,cantidadVideos);
-				
-		$('<p id="video"> Link de video <input type="text" name="url_video[]" id="url_video" class="url_video" size="98" class="preview"/><img src="<?php echo base_url() ?>images/logo_youtube.png"/> <a href="#" id="eliminar" class="eliminar" style="font-size:9px;">Eliminar</a><br /></p>').appendTo('#videoY');
-				}
-		contador++;
+            $('#subtotal').html(paquete_val.precio - ( paquete_val.precio * .17));
+			var iva = paquete_val.precio * .17;			
+			$('#niva').html(iva.toFixed(2));
+            $('#totalConDescuento').html(paquete_val.precio);
+            $('#nprecio').html(paquete_val.precio);
+            if(paquete_val.cantFotos == 0){
+                $('.contenedorFotos').hide();           
+            }
+            var cantidadVideos = paquete_val.videos;
+            console.log(cantidadVideos+' cantidad de videos')
+            if(cantidadVideos == 0){
+                $('#links_videos').hide();
+            }
+            
+            
+            var contador = 1; 
+            $(".addVid").click(function(e){
+                e.preventDefault(); 
+                if(contador < cantidadVideos){
+                console.log(contador,cantidadVideos);
+                
+        $('<p id="video"> Link de video <input type="text" name="url_video[]" id="url_video" class="url_video" size="98" class="preview"/><img src="<?php echo base_url() ?>images/logo_youtube.png"/> <a href="#" id="eliminar" class="eliminar" style="font-size:9px;">Eliminar</a><br /></p>').appendTo('#videoY');
+                }
+        contador++;
         
-   	 	});
-		$("body").on("click",".eliminar", function(e){
+        });
+        $("body").on("click",".eliminar", function(e){
             $(this).parent('p').remove(); 
-			contador--;
+            contador--;
         return false;
-   		 });
-			console.log(paquete_val.videos);
+         });
+            console.log(paquete_val.videos);
             $('#contenedor_publicar_anuncio').fadeIn();
             <?php endif;?>
         });
@@ -874,46 +885,52 @@ TOTAL
         $('#paso_uno [name=seccion]').on('change', function() {
             $('#paso_tres [name=seccion_texto]').val($(this).next().text());
         });
-		
+        
         $('#cerrarPublicacion').on('click', function() {
             oculta('contenedor_publicar_anuncio');
-			window.location.href="<?=base_url()?>";
+            window.location.href="<?=base_url()?>";
         });
-		
+        
         $("body").on("click",".del", function(e){
             $(this).parent('span').remove(); 
         return false;
     });
-	
-		$('.cupon').on('click', function () {
-			var valor = $(this).val();   
-			var cuponID = $(this).attr('data-rel');
-            var paquete_val = $(this).data('paquete');
-            var precio = $('#nprecio').html();
-            console.log(precio);
-            var descuentoCupon = (precio * (valor/100));
-            var total = precio - (descuentoCupon);
+    
+        $('.cupon').on('click', function () {
+            var valor = $(this).val();   
+            var cuponID = $(this).attr('data-rel');
+            var paquete_val = $('#nprecio').html();
+            var precio = $('#subtotal').html();
+			console.log(paquete_val+'***********************');
+			var iva = precio * .17;
+			precio = precio - iva;
+            console.log(valor+'*-------********');
+            var descuentoCupon = (paquete_val * (valor/100));
+			
+            var total = paquete_val - (descuentoCupon);
+			
             console.log(total);
-            $('#descuentoCupon').html(descuentoCupon);
+            $('#descuentoCupon').html(descuentoCupon.toFixed(2));
             $('#totalConDescuento').html(total);
-			$('#total').val(total);
-			$('#cuponUsado').val(cuponID);
-			
+            $('#total').val(total);
+			$('#iva').val(iva);
+            $('#cuponUsado').val(cuponID);
+            
         });
-		
-		$('#paso_uno [name=seccion]').on('click', function () {
-			var valor = $(this).val();   
-			if(valor == 6 || valor == 7){
-				$('#precio').val('0.00');
-				$('#precio').attr('disabled', 'disabled');
-			} else {
-				$('#precio').removeAttr('disabled');
-			}
-			console.log(valor+'seccionnnnnnnn')
-			
+        
+        $('#paso_uno [name=seccion]').on('click', function () {
+            var valor = $(this).val();   
+            if(valor == 6 || valor == 7){
+                $('#precio').val('0.00');
+                $('#precio').attr('disabled', 'disabled');
+            } else {
+                $('#precio').removeAttr('disabled');
+            }
+            console.log(valor+'seccionnnnnnnn')
+            
         });
 
-		 $('#p_form').submit(function(e){
+         $('#p_form').submit(function(e){
                 e.preventDefault();
                 var form = $(this);
                 $.ajax({
@@ -922,13 +939,13 @@ TOTAL
                     dataType: 'html',
                     data: form.serialize(),
                     success: function(data){
-						
+                        
                         $('#iframe').append(data);
                     }
                 });
             });
         
-	
+    
 
     });
 

@@ -19,7 +19,7 @@ class Perfil_model extends CI_Model{
 	function infoFiscal($idUsuario){
 		
 		$query = $this->db-> query('SELECT b.razonSocial, b.rfc, b.calle, b.noExterior, b.cp, b.municipio, b.estadoID, b.idPais
-from usuario a INNER JOIN usuarioDato b ON a.idUsuario = b.idUsuario 
+from usuario a INNER JOIN usuariodato b ON a.idUsuario = b.idUsuario 
 where a.idUsuario ='.$idUsuario);
 		if ($query->num_rows() == 1){
 			return $query->row();
@@ -31,7 +31,7 @@ where a.idUsuario ='.$idUsuario);
 
 	function infoDetalleN($idUsuario){
 		$query = $this->db-> query('SELECT b.nombreNegocio, b.nombreContacto, b.telefono, b.calle, b.numero, b.colonia, b.municipioC, b.idEstado, b.cp, b.correo, b.paginaWeb, b.Logo, b.descripcion, d.latitud, d.longitud
-FROM usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUsuario AND b.idUsuario = d.idUsuarioDato AND a.idUsuario ='.$idUsuario);
+FROM usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUsuario AND b.idUsuario = d.idusuariodato AND a.idUsuario ='.$idUsuario);
 		if ($query->num_rows() == 1){
 			return $query->row();
 		} else {

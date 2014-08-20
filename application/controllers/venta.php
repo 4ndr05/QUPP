@@ -307,6 +307,8 @@ class Venta extends CI_Controller {
         $compraDetalle = $this->defaultdata_model->insertItem('compradetalle', $compradetalle);
 
         if($precio_total <= 00.00){
+        $this->defaultdata_model->updateItem('compraID', $compraID, $data = array('pagado' => 1), 'compra');
+        $this->defaultdata_model->updateItem('servicioID', $servicioID, $data = array('pagado' => 1), 'serviciocontratado');
            echo '<div class="registro_normal"> <!-- Contenedor morado registro -->
 
                 <div class="titulo_registro">GRACIAS</div>
@@ -323,6 +325,7 @@ class Venta extends CI_Controller {
         
                 </div>
             </div>';
+
         } else {
            $preference_data = array(
             "items" => array(
