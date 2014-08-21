@@ -25,6 +25,19 @@ function animar_scroll(ubicacion){
             $('#publicar_anuncio').animate({scrollTop: posicion}, 500);
             return;
 	}
+
+  function contener_images() {
+    $('#slideshow_publicar_anuncio_previo').before('<ul id="nav_anuncio_previo">').cycle({
+    fx:      'scrollRight', 
+    next:   '#right_previo', 
+    timeout:  0, 
+    easing:  'easeInOutBack',
+        pager:  '#nav_anuncio_previo',
+        pagerAnchorBuilder: function(idx, slide) {
+            return '<li><a href="#"><img src="' + slide.src + '" width="61" height="44" /></a></li>';
+        }
+    });
+}
 	
 $(function() {
     $('#slideshow_publicar_anuncio_previo').before('<ul id="nav_anuncio_previo">').cycle({

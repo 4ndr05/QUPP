@@ -15,7 +15,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= '';
+$config['base_url']	= '/';
 
 /*
 |--------------------------------------------------------------------------
@@ -360,6 +360,14 @@ $config['rewrite_short_tags'] = FALSE;
 |
 */
 $config['proxy_ips'] = '';
+
+
+
+/**
+ * TODO ELEMENTOS DE CONFIGURACION GLOBAL DE QUP
+ */
+
+$config['mail_system'] = 'contacto@quierounperro.com';
 
 
 /* End of file config.php */

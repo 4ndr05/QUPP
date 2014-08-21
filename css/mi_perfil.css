@@ -4,7 +4,7 @@
 	margin: 0px auto;
 	}
 
-.menu_perfil li{
+.menu_perfil li {
 	width:132px;
 	height:49px;
 	background-image:url(../images/boton_perfil.png);
@@ -13,12 +13,18 @@
 	color:#FFFFFF;
 	font-size:17px;
 	}
-	
-
-.menu_perfil li:hover{
+.menu_perfil li a{
+	color:#FFFFFF;
+	text-decoration:none;
+	}
+.menu_perfil li:hover a{
+	color:#3E3E40;
+	}
+.menu_perfil li:hover {
 	background-image:url(../images/boton_perfil_select.png);
 	color:#3E3E40;
 	cursor:pointer;}
+
 .icono_seleccion{
 	width:132px;
 	height:49px;
@@ -28,6 +34,10 @@
 	margin-left:-1px;
 	color:#3E3E40 !important;
 	font-size:17px;
+	}
+.icono_seleccion a{
+	color:#3E3E40 !important;
+	text-decoration:none;
 	}
 .contenedor_bienvenido{
      width: 794px;

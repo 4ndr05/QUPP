@@ -142,21 +142,7 @@
         oculta('contenedor_registro');
         <?php endif; ?>
 
-        $("input").on("click", function () {
-            var user = $("input:checked").val();
-            console.log(user);
-            if (user == 2) {
-
-                $('#map-canvas').show();
-            }
-            if (user == 3) {
-
-                $('#map-canvas').show();
-            }
-        });
-
-
-    });
+      
 </script>
  <!-- /////   Contenedor publicidad -->
  <!-- -->
@@ -264,7 +250,7 @@ Enviar
   </div>
 
 
-<!--        CONTENEDOR LOGIN                            -->
+<!--		CONTENEDOR LOGIN							-->
 <!-- ------------------------------------------------------ -->
 <form action="<?= base_url() ?>sesion/login/principal/principal" id="login" class="validate" method="post">
     <div class="contenedor_login" id="contenedor_login" style="display:none;">
@@ -272,9 +258,9 @@ Enviar
                                           onclick="oculta('contenedor_login');"/></div>
 
         <div class="registro_normal">
-            
+			
             <div class="titulo_registro"> INGRESAR</div>
-            <div id="ingreso_normal">
+			<div id="ingreso_normal">
             <div class="texto_inputs">
                 <p> Usuario:</p>
 
@@ -294,18 +280,18 @@ Enviar
             </br>
             <ul class="morado_reg">
                 <li>
-                    <input type="submit"/>
+                    <input type="submit" class="el_submit"/>
                 </li>
             </ul>
-            </div>
+			</div>
 </form>
 
             
             <div id="envio_con" class="envio_con">
             <form action="<?= base_url() ?>recuperarcontrasena/sendLink" id="recuperarcontrasena" method="post">
-                </br>
+				</br>
                 <div class="titulo_registro"></div>
-                <div class="texto_inputs">
+				<div class="texto_inputs">
                 <p> Ingresa tu correo:</p>
                 </div>
 
@@ -314,19 +300,19 @@ Enviar
             </div>
 
                 
-                <ul class="morado_reg">
+				<ul class="morado_reg">
                 <li>
-                   <input type="submit" value="Recuperar contrase&ntilde;a"/>
+                   <input type="submit" value="Recuperar" class="el_submit"/>
                 </li>
             </ul>
                 
             </form>
-            </br>
+			</br>
             </div>
-            
-            <div id="confirmacionCambio" style="display:none;">
-             Se ha enviado contraseña al correo electronico indicado.
-            </div>
+			
+			<div id="confirmacionCambio" style="display:none; padding:20px;">
+			 Se ha enviado contraseña al correo electronico indicado.
+			</div>
             
 
         </div>
@@ -334,10 +320,10 @@ Enviar
     </div>
 <!--</form>-->
 <!-- ------------------------------------------------------ -->
-<!--        FIN    CONTENEDOR LOGIN                         -->
+<!--		FIN    CONTENEDOR LOGIN							-->
 
 
-<!--        CONTENEDOR REGISTRO                         -->
+<!--		CONTENEDOR REGISTRO							-->
 <!-- ------------------------------------------------------ -->
 <form action="<?php echo base_url() ?>registro/registrar" id="registerNow" class="validate" method="get" autocomplete="off"
       enctype="multipart/form-data">
@@ -400,7 +386,7 @@ Enviar
             promociones </label></p>
 
 
-    <p><input name="terminosCondiciones" type="checkbox" value="1" checked="checked" class="validate[required]"/> <label> He leído y acepto los <a href="<?php echo base_url()?>content/terminos_y_condiciones.pdf" target="_blank" class="link_blanco">Términos y Condiciones</a> y <a href="<?php echo base_url()?>content/politica_de_privacidad.pdf" target="_blank" class="link_blanco">la Política de Privacidad</a> *  </label></p>
+    <p><input name="terminosCondiciones" type="checkbox" value="1" class="validate[required]"/> <label> He leído y acepto los <a href="<?php echo base_url()?>content/terminos_y_condiciones.pdf" target="_blank" class="link_blanco">Términos y Condiciones</a> y <a href="<?php echo base_url()?>content/politica_de_privacidad.pdf" target="_blank" class="link_blanco">la Política de Privacidad</a> *  </label></p>
 
 
     <font class="asterisco">Los datos marcados con un astrisco (*) son obligatorios </font>
@@ -864,11 +850,11 @@ Enviar
 <!-- Fin contenedor negro registro -->
 
 </form>
-<!--        FIN CONTENEDOR REGISTRO                         -->
+<!--		FIN CONTENEDOR REGISTRO							-->
 <!-- ------------------------------------------------------ -->
 
 
-<!--        EXITO REGISTRO                          -->
+<!--		EXITO REGISTRO							-->
 <!-- ------------------------------------------------------ -->
 <div class="contenedor_registro" id="contenedor_correcto" style="display:none;"> <!-- Contenedor negro reistro-->
     <div class="cerrar_registro"><img src="<?php echo base_url() ?>images/cerrar.png"
@@ -895,11 +881,11 @@ Enviar
 
 </div>
 
-<!--        FIN EXITO REGISTRO                      -->
+<!--		FIN EXITO REGISTRO						-->
 <!-- ------------------------------------------------------ -->
 
 
-<!--        ERROR REGISTRO                          -->
+<!--		ERROR REGISTRO							-->
 <!-- ------------------------------------------------------ -->
 
 <div class="contenedor_registro" id="contenedor_error" style="display:none;"> <!-- Contenedor negro reistro-->
@@ -927,7 +913,7 @@ Enviar
 
 
 
-<!--        FIN ERROR REGISTRO                          -->
+<!--		FIN ERROR REGISTRO							-->
 <!-- ------------------------------------------------------ -->
 
 
@@ -944,7 +930,7 @@ Enviar
 
 
     <ul class="iconos_estatus">
-        <li >
+        <li   <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>  onclick="window.location='<?= base_url() ?>carrito';" <?php else: ?>  <?php endif; ?>>
 
             <img id="horizontal_compras_mini"
                  onmouseover="mostrar_icono('horizontal_compras'); ocultar_icono('horizontal_compras_mini');"
@@ -953,7 +939,7 @@ Enviar
             <img class="iconos_flotantes2"
                  onmouseout="mostrar_icono('horizontal_compras_mini'); ocultar_icono('horizontal_compras');"
                  id="horizontal_compras" src="<?php echo base_url() ?>images/compras_horizontal.png"
-                 onclick="window.location='<?= base_url() ?>carrito';"/>
+               />
 
         </li>
         <li <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
@@ -987,9 +973,10 @@ Enviar
 
 <div id="espacio_izquierda" class="seccion_izquierda">
     <ul class="iconos" id="iconos_grandes">
-        <li onclick="window.location='<?= base_url() ?>carrito';">
+        <li <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>  onclick="window.location='<?= base_url() ?>carrito';" <?php else: ?>  <?php endif; ?>>
             <div class="indicadores"> 
                 <?php echo $carritoT ?>
+                
             </div> 
 
             <img src="<?php echo base_url() ?>images/compras.png"/></li>
@@ -1031,15 +1018,6 @@ Enviar
                         <li data-target="#artCarousel" data-slide-to="2"></li>
                     </ol>
                     <div class="carousel-inner">
-                        <div class="item active"><img src="<?php echo base_url() ?>images/900x500_1.jpg" alt="Model 1">
-
-                            <div class="carousel-caption">
-                                <p>En nuestra seccion de Cruza encuentra la pareja perfecta para tu perrito.</p>
-                            </div>
-                        </div>
-
-
-
 
                         <?php $banner = $this->session->userdata('banner'); ?>
             <?php if (is_logged() && ($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3)) {
@@ -1095,16 +1073,16 @@ Enviar
         <div id="fb-root"></div>
         <div id="fb-root"></div>
         <script>
-           window.fbAsyncInit = function() {
+		   window.fbAsyncInit = function() {
         FB.init({
           appId      : '343695012453981',
           xfbml      : true,
           version    : 'v2.0'
         });
       };
-        
-        
-         (function(d, s, id){
+		
+		
+		 (function(d, s, id){
          var js, fjs = d.getElementsByTagName(s)[0];
          if (d.getElementById(id)) {return;}
          js = d.createElement(s); js.id = id;

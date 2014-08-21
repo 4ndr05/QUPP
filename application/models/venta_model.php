@@ -114,6 +114,16 @@ class Venta_model extends CI_Model {
         return null;
     }
 
+        function getFotos($id_anuncio){
+        $this->db->from("publicaciones p");
+        $this->db->join("fotospublicacion fp", "p.publicacionID=fp.publicacionID");
+        $this->db->where("p.publicacionID", $id_anuncio);
+         $resultSet = $this->db->get();
+       // $this->output->enable_profiler(TRUE);
+//var_dump($resultSet);
+        return array('data' => $resultSet->result(), 'count' => $resultSet->num_rows);
+        }
+
     function getPublicaciones($raza = null, $genero = null, $estado = null, $precio = null, $palabra_clave = null, $id_anuncio = null, $seccion = null) {
         /*
          * 
@@ -130,7 +140,10 @@ class Venta_model extends CI_Model {
         $this->db->join("seccion se", "p.seccion=se.seccionID");
         $this->db->join("usuario u", "sc.idUsuario=u.idUsuario");
         $this->db->join("estado es", "p.estadoID=es.estadoID");
-        $this->db->join("fotospublicacion fp", "p.publicacionID=fp.publicacionID");
+        /**
+        Se comenta para que no se traiga las fotos pues, estas se extraen de forma independiente.
+        **/
+        //$this->db->join("fotospublicacion fp", "p.publicacionID=fp.publicacionID");
         $this->db->join("videos vi", "p.publicacionID=vi.publicacionID");
         
         $this->db->where("p.aprobada", 1);
