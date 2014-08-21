@@ -322,10 +322,13 @@ class Venta extends CI_Controller {
                     </br></br>
                     <div> Tu anuncio ha pasado a la sección de aprobación, pronto recibirás un correo con la confirmación de la publicación.</div>
                     <div id="confirm">
-                    </div>
+              </div>
         
                 </div>
-            </div>';
+            </div>
+
+            <a href="'.base_url().'principal/miPerfil" style="text-decoration:none; float:right;">Cerrar Proceso</a>
+                  ';
 
         } else {
            $preference_data = array(
@@ -344,9 +347,9 @@ class Venta extends CI_Controller {
                 'date_created' => date('Y-m-d')
             ),
             "back_urls" => array(
-                "success" => base_url().'venta/updateCompra/'.$compraID.'/1/'.$servicioID,
-                "pending" => base_url().'venta/updateCompra/'.$compraID.'/1/'.$servicioID,
-                "failure" => base_url().'venta/updateCompra/'.$compraID.'/0/'.$servicioID
+                "success" => base_url().'venta/updateCompra/'.$compraID.'/1/'.$servicioID.'/'.$publicacionID,
+                "pending" => base_url().'venta/updateCompra/'.$compraID.'/1/'.$servicioID.'/'.$publicacionID,
+                "failure" => base_url().'venta/updateCompra/'.$compraID.'/0/'.$servicioID.'/'.$publicacionID
             )
         );
 
@@ -451,10 +454,19 @@ class Venta extends CI_Controller {
         }
     }
 
-    function updateCompra($compraID,$estado,$servicioID){
-        $this->defaultdata_model->updateItem('compraID', $compraID, $data = array('pagado' => $estado), 'compra');
-        $this->defaultdata_model->updateItem('servicioID', $servicioID, $data = array('pagado' => $estado), 'serviciocontratado');
-        redirect('principal/miPerfil');
+    function updateCompra($compraID,$estado,$servicioID,$publicacionID){
+
+         if($estado == 1){
+          $this->defaultdata_model->updateItem('compraID', $compraID, $data = array('pagado' => $estado), 'compra');
+          $this->defaultdata_model->updateItem('servicioID', $servicioID, $data = array('pagado' => $estado), 'serviciocontratado');
+          $data = array('estatusCompra' => 1);
+        } else {
+          $delAnuncio = $this->admin_model->deleteItem('compraID', $compraID, 'compras');
+          $delPublicacion = $this->admin_model->deleteItem('publicacionID', $publicacionID, 'publicaciones');
+          $delPublicacion = $this->admin_model->deleteItem('servicioID', $servicioID, 'serviciocontratado');
+          $data = array('estatusCompra' => 0);
+        }
+        $this->load->view('partial/proceso_exitoso_view',$data);
     }
 
     function add_favorite() {
@@ -562,6 +574,11 @@ class Venta extends CI_Controller {
             echo '<div class="alert alert-success">Se ha enviado correctamente el correo electrónico.</div>';
         }
 
+    }
+
+
+    function meh(){
+        $this->load->view('partial/proceso_exitoso_view'); 
     }
 
 }

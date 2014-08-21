@@ -391,7 +391,7 @@ $(document).ready(function()
                         //$('#name_logo_form').prop('src', data.url_logo);
                         $('#logo_image').fadeIn();
                         $('<img id="logo_image" class="span6 thumbnail" src="'+data.url_logo+'"/><input name="name_logo_form[]" value="'+data.orig_name+'" type="hidden"/>').appendTo('.row-fluid');
-                        <!--$('<img src="'+data.url_logo+'" width="294" height="200"/>').appendTo('.picse_mini');-->
+                        $('<img src="'+data.url_logo+'" width="294" height="200"/>').appendTo('.picse_mini');
                     } else {
                         $('#error_logo').fadeIn().text(data.error);
                     }
@@ -460,10 +460,6 @@ $(document).ready(function()
     <div class="contenedor_galeria_mini">
         <div id="slideshow_publicar_anuncio" class="picse_mini">
         
-           <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>
-            <img src="<?php echo base_url() ?>images/anuncios/02/2.png" width="294" height="200"/>
-            <img src="<?php echo base_url() ?>images/anuncios/02/3.png" width="294" height="200"/>
-             <img src="<?php echo base_url() ?>images/anuncios/02/1.png" width="294" height="200"/>
             
         </div>
     </div>
@@ -680,7 +676,7 @@ TOTAL
 
 <div>
                             <ul class="morado_directorio" id="btn_sig">
-                                <li class="sig_paso">
+                                <li class="sig_paso save">
                                   <input type="submit" value="Publicar"/>
                                 </li>
                             </ul>
@@ -699,6 +695,7 @@ TOTAL
                         <div class="titulo_de_pasos"> PUBLICAR EN ANUNCIOS </div>
                         <div class="instrucciones_pasos"> Pago del servicio: </div>
                         <div id="iframe"></div>
+                        <div id="closeProcess"></div>
                         <br/>
                     </div>
                 </div>
@@ -888,7 +885,7 @@ TOTAL
         
         $('#cerrarPublicacion').on('click', function() {
             oculta('contenedor_publicar_anuncio');
-            window.location.href="<?=base_url()?>";
+            window.location.href="<?=base_url()?>principal/miPerfil";
         });
         
         $("body").on("click",".del", function(e){
@@ -933,13 +930,14 @@ TOTAL
          $('#p_form').submit(function(e){
                 e.preventDefault();
                 var form = $(this);
+				$('.save').hide();
                 $.ajax({
                     url:'<?php echo base_url('venta/anuncio') ?>',
                     type:'post',
                     dataType: 'html',
                     data: form.serialize(),
                     success: function(data){
-                        
+                        $('#cerrarPublicacion').hide();
                         $('#iframe').append(data);
                     }
                 });

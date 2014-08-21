@@ -53,7 +53,6 @@ class Recuperarcontrasena extends CI_Controller{
 		$codeTime = substr($code, 25, $lenCodeTime);
 		$idUsuario = substr($code,(25+$lenCodeTime));
 		$codeAge = time() - $codeTime;
-		var_dump($confirmationCode,$lenCodeTime,$codeTime,$idUsuario,$codeAge);
 		if($codeAge>86400){
 			$data['response'] = 'expired';
 		}
@@ -64,8 +63,6 @@ class Recuperarcontrasena extends CI_Controller{
 			$data['response'] = 'ok';
 			$data['gerr'] = $this->resetPassword($confirmationCode);
 		}
-
-		var_dump($data);
 		
 	}
 
@@ -87,7 +84,7 @@ class Recuperarcontrasena extends CI_Controller{
 				break;
 			
 			case -1 :
-				redirect('principal/sss');
+				redirect('principal');
 
 				break;
 		}

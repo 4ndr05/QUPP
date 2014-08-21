@@ -221,7 +221,7 @@
                 dataType: 'json',
 				success: function(response) {
 					oculta('contenedor_anuncio_detalle');
-					alert('El anuncio ha sido aprobado');
+					alert('El anuncio ha sido declinado');
 					
 				}
 				
