@@ -20,6 +20,7 @@ class Venta extends CI_Controller {
         $this->load->library('cart');
         $this->load->helper('date');
         $this->load->library("UUID", true);
+        $this->load->library('email');
 
         $CI = & get_instance();
         $CI->config->load("mercadopago", TRUE);
@@ -462,8 +463,20 @@ class Venta extends CI_Controller {
             'publicacionID' => $this->input->post('pub'),
             'idUsuario' => $this->session->userdata('idUsuario')
         );
-
+        $insert = false;
         $this->usuario_model->insert_values($data);
+        $insert=true;
+        if($insert){
+            echo 'Se ha agregado a favoritos.';
+        }else{
+            echo 'Favor de intentarlo mas tarde.';
+        }
+    }
+
+    function fotos (){
+    $id_anuncio = $this->input->post('id_anuncio') === '' ? NULL : $this->input->post('id_anuncio');
+    
+        echo json_encode($this->venta_model->getFotos($id_anuncio));
     }
 
     function denunciar() {
@@ -478,6 +491,7 @@ class Venta extends CI_Controller {
             'wrapchars' => '300',
             'wordwrap' => true,
             'protocol' => 'sendmail',
+
         );
 
         $this->email->initialize($config);
@@ -503,22 +517,27 @@ class Venta extends CI_Controller {
                         <img src="'.base_url().'images/logo_mail.jpg"/>
                     </td>
                     <td height="48" colspan="6" style="font-family: \'titulos\'; font-size:50px; color:#72A937; margin:0px; padding:0px; margin-bottom:-10px;">
-                        QUP Contacto
+                        QUP Denuncia
                     </td>
                 </tr>
                 <tr>
                     <td colspan="7" >
                         <p>&nbsp;  </p>
-                        <font style="margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" >Hola: ' . $directorio->nombre . " " . $directorio->apellido . '!! </font>
+                        <font> El usuario ' . $this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido') . ' ha denunciado el siguiente anuncio..</font>
+                       
                     </br>
                 </br>
-
-                <font> El usuario ' . $this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido') . ' quiere contactase contigo...</font>
+ <font style="margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" >' . ($directorio['data'][0]->titulo).'</font>
+                
             </br>
+           <font style="margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" > Creado por: '.$directorio['data'][0]->correo.'</font>
+           <font style="margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" > Fecha de creacion: '.$directorio['data'][0]->fechaCreacion.'</font>
+           <font style="margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" > Duracion: '.$directorio['data'][0]->vigencia.' ('.$directorio['data'][0]->fechaVencimiento.')</font>
+           <font style="margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" > Descripcion: '.$directorio['data'][0]->descripcion.'</font>
         </br>
 
-        <font color="#000066"><strong> Asunto: ' . $this->input->post('asunto_contacto') . '</strong></font>
-        <font color="#000066"><strong>Mensaje: </strong><br/>' . $this->input->post('comentario_contacto') . '</font>
+        <font color="#000066"><strong> Asunto: ' . $this->input->post('asunto_denuncia') . '</strong></font>
+        <font color="#000066"><strong>Mensaje: </strong><br/>' . $this->input->post('comentarios_denuncia') . '</font>
         <br/>
         <p> </p>
     </td>
@@ -542,6 +561,7 @@ class Venta extends CI_Controller {
         } else {
             echo '<div class="alert alert-success">Se ha enviado correctamente el correo electrónico.</div>';
         }
+
     }
 
 }

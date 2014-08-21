@@ -1,7 +1,7 @@
 <?php
 $this->load->view('general/general_header_view', array('title' => 'Venta',
-		'links'                                                      => array('venta'), 'scripts' => array('funciones_venta')))
-?>
+  'links'                                                      => array('venta'), 'scripts' => array('funciones_venta')))
+  ?>
 
   <div id="iconos_ocultos" class="iconos_ocultos">
 
@@ -11,31 +11,31 @@ $this->load->view('general/general_header_view', array('title' => 'Venta',
 
             <img id="horizontal_compras_mini" onmouseover="mostrar_icono('horizontal_compras');
             ocultar_icono('horizontal_compras_mini');" class="iconos_flotantes"
-            src="<?=base_url()?>images/compras_horizontal_mini.png"/>
+            src="<?php echo base_url()?>images/compras_horizontal_mini.png"/>
 
             <img class="iconos_flotantes2" onmouseout="mostrar_icono('horizontal_compras_mini');
             ocultar_icono('horizontal_compras');" id="horizontal_compras"
-            src="<?=base_url()?>images/compras_horizontal.png"/>
+            src="<?php echo base_url()?>images/compras_horizontal.png"/>
 
         </li>
         <li>
             <img id="horizontal_ingresar_mini" onmouseover="mostrar_icono('horizontal_ingresar');
             ocultar_icono('horizontal_ingresar_mini');" class="iconos_flotantes"
-            src="<?=base_url()?>images/ingresar_horizontal_mini.png"/>
+            src="<?php echo base_url()?>images/ingresar_horizontal_mini.png"/>
 
             <img class="iconos_flotantes2" onmouseout="mostrar_icono('horizontal_ingresar_mini');
             ocultar_icono('horizontal_ingresar');" id="horizontal_ingresar"
-            src="<?=base_url()?>images/ingresar_horizontal.png"/>
+            src="<?php echo base_url()?>images/ingresar_horizontal.png"/>
         </li>
 
         <li>
             <img id="horizontal_registrate_mini" onmouseover="mostrar_icono('horizontal_registrate');
             ocultar_icono('horizontal_registrate_mini');" class="iconos_flotantes"
-            src="<?=base_url()?>images/registrate_horizontal_mini.png"/>
+            src="<?php echo base_url()?>images/registrate_horizontal_mini.png"/>
 
             <img class="iconos_flotantes2" onmouseout="mostrar_icono('horizontal_registrate_mini');
             ocultar_icono('horizontal_registrate');" id="horizontal_registrate"
-            src="<?=base_url()?>images/registrate_horizontal.png"/>
+            src="<?php echo base_url()?>images/registrate_horizontal.png"/>
         </li>
     </ul>
 </div>
@@ -44,40 +44,41 @@ $this->load->view('general/general_header_view', array('title' => 'Venta',
 
 <div class="contenedor_contactar" id="contenedor_contactar" style=" display:none;">
     <div class="contenedor_cerrar_contactar">
-        <img src="<?=base_url()?>images/cerrar_anuncio_gris.png" onclick="oculta('contenedor_contactar');"/>
+        <img src="<?php echo base_url()?>images/cerrar_anuncio_gris.png" onclick="oculta('contenedor_contactar');"/>
     </div>
     <div class="contactar_al_aunuciante">
         <font class="titulo_anuncio_publicado"> CONTACTA AL ANUNCIANTE </font>
     </br>
 </br>
-<strong> Nombre de usuario:</strong> Juanito Perez
+<strong> Nombre de usuario:</strong> <?php echo $this->session->userdata('nombre').' '.$this->session->userdata('apellido');?>
 </br>
-<strong> Estado </strong> Hidalgo
+<strong> Estado </strong> <?php echo $this->session->userdata('estado')?>
 </br>
-<strong> Ciudad </strong> Actopan
+<strong> Ciudad </strong> <?php echo $this->session->userdata('ciudad')?>
 </br>
-<strong> Teléfono </strong> 372829102374746
+<strong> Teléfono </strong> <?php echo $this->session->userdata('telefono')?>
 </br>
 </br>
 <font class="titulo_anuncio_publicado"> PROPORCIONA TU INFORMACIÓN </font>
 </br>
 </br>
-<input type="text" class="formu_contacto" id="nombre_contacto"
-onfocus="clear_textbox('nombre_contacto', 'Nombre');" placeholder="Nombre" size="44"/>
-<input type="text" class="formu_contacto" id="mail_contacto"
-onfocus="clear_textbox('mail_contacto', 'Tu-email')" placeholder="Tu-email" size="44"/>
-<input type="text" class="formu_contacto" id="asunto_contacto"
-onfocus="clear_textbox('asunto_contacto', 'Asunto')" placeholder="Asunto" size="44"/>
-<textarea cols="50" onfocus="clear_textbox('comentarios_contacto', 'Comentarios')" id="comentarios_contacto"
-class="formu_contacto" rows="5">Comentarios</textarea>
+<form id="contacto_form">
+    <input type="text" class="formu_contacto" id="nombre_contacto"
+    value="<?php echo $this->session->userdata('nombre')?>" size="44"/>
+    <input type="text" class="formu_contacto" id="mail_contacto"
+    value="<?php echo $this->session->userdata('correo')?>" size="44"/>
+    <input type="text" class="formu_contacto" id="asunto_contacto"
+    onfocus="clear_textbox('asunto_contacto', 'Asunto')" placeholder="Asunto" size="44"/>
+    <textarea cols="50" onfocus="clear_textbox('comentarios_contacto', 'Comentarios')" id="comentarios_contacto"
+    class="formu_contacto" rows="5">Comentarios</textarea>
 </br>
 </br>
 <ul class="boton_naranja_tres">
     <li>
-        Enviar
+        <input type="submit" value="Enviar"/>
     </li>
 </ul>
-
+</form>
 
 </div>
 
@@ -86,7 +87,7 @@ class="formu_contacto" rows="5">Comentarios</textarea>
 
 <div class="contenedor_contactar" id="contenedor_denunciar" style=" display:none;">
     <div class="contenedor_cerrar_contactar">
-        <img src="<?=base_url()?>images/cerrar_anuncio_gris.png" onclick="oculta('contenedor_denunciar');"/>
+        <img src="<?php echo base_url()?>images/cerrar_anuncio_gris.png" onclick="oculta('contenedor_denunciar');"/>
     </div>
     <div class="contactar_al_aunuciante">
         <font class="titulo_anuncio_publicado"> DENUNCIA DE CONTENIDO </font>
@@ -105,13 +106,13 @@ class="formu_contacto" rows="5">Comentarios</textarea>
 </br>
 </br>
 <form id="denuncia_form">
-    <input type="text" class="formu_contacto" id="nombre_contacto"
+    <input type="text" class="formu_contacto" name="nombre_denuncia" id="nombre_denuncia"
     value="<?php echo $this->session->userdata('nombre')?>" size="44"/>
-    <input type="text" class="formu_contacto" id="mail_contacto"
+    <input type="text" class="formu_contacto" name="mail_denuncia" id="mail_denuncia"
     value="<?php echo $this->session->userdata('correo')?>" size="44"/>
-    <input type="text" class="formu_contacto" id="asunto_contacto"
-    onfocus="clear_textbox('asunto_contacto', 'Asunto')" value="Asunto" size="44"/>
-    <textarea cols="50" onfocus="clear_textbox('comentarios_contacto', 'Comentarios')" id="comentarios_contacto"
+    <input type="text" class="formu_contacto" name="asunto_denuncia" id="asunto_denuncia"
+    onfocus="clear_textbox('asunto_denuncia', 'Asunto')" value="Asunto" size="44"/>
+    <textarea cols="50" onfocus="clear_textbox('comentarios_denuncia', 'Comentarios')" name="comentarios_denuncia" id="comentarios_denuncia"
     class="formu_contacto" rows="5">Comentarios</textarea>
 </br>
 </br>
@@ -130,17 +131,17 @@ class="formu_contacto" rows="5">Comentarios</textarea>
 
 <div class="contenedor_anuncio_detalle" id="contenedor_anuncio_detalle" style=" display:none;">
     <div class="contenedor_cerrar_anuncio">
-        <img src="<?=base_url()?>images/cerrar_anuncio.png" onclick="oculta('contenedor_anuncio_detalle');"/>
+        <img src="<?php echo base_url()?>images/cerrar_anuncio.png" onclick="oculta('contenedor_anuncio_detalle');"/>
     </div>
     <div class="leer_anuncio">
 
 
         <div class="contenedor_galeria">
             <div id="slideshow_publicar_anuncio_previo" class="picse">
-                <img src="<?=base_url()?>images/anuncios/02/1.png" width="294" height="200"/>
-                <img src="<?=base_url()?>images/anuncios/02/2.png" width="294" height="200"/>
-                <img src="<?=base_url()?>images/anuncios/02/3.png" width="294" height="200"/>
-                <img src="<?=base_url()?>images/anuncios/02/1.png" width="294" height="200"/>
+                <img src="<?php echo base_url()?>images/anuncios/02/1.png" width="294" height="200"/>
+                <img src="<?php echo base_url()?>images/anuncios/02/2.png" width="294" height="200"/>
+                <img src="<?php echo base_url()?>images/anuncios/02/3.png" width="294" height="200"/>
+                <img src="<?php echo base_url()?>images/anuncios/02/1.png" width="294" height="200"/>
             </div>
 
         </div>
@@ -177,10 +178,10 @@ class="formu_contacto" rows="5">Comentarios</textarea>
 </br>
 <ul class="boton_gris">
     <li>
-        <img src="<?=base_url()?>images/favorito.png"/>Agregar a Favoritos
+        <img src="<?php echo base_url()?>images/favorito.png"/>Agregar a Favoritos
     </li>
 </ul>
-
+<span id="info_fav"></span>
 </div>
 </br>
 <div class="contenedor_del_detalle">
@@ -206,7 +207,7 @@ class="formu_contacto" rows="5">Comentarios</textarea>
     VIDEO
 </div>
 
-<iframe class="youtube_video" src="<?=base_url()?>http://www.youtube.com/embed/YlmidIPuZ58"></iframe>
+<iframe class="youtube_video" src="<?php echo base_url()?>http://www.youtube.com/embed/YlmidIPuZ58"></iframe>
 
 
 </div>
@@ -214,7 +215,7 @@ class="formu_contacto" rows="5">Comentarios</textarea>
 
 <ul class="boton_rojo_dos">
     <li class="btn_den">
-        <img src="<?=base_url()?>images/alert.png"/>
+        <img src="<?php echo base_url()?>images/alert.png"/>
         Denunciar Anuncio
     </li>
 </ul>
@@ -254,7 +255,7 @@ que el nombre del criador esté en el certificado.
 
 <div class="contenedor_contactar_previo" id="contenedor_contactar_previo" style=" display:none;">
     <div class="contenedor_cerrar_contactar">
-        <img src="<?=base_url()?>images/cerrar_anuncio.png" onclick="oculta('contenedor_contactar_previo');"/>
+        <img src="<?php echo base_url()?>images/cerrar_anuncio.png" onclick="oculta('contenedor_contactar_previo');"/>
     </div>
     <div class="contactar_al_aunuciante">
         <font class="titulo_anuncio_publicado"> CONTACTA AL ANUNCIANTE </font>
@@ -293,17 +294,17 @@ class="formu_contacto" rows="5">Comentarios</textarea>
 
 <div class="contenedor_anuncio_detalle" id="contenedor_anuncio_detalle" style=" display:none;">
     <div class="contenedor_cerrar_anuncio">
-        <img src="<?=base_url()?>images/cerrar_anuncio.png" onclick="oculta('contenedor_anuncio_detalle');"/>
+        <img src="<?php echo base_url()?>images/cerrar_anuncio.png" onclick="oculta('contenedor_anuncio_detalle');"/>
     </div>
     <div class="leer_anuncio">
 
 
         <div class="contenedor_galeria">
             <div id="slideshow_publicar_anuncio_previo" class="picse">
-                <img src="<?=base_url()?>images/anuncios/02/1.png" width="294" height="200"/>
-                <img src="<?=base_url()?>images/anuncios/02/2.png" width="294" height="200"/>
-                <img src="<?=base_url()?>images/anuncios/02/3.png" width="294" height="200"/>
-                <img src="<?=base_url()?>images/anuncios/02/1.png" width="294" height="200"/>
+                <img src="<?php echo base_url()?>images/anuncios/02/1.png" width="294" height="200"/>
+                <img src="<?php echo base_url()?>images/anuncios/02/2.png" width="294" height="200"/>
+                <img src="<?php echo base_url()?>images/anuncios/02/3.png" width="294" height="200"/>
+                <img src="<?php echo base_url()?>images/anuncios/02/1.png" width="294" height="200"/>
             </div>
 
         </div>
@@ -340,9 +341,10 @@ class="formu_contacto" rows="5">Comentarios</textarea>
 </br>
 <ul class="boton_gris">
     <li>
-        <img src="<?=base_url()?>images/favorito.png"/>Agregar a Favoritos
+        <img src="<?php echo base_url()?>images/favorito.png"/>Agregar a Favoritos
     </li>
 </ul>
+<span id="info_fav"></span>
 
 </div>
 </br>
@@ -369,7 +371,7 @@ class="formu_contacto" rows="5">Comentarios</textarea>
     VIDEO
 </div>
 
-<iframe class="youtube_video" src="<?=base_url()?>http://www.youtube.com/embed/YlmidIPuZ58"></iframe>
+<iframe class="youtube_video" src="<?php echo base_url()?>http://www.youtube.com/embed/YlmidIPuZ58"></iframe>
 
 
 </div>
@@ -377,7 +379,7 @@ class="formu_contacto" rows="5">Comentarios</textarea>
 
 <ul class="boton_rojo_dos">
     <li class="btn_den">
-        <img src="<?=base_url()?>images/alert.png"/>
+        <img src="<?php echo base_url()?>images/alert.png"/>
         Denunciar Anuncio
     </li>
 </ul>
@@ -433,7 +435,7 @@ que el nombre del criador esté en el certificado.
                 </ul>
             </div>
             <div class="crerar_publicar_anuncio">
-                <img src="<?=base_url()?>images/cerrar.png" onclick="oculta('contenedor_publicar_anuncio');"/>
+                <img src="<?php echo base_url()?>images/cerrar.png" onclick="oculta('contenedor_publicar_anuncio');"/>
 
             </div>
         </br>
@@ -441,7 +443,7 @@ que el nombre del criador esté en el certificado.
             <div class="titulo_de_pasos"> PUBLICAR ANUNCIO</div>
             <div class="instrucciones_pasos"> Selecciona la sección de publicación</div>
             <div class="contenido_indicacion">
-                <img src="<?=base_url()?>images/pero_paso_uno.png" class="perro_paso_uno"/>
+                <img src="<?php echo base_url()?>images/pero_paso_uno.png" class="perro_paso_uno"/>
 
                 <form id="form1" name="form1" method="post" class="radios_secciones" action="">
                     <input type="radio" name="radiog_dark" id="radio4" class="css-checkbox"/><label for="radio4"
@@ -489,7 +491,7 @@ que el nombre del criador esté en el certificado.
         </ul>
     </div>
     <div class="crerar_publicar_anuncio">
-        <img src="<?=base_url()?>images/cerrar.png" onclick="oculta('contenedor_publicar_anuncio');"/>
+        <img src="<?php echo base_url()?>images/cerrar.png" onclick="oculta('contenedor_publicar_anuncio');"/>
 
     </div>
 </br>
@@ -504,7 +506,7 @@ que el nombre del criador esté en el certificado.
                 <label>
                     <div class="title_paquetes">
                         <div class="lateral_lite"></div>
-                        <img src="<?=base_url()?>images/perrito_lite.png" class="margen" width="29" height="29"/>
+                        <img src="<?php echo base_url()?>images/perrito_lite.png" class="margen" width="29" height="29"/>
                         <font class="title_paquetes_titilos"> PAQUETE LITE </font>
                     </div>
                     <div class="precio_paquete_lite">
@@ -530,23 +532,23 @@ que el nombre del criador esté en el certificado.
                         <ul>
                             <li>
                                 <div class="cantidades_detalle_paquete_lite"> 10</div>
-                                <img src="<?=base_url()?>images/icono_camara.png" width="34" height="26"/>
+                                <img src="<?php echo base_url()?>images/icono_camara.png" width="34" height="26"/>
                             </li>
                             <li>
                                 <div class="cantidades_detalle_paquete_lite"> 10</div>
-                                <img src="<?=base_url()?>images/icono_texto.png" width="34" height="26"/>
+                                <img src="<?php echo base_url()?>images/icono_texto.png" width="34" height="26"/>
                             </li>
                             <li>
                                 <div class="cantidades_detalle_paquete_lite"> 10</div>
-                                <img src="<?=base_url()?>images/icono_calendario.png" width="34" height="26"/>
+                                <img src="<?php echo base_url()?>images/icono_calendario.png" width="34" height="26"/>
                             </li>
                             <li>
                                 <div class="cantidades_detalle_paquete_of"> 0</div>
-                                <img src="<?=base_url()?>images/icono_ticket_of.png" width="34" height="26"/>
+                                <img src="<?php echo base_url()?>images/icono_ticket_of.png" width="34" height="26"/>
                             </li>
                             <li>
                                 <div class="cantidades_detalle_paquete_of"> 0</div>
-                                <img src="<?=base_url()?>images/icono_video_of.png" width="34" height="26"/>
+                                <img src="<?php echo base_url()?>images/icono_video_of.png" width="34" height="26"/>
                             </li>
                         </ul>
                     </div>
@@ -561,7 +563,7 @@ que el nombre del criador esté en el certificado.
                 <label>
                     <div class="title_paquetes">
                         <div class="lateral_regular"></div>
-                        <img src="<?=base_url()?>images/perrito_regular.png" class="margen" width="29" height="29"/>
+                        <img src="<?php echo base_url()?>images/perrito_regular.png" class="margen" width="29" height="29"/>
                         <font class="title_paquetes_titilos"> PAQUETE REGULAR </font>
 
                     </div>
@@ -591,23 +593,23 @@ que el nombre del criador esté en el certificado.
                         <ul>
                             <li>
                                 <div class="cantidades_detalle_paquete_regular"> 5</div>
-                                <img src="<?=base_url()?>images/icono_camara_regular.png" width="34" height="26"/>
+                                <img src="<?php echo base_url()?>images/icono_camara_regular.png" width="34" height="26"/>
                             </li>
                             <li>
                                 <div class="cantidades_detalle_paquete_regular"> 150</div>
-                                <img src="<?=base_url()?>images/icono_texto_regular.png" width="34" height="26">
+                                <img src="<?php echo base_url()?>images/icono_texto_regular.png" width="34" height="26">
                             </li>
                             <li>
                                 <div class="cantidades_detalle_paquete_regular"> 30</div>
-                                <img src="<?=base_url()?>images/icono_calendario_regular.png" width="34" height="26"/>
+                                <img src="<?php echo base_url()?>images/icono_calendario_regular.png" width="34" height="26"/>
                             </li>
                             <li>
                                 <div class="cantidades_detalle_paquete_regular"> 2</div>
-                                <img src="<?=base_url()?>images/icono_ticket_regular.png" width="34" height="26"/>
+                                <img src="<?php echo base_url()?>images/icono_ticket_regular.png" width="34" height="26"/>
                             </li>
                             <li>
                                 <div class="cantidades_detalle_paquete_regular"> 1</div>
-                                <img src="<?=base_url()?>images/icono_video_regular.png" width="34" height="26"/>
+                                <img src="<?php echo base_url()?>images/icono_video_regular.png" width="34" height="26"/>
                             </li>
                         </ul>
                     </div>
@@ -620,7 +622,7 @@ que el nombre del criador esté en el certificado.
                 <label>
                     <div class="title_paquetes">
                         <div class="lateral_premium"></div>
-                        <img src="<?=base_url()?>images/perrito_premium.png" class="margen" width="29" height="29"/>
+                        <img src="<?php echo base_url()?>images/perrito_premium.png" class="margen" width="29" height="29"/>
                         <font class="title_paquetes_titilos"> PAQUETE PREMIUM </font>
 
                     </div>
@@ -650,23 +652,23 @@ que el nombre del criador esté en el certificado.
                         <ul>
                             <li>
                                 <div class="cantidades_detalle_paquete_premium"> 15</div>
-                                <img src="<?=base_url()?>images/icono_camara_premium.png" width="34" height="26"/>
+                                <img src="<?php echo base_url()?>images/icono_camara_premium.png" width="34" height="26"/>
                             </li>
                             <li>
                                 <div class="cantidades_detalle_paquete_premium"> ∞</div>
-                                <img src="<?=base_url()?>images/icono_texto_premium.png" width="34" height="26">
+                                <img src="<?php echo base_url()?>images/icono_texto_premium.png" width="34" height="26">
                             </li>
                             <li>
                                 <div class="cantidades_detalle_paquete_premium"> 60</div>
-                                <img src="<?=base_url()?>images/icono_calendario_premium.png" width="34" height="26"/>
+                                <img src="<?php echo base_url()?>images/icono_calendario_premium.png" width="34" height="26"/>
                             </li>
                             <li>
                                 <div class="cantidades_detalle_paquete_premium"> 5</div>
-                                <img src="<?=base_url()?>images/icono_ticket_premium.png" width="34" height="26"/>
+                                <img src="<?php echo base_url()?>images/icono_ticket_premium.png" width="34" height="26"/>
                             </li>
                             <li>
                                 <div class="cantidades_detalle_paquete_premium"> 2</div>
-                                <img src="<?=base_url()?>images/icono_video_premium.png" width="34" height="26"/>
+                                <img src="<?php echo base_url()?>images/icono_video_premium.png" width="34" height="26"/>
                             </li>
                         </ul>
                     </div>
@@ -708,7 +710,7 @@ que el nombre del criador esté en el certificado.
     </div>
 
     <div class="crerar_publicar_anuncio">
-        <img src="<?=base_url()?>images/cerrar.png" onclick="oculta('contenedor_publicar_anuncio');"/>
+        <img src="<?php echo base_url()?>images/cerrar.png" onclick="oculta('contenedor_publicar_anuncio');"/>
 
     </div>
 </br>
@@ -812,15 +814,15 @@ Precio: &nbsp;
 </p>
 </br>
 <p class="margen_15_left">
-    Link de video <input type="text" size="98"/><img src="<?=base_url()?>images/logo_youtube.png"/>
+    Link de video <input type="text" size="98"/><img src="<?php echo base_url()?>images/logo_youtube.png"/>
 </p>
 
-<p class="margen_15_left"><a href="<?=base_url()?>#"> Tutorial para subir video a <img
-    src="<?=base_url()?>images/logo_youtube.png" width="43" height="16"/> </a></p>
+<p class="margen_15_left"><a href="<?php echo base_url()?>#"> Tutorial para subir video a <img
+    src="<?php echo base_url()?>images/logo_youtube.png" width="43" height="16"/> </a></p>
 </br>
 <p class="margen_15_left">
 
-    <!-- <iframe src="<?=base_url()?>../subir_archivos/index.html" style="overflow:none;" scrolling="no" width="800" height="100"> </iframe> -->
+    <!-- <iframe src="<?php echo base_url()?>../subir_archivos/index.html" style="overflow:none;" scrolling="no" width="800" height="100"> </iframe> -->
 </p>
 
 <div style="width:800px; height:150px;">
@@ -857,7 +859,7 @@ Precio: &nbsp;
     </div>
 
     <div class="crerar_publicar_anuncio">
-        <img src="<?=base_url()?>images/cerrar.png" onclick="oculta('contenedor_publicar_anuncio');"/>
+        <img src="<?php echo base_url()?>images/cerrar.png" onclick="oculta('contenedor_publicar_anuncio');"/>
 
     </div>
 </br>
@@ -869,10 +871,10 @@ Precio: &nbsp;
 
         <div class="contenedor_galeria">
             <div id="slideshow_publicar_anuncio" class="picse">
-                <img src="<?=base_url()?>images/anuncios/02/1.png" width="294" height="200"/>
-                <img src="<?=base_url()?>images/anuncios/02/2.png" width="294" height="200"/>
-                <img src="<?=base_url()?>images/anuncios/02/3.png" width="294" height="200"/>
-                <img src="<?=base_url()?>images/anuncios/02/1.png" width="294" height="200"/>
+                <img src="<?php echo base_url()?>images/anuncios/02/1.png" width="294" height="200"/>
+                <img src="<?php echo base_url()?>images/anuncios/02/2.png" width="294" height="200"/>
+                <img src="<?php echo base_url()?>images/anuncios/02/3.png" width="294" height="200"/>
+                <img src="<?php echo base_url()?>images/anuncios/02/1.png" width="294" height="200"/>
             </div>
 
         </div>
@@ -909,10 +911,10 @@ Precio: &nbsp;
 </br>
 <ul class="boton_gris">
     <li class="btn_fvt">
-        <img src="<?=base_url()?>images/favorito.png"/>Agregar a Favoritos
+        <img src="<?php echo base_url()?>images/favorito.png"/>Agregar a Favoritos
     </li>
 </ul>
-
+<span id="info_fav"></span>
 </div>
 </br>
 
@@ -941,7 +943,7 @@ Precio: &nbsp;
 </div>
 
 <iframe class="youtube_video"
-src="<?=base_url()?>http://www.youtube.com/embed/YlmidIPuZ58"></iframe>
+src="<?php echo base_url()?>http://www.youtube.com/embed/YlmidIPuZ58"></iframe>
 
 
 </div>
@@ -949,7 +951,7 @@ src="<?=base_url()?>http://www.youtube.com/embed/YlmidIPuZ58"></iframe>
 
 <ul class="boton_rojo_dos">
     <li>
-        <img src="<?=base_url()?>images/alert.png"/>
+        <img src="<?php echo base_url()?>images/alert.png"/>
         Denunciar Anuncio
     </li>
 </ul>
@@ -1027,7 +1029,7 @@ de que el nombre del criador esté en el certificado.
     </div>
 </br>
 <div class="crerar_publicar_anuncio" style="margin-top:0px;">
-    <img src="<?=base_url()?>images/cerrar.png" onclick="oculta('contenedor_publicar_anuncio');"/>
+    <img src="<?php echo base_url()?>images/cerrar.png" onclick="oculta('contenedor_publicar_anuncio');"/>
 
 </div>
 
@@ -1049,7 +1051,7 @@ de que el nombre del criador esté en el certificado.
     </tr>
     <tr>
         <td>
-            <img src="<?=base_url()?>images/pago_regular.png" width="156" height="79"/>
+            <img src="<?php echo base_url()?>images/pago_regular.png" width="156" height="79"/>
         </td>
         <td>
             <p>* 5 fotos</p>
@@ -1076,7 +1078,7 @@ de que el nombre del criador esté en el certificado.
     </tr>
     <tr>
         <td colspan="2">
-            <img style="" src="<?=base_url()?>images/mini_cupon.png"/> <font class="texto_de_cupon">Cupones de
+            <img style="" src="<?php echo base_url()?>images/mini_cupon.png"/> <font class="texto_de_cupon">Cupones de
             descuento: </font> </br> <font id="ver_cupones" class="ver_cupones" onclick="muestra('los_cupones_disponibles');
             muestra('no_ver_cupones');
             oculta('ver_cupones');"> Ver cupones </font>
@@ -1149,14 +1151,14 @@ de que el nombre del criador esté en el certificado.
             <div class="fondo_select">
                 <select class="styled" id="raza" name="raza">
                     <option value=""> Selecciona un raza</option>
-<?php if ($razas != null):?>
+                    <?php if ($razas != null):?>
                         <?php foreach ($razas as $raza):?>
                             ?>
                             <option style="background-color: #BCBEC0;"
                             value="<?php echo $raza->razaID?>"><?php echo $raza->raza?></option>
-<?php endforeach;?>
+                        <?php endforeach;?>
                     <?php endif;?>
-?>
+                    ?>
                 </select>
             </div>
 
@@ -1172,20 +1174,20 @@ de que el nombre del criador esté en el certificado.
             <div class="fondo_select">
                 <select class="styled estilo_select" id="estado" name="estado">
                     <option value=""> Selecciona un Estado</option>
-<?php
-if ($estados != null):
-	foreach ($estados as $estado):
-	?>
-	                       <option style="background-color: #BCBEC0;"
-	                       value="<?=$estado->estadoID?>"><?=$estado->nombreEstado?></option>
-	<?php
-	endforeach;
-endif;
-?>
+                    <?php
+                    if ($estados != null):
+                     foreach ($estados as $estado):
+                         ?>
+                     <option style="background-color: #BCBEC0;"
+                     value="<?php echo $estado->estadoID?>"><?php echo $estado->nombreEstado?></option>
+                     <?php
+                     endforeach;
+                     endif;
+                     ?>
 
-                   </select>
-               </div>
-               <div class="fondo_select">
+                 </select>
+             </div>
+             <div class="fondo_select">
                 <select class="styled estilo_select" id="Precio" name="precio">
                     <option value=""> Ordenar por precio</option>
                     <option style="background-color: #BCBEC0;" value="asc"> De menor a mayor</option>
@@ -1206,10 +1208,10 @@ endif;
 <div id="contenedor_central">
     <div id="espacio_izquierda" class="seccion_izquierda_secciones">
         <ul class="iconos">
-            <li><img src="<?=base_url()?>images/compras.png"/></li>
-            <li><img src="<?=base_url()?>images/sesion.png"/></li>
+            <li><img src="<?php echo base_url()?>images/compras.png"/></li>
+            <li><img src="<?php echo base_url()?>images/sesion.png"/></li>
             <li>
-                <img src="<?=base_url()?>images/registrate.png"/>
+                <img src="<?php echo base_url()?>images/registrate.png"/>
             </li>
         </ul>
     </div>
@@ -1219,54 +1221,54 @@ endif;
 
         <!-- item container -->
         <ul id="itemContainer" style="display:inline-block;">
-<?php $fila = 1;?>
+            <?php $fila = 1;?>
 
-<?php
-foreach ($publicaciones as $publicacion):
-?>
-<!-- INICIO contenedor anuncio  -->
+            <?php
+            foreach ($publicaciones as $publicacion):
+                ?>
+            <!-- INICIO contenedor anuncio  -->
             <div class="contenedor_anuncio">
                 <div class="titulo_anuncio">
-<?=$publicacion->titulo?>
+                    <?php echo $publicacion->titulo?>
                 </div>
                 <div class="descripcion_anuncio">
-                    <font> Precio: <?=$publicacion->precio?></font>
+                    <font> Precio: <?php echo $publicacion->precio?></font>
                     <br/>
-                    <font> Raza: <?=$publicacion->raza?> </font>
+                    <font> Raza: <?php echo $publicacion->raza?> </font>
                     <br/>
-                    <font> Género: <?=$publicacion->genero?'Macho':'Hembra'?> </font>
+                    <font> Género: <?php echo $publicacion->genero?'Macho':'Hembra'?> </font>
                     <br/>
-                    <font> Ciudad: <?=$publicacion->ciudad?></font>
+                    <font> Ciudad: <?php echo $publicacion->ciudad?></font>
                 </div>
                 <div class="contenedor_foto_anuncio">
-                    <img src="<?=base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80"/>
+                    <img src="<?php echo base_url()?>images/anuncios/01/perro.png" align="middle" width="128" height="80"/>
                 </div>
 
                 <ul class="ver_detalle_anuncio">
-<?php if ($this->session->userdata('idUsuario') !== FALSE):?>
-                        <li onclick="buscar_detalles('<?=$publicacion->publicacionID?>');">
+                    <?php if ($this->session->userdata('idUsuario') !== FALSE):?>
+                        <li class="mas_anuncio" data-id="<?php echo $publicacion->publicacionID ?>" >
                             Ver detalle...
                         </li>
-<?php else:?>
-<li onclick="javascript:alert('Favor de iniciar sesión.')">
+                    <?php else:?>
+                        <li onclick="javascript:alert('Favor de iniciar sesión.')">
                             Ver detalle...
                         </li>
-<?php endif;?>
-</ul>
+                    <?php endif;?>
+                </ul>
             </div>
 
             <!-- Fin contenedor annuncio -->
 
-<?php if (4 > $fila++):?>
-<!-- Inicio margen falso -->
+            <?php if (4 > $fila++):?>
+                <!-- Inicio margen falso -->
                 <div class="margen_derecho_20">
 
                 </div>
-<?php else:?>
+            <?php else:?>
                 <?php $fila = 1;?>
             <?php endif;?>
-<!-- FIN margen falso -->
-<?php endforeach;?>
+            <!-- FIN margen falso -->
+        <?php endforeach;?>
 
     </ul>
 
@@ -1286,34 +1288,33 @@ foreach ($publicaciones as $publicacion):
 </div>
 
 <script>
-    function obten_id(id) {
-        muestra('contenedor_contactar');
-        document.getElementById('enviando_id').value = id;
-
-    }
-
-    function enviar_mail(id) {
-        id = document.getElementById('enviando_id').value
-        alert(id);
-
-        $.ajax({
-            url: '<?php echo base_url('venta/contactar/');?>/' + id,
-            type: 'post',
-            dataType: 'html',
-            data: '',
-            beforeSend: function () {
-                $(".infouser").empty().html('<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
-            },
-            success: function (data) {
-                $(".infouser").empty().append(data);
-
-            }
-        });
-
-    }
-
 
     $(function () {
+
+        function obten_id(id) {
+            muestra('contenedor_contactar');
+            document.getElementById('enviando_id').value = id;
+
+        }
+
+        function enviar_mail(id) {
+            id = document.getElementById('enviando_id').value
+            alert(id);
+
+            $.ajax({
+                url: '<?php echo base_url('venta/contactar/');?>/' + id,
+                type: 'post',
+                dataType: 'html',
+                data: '',
+                beforeSend: function () {
+                    $(".infouser").empty().html('<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
+                },
+                success: function (data) {
+                    $(".infouser").empty().append(data);
+
+                }
+            });
+        }
 
         /* initiate the plugin */
         $("div.holder").jPages({
@@ -1331,6 +1332,7 @@ foreach ($publicaciones as $publicacion):
 
             search_data(form);
         });
+
         $("#filtro_venta [name]").keyup(function () {
             if ($(this).val().length > 2 || $(this).val().length === 0) {
                 var form = $("#filtro_venta");
@@ -1358,11 +1360,12 @@ foreach ($publicaciones as $publicacion):
                     }
 
                     for (var i = 0; i < result.count; i++) {
-                        if (data[i].genero === '0')
+                        if (data[i].genero === '0'){
                             var el_genero = "Hembra";
-                        else
+                        }
+                        else{
                             var el_genero = "Macho";
-
+                        }
 
                         var cont_anun = $('<div class="contenedor_anuncio"></div>');
                         var cont_titulo = $('<div class="titulo_anuncio"></div>');
@@ -1378,12 +1381,11 @@ foreach ($publicaciones as $publicacion):
                         cont_imagen.append('<img src="images/anuncios/01/' + logo + '" alt="logo" width="128" height="80"/>');
                         cont_anun.append(cont_imagen);
 
-<?php if ($this->session->userdata('idUsuario') !== FALSE):?>
-var ver_mas = $('<ul class="ver_detalle_anuncio"><li onclick="muestra(\'contenedr_anuncio_detalle\')">Ver detalle...</li></ul>');
-<?php else:?>
-var ver_mas = $('<ul class="ver_detalle_anuncio"><li onclick="javascript:alert(\'Favor de iniciar sesión.\')">Ver detalle...</li></ul>');
-
-<?php endif;?>
+                        <?php if ($this->session->userdata('idUsuario') !== FALSE): ?>
+                        var ver_mas = $('<ul class="ver_detalle_anuncio"><li onclick="muestra(\'contenedr_anuncio_detalle\')">Ver detalle...</li></ul>');
+                    <?php else: ?>
+                    var ver_mas = $('<ul class="ver_detalle_anuncio"><li onclick="javascript:alert(\'Favor de iniciar sesión.\')">Ver detalle...</li></ul>');
+                <?php endif; ?>
                 cont_anun.append(ver_mas);
 
                 $("#itemContainer").append(cont_anun);
@@ -1414,8 +1416,6 @@ function show_details(data) {
 
 }
 
-});
-
 function buscar_detalles(id) {
     muestra('contenedor_anuncio_detalle');
     var id_anuncio = "raza=&genero=&estado=&precio=&palabra_clave=&id_anuncio=" + id;
@@ -1432,6 +1432,9 @@ function buscar_detalles(id) {
             $(".contenedor_galeria").empty().html('<div class="spinner" style="position:fixed;"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
         },
         success: function (result) {
+
+            buscar_imagenes(id);
+
             $(".contenedor_galeria").empty();
             $(".datos_general").empty();
             $(".descripcion_del_anuncio").empty();
@@ -1451,7 +1454,7 @@ function buscar_detalles(id) {
                 var cont_datos = $('.datos_general');
                 var cont_info = $(' <div class="titulo_anuncio_publicado">' + data[i].titulo + '</div></br><strong>Precio:' + data[i].precio + '</strong></br><font> Fecha de publicación:' + data[i].fechaCreacion + '</font></br><font>Sección: Venta</font></br><font>Raza:' + data[i].raza + '</font></br><font>Género:' + (data[i].genero ? 'Macho' : 'Hembra') + '</font></br><font>Lugar: ' + data[i].nombreEstado + '</font></br></br>');
                 cont_datos.append(cont_info);
-                var botones = $('<ul class="boton_naranja"><li onclick="obten_id(\'' + data[i].publicacionID + '\')">Contactar al anunciante</li> </ul> </br> <ul class="boton_gris"><li data-pub="' + data[i].publicacionID + '" class="btn_fvt"><img src="images/favorito.png"/>Agregar a Favoritos</li></ul>');
+                var botones = $('<ul class="boton_naranja"><li onclick="obten_id(\'' + data[i].publicacionID + '\')">Contactar al anunciante</li> </ul> </br> <ul class="boton_gris"><li data-pub="' + data[i].publicacionID + '" class="btn_fvt"><img src="images/favorito.png"/>Agregar a Favoritos</li></ul><span id="info_fav"></span>');
                 cont_datos.append(botones);
                 $('.descripcion_del_anuncio').append(data[i].descripcion);
                 var video = $('.youtube_video');
@@ -1465,6 +1468,35 @@ function buscar_detalles(id) {
             denunciar_pub();
         }
     });
+}
+
+function buscar_imagenes(id){
+             id_anuncio="id_anuncio="+id;
+             alert('en funcion');
+            $.ajax({
+                url: '<?php echo base_url('venta/fotos') ?>',
+                data: id_anuncio,
+                dataType: 'json',
+                type: 'post',
+                 success: function(result)
+                { 
+                    $(".contenedor_galeria").empty().html('<div id="slideshow_publicar_anuncio_previo" class="picse"></div>');
+                   alert('correct');
+                    var data = result.data;
+
+                    if (result.count < 1) {
+                    
+                    }
+                    for (var i = 0; i < result.count; i++)
+                    {
+                       
+                        $("#slideshow_publicar_anuncio_previo").append('<img src="' + data[i].foto + '" width="294" height="200" style=" top: 0px; left: 0px; display: block; z-index: 5; opacity: 1;"/>');
+                        
+            }
+            contener_images();
+    }
+    
+});
 
 }
 
@@ -1479,14 +1511,16 @@ function add_favorite() {
             data: 'pub=' + pub,
             dataType: 'html',
             type: 'post',
-            before: function () {
-
+            before: function (data) {
+                $('#info_fav').html('loading');
             },
-            success: function () {
-
+            success: function (data) {
+                $('#info_fav').html(data);
             },
             complete: function () {
-
+                setTimeout(function(){
+                    $('#info_fav').html('');
+                }, 5000);
             }
         });
     });
@@ -1496,37 +1530,46 @@ function denunciar_pub() {
 
     $('.btn_den').on('click', function (){
         var pub = $(this).data("pub");
+        $('.info', '#denuncia_form').html('');
 
         muestra('contenedor_denunciar');
-        document.getElementById('enviando_id').value = id;
-
-        $('#contenedor_denunciar #denuncia_form').submit(e){
+        
+        $('#contenedor_denunciar #denuncia_form').submit(function(e){
             e.preventDefault();
             var form = $(this);
             $.ajax({
                 url: '<?php echo base_url('venta/denunciar')?>',
-                data: 'pub=' + pub,
+                data: form.serialize()+'&pub='+pub,
                 dataType: 'html',
                 type: 'post',
                 before: function () {
-                    $('.info',form).text('loading');
+                    $('.info',form).html('loading');
                 },
                 success: function (data) {
-                    $('.info',form).text(data);
+                    $('.info',form).html(data);
                 }
             });
         });
-});
+    });
 }
+
+$('.mas_anuncio').on('click', function(){
+
+    var id = $(this).data('id');
+
+    buscar_detalles(id);
+});
+
+});
 
 </script>
 </div>
 
 
 <div class="slideshow_tres">
-    <img src="<?=base_url()?>images/banner_inferior/1.png" width="638" height="93"/>
-    <img src="<?=base_url()?>images/banner_inferior/2.png" width="638" height="93"/>
-    <img src="<?=base_url()?>images/banner_inferior/3.png" width="638" height="93"/>
+    <img src="<?php echo base_url()?>images/banner_inferior/1.png" width="638" height="93"/>
+    <img src="<?php echo base_url()?>images/banner_inferior/2.png" width="638" height="93"/>
+    <img src="<?php echo base_url()?>images/banner_inferior/3.png" width="638" height="93"/>
 </div>
 
 <div class="division_menu_inferior"></div>

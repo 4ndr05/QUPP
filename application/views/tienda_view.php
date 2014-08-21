@@ -24,9 +24,10 @@
                                         //show loader
                                     },
                                     success: function(data) {
-                                        $('.infouser', form).html(data);
+                                        $('.infouser', form).empty().html(data);
                                     },
                                     error: function(data) {
+                                        $('.infouser', form).empty();
                                         $("<div class='alert alert-warning'>No se ha agregado el producto al carrito. Vuelva a intentarlo o contacte al administrador del sitio.</div>").appendTo($('.infouser', form));
                                     },
                                     complete: function() {

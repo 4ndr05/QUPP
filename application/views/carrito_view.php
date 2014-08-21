@@ -1023,22 +1023,22 @@
                                                                             </div>
                                                                             <div id="form_envio">
                                                                             <div>
-                                                                                <label>Nombre:</label> <input class="background_gris_mini" name="nombre" type="text" value="<?php echo $datosPersonales->nombre ?>"/>
+                                                                                <label>Nombre:</label> <input class="background_gris_mini" name="nombre" type="text" value="<?php echo $datosPersonales->nombre ?>" style="margin-right:27px;"/>
                                                                                 <label>Apellidos:</label> <input class="background_gris_mini" name="apellidos" type="text" value="<?php echo $datosPersonales->apellido ?>"/>
                                                                             </div>
-                                                                            <div>
-                                                                                <label>C.P:</label> <input class="background_gris_mini" name="cp" type="text" value="<?php echo $datosPersonales->cp ?>"/>
-                                                                                <label>Calle:</label> <input class="background_gris_mini" name="calle" type="text" value="<?php echo $datosPersonales->calle ?>"/>
+                <br/>                 <div>
+                                                                                <label style="margin-right:34px;">C.P:</label> <input class="background_gris_mini" name="cp" type="text" value="<?php echo $datosPersonales->cp ?>" style="margin-right:28px;"/>
+                                                                                <label style="margin-right:28px;">Calle:</label> <input class="background_gris_mini" name="calle" type="text" value="<?php echo $datosPersonales->calle ?>"/>
                                                                             </div>
-                                                                            <div>
-                                                                                <label>Número:</label> <input name="noExterior" class="background_gris_mini" type="text" value="<?php echo $datosPersonales->numero ?>"/>
-                                                                                <label>Colonia:</label> <input class="background_gris_mini" type="text" name="colonia"
+                     <br/>
+                                          <div>
+                                                                                <label>Número:</label> <input name="noExterior" class="background_gris_mini" type="text" value="<?php echo $datosPersonales->numero ?>" style="margin-right:28px;"/>
+                                                                                <label style="margin-right:8px;">Colonia:</label> <input class="background_gris_mini" type="text" name="colonia"
                                                                                                                value="<?php echo $datosPersonales->colonia ?>"/>
                                                                             </div>
-                                                                            <div>                   
-                                                                                <label>Ciudad:</label> <input class="background_gris_mini" type="text" name="ciudad"
-                                                                                                              value="<?php echo $datosPersonales->municipio ?>"/>
-                                                                                <label>Estado:</label> <select class="background_gris_mini" name="idEstado">
+              <br/>                                                              <div>                   
+                                                                                <label>Ciudad:</label> <input class="background_gris_mini" type="text" name="ciudad" value="<?php echo $datosPersonales->municipio ?>" style=" margin-right:31px;"/>
+                                                                                <label style="margin-right:14px;">Estado:</label> <select class="background_gris_mini" name="idEstado">
                                                                                     <option> ---</option>
                                                                                     <?php
                                                                                     if ($estados != null):
@@ -1053,13 +1053,13 @@
                                                                                     ?>
                                                                                 </select>
                                                                             </div>
-                                                                            <div>          
+              <br/>                                                              <div>          
 
-                                                                                <label>Pais:</label> <select class="background_gris_mini" name="idPais">
+                                                                                <label style="margin-right:30px;">Pais:</label> <select class="background_gris_mini" name="idPais">
                                                                                     <option> México</option>
                                                                                 </select>
                                                                             </div>
-                                                                        </div>
+<br/>                                                                        </div>
                                                                         </div>
                                                                     </div>
                                                                     </td>
