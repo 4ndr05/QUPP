@@ -183,7 +183,7 @@ class Admin_model extends CI_Model
 
         if ($zona != null) {
             $this->db->join("usuariodato ud", "u.idUsuario=ud.idUsuario");
-            $this->db->join("ubicacionusuario uu", 'ud.idUsuarioDato=uu.idUsuarioDato');
+            $this->db->join("ubicacionusuario uu", 'ud.idUsuarioDato=uu.idUsuarioDato','left');
             $this->db->where("uu.zonageograficaID", $zona);
         }
 

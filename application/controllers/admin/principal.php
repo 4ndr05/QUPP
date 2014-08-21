@@ -364,6 +364,7 @@ class Principal extends CI_Controller {
         $data['count_adoption_pets'] = $this->admin_model->getCountAdoptionPets();
         $data['count_lost_pets'] = $this->admin_model->getCountLostPets();
         $data['count_directory'] = $this->admin_model->getCountDirectory();
+        $data['anuncios'] = $this->admin_model->getAnuncios(0,2,NULL);
 
 
         $this->load->view("admin/anuncios_view", $data);
@@ -388,8 +389,8 @@ class Principal extends CI_Controller {
 
         $zonas = $this->input->post('zonas');
 
-        if (empty($zonas) || $zonas == null) {
-            $zona = 9;
+        if (empty($zonas) || $zonas == '') {
+            $zona = null;
         }
 
         $seccion = $this->input->post('seccion');
@@ -406,8 +407,9 @@ class Principal extends CI_Controller {
             case "directorio": $seccion = 4;
                 break;
             default:
-                $seccion = 1;
+                $seccion = 2;
         }
+        
         echo json_encode($this->admin_model->getAnuncios($aprobado, $seccion, $zonas));
     }
 
