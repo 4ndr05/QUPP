@@ -239,8 +239,8 @@ Pantallas
 </ul>
 </li>
 <li>
-Usuarios
-<ul>
+<a href="<?php echo base_url()?>admin/principal/getUsuarios" id="usuarios" name="usuarios" class="seccion filtro" style="text-decoration:none; color:#FFF;">Usuarios</a>
+<!--<ul>
 <li>
 <a href="<?php echo base_url()?>#"> <img src="<?php echo base_url()?>images/ciculo.png" /> Altas</a>
 </li>
@@ -250,7 +250,7 @@ Usuarios
 <li>
 <a href="<?php echo base_url()?>#"> <img src="<?php echo base_url()?>images/ciculo.png" /> Consultas</a>
 </li>
-</ul>
+</ul>-->
 </li>
 <li>
 <a href="<?php echo base_url()?>admin/principal/getMensajes" id="mensajes" name="mensajes" class="seccion filtro" style="text-decoration:none; color:#FFF;">Mensajes</a>

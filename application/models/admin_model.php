@@ -336,6 +336,37 @@ class Admin_model extends CI_Model
         return $this->db->get($this->tablas['mensajes'])->result();
     }
 
+    function getPublicacion($publicacionID){
+        $query = $this->db->query('SELECT * FROM publicaciones where publicacionID = '.$publicacionID);
+        if ($query->num_rows() == 1){
+            return $query->row();
+        } else {
+            return null;
+        }
+    }
+
+    function getUsuarios($tipoUsuario,$zona){
+        $q = 'select usuario.*, `ubicacionusuario`.`zonageograficaID`
+                                   from usuario
+                                   left join `usuariodato` on `usuariodato`.`idUsuario` = usuario.`idUsuario`
+                                   left join `ubicacionusuario` on `ubicacionusuario`.`idUsuarioDato` = `usuariodato`.`idUsuarioDato`
+                                   where `usuario`.`tipoUsuario` = '.$tipoUsuario;
+
+        if($zona != '' && $zona != 9){
+            $q .= ' and `ubicacionusuario`.`zonageograficaID` = '.$zona;
+        }
+
+        $q .= ' and status <> 0 and status <> 2 order by usuario.nombre asc';
+        $query = $this->db->query($q);
+        if ($query->num_rows() >= 1){
+            return $query->result();
+        } else {
+            return null;
+        }
+    }
+
+
+
 
 
 

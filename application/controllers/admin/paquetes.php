@@ -38,6 +38,7 @@ class Paquetes extends CI_Controller {
         $data['SYS_metaDescription']    = '';  
         $data['paquetes']    = $this->defaultdata_model->getPaquetes();
         $data['cupones']    = $this->defaultdata_model->getCupones();
+        $data['tiendas']    = $this->defaultdata_model->getTiendas();
         $this->load->view('admin/admin_paquetes_view',$data);
     }
 
@@ -70,7 +71,7 @@ class Paquetes extends CI_Controller {
                         $arrcuponDetalle= array(
                             'descripcion'   => 'cuponTienda',
                             'valor' => $cuponTienda[$i],
-                            'vigencia' => $this->input->post('vigencia'),
+                            'vigencia' => 30,
                             'tipoCupon' => 1,
                             'cuponID' =>$e
                         );

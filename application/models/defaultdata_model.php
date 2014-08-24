@@ -202,5 +202,11 @@ class Defaultdata_model extends CI_Model {
         $this->db->update($this->tablas[$tabla], $data);
         return true;
     }
+
+
+    function getTiendas(){
+      $this->db->where('tipoUsuario',2);
+      return $this->db->get($this->tablas['usuariodetalle'])->result();
+    }
 }
 ?>
