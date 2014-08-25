@@ -136,7 +136,9 @@ class Principal extends CI_Controller {
          $data['zonaT'] = $zona;
          $data['zonaNombre'] = $this->admin_model->getSingleItem('zonaID',$zona,'zonageografica');
          $data['seccionNombre'] = $this->admin_model->getSingleItem('seccionID',$seccion,'seccion');
-        $this->load->view('admin/pantalla_raza_view', $data);
+         $data['contenidos'] = $this->admin_model->getContenidos(8);
+         $data['fotoscontenido'] = $this->admin_model->getFotosContenido();
+         $this->load->view('admin/pantalla_raza_view', $data);
     }
 
     function getMensajes(){
@@ -235,6 +237,9 @@ class Principal extends CI_Controller {
             }
         if($seccionID == 10){
             redirect('admin/principal/getDatosCuriosos/'.$seccionID.'/'.$zonaID);
+        }
+        if($seccionID == 8){
+            redirect('admin/principal/getRazaMes/'.$seccionID.'/'.$zonaID);
         }
          redirect('admin/principal/getPantalla/'.$seccionID.'/'.$zonaID);
         
@@ -707,8 +712,51 @@ $mensaje = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
 
 
     function guardarRaza(){
-        var_dump($_POST);
-        $this->input->post();
+        $numRazas = count($this->admin_model->getContenidos(8));
+        if($numRazas == 4){
+            $razaAnterior = $this->admin_model->topContenido(8);
+            $eliminarRaza = $this->admin_model->deleteItem('contenidoID', $razaAnterior, 'contenido');
+            $eliminarFotos = $this->admin_model->deleteItem('contenidoID', $razaAnterior, 'fotoscontenido');
+        }
+        $data = array(
+            'seccionID' => 8,
+            'seccionDetalle' => 'Raza del mes',
+            'fecha' => date('Y-m-d'),
+            'zonaID' => $this->input->post('zonaRaza'),
+            'nombre' => $this->input->post('nombre'),
+            'mes' => $this->input->post('mes'),
+            'origenes' => $this->input->post('origenes'),
+            'caracter' => $this->input->post('caracter'),
+            'cualidades' => $this->input->post('cualidades'),
+            'colores' => $this->input->post('colores'),
+            'acercaDe' => $this->input->post('acercaDe')
+        );
+        $contenidoID = $this->admin_model->insertItem('contenido',$data);
+        //REGISTRO FOTOS
+        $this->load->library('upload'); 
+
+      
+        $config['upload_path'] = 'images/raza_mes';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '5120';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '768';
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_multi_upload("fotos")) { 
+            $imagenes = $this->upload->get_multi_upload_data(); 
+            foreach ($imagenes as $imagen) {
+               $data = array(
+                    'foto' => $imagen['file_name'], 
+                    'contenidoID' => $contenidoID
+                );
+
+                $fotoID = $this->admin_model->insertItem('fotoscontenido',$data);
+            }
+        }
+
+        redirect('admin/principal/getRazaMes/8/'.$this->input->post('zonaRaza'));
+        
     }
 
 

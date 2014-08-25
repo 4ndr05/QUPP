@@ -44,6 +44,15 @@ if(seccion == 7 || seccion == 8 || seccion == 9 || seccion == 10) {
              //console.log(uno);
      });
 	 
+	 $(".agregarRaza").click(function() {
+		 	
+            var zonaN = $("#zonaIDR").val();
+			$("#zonaRaza").val(zonaN);
+			 muestra('contenedor_agregar_raza');
+             //console.log(uno);
+     });
+	 
+	 
 	 $(".deleteContent").click(function() {
 		 	
              var bannerIDel = $(this).attr('data-rel');
@@ -394,10 +403,10 @@ ZONA- <label id="zonaNombre"><label id="nombreZona"><?=$zonaNombre->zona?></labe
 <div class="titulo_modificaciones"> 
 AGREGAR RAZA
 </div>
-<form action="<?=base_url()?>admin/principal/guardarRaza" method="post">
+<form action="<?=base_url()?>admin/principal/guardarRaza" method="post" enctype="multipart/form-data">
 <div class="contenido_intruciones">
 </br>
-
+<input type="hidden" name="zonaRaza" id="zonaRaza" value="" />
 <table > 
 <tr> 
 <td width="105"> Nombre: </td>
@@ -406,23 +415,23 @@ AGREGAR RAZA
 <tr> 
 <td> Mes: </td>
 <td> <select name="mes" id="mes" class="validate[required]">
- <option value="1"> Enero </option>
- <option value="2"> Febrero </option>
- <option value="3"> Marzo </option>
- <option value="4"> Abril </option>
- <option value="5"> Mayo </option>
- <option value="6"> Junio </option>
- <option value="7"> Julio </option>
- <option value="8"> Agosto </option>
- <option value="9"> Septiembre </option>
- <option value="10"> Octubre </option>
- <option value="11"> Noviembre </option>
- <option value="12"> Diciembre </option> 
+ <option value="Enero"> Enero </option>
+ <option value="Febrero"> Febrero </option>
+ <option value="Marzo"> Marzo </option>
+ <option value="Abril"> Abril </option>
+ <option value="Mayo"> Mayo </option>
+ <option value="Junio"> Junio </option>
+ <option value="Julio"> Julio </option>
+ <option value="Agosto"> Agosto </option>
+ <option value="Septiembre"> Septiembre </option>
+ <option value="Octubre"> Octubre </option>
+ <option value="Noviembre"> Noviembre </option>
+ <option value="Diciembre"> Diciembre </option> 
  </select> </td>
 </tr>
 <tr> 
 <td> Imagenes: </td> 
-<td> <input name="fotos[]" type="file" id="fotos[]" multiple="multiple" class="validate[required]"/> </td>
+<td> <input name="fotos[]" type="file" id="fotos" multiple="multiple" class="validate[required]"/> </td>
 </tr>
 <tr> 
 <td> Origenes: </td>
@@ -578,25 +587,35 @@ Imagen
 <td bgcolor="#E6E7E8"> </td>
 <td bgcolor="#E6E7E8"> </td>
 
-<td bgcolor="#E6E7E8"> <img src="<?=base_url()?>images/agregar.png" onclick="muestra('contenedor_agregar_raza');"/> </td>
+<td bgcolor="#E6E7E8"> <img src="<?=base_url()?>images/agregar.png" class="agregarRaza"/> </td>
 </tr>
-
+<?php 
+if($contenidos != null){
+foreach($contenidos as $contenidoR){?>
 <tr> 
-<td height="307">BOBTAIL  </td>
-<td height="307">ENERO  </td>
-<td> <img src="<?=base_url()?>images/raza_mes/1.png" width="124" height="151" />
-<img src="<?=base_url()?>images/raza_mes/2.png" width="124" height="151" />
+<td height="307"><?=strtoupper($contenidoR->nombre)?></td>
+<td height="307"><?=strtoupper($contenidoR->mes)?></td>
+<td>
+<?php if($fotoscontenido != null){
+	foreach($fotoscontenido as $foto){
+		if($foto->contenidoID == $contenidoR->contenidoID){?>
+ <img src="<?=base_url()?>images/raza_mes/<?=$foto->foto?>" width="124" height="151" />
+<?php }
+	}
+}?>
  </td>
-<td>Es originario de Gran Bretaña donde fue utilizado como perro pastor.
+<td><?=$contenidoR->origenes?>
 </td>
-<td> Es un perro muy fiel e inteligente al que le encanta pasar tiempo con su familia y participar de sus actividades. Tiene un fuerte instinto de pastoreo y hay que hacerle entender que no necesita pastorear a las personas; si no se le marcan bien las pautas que debe seguir puede volverse caprichoso, como ocurre con todas las razas. Son perros muy alegres, afectuosos, cariñosos con los niños que siguen comportándose como cachorros durante bastante tiempo. No es difícil de adiestrar y le encanta jugar. </td>
+<td><?=$contenidoR->caracter?></td>
 <td>   
-Fidelidad y gusto por compartir con su familia.
+<?=$contenidoR->cualidades?>
 </td>
-<td> AZULADOGRIS</td>
-<td>  El Bobtail o antiguo pastor inglés es un perro grande, macizo y de forma cuadrada. Tiene una doble capa de pelaje espeso que le protege del frío y la humedad durante las largas jornadas de pastoreo. La cabeza es grande con un stop pronunciado en el hocico, la nariz negra, las orejas medianas y pegadas a la cabeza, y los ojos marrones o azules (o en ocasiones uno de cada color). El nombre Bobtail viene del inglés y significa "sin cola", lo cual es una destacada característica de esta raza; normalmente nacen ya sin cola.</td>
-<td> <img src="<?=base_url()?>images/editar.png" onclick="muestra('contenedor_agregar_raza');"/> </td>
+<td><?=$contenidoR->colores?></td>
+<td><?=$contenidoR->acercaDe?></td>
+<td> <img src="<?=base_url()?>images/editar.png" id="editar_raza<?=$contenidoR->contenidoID?>"/> </td>
 </tr>
+<?php }
+}?>
 </table>
 <!--       CONTENIDO MEDIO CONTENIDO       -->
 
