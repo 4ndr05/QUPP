@@ -522,7 +522,7 @@ BC00002
 
 <?php if($c->seccionID == 7 ||$c->seccionID == 8 || $c->seccionID == 9 || $c->seccionID == 10 ):  ?>
 
-<tr class="imagenApoyo zona<?=$c->zonaID?><?=$c->seccionID?> row" style="display:none">
+<!--<tr class="imagenApoyo zona<?=$c->zonaID?><?=$c->seccionID?> row" style="display:none">
 <td>
 
 </td>
@@ -546,7 +546,7 @@ Imagen
 <img src="<?php echo base_url()?>images/agregar.png" class="updateText" data-rel="<?php echo $c->bannerID?>" id="2"/>
 </td>
 
-</tr>
+</tr>-->
 <?php endif; ?>
 <tr class="zona<?=$c->zonaID?><?=$c->seccionID?> row " style="display:none;">
 

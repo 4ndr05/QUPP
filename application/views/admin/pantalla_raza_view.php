@@ -1,5 +1,9 @@
 <?php $this -> load -> view('admin/menu_view.php') ?>
+<link rel="stylesheet" href="<?php echo base_url()?>css/validator/validationEngine.jquery.css" type="text/css"/>
+<script src="<?php echo base_url()?>js/funciones_.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo base_url()?>js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/validator/languages/jquery.validationEngine-es.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/validator/jquery.validationEngine.js"></script>
 <script>
 jQuery(document).ready(function(){
 	
@@ -137,6 +141,18 @@ if(seccion == 7 || seccion == 8 || seccion == 9 || seccion == 10) {
 
 
 	 
+});
+
+jQuery(document).ready(function(){
+			// binds form submission and fields to the validation engine
+			jQuery("form").validationEngine({
+				promptPosition           : "topRight",
+				scroll                   : false,
+				ajaxFormValidation       : false,
+				ajaxFormValidationMethod : 'post'
+			});
+
+     
 });
 
 function goToSearch(){
@@ -378,42 +394,55 @@ ZONA- <label id="zonaNombre"><label id="nombreZona"><?=$zonaNombre->zona?></labe
 <div class="titulo_modificaciones"> 
 AGREGAR RAZA
 </div>
-
+<form action="<?=base_url()?>admin/principal/guardarRaza" method="post">
 <div class="contenido_intruciones">
 </br>
 
 <table > 
 <tr> 
 <td width="105"> Nombre: </td>
-<td width="317"> <input type="text"/> </td>
+<td width="317"> <input name="nombre" type="text" id="nombre" class="validate[required]"/> </td>
 </tr>
 <tr> 
 <td> Mes: </td>
-<td> <select> <option> --- </option> </select> </td>
+<td> <select name="mes" id="mes" class="validate[required]">
+ <option value="1"> Enero </option>
+ <option value="2"> Febrero </option>
+ <option value="3"> Marzo </option>
+ <option value="4"> Abril </option>
+ <option value="5"> Mayo </option>
+ <option value="6"> Junio </option>
+ <option value="7"> Julio </option>
+ <option value="8"> Agosto </option>
+ <option value="9"> Septiembre </option>
+ <option value="10"> Octubre </option>
+ <option value="11"> Noviembre </option>
+ <option value="12"> Diciembre </option> 
+ </select> </td>
 </tr>
 <tr> 
 <td> Imagenes: </td> 
-<td> <input type="file"/> </td>
+<td> <input name="fotos[]" type="file" id="fotos[]" multiple="multiple" class="validate[required]"/> </td>
 </tr>
 <tr> 
 <td> Origenes: </td>
-<td> <textarea> </textarea> </td>
+<td> <textarea name="origenes" id="origenes" class="validate[required]"></textarea> </td>
 </tr>
 <tr> 
 <td> Caracter: </td>
-<td> <textarea> </textarea> </td>
+<td> <textarea name="caracter" id="caracter" class="validate[required]"></textarea> </td>
 </tr>
 <tr> 
 <td> Cualidades: </td>
-<td> <textarea></textarea></td>
+<td> <textarea name="cualidades" id="cualidades" class="validate[required]"></textarea></td>
 </tr>
 <tr> 
 <td> Colores: </td>
-<td> <textarea></textarea> </td>
+<td> <textarea name="colores" id="colores" class="validate[required]"></textarea> </td>
  </tr>
  <tr> 
  <td> Sobre la raza: </td>
- <td> <textarea> </textarea> </td>
+ <td> <textarea name="acercaDe" id="acercaDe" class="validate[required]"></textarea> </td>
  
  </tr>
 </table>
@@ -423,10 +452,10 @@ AGREGAR RAZA
 </div>
 <ul class="morado_reg">
 <li>
-Guardar
+<input type="submit" value="Guardar" />
 </li>
 </ul>
-
+</form>
 </div>
 
 </div> <!-- Fin contenedor negro imagenes -->
