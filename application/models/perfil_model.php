@@ -19,7 +19,7 @@ class Perfil_model extends CI_Model{
 	function infoFiscal($idUsuario){
 		
 		$query = $this->db-> query('SELECT b.razonSocial, b.rfc, b.calle, b.noExterior, b.cp, b.municipio, b.estadoID, b.idPais
-from usuario a INNER JOIN usuariodato b ON a.idUsuario = b.idUsuario 
+from usuario a INNER JOIN usuarioDato b ON a.idUsuario = b.idUsuario 
 where a.idUsuario ='.$idUsuario);
 		if ($query->num_rows() == 1){
 			return $query->row();
@@ -31,7 +31,7 @@ where a.idUsuario ='.$idUsuario);
 
 	function infoDetalleN($idUsuario){
 		$query = $this->db-> query('SELECT b.nombreNegocio, b.nombreContacto, b.telefono, b.calle, b.numero, b.colonia, b.municipioC, b.idEstado, b.cp, b.correo, b.paginaWeb, b.Logo, b.descripcion, d.latitud, d.longitud
-FROM usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUsuario AND b.idUsuario = d.idusuariodato AND a.idUsuario ='.$idUsuario);
+FROM usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUsuario AND b.idUsuario = d.idUsuarioDato AND a.idUsuario ='.$idUsuario);
 		if ($query->num_rows() == 1){
 			return $query->row();
 		} else {
@@ -39,15 +39,19 @@ FROM usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUs
 		}
 
 	}
+	function updateItem($itemID, $ID, $data, $tabla)
+    {
+        $this->db->where($itemID, $ID);
+        $this->db->update($this->tablas[$tabla], $data);
+        return true;
+    }
 
     function getAnuncios($idUsuario){
-    	$query = $this->db->query('SELECT distinct a.NombrePaquete, c.seccionNombre, b.titulo, b.vigente, b.fechaVencimiento, b.numeroVisitas, d.idusuario
-									FROM publicaciones b
-									join paquete a on a.`paqueteID` = b.paqueteID
-									join seccion c on c.`seccionID` = `b`.`seccion`
-									join `serviciocontratado` d on `d`.`servicioID` = `b`.`servicioID`
-									join `usuario` e on `e`.`idUsuario` = `d`.`idUsuario`
-									where e.idusuario =  '.$idUsuario);
+    	$query = $this->db->query('SELECT distinct a.NombrePaquete, c.seccionNombre,b.seccion,b.titulo,b.paqueteID, b.vigente, b.fechaVencimiento, b.numeroVisitas, b.publicacionID,b.aprobada,d.vigencia,d.precio,d.caracteres,d.cantFotos,d.videos,d.cupones FROM Paquete a, publicaciones b, seccion c , serviciocontratado d, usuario e 
+    		WHERE a.paqueteID = b.paqueteID
+			AND b.seccion = c.seccionID
+			AND d.idusuario = e.idusuario
+			And e.idusuario ='.$idUsuario.' group by b.publicacionID');
     	if ($query->num_rows() >= 1){
 			return $query->result();
 		} else {
@@ -57,14 +61,12 @@ FROM usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUs
     }
 
     function getAnunciosAct($idUsuario){
-    	$query = $this->db->query('SELECT distinct a.NombrePaquete, c.seccionNombre, b.titulo, b.vigente, b.fechaVencimiento, b.numeroVisitas, d.idusuario
-									FROM publicaciones b
-									join paquete a on a.`paqueteID` = b.paqueteID
-									join seccion c on c.`seccionID` = `b`.`seccion`
-									join `serviciocontratado` d on `d`.`servicioID` = `b`.`servicioID`
-									join `usuario` e on `e`.`idUsuario` = `d`.`idUsuario`
-									AND b.vigente = 1
-									And e.idusuario ='.$idUsuario);
+    	$query = $this->db->query('SELECT distinct a.NombrePaquete, c.seccionNombre,b.seccion,b.paqueteID, b.titulo, b.vigente, b.fechaVencimiento, b.numeroVisitas, b.publicacionID,b.aprobada,d.vigencia,d.precio,d.caracteres,d.cantFotos,d.videos,d.cupones FROM Paquete a, publicaciones b, seccion c , serviciocontratado d, usuario e 
+    		WHERE a.paqueteID = b.paqueteID
+			AND b.seccion = c.seccionID
+			AND d.idusuario = e.idusuario
+			AND b.vigente = 1
+			And e.idusuario ='.$idUsuario.' group by b.publicacionID');
     	if ($query->num_rows() >= 1){
 			return $query->result();
 		} else {
@@ -74,14 +76,12 @@ FROM usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUs
     }
 
     function getAnunciosInAct($idUsuario){
-    	$query = $this->db->query('SELECT distinct a.NombrePaquete, c.seccionNombre, b.titulo, b.vigente, b.fechaVencimiento, b.numeroVisitas, d.idusuario
-									FROM publicaciones b
-									join paquete a on a.`paqueteID` = b.paqueteID
-									join seccion c on c.`seccionID` = `b`.`seccion`
-									join `serviciocontratado` d on `d`.`servicioID` = `b`.`servicioID`
-									join `usuario` e on `e`.`idUsuario` = `d`.`idUsuario`
-									AND b.vigente = 0
-									And e.idusuario ='.$idUsuario);
+    	$query = $this->db->query('SELECT distinct a.NombrePaquete, c.seccionNombre,b.seccion,b.paqueteID,b.titulo, b.vigente, b.fechaVencimiento, b.numeroVisitas, b.publicacionID,b.aprobada,d.vigencia,d.precio,d.caracteres,d.cantFotos,d.videos,d.cupones FROM Paquete a, publicaciones b, seccion c , serviciocontratado d, usuario e 
+    		WHERE a.paqueteID = b.paqueteID
+			AND b.seccion = c.seccionID
+			AND d.idusuario = e.idusuario
+			AND b.vigente = 0
+			And e.idusuario ='.$idUsuario.' group by b.publicacionID');
     	if ($query->num_rows() >= 1){
 			return $query->result();
 		} else {
@@ -115,12 +115,11 @@ FROM usuario a, usuarioDetalle b , UbicacionUsuario D WHERE a.idUsuario = b.idUs
     }
 
     function getFavoritos($idUsuario){
-    	$query = $this->db->query('SELECT * from favoritos d, publicaciones a, serviciocontratado b, usuario c, estado e,raza r
+    	$query = $this->db->query('SELECT * from favoritos d, publicaciones a, serviciocontratado b, usuario c, estado e
 			where a.servicioID = b.servicioID
 			and b.idUsuario = c.idUsuario
 			and d.publicacionID = a.publicacionID
 			and a.estadoID = e.estadoID
-			and a.razaID = r.razaID
 			and d.idusuario =' .$idUsuario);
     	if ($query->num_rows() >= 1){
 			return $query->result();
@@ -159,8 +158,46 @@ where compra.`usuarioID` ='.$idUsuario);
 		} else {
 			return null;
 		}
+    }
 
 
+    function getPublicacion($publicacionID){
+    	$query = $this->db->query('SELECT * FROM publicaciones where publicacionID = '.$publicacionID);
+    	if ($query->num_rows() == 1){
+			return $query->row();
+		} else {
+			return null;
+		}
+    }
+
+    function getImagenes($publicacionID){
+    	$query = $this->db->query('SELECT * FROM fotospublicacion where publicacionID = '.$publicacionID);
+    	if ($query->num_rows() >= 1){
+			return $query->result();
+		} else {
+			return null;
+		}
+    }
+
+     function getVideos($publicacionID){
+    	$query = $this->db->query('SELECT * FROM videos where publicacionID = '.$publicacionID);
+    	if ($query->num_rows() >= 1){
+			return $query->result();
+		} else {
+			return null;
+		}
+    }
+
+    function deleteVideos($id){
+        $this -> db -> where('publicacionID', $id);
+        $this -> db -> delete($this -> tablas['videos']);
+        return true;
+    }
+
+    function deleteFotos($id){
+        $this -> db -> where('publicacionID', $id);
+        $this -> db -> delete($this -> tablas['fotospublicacion']);
+        return true;
     }
 
 }

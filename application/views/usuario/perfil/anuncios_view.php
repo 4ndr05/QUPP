@@ -32,7 +32,7 @@
   <th width="92"> Popularidad </th>
   <th width="142"> Renovar/</br>Cancelar </th>
   </tr>
-  <?php if ($anuncios != Null) {?>
+  <?php if ($anuncios != null) {?>
   <?php 
   foreach ($anuncios as $anuncio) { ?>
     <tr>
@@ -43,25 +43,30 @@
             <?php } elseif ($anuncio->NombrePaquete == 'Regular') {?>
                 <td><img src="<?php echo base_url()?>images/ico_regular.png" width="34" height="34"/>
                 </br>
-                <font class="lite"> Regular </font> </td>        
+                <font class="regular"> Regular </font> </td>        
             <?php  } else { ?>
                 <td><img src="<?php echo base_url()?>images/ico_premium.png" width="34" height="34"/>
-                </br><font class="lite"> Premium </font> </td>        
+                </br><font class="premium"> Premium </font> </td>        
             <?php } ?>
             
             <td> <?php echo $anuncio->seccionNombre ?> </td>
             <td> <?php echo $anuncio->titulo ?> </td>
             <td>
-                <?php if ($anuncio->vigente == 1) {?>
+                <?php if ($anuncio->vigente == 1 && $anuncio->aprobada == 1) {?>
                 Activo
-                <?php } else { ?>
+                <?php } elseif($anuncio->vigente == 1 && $anuncio->aprobada == 0)  { ?>
+                Pendiente de Aprobacion
+                <?php } elseif($anuncio->vigente == 1 && $anuncio->aprobada == 2)  { ?>
+                Declinado
+                <?php } elseif($anuncio->vigente == 0) { ?>
                 Inactivo
                 <?php } ?>
 
             </td>
             <td> <?php echo $anuncio->fechaVencimiento ?> </td>
             <td> <?php echo $anuncio->numeroVisitas ?> </td>
-            <td> <ul class="boton_gris_perfil_tabla"> <li> Renovar </li> </ul> </td>
+            <td> <ul class="boton_gris_perfil_tabla"> <li><a href="#"  class="paquete_renovar reset"
+   data-paquete='{"id":"<?php echo $anuncio->paqueteID ?>","nombre":"<?php echo $anuncio->NombrePaquete ?>","vigencia":"<?php echo $anuncio->vigencia ?>","precio":"<?php echo $anuncio->precio ?>","caracteres":"<?php echo $anuncio->caracteres ?>","cantFotos":"<?php echo $anuncio->cantFotos ?>","videos":"<?php echo $anuncio->videos ?>","cupones":"<?php echo $anuncio->cupones ?>","seccion":"<?php echo $anuncio->seccion?>","publicacionID":"<?php echo $anuncio->publicacionID?>"}'>Renovar</a></li> </ul> </td>
     </tr>
   <?php } ?>
 
@@ -80,7 +85,7 @@
   <th width="92"> Popularidad </th>
   <th width="142"> Renovar/</br>Cancelar </th>
   </tr>
-<?php if ($anunciosAct != Null) {?>
+<?php if ($anunciosAct != null) {?>
   <?php 
   foreach ($anunciosAct as $anuncio) { ?>
     <tr>
@@ -91,10 +96,10 @@
             <?php } elseif ($anuncio->NombrePaquete == 'Regular') {?>
                 <td><img src="<?php echo base_url()?>images/ico_regular.png" width="34" height="34"/>
                 </br>
-                <font class="lite"> Regular </font> </td>        
+                <font class="regular"> Regular </font> </td>        
             <?php  } else { ?>
                 <td><img src="<?php echo base_url()?>images/ico_premium.png" width="34" height="34"/>
-                </br><font class="lite"> Premium </font> </td>        
+                </br><font class="premium"> Premium </font> </td>        
             <?php } ?>
             
             <td> <?php echo $anuncio->seccionNombre ?> </td>
@@ -128,7 +133,7 @@
   <th width="92"> Popularidad </th>
   <th width="142"> Renovar/</br>Cancelar </th>
   </tr>
-<?php if ($anunciosInAct != Null) {?>
+<?php if ($anunciosInAct != null) {?>
   <?php 
   foreach ($anunciosInAct as $anuncio) { ?>
   
@@ -165,3 +170,14 @@
 
  </table>
  </div>
+ 
+ 
+ <!--EDICION DE ANUNCIO-->
+<div id="contenedor_publicar_anuncio" class="contenedor_publicar" style=" display:none">
+
+    <!-- Inicio contenedor pap publicar anuncio aunucio !-->
+    <div id="publicar_anuncio" class="pubicar_anuncio_mini">
+        <?php $this->load->view('partial/_pasos_anuncio_renovar', array('paquetes' => $paquetes, 'estados' => $estados, 'razas' => $razas,'cupones' => $cupones,'anuncios'=> $anuncios)); ?>
+
+    </div>
+</div>

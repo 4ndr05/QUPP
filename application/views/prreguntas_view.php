@@ -4,7 +4,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Quienes somos-Quierounperro.com</title>
+<title>Preguntas Frecuentes-Quierounperro.com</title>
 <link rel="shortcut icon" href="<?php echo base_url()?>images/ico.ico" />  
 <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/reset.css" media="screen"/>
  <link rel="stylesheet" href="<?php echo base_url()?>css/jPages.css">
@@ -74,7 +74,9 @@ if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
   <link type="text/css" rel="stylesheet" href="<?php echo base_url() ?>css/quienes.css" media="screen"></link>
 
 
-<script type="text/javascript">
+  <link type="text/css" rel="stylesheet" href="<?=base_url()?>css/preguntas_frecuentes.css" media="screen"></link>
+  
+ <script type="text/javascript">
   jQuery(document).ready(function () {
             // binds form submission and fields to the validation engine
             jQuery("form").validationEngine({
@@ -86,11 +88,12 @@ if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
 
 
         });
-</script>
+</script> 
+
 
 </head>
-<body>
 
+<body>
 
 
 <div id="iconos_ocultos" class="iconos_ocultos">
@@ -119,11 +122,8 @@ if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
 </div>
 
 <?php $this->load->view('general/menu_view')?>
-
-
-
 <div class="titulo_seccion">
-¿QUIÉNES SOMOS?
+PREGUNTAS FRECUENTES
 
 </div>
 
@@ -138,24 +138,80 @@ if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
 </ul>
 </div>
 
-<div class="central_quienes"> 
+<div class="central_frecuentes"> 
 <p> 
-QuieroUnPerro.com es un sitio creado para la comunidad amante de los perros. En este portal podrás encontrar el perrito que siempre buscaste, conseguir la pareja perfecta para cruzarlo o buscarlo en caso de que esté perdido. Aquí también podrás adoptar a aquéllos que son abandonados y viven en terribles condiciones o ayudar a buscarles una familia.
+
+<p><font class="sub_frecuentes">1.- ¿Cuántos anuncios se pueden publicar por usuario?</font>
 </br>
-QuieroUnPerro.com está comprometido con la sociedad y ofrece espacios gratuitos para promover y concientizar acerca del respeto y cuidado de las mascotas. Tenemos por objetivo solucionar todas tus necesidades relacionadas al mejor amigo del hombre, abriendo canales de comunicación para contactar a otros amantes de perros y compartir experiencias.
+- No existe un límite de anuncios para publicar por usuario. Cuando eres un usuario nuevo, tienes derecho a un anuncio de prueba gratis. Una vez utilizado, puedes adquirir la cantidad de anuncios que desees publicar. </p>
 </br>
-En este portal encontrarás información de todo tipo de eventos caninos, promociones, artículos de interés y un amplio directorio de productos y servicios para tu peludo, buscando siempre darle lo mejor a tu mascota.
-</p>
-<div class="sub_quienes"> LA COMINIDAD QUP</div>
 <p>
-La comunidad de QuieroUnPerro.com (QUP) está conformada por diversas organizaciones y asociaciones de protección animal que unen esfuerzos para procurar el cuidado, bienestar y respeto hacia los animales. QUP te invita a formar parte de los voluntarios que participan apoyando a dichas asociaciones en sus múltiples campañas y actividades de rescate, adopción, esterilización, entre otras. Si quieres unirte, por favor contáctanos a través del correo ayuda@quierounperro.com.
+<font class="sub_frecuentes">2.- ¿Con que medidas de seguridad cuenta el sitio?</font>
+</br>
+- El sitio cuenta con una programación segura, de manera que todos tus datos e información se encuentran encriptados. Las transacciones se realizan directamente con el banco, de esta manera el sitio no tiene acceso a tu información bancaria. Además, está soportado por un dominio HTTPS que garantiza la seguridad del usuario.
 </p>
+</br>
+<p>
+<font class="sub_frecuentes">3.- ¿Por qué no puedo ingresar a mi cuenta?</font>
+</br>
+a) El usuario y/o la contraseña son incorrectos, puedes utilizar el campo de solicitud de contraseña y ésta te será enviada a la cuenta de correo electrónico que está registrado en tu perfil de usuario. b) Tu cuenta ha sido cancelada debido a que se violaron una o más de las políticas y/o términos y condiciones de uso de QuieroUnPerro.com
+</p>
+</br>
+<p>
+<font class="sub_frecuentes">4.- ¿Por qué mi cuenta de usuario se ha cancelado?</font>
+</br>
+Existen varias  razones por las cuales se cancela una cuenta:
+-	El usuario ha violado una o más de las políticas y/o términos y condiciones de uso de QuieroUnPerro.com
+</br>
+-	El usuario ha publicado anuncios o comentarios que atentan contra la moral, la salud, y las buenas costumbres.
+</br>
+-	El usuario ha publicado información falsa en el sitio o ha intentado hacer transacciones fraudulentas.
+</br>
+-	El usuario ha publicado un anuncio de venta o cruza en las secciones de adopción o perros perdidos debido a que son secciones gratuitas y de servicio a la comunidad.
+</br>
+</p>
+</br>
+<p>
+<font class="sub_frecuentes">5.- ¿Si olvidé mi cuenta, tengo que crear otro usuario?</font>
+</br>
+- No. Para recuperar tu usuario y contraseña solamente necesitas utilizar el campo para recuperar contraseña vía correo electrónico, que está situado en la sección lateral izquierda de la página de inicio en la sección de mi cuenta. 
+</p>
+</br>
+<p>
+<font class="sub_frecuentes">6.- ¿Cómo puedo subir las fotos a mi anuncio?</font>
+</br>
+- Una vez que te encuentres en el tercer paso de creación de anuncio, deberás seleccionar el botón "cargar imágenes" y se abrirá una ventana para seleccionar las imágenes de tu computadora. Si las imágenes son de un tamaño superior a 1MB el tiempo de carga puede tardar unos minutos.
+</p>
+</br>
+<p>
+<font class="sub_frecuentes">7.- ¿Cómo puedo saber si mi anuncio ya fue publicado?</font>
+</br>
+- Una vez que termines el proceso de creación de anuncio, éste será revisado y aprobado para su publicación en el sitio, a pesar de ya haber sido pagado. Este proceso puede llegar a tardar hasta 12 horas hábiles. Puedes consultar el estatus de tu anuncio en cualquier momento en tu perfil de usuario. Una vez autorizado, éste será publicado en la sección previamente seleccionada y será visible para todos los visitantes del sitio.
+</p>
+</br>
+<p>
+<font class="sub_frecuentes"> 8.-  Ya pasaron 12 horas hábiles y mi anuncio no ha sido publicado, ¿qué sucede? </font>
+</br>
+- Puede ser que el contenido del anuncio atente contra las políticas y términos y condiciones de QuieroUnPerro.com. Si este es el caso, recibirás un correo electrónico donde se te comunique lo sucedido y los pasos a seguir. Si no lo has recibido, por favor envia un correo a contacto@quierounperro.com.
+</p>
+</br>
+<p>
+<font class="sub_frecuentes">9.- ¿Cuál es la vigencia de los anuncios en las secciones de publicación?</font>
+</br>
+-La vigencia de los anuncios varía dependiendo del tipo de paquete que se ha contratado, para el caso de los paquetes Lite y Regular es de 30 días, y para los paquetes Premium es de 60 días.
+</p>
+</br>
+<p>
+<font class="sub_frecuentes">10.- ¿Cómo  puedo  anunciar mi marca, producto, servicio o evento en la página?</font>
+</br>
+- Envía un correo a la dirección publicidad@quierounperro.com y llena la información que se solicita. Un representante se pondrá en contacto contigo para mayor información
+</p>
+
 
 
 
 
  </div>
-
 
 <div id="slideshow_anuncio" class="contenedor_banner"> 
 <img src="<?php echo base_url() ?>images/6.png" />

@@ -69,7 +69,6 @@ class Cuenta extends CI_Controller {
         $marker['ondragend'] = 'updateDatabase(event.latLng.lat(), event.latLng.lng());';
         //$marker['ondragend'] = 'alert(\'You just dropped me at: \' + event.latLng.lat() + \', \' + event.latLng.lng());';
         $this->googlemaps->add_marker($marker);
-        var_dump($this->session->userdata('tipoUsuario'));
 
         $this->load->view('index_view', $data);
     }
@@ -122,13 +121,19 @@ class Cuenta extends CI_Controller {
         $data['myInfo']    = $this->usuario_model->getMyInfo($this->session->userdata('idUsuario'));
         $data['info']     = $this->usuario_model->getInfoCompleta($this->session->userdata('idUsuario'));
         $data['estados']    = $this->defaultdata_model->getEstados();
-
+        $data['paquetes'] = $this->defaultdata_model->getPaquetes();
+        $data['razas'] = $this->defaultdata_model->getRazas();
+        if(is_logged()){
+            $cupones = $this->usuario_model->getCuponesUsuario($this->session->userdata('idUsuario'));
+            $data['cupones'] = $cupones;
+        }
         if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
             $data['ubicacion'] = $this->usuario_model->miUbicacion($this->session->userdata('idUsuarioDato'));
             $data['giro'] = $this->usuario_model->getGiro($this->session->userdata('idUsuarioDetalle'));
         }
         $data['seccion'] = 5;
-         $this->load->view('usuario/myprofile_view',$data);
+        $data['banner'] = $this->defaultdata_model->getTable('banner');
+        $this->load->view('usuario/myprofile_view',$data);
     }
 
     function miPerfil(){
@@ -165,7 +170,6 @@ class Cuenta extends CI_Controller {
     }
 
     function updateMiPerfilF(){
-        var_dump($_POST);
         $data= array(
             'razonSocial'=> $this->input->post('razon'),
             'rfc'=> $this->input->post('RFC'),
@@ -189,7 +193,15 @@ class Cuenta extends CI_Controller {
         $data['anuncios'] = $this->perfil_model->getAnuncios($this->session->userdata('idUsuario'));
         $data['anunciosAct'] = $this->perfil_model->getAnunciosAct($this->session->userdata('idUsuario'));
         $data['anunciosInAct'] = $this->perfil_model->getAnunciosInAct($this->session->userdata('idUsuario'));
-
+        $data['estados']    = $this->defaultdata_model->getEstados();
+        $data['paquetes'] = $this->defaultdata_model->getPaquetes();
+        $data['razas'] = $this->defaultdata_model->getRazas();
+        $data['seccion'] = 5;
+        $data['banner'] = $this->defaultdata_model->getTable('banner');
+        if(is_logged()){
+            $cupones = $this->usuario_model->getCuponesUsuario($this->session->userdata('idUsuario'));
+            $data['cupones'] = $cupones;
+        }
 
 
         if($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3){
@@ -361,5 +373,33 @@ Bienvenido</td></tr>
             }
         echo json_encode($data);
 
+    }
+
+    function publicacion(){
+        $publicacionID = $this->input->post('publicacionID');
+        $data['response'] ='true';
+        $data = array();
+        $publicacion = $this->perfil_model->getPublicacion($publicacionID);
+        if($publicacion != null){
+        foreach($publicacion as $k => $v){
+            $data[$k] = $v;
+        }
+        $data['response'] ='true';
+        }
+        echo json_encode($data);
+    }
+
+    function imagenes(){
+        $publicacionID = $this->input->post('publicacionID');
+        $data['response'] ='true';
+        $data = array();
+        $publicacion = $this->perfil_model->getImagenes($publicacionID);
+        if($publicacion != null){
+        foreach($publicacion as $k => $v){
+            $data[$k] = $v;
+        }
+        $data['response'] ='true';
+        }
+        echo json_encode($data);
     }
 }
