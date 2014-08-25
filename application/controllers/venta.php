@@ -48,7 +48,7 @@ class Venta extends CI_Controller {
         $data['razas'] = $this->defaultdata_model->getRazas();
         $data['giros'] = $this->defaultdata_model->getGiros();
         $data['publicaciones'] = $this->venta_model->getAnuncios(self::$seccion);
-        $data['seccion'] = self::$seccion;
+        $data['seccion'] = 2;
 
         $this->load->view('venta_view', $data);
     }

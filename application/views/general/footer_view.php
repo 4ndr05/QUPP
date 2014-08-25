@@ -1,3 +1,16 @@
+<script>
+            if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
+
+                document.write('<link type="text/css" rel="stylesheet" href="<?php echo base_url() ?>css/index_.css" media="screen"></link> <link type="text/css" rel="stylesheet" href="<?php echo base_url() ?>css/general.css" media="screen"></link> ');
+            }
+            if (navigator.appName == "Microsoft Internet Explorer") {
+
+                document.write('<link type="text/css" rel="stylesheet" href="<?php echo base_url() ?>css/index_explorer.css" media="screen"></link>');
+            }
+        </script>
+        
+        
+
 <div id="menu_inferior" align="center">
     <div id="acerca_nosotros" class="menu_inferiror">
         <p class="title_final">Acerca de nosotros</p>
@@ -6,7 +19,7 @@
             <ul class="sub_menu_inferior">
                 <li onclick="window.location.href='<?=base_url()?>quienes'"> - ¿Quiénes Somos?
                 </li>
-                <li>- La comunidad QUP</li>
+                <li onclick="window.location.href='<?=base_url()?>quienes#sub_quienes'">- La comunidad QUP</li>
             </ul>
         </div>
     </div>
@@ -27,9 +40,9 @@
         <div class="contenido_final">
             <ul class="sub_menu_inferior">
                 <li>- Tutorial</li>
-                <li onclick="muestra('publicidad');">- Publicidad</li>
-                <li onclick="muestra('soporte');">- Soporte</li>
-                <li>- Preguntas Frecuentes</li>
+                <li onclick="window.location.href='<?=base_url()?>quienes/publicidad/1'"> - Publicidad</li>
+                <li onclick="window.location.href='<?=base_url()?>quienes/publicidad/2'"> - Soporte</li>
+                <li onclick="window.location.href='<?=base_url()?>quienes/preguntas'">- Preguntas Frecuentes</li>
             </ul>
         </div>
     </div>

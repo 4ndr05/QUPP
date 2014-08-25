@@ -157,7 +157,14 @@ NEGOCIO
 <?php if($cupones != null){
 	foreach($cupones as $cupon){
 		if($cupon->paqueteID == $paquete->paqueteID && $cupon->tipoCupon == 3){?>
-<p id="cupon<?=$paquete->paqueteID?>"><select name="cuponNegocioTienda[]"id="cuponNegocioTienda" class="validate[required]"><option value> Seleccione </option><option value="Tienda 1" <?=($cupon->descripcion == 'Tienda 1') ? 'selected="selected"' : ''?>> Tienda 1 </option><option value="Tienda 2" <?=($cupon->descripcion == 'Tienda 2') ? 'selected="selected"' : ''?>> Tienda 2 </option></select><input name="cuponNegocio[]" type="text" id="cuponNegocio" size="3" class="validate[required],custom[number]" value="<?=$cupon->valor;?>"/>% <a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a>
+<p id="cupon<?=$paquete->paqueteID?>"><select name="cuponNegocioTienda[]"id="cuponNegocioTienda" class="validate[required]">
+<option value> Seleccione </option>
+<?php if($tiendas != null){
+		foreach ($tiendas as $tienda) { ?>
+			<option value="<?=$tienda->nombreNegocio?>" <?=($cupon->descripcion == $tienda->nombreNegocio) ? 'selected="selected"' : ''?>><?=$tienda->nombreNegocio?></option>
+<?php		}
+	}?>
+</select><input name="cuponNegocio[]" type="text" id="cuponNegocio" size="3" class="validate[required],custom[number]" value="<?=$cupon->valor;?>"/>% <a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a>
 <?php }}}?>
 
 </td>

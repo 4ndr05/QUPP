@@ -909,9 +909,32 @@ Fidelidad y gusto por compartir con su familia.
       
 
 <div class="slideshow_tres" >
-<img src="images/banner_inferior/1.png" width="638" height="93"/>
-<img src="images/banner_inferior/2.png" width="638" height="93"/>
-<img src="images/banner_inferior/3.png" width="638" height="93"/>
+<?php $banner = $this->session->userdata('banner'); ?>
+                <?php
+                if (is_logged() && ($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3)) {
+                    if ($banner != null) {
+
+                        foreach ($banner as $contenido) {
+                            if ($this->session->userdata('zonaID') == $contenido->zonaID && $contenido->posicion == 3 && $contenido->seccionID == $seccion) {
+                                ?>
+                                <img src="<?php echo base_url()?>images/<?php echo $contenido->imgbaner; ?>" width="638" height="93"/>
+                            <?php
+                            }
+                        }
+                    }
+                } else {
+
+                    if ($banner !== null && !empty($banner)) {
+                        foreach ($banner as $contenido) {
+                            if ($contenido->zonaID == 9 && $contenido->posicion == 3 && $contenido->seccionID == $seccion) {
+                                ?>
+                                <img src="<?php echo base_url()?>images/<?php echo $contenido->imgbaner; ?>" width="638" height="93"/>
+                            <?php
+                            }
+                        }
+                    }
+                }
+                ?>
 	</div>
     
 <div class="division_menu_inferior"> </div>
