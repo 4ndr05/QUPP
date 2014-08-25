@@ -1,5 +1,9 @@
 <?php $this -> load -> view('admin/menu_view.php') ?>
+<link rel="stylesheet" href="<?php echo base_url()?>css/validator/validationEngine.jquery.css" type="text/css"/>
+<script src="<?php echo base_url()?>js/funciones_.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo base_url()?>js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/validator/languages/jquery.validationEngine-es.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/validator/jquery.validationEngine.js"></script>
 <script>
 jQuery(document).ready(function(){
 	
@@ -39,6 +43,24 @@ if(seccion == 7 || seccion == 8 || seccion == 9 || seccion == 10) {
 			 muestra('contenedor_texto_apoyo');
              //console.log(uno);
      });
+	 
+	  $(".agregarEvento").click(function() {
+		 	
+            var zonaN = $("#zonaIDR").val();
+			$(".zonaRaza").val(zonaN);
+			 muestra('contenedor_agregar_evento');
+             //console.log(uno);
+     });
+	 $(".editEvento").click(function() {
+		 	
+            var zonaN = $("#zonaIDR").val();
+			$(".zonaRaza").val(zonaN);
+     });
+	 
+	  $("body").on("click",".eliminar", function(e){
+            $(this).parent('p').remove(); 
+        return false;
+    });
 	 
 	 $(".deleteContent").click(function() {
 		 	
@@ -137,6 +159,17 @@ if(seccion == 7 || seccion == 8 || seccion == 9 || seccion == 10) {
 
 
 	 
+});
+jQuery(document).ready(function(){
+			// binds form submission and fields to the validation engine
+			jQuery("form").validationEngine({
+				promptPosition           : "topRight",
+				scroll                   : false,
+				ajaxFormValidation       : false,
+				ajaxFormValidationMethod : 'post'
+			});
+
+     
 });
 
 function goToSearch(){
@@ -370,44 +403,64 @@ PANTALLAS- <label id="nombreSeccion"><label id="seccion"><?=$seccionNombre->secc
 ZONA- <label id="zonaNombre"><label id="nombreZona"><?=$zonaNombre->zona?></label></label>
 </div>
 
+<?php if($contenidos != null){
+	foreach($contenidos as $c){?>
 <!--CONTENIDOS DEL EVENTO DEL MES-->
-<div class="contenedor_modificaciones" id="contenedor_agregar_evento" style="display:none"> <!-- Contenedor negro imagenes-->
-<div class="cerrar_modificaciones"> <img src="<?=base_url()?>images/cerrar.png" onclick="oculta('contenedor_agregar_evento');"/> </div>
+<div class="contenedor_modificaciones" id="contenedor_editar_evento<?=$c->contenidoID?>" style="display:none"> <!-- Contenedor negro imagenes-->
+<div class="cerrar_modificaciones"> <img src="<?=base_url()?>images/cerrar.png" onclick="oculta('contenedor_editar_evento<?=$c->contenidoID?>');"/> </div>
 
 
 <div class="modificaciones"> 
+<form action="<?=base_url()?>admin/principal/editarEvento/<?=$c->contenidoID?>" method="post" enctype="multipart/form-data">
 <div class="titulo_modificaciones"> 
 AGREGAR EVENTO
 </div>
 
 <div class="contenido_intruciones">
+</br>
+<input type="hidden" name="zonaRaza" id="zonaRaza" class="zonaRaza" value="9" />
+
 <p>Ingrese los datos del evento</p>
 </br>
 
-<table width="420" height="221"> 
+<table width="420" height="234"> 
 <tr> 
-<td width="91"> Titulo: </td>
-<td width="317"> <input type="text"/> </td>
+<td width="91" height="39"> Titulo: </td>
+<td width="317"> <input name="nombre" type="text" id="nombre" value="<?=$c->nombre?>" class="validate[required]"/> </td>
 </tr>
 <tr> 
 <td> Imagen: </td>
-<td> <input type="file"/> </td>
+<td> <input name="fotos[]" type="file" id="fotos" /> </td>
+</tr>
+<tr>
+<td></td>
+<td><?php if($fotoscontenido != null){
+	foreach($fotoscontenido as $foto){
+		if($foto->contenidoID == $c->contenidoID){?>
+ <p><img src="<?=base_url()?>images/eventos/<?=$foto->foto?>" width="40"/> <input type="hidden" id="imagen" name="imagen[]" value="<?=$foto->foto?>"/><a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a></p>
+<?php }
+	}
+}?></td>
 </tr>
 <tr> 
 <td> Fecha: </td>
-<td> <input type="text" /> </td>
+<td> <input name="fecha" type="text" id="fecha" value="<?=$c->fecha?>" class="validate[required]"/> </td>
 </tr>
 <tr> 
 <td> Hora: </td>
-<td> <input type="text" />  </td>
+<td> <input name="horario" type="text" id="horario" value="<?=$c->horario?>" class="validate[required]"/>  </td>
 </tr>
 <tr>
 <td> Lugar: </td>
-<td> <input type="text"/> </td>
+<td> <input name="lugar" type="text" id="lugar" value="<?=$c->lugar?>" class="validate[required]"/> </td>
+</tr>
+<tr>
+<td> Domicilio: </td>
+<td> <input name="domicilio" type="text" id="domicilio" value="<?=$c->domicilio?>" class="validate[required]"/> </td>
 </tr>
 <tr> 
 <td> Contenido: </td> 
-<td> <textarea></textarea> </td></tr>
+<td> <textarea name="texto" id="texto" class="validate[required]"><?=$c->texto?></textarea> </td></tr>
 </table>
 
 
@@ -415,10 +468,77 @@ AGREGAR EVENTO
 </div>
 <ul class="morado_reg">
 <li>
-Guardar
+<input type="submit" value="Guardar" />
 </li>
 </ul>
+</form>
+</div>
 
+</div> <!-- Fin contenedor negro imagenes -->
+<!--FIN CONTENIDO DEL MES-->
+</br>
+
+<?php }
+}?>
+
+
+<!--CONTENIDOS DEL EVENTO DEL MES-->
+<div class="contenedor_modificaciones" id="contenedor_agregar_evento" style="display:none"> <!-- Contenedor negro imagenes-->
+<div class="cerrar_modificaciones"> <img src="<?=base_url()?>images/cerrar.png" onclick="oculta('contenedor_agregar_evento');"/> </div>
+
+
+<div class="modificaciones"> 
+<form action="<?=base_url()?>admin/principal/guardarEvento" method="post" enctype="multipart/form-data">
+<div class="titulo_modificaciones"> 
+AGREGAR EVENTO
+</div>
+
+<div class="contenido_intruciones">
+</br>
+<input type="hidden" name="zonaRaza" id="zonaRaza" class="zonaRaza" value="9" />
+
+<p>Ingrese los datos del evento</p>
+</br>
+
+<table width="420" height="234"> 
+<tr> 
+<td width="91" height="39"> Titulo: </td>
+<td width="317"> <input name="nombre" type="text" id="nombre" class="validate[required]"/> </td>
+</tr>
+<tr> 
+<td> Imagen: </td>
+<td> <input name="fotos[]" type="file" id="fotos" /> </td>
+</tr>
+<tr> 
+<td> Fecha: </td>
+<td> <input name="fecha" type="text" id="fecha" class="validate[required]" class="validate[required]"/> </td>
+</tr>
+<tr> 
+<td> Hora: </td>
+<td> <input name="horario" type="text" id="horario" class="validate[required]" />  </td>
+</tr>
+<tr>
+<td> Lugar: </td>
+<td> <input name="lugar" type="text" id="lugar" class="validate[required]"/> </td>
+</tr>
+<tr>
+<td> Domicilio: </td>
+<td> <input name="domicilio" type="text" id="domicilio" class="validate[required]"/> </td>
+</tr>
+<tr> 
+<td> Contenido: </td> 
+<td> <textarea name="texto" id="texto" class="validate[required]"></textarea> </td></tr>
+</table>
+
+
+
+</div>
+<ul class="morado_reg">
+<li>
+<input type="submit" value="Guardar" />
+</li>
+</ul>
+</form>
 </div>
 
 </div> <!-- Fin contenedor negro imagenes -->
@@ -519,7 +639,7 @@ Imagen
 <!--       CONTENIDO SUPERIOR       -->
 
 <!--       CONTENIDO MEDIO ARTICULO       -->
-<table width="992" height="120" align="center" class="tabla_carrito"> 
+<table width="992" height="419" align="center" class="tabla_carrito"> 
 <tr> 
 <th width="128"> Titulo </th>
 <th width="104"> Imagen </th>
@@ -531,30 +651,39 @@ Imagen
 <th width="103"> </th>
 </tr>
 <tr> 
-<td height="74" bgcolor="#E6E7E8"> </td>
 <td bgcolor="#E6E7E8"> </td>
 <td bgcolor="#E6E7E8"> </td>
 <td bgcolor="#E6E7E8"> </td>
 <td bgcolor="#E6E7E8"> </td>
 <td bgcolor="#E6E7E8"> </td>
 <td bgcolor="#E6E7E8"> </td>
-<td bgcolor="#E6E7E8"> <img src="<?=base_url()?>images/agregar.png" onclick="muestra('contenedor_agregar_evento');"/> </td>
+<td bgcolor="#E6E7E8"> </td>
+<td bgcolor="#E6E7E8"> <img src="<?=base_url()?>images/agregar.png"  class="agregarEvento"/> </td>
 </tr>
-
+<?php if($contenidos != null){
+	foreach($contenidos as $c){?>
 <tr> 
-<td>TALLER DE ADIESTRAMIENTO CANINO  </td>
-<td> <img src="<?=base_url()?>images/eventos/1.png" width="101" height="156"/> </td>
-<td> 27 Julio</td>
-<td> 9:30am</td>
-<td> Instalaciones de PerrosEnnes </td>
-<td> Venustiano Carranza esq. Benito Juárez , Centro Santa Rosa Jáuregui, Querétaro, Querétaro, México. </td>
-<td>Objetivo del taller: crear un vínculo de comunicación en el que tu perro sabrá con claridad qué esperas de él, cómo y cuándo. Tú como dueño sabrás claramente qué puedes esperar de tu perro en cualquier circunstancia y cómo manejarlo. 
-Tu perro aprenderá: Uso del Clicker Uso del Halter Parado Ordenes con señas Ordenes a distancia Ordenes corporales Quieto con distractor y fuera de vista Técnicas de refuerzo positiv 
-El taller de adiestramiento canino está dirigido a dueños de perros con interés en el adiestramiento canino, entrenadores caninos, protectoras de animales, veterinarios, paseadores de perros y público en general. 
-Impartido por: Néstor Fuentes, Terapeuta profesional en Conducta Canina, Fundador y Director de Perros Ennes. Es experto en comportamiento canino con más de 20 años de experiencia. 
+<td height="314"><?=strtoupper($c->nombre);?></td>
+<td>
+<?php if($fotoscontenido != null){
+	foreach($fotoscontenido as $foto){
+		if($foto->contenidoID == $c->contenidoID){?>
+ <img src="<?=base_url()?>images/eventos/<?=$foto->foto?>" width="101" height="156"/> 
+<?php }
+	}
+}?>
 </td>
-<td> <img src="<?=base_url()?>images/editar.png" onclick="muestra('contenedor_agregar_evento');"/> </td>
+<td><?=$c->fecha;?></td>
+<td><?=$c->horario;?></td>
+<td><?=$c->lugar;?></td>
+<td><?=$c->domicilio;?></td>
+<td><?=$c->texto;?>
+</td>
+<td> <img src="<?=base_url()?>images/editar.png" onclick="muestra('contenedor_editar_evento<?=$c->contenidoID?>');" class="editarEvento"/> </td>
 </tr>
+<?php }
+}
+?>
 </table>
 
 <!--       CONTENIDO MEDIO CONTENIDO       -->

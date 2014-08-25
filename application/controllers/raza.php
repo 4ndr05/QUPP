@@ -37,9 +37,19 @@ class Raza extends CI_Controller
 	
     public function index()
     {
-        
-       //var_dump($data['publicaciones']);
-        $this->load->view('raza_view');
+        $data['contenidos'] = $this->admin_model->getContenidos(8);
+        $data['fotoscontenido'] = $this->admin_model->getFotosContenido();
+        $data['fotocontenido'] = $this->admin_model->getFotoContenido();
+        $data['seccion'] = 8;
+        $data['banner'] = $this->defaultdata_model->getTable('banner');
+       $data['estados']     = $this->defaultdata_model->getEstados();
+       $data['paquetes'] = $this->defaultdata_model->getPaquetes();
+       $data['razas'] = $this->defaultdata_model->getRazas();
+       if(is_logged()){
+            $cupones = $this->usuario_model->getCuponesUsuario($this->session->userdata('idUsuario'));
+            $data['cupones'] = $cupones;
+        }
+        $this->load->view('raza_view',$data);
     }
 }
  ?>

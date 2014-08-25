@@ -18,7 +18,6 @@
    <script src="<?php echo base_url() ?>js/funciones_.js" type="text/javascript"></script>
        <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.customSelect.js"></script>
      <script type="text/javascript" src="<?php echo base_url() ?>js/funcion_select.js"></script>
-  
     <script>
 jQuery(document).ready(function(){
 
@@ -34,8 +33,8 @@ jQuery(document).ready(function(){
                                     success: function(data) {
                                        if(data.response = true){
 										   alert('Mensaje Enviado');
-										   muestra('contenedor_correcto');
-										   oculta('contenedor_publicar_anuncio');			   
+										   muestra('contenedor_correcto');	
+										   oculta('contenedor_publicar_anuncio');		   
 										} else {
 											muestra('contenedor_error');
 										}
@@ -50,7 +49,8 @@ jQuery(document).ready(function(){
         
 
 
-    </script>
+    </script>  
+
 
 </head>
 
@@ -133,8 +133,6 @@ margin-top: 30px;">
 </ul> 
 
 </form>
-
-
 </div>
 
 </div>
@@ -185,55 +183,75 @@ margin-top: 30px;">
 
 
 <div class="contenedor_central" style="margin-bottom:45px;">
+<?php if($contenidos != null){
+	foreach($contenidos as $cv){
+		if($cv->contenidoID == $ID){?>
+<div class="contenedor_de_anuncio_eveto"> 
+<div class="contenedor_fecha_evento_detalle">
+
+<p class="dia"><?=$cv->fecha?></p>
+
+ </div>
+ <?php if($fotocontenido != null){
+	 	foreach($fotocontenido as $p){
+			if($p->contenidoID == $cv->contenidoID){?>
+ <img src="<?php echo base_url()?>images/eventos/<?=$p->foto?>" width="238" height="374"/>
+ <?php }
+	}
+}?>
+</div>
+<?php }
+	}
+}?>
+<div class="contender_texto_descripcion">
+
+</div>
+  <div class="contenedor_eventos_proxsimos"> 
+  <?php if($contenidos != null){
+	foreach($contenidos as $cv){
+		if($cv->contenidoID != $ID){?>
+
+     <div class="evento_proximo">
+     <div class="contenedor_evento_proxi_mini">
+     <div class="fecha_mini"> 
+     <p class="dia_mini"><?=$cv->fecha?></p>
+     </div>
+      <img src="<?php echo base_url()?>images/cale_event.png" width="83"  height="115"/>  </div>
+     <div class="contenedor_nombre_evento_mini"> 
+     <?=strtoupper($cv->nombre)?>
+    
+      </div> <div class="ver_mas_mini" onclick="window.location.href = '<?php echo base_url()?>evento/detalle/<?=$cv->contenidoID?>'"> Ver más... </div>
+       </div>
+       </br>
+       <?php }
+	   }
+	   }?>
+	 </div>
+<?php if($contenidos != null){
+	foreach($contenidos as $cv){
+		if($cv->contenidoID == $ID){?>
+<div class="contenedor_texto_inferior"> 
+<?=$cv->texto?>
 </br>
-      <!-- item container -->
-      <ul id="itemContainer_evento" style="min-height:100px;">
-      
-      
-      <!-- Contenedor evento -->
-      <?php if($contenidos != null){
-		  		foreach ($contenidos as $ev){ ?>
-      <div class="contenedor_evento" >
-      <div class="contenedor_imagen_evento">
-      <div class="contenedor_fecha_evento"> 
-      <p class="dia"><?=$ev->fecha?></p>
-      </div>
-      
-      <img src="<?php echo base_url()?>images/cale_event.png" />
-       </div>
-       <div class="contenido_evento">
-       <p class="titulo_evento_mes">
-       <?=strtoupper($ev->nombre)?>
-       </p>
-       
-       </br>
-       </br>
-       
-       <p><strong>FECHA:</strong> <?=strtoupper($ev->fecha)?></p>
-       <p> <strong>HORA</strong> <?=strtoupper($ev->horario)?></p>
-       <p> <strong>LUGAR</strong>  <?=strtoupper($ev->lugar)?></p>
-       
-      
-       </div>
-        <ul class="ver_mas_evento"><li onclick="window.location.href = '<?php echo base_url()?>evento/detalle/<?=$ev->contenidoID?>'"> Ver más... &nbsp;</li> </ul>
-      </div>
-      <?php } }?>
-      
-      <!-- FIN contenedor evento -->
-        
-  
-       </ul>
+</br>
+<p id="fecha_evento"> <div class="recuadro_rosa"> </div>  Fecha: <?=$cv->fecha?> </p>
+</br>
+<p id="hora_evento"> <div class="recuadro_rosa"> </div>  Hora: <?=$cv->horario?> </p>
+</br>
+<p id="lugar_evento"> <div class="recuadro_rosa"> </div>  Lugar: <?=$cv->lugar?> </p>
+</br>
+<p id="domicilio_evento"> <div class="recuadro_rosa"> </div>  Domicilio: <?=$cv->domicilio?> </p>
+
+</div>
+   
  
-      </br>
-      </br>
-      <div style="text-align:center;">
-       <!-- navigation holder -->
-      <div class="holder">  </div>
-      </div>
-      </div>
-	  
-	  
-	  <div class="seccion_derecha_paquetes">
+     
+     
+	     <?php }
+   }
+  }?> 
+</div>	  
+<div class="seccion_derecha_paquetes">
 <ul class="aqui_crear_anuncio_eventos">
 <li onclick="muestra('contenedor_publicar_anuncio');">
 
@@ -241,9 +259,9 @@ margin-top: 30px;">
 </ul>
 </div>
  
-</div>
 
-      
+
+</div>      
 
 <div class="slideshow_tres" >
 <?php $banner = $this->session->userdata('banner'); ?>

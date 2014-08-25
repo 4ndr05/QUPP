@@ -44,6 +44,19 @@ if(seccion == 7 || seccion == 8 || seccion == 9 || seccion == 10) {
              //console.log(uno);
      });
 	 
+	 $(".agregarRaza").click(function() {
+		 	
+            var zonaN = $("#zonaIDR").val();
+			$(".zonaRaza").val(zonaN);
+			 muestra('contenedor_agregar_raza');
+             //console.log(uno);
+     });
+	 $(".editRaza").click(function() {
+		 	
+            var zonaN = $("#zonaIDR").val();
+			$(".zonaRaza").val(zonaN);
+     });
+	 
 	 $(".deleteContent").click(function() {
 		 	
              var bannerIDel = $(this).attr('data-rel');
@@ -132,6 +145,10 @@ if(seccion == 7 || seccion == 8 || seccion == 9 || seccion == 10) {
                 }
     		});*/
      });  
+	 $("body").on("click",".eliminar", function(e){
+            $(this).parent('p').remove(); 
+        return false;
+    });
 	 
 	$(".filtro").click(
 	function(){
@@ -394,10 +411,10 @@ ZONA- <label id="zonaNombre"><label id="nombreZona"><?=$zonaNombre->zona?></labe
 <div class="titulo_modificaciones"> 
 AGREGAR RAZA
 </div>
-<form action="<?=base_url()?>admin/principal/guardarRaza" method="post">
+<form action="<?=base_url()?>admin/principal/guardarRaza" method="post" enctype="multipart/form-data">
 <div class="contenido_intruciones">
 </br>
-
+<input type="hidden" name="zonaRaza" id="zonaRaza" class="zonaRaza" value="9" />
 <table > 
 <tr> 
 <td width="105"> Nombre: </td>
@@ -406,23 +423,23 @@ AGREGAR RAZA
 <tr> 
 <td> Mes: </td>
 <td> <select name="mes" id="mes" class="validate[required]">
- <option value="1"> Enero </option>
- <option value="2"> Febrero </option>
- <option value="3"> Marzo </option>
- <option value="4"> Abril </option>
- <option value="5"> Mayo </option>
- <option value="6"> Junio </option>
- <option value="7"> Julio </option>
- <option value="8"> Agosto </option>
- <option value="9"> Septiembre </option>
- <option value="10"> Octubre </option>
- <option value="11"> Noviembre </option>
- <option value="12"> Diciembre </option> 
+ <option value="Enero"> Enero </option>
+ <option value="Febrero"> Febrero </option>
+ <option value="Marzo"> Marzo </option>
+ <option value="Abril"> Abril </option>
+ <option value="Mayo"> Mayo </option>
+ <option value="Junio"> Junio </option>
+ <option value="Julio"> Julio </option>
+ <option value="Agosto"> Agosto </option>
+ <option value="Septiembre"> Septiembre </option>
+ <option value="Octubre"> Octubre </option>
+ <option value="Noviembre"> Noviembre </option>
+ <option value="Diciembre"> Diciembre </option> 
  </select> </td>
 </tr>
 <tr> 
 <td> Imagenes: </td> 
-<td> <input name="fotos[]" type="file" id="fotos[]" multiple="multiple" class="validate[required]"/> </td>
+<td> <input name="fotos[]" type="file" id="fotos" multiple="multiple" class="validate[required]"/> </td>
 </tr>
 <tr> 
 <td> Origenes: </td>
@@ -461,6 +478,110 @@ AGREGAR RAZA
 </div> <!-- Fin contenedor negro imagenes -->
 <!--la raza del mes-->
 </br>
+<?php if($contenidos != null){
+foreach($contenidos as $contenidoE){?>
+<!--la raza del mes-->
+<div class="contenedor_modificaciones" id="contenedor_editar_raza<?=$contenidoE->contenidoID?>" style="display:none"> <!-- Contenedor negro imagenes-->
+<div class="cerrar_modificaciones"> <img src="<?=base_url()?>images/cerrar.png" onclick="oculta('contenedor_editar_raza<?=$contenidoE->contenidoID?>');"/> </div>
+
+
+<div class="modificaciones"> 
+<div class="titulo_modificaciones"> 
+EDITAR RAZA
+</div>
+<form action="<?=base_url()?>admin/principal/editarRaza/<?=$contenidoE->contenidoID?>" method="post" enctype="multipart/form-data">
+<div class="contenido_intruciones">
+</br>
+<input type="hidden" name="zonaRaza" id="zonaRaza" class="zonaRaza" value="9" />
+<table > 
+<tr> 
+<td width="105"> Nombre: </td>
+<td width="317"> <input name="nombre" type="text" class="validate[required]" id="nombre" value="<?=$contenidoE->nombre?>"/> </td>
+</tr>
+<tr> 
+<td> Mes: </td>
+<td> <select name="mes" id="mes" class="validate[required]">
+ <option value="Enero" <?=($contenidoE->mes == "Enero") ? 'selected="selected"' : ''?>> Enero </option>
+ <option value="Febrero" <?=($contenidoE->mes == "Febrero") ? 'selected="selected"' : ''?>> Febrero </option>
+ <option value="Marzo" <?=($contenidoE->mes == "Marzo") ? 'selected="selected"' : ''?>> Marzo </option>
+ <option value="Abril" <?=($contenidoE->mes == "Abril") ? 'selected="selected"' : ''?>> Abril </option>
+ <option value="Mayo" <?=($contenidoE->mes == "Mayo") ? 'selected="selected"' : ''?>> Mayo </option>
+ <option value="Junio" <?=($contenidoE->mes == "Junio") ? 'selected="selected"' : ''?>> Junio </option>
+ <option value="Julio" <?=($contenidoE->mes == "Julio") ? 'selected="selected"' : ''?>> Julio </option>
+ <option value="Agosto" <?=($contenidoE->mes == "Agosto") ? 'selected="selected"' : ''?>> Agosto </option>
+ <option value="Septiembre" <?=($contenidoE->mes == "Septiembre") ? 'selected="selected"' : ''?>> Septiembre </option>
+ <option value="Octubre" <?=($contenidoE->mes == "Octubre") ? 'selected="selected"' : ''?>> Octubre </option>
+ <option value="Noviembre" <?=($contenidoE->mes == "Noviembre") ? 'selected="selected"' : ''?>> Noviembre </option>
+ <option value="Diciembre" <?=($contenidoE->mes == "Diciembre") ? 'selected="selected"' : ''?>> Diciembre </option> 
+ </select> </td>
+</tr>
+<tr> 
+<td> Imagenes: </td> 
+<td> <input name="fotos[]" type="file" id="fotos" multiple="multiple" class="validate[required]"/> </td>
+</tr>
+<tr>
+<td></td>
+<td>
+<?php if($fotoscontenido != null){
+	foreach($fotoscontenido as $foto){
+		if($foto->contenidoID == $contenidoE->contenidoID){?>
+        <p><img src="<?=base_url()?>images/raza_mes/<?=$foto->foto?>" width="40"/><input type="hidden" id="imagen" name="imagen[]" value="<?=$foto->foto?>"/><a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a></p>
+<?php }
+	}
+}?>
+
+</td>
+</tr>
+<tr> 
+<td> Origenes: </td>
+<td> <textarea name="origenes" id="origenes" class="validate[required]"><?=$contenidoE->origenes?>
+</textarea> </td>
+</tr>
+<tr> 
+<td> Caracter: </td>
+<td> <textarea name="caracter" id="caracter" class="validate[required]"><?=$contenidoE->caracter?>
+</textarea> </td>
+</tr>
+<tr> 
+<td> Cualidades: </td>
+<td> <textarea name="cualidades" id="cualidades" class="validate[required]"><?=$contenidoE->cualidades?>
+</textarea></td>
+</tr>
+<tr> 
+<td> Colores: </td>
+<td> <textarea name="colores" id="colores" class="validate[required]"><?=$contenidoE->colores?>
+</textarea> </td>
+ </tr>
+ <tr> 
+ <td> Sobre la raza: </td>
+ <td> <textarea name="acercaDe" id="acercaDe" class="validate[required]"><?=$contenidoE->acercaDe?>
+ </textarea> </td>
+ 
+ </tr>
+ 
+</table>
+
+
+
+</div>
+<ul class="morado_reg">
+<li>
+<input type="submit" value="Guardar" />
+</li>
+</ul>
+</form>
+</div>
+
+</div> <!-- Fin contenedor negro imagenes -->
+<!--la raza del mes-->
+<?php }
+}?>
+
+
+
+
+
+
 
 <!--       CONTENIDO SUPERIOR       -->
 <table class="tabla_carrito superior" width="990" style="display:none">
@@ -578,25 +699,35 @@ Imagen
 <td bgcolor="#E6E7E8"> </td>
 <td bgcolor="#E6E7E8"> </td>
 
-<td bgcolor="#E6E7E8"> <img src="<?=base_url()?>images/agregar.png" onclick="muestra('contenedor_agregar_raza');"/> </td>
+<td bgcolor="#E6E7E8"> <img src="<?=base_url()?>images/agregar.png" class="agregarRaza"/> </td>
 </tr>
-
+<?php 
+if($contenidos != null){
+foreach($contenidos as $contenidoR){?>
 <tr> 
-<td height="307">BOBTAIL  </td>
-<td height="307">ENERO  </td>
-<td> <img src="<?=base_url()?>images/raza_mes/1.png" width="124" height="151" />
-<img src="<?=base_url()?>images/raza_mes/2.png" width="124" height="151" />
+<td height="307"><?=strtoupper($contenidoR->nombre)?></td>
+<td height="307"><?=strtoupper($contenidoR->mes)?></td>
+<td>
+<?php if($fotoscontenido != null){
+	foreach($fotoscontenido as $foto){
+		if($foto->contenidoID == $contenidoR->contenidoID){?>
+ <img src="<?=base_url()?>images/raza_mes/<?=$foto->foto?>" width="124" height="151" />
+<?php }
+	}
+}?>
  </td>
-<td>Es originario de Gran Bretaña donde fue utilizado como perro pastor.
+<td><?=$contenidoR->origenes?>
 </td>
-<td> Es un perro muy fiel e inteligente al que le encanta pasar tiempo con su familia y participar de sus actividades. Tiene un fuerte instinto de pastoreo y hay que hacerle entender que no necesita pastorear a las personas; si no se le marcan bien las pautas que debe seguir puede volverse caprichoso, como ocurre con todas las razas. Son perros muy alegres, afectuosos, cariñosos con los niños que siguen comportándose como cachorros durante bastante tiempo. No es difícil de adiestrar y le encanta jugar. </td>
+<td><?=$contenidoR->caracter?></td>
 <td>   
-Fidelidad y gusto por compartir con su familia.
+<?=$contenidoR->cualidades?>
 </td>
-<td> AZULADOGRIS</td>
-<td>  El Bobtail o antiguo pastor inglés es un perro grande, macizo y de forma cuadrada. Tiene una doble capa de pelaje espeso que le protege del frío y la humedad durante las largas jornadas de pastoreo. La cabeza es grande con un stop pronunciado en el hocico, la nariz negra, las orejas medianas y pegadas a la cabeza, y los ojos marrones o azules (o en ocasiones uno de cada color). El nombre Bobtail viene del inglés y significa "sin cola", lo cual es una destacada característica de esta raza; normalmente nacen ya sin cola.</td>
-<td> <img src="<?=base_url()?>images/editar.png" onclick="muestra('contenedor_agregar_raza');"/> </td>
+<td><?=$contenidoR->colores?></td>
+<td><?=$contenidoR->acercaDe?></td>
+<td> <img src="<?=base_url()?>images/editar.png"  onclick="muestra('contenedor_editar_raza<?=$contenidoR->contenidoID?>');" class="editRaza"/> </td>
 </tr>
+<?php }
+}?>
 </table>
 <!--       CONTENIDO MEDIO CONTENIDO       -->
 

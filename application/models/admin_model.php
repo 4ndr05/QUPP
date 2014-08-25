@@ -365,6 +365,48 @@ class Admin_model extends CI_Model
         }
     }
 
+    function getContenidos($ID)
+    {
+        $this->db->where('seccionID',$ID);
+        return $this->db->get($this->tablas['contenido'])->result();
+    }
+
+    function getContenido($ID)
+    {
+        $this->db->where('contenidoID',$contenidoID);
+        return $this->db->get($this->tablas['contenido'])->row();
+    }
+
+    function getFotosContenido(){
+        return $this->db->get($this->tablas['fotoscontenido'])->result();
+    }
+
+    function getFotoContenido(){
+        $this->db->group_by('contenidoID');
+        return $this->db->get($this->tablas['fotoscontenido'])->result();
+    }
+
+    function topContenido($seccionID){
+        $query = $this->db->query("select contenidoID
+                                from contenido
+                                where seccionID = ".$seccionID."
+                                limit 1");
+         if ($query->num_rows() == 1){
+            $query = $query->row();
+            return $query->contenidoID;
+         } else {
+            return null;
+         }
+            
+        
+    }
+
+    function deleteFotosContenido($contenidoID){
+        $this -> db -> where('contenidoID', $contenidoID);
+        $this -> db -> delete($this -> tablas['fotoscontenido']);
+        return true;
+    }
+
 
 
 

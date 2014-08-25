@@ -15,6 +15,7 @@ class Venta extends CI_Controller {
         $this->load->model('admin_model');
         $this->load->model('venta_model');
         $this->load->model('usuario_model');
+        $this->load->model('perfil_model');
         $this->load->helper(array('form', 'url'));
         $this->load->library('googlemaps');
         $this->load->library('cart');
@@ -643,14 +644,14 @@ class Venta extends CI_Controller {
         );
 
         //$publicacionID = $this->defaultdata_model->updateItem('publicaciones', $dataPublicacion);
-        $publicacionID = $this->defaultdata_model->updateItem('publicacionID', $publicacionID, $dataPublicacion);
+        $publicacionID = $this->defaultdata_model->updateItem('publicacionID', $publicacionID, $dataPublicacion,'publicaciones');
 
         //VIDEOS PUBLICACION 
 
         
           if(isset($_POST['url_video'])){
-          $videosExt = $this->defaultdata_model->getVideos($publicacionID);
-          $this->defaultdata_model->deleteVideos($publicacionID);
+          $videosExt = $this->perfil_model->getVideos($publicacionID);
+          $this->perfil_model->deleteVideos($publicacionID);
              $video = $this->input->post('url_video');
                 if( $video != null){
                     for($i=0;$i<=count($video);$i++){               
@@ -673,8 +674,8 @@ class Venta extends CI_Controller {
          $name_logo_form = $this->input->post('name_logo_form');
 
                 if( $name_logo_form != null){
-                    $imgExt = $this->defaultdata_model->getImagenes($publicacionID);
-                    $this->defaultdata_model->deleteFotos($publicacionID);
+                    $imgExt = $this->perfil_model->getImagenes($publicacionID);
+                    $this->perfil_model->deleteFotos($publicacionID);
                     for($i=0;$i<=count($name_logo_form) -1;$i++){     
                         //Se mueve la imagen de tmp a negocio_logo
                         if($name_logo_form[$i] != null){
@@ -703,8 +704,10 @@ class Venta extends CI_Controller {
          //COMPRA
          $valorCupon = $this->input->post('radiog_dark');
          $cuponID = $this->input->post('cuponUsado');
+        
          $precio_total = $detallePaquete->precio - ($detallePaquete->precio * ($valorCupon / 100));
 
+         if($this->input->post('exp') == true){
          if($cuponID != 0){
             $this->defaultdata_model->updateItem('cuponID', $cuponID, $data = array('usado' => 1), 'cuponadquirido');
          }
@@ -730,7 +733,7 @@ class Venta extends CI_Controller {
             'productoID' => $publicacionID
         );
         $compraDetalle = $this->defaultdata_model->insertItem('compradetalle', $compradetalle);
-
+        }
         if($precio_total <= 00.00){
         $this->defaultdata_model->updateItem('compraID', $compraID, $data = array('pagado' => 1), 'compra');
         $this->defaultdata_model->updateItem('servicioID', $servicioID, $data = array('pagado' => 1), 'serviciocontratado');
@@ -755,6 +758,7 @@ class Venta extends CI_Controller {
                   ';
 
         } else {
+            
            $preference_data = array(
             "items" => array(
                 array(
