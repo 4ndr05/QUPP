@@ -8,20 +8,20 @@
 <ul class="menu_perfil_mini">
 <li class="icono_seleccion_mini">
 
-
+<div>
 <p style=" margin-top:3px; margin-left:5px;" onclick="oculta('anunciosAct'); oculta('anunciosInAct'); muestra('anuncios');"> Todos (<?php echo count($anuncios)?>) </p>
 </li>
 <li>
-<p style=" margin-top:3px; margin-left:5px;" onclick=" muestra('anunciosAct'); oculta('anuncios'); oculta('anunciosInAct');"> Activos (<?php echo count($anunciosAct)?>) </p>
+<p style=" margin-top:3px; margin-left:5px;" onclick=" oculta('anuncios'); oculta('anunciosInAct'); muestra('anunciosAct'); "> Activos (<?php echo count($anunciosAct)?>) </p>
 </li>
 <li>
-<p style=" margin-top:3px; margin-left:5px;" onclick="muestra('anunciosInAct');oculta('anuncios'); oculta('anunciosAct'); "> Expirados (<?php echo count($anunciosInAct)?>) </p>
+<p style=" margin-top:3px; margin-left:5px;" onclick="muestra(oculta('anuncios'); oculta('anunciosAct'); 'anunciosInAct');"> Expirados (<?php echo count($anunciosInAct)?>) </p>
 </li>
 </ul>
    </br>
   
 
- <div id="anuncios" style="display:block;">
+<div id="anuncios" style="display:block;">
 <table class="tabla_perfil" width="795" >
   <tr>
   <th width="76"> Paquete </th>
@@ -169,6 +169,7 @@
   <?php } ?>
 
  </table>
+ </div>
  </div>
  
  
