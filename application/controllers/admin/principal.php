@@ -706,4 +706,10 @@ $mensaje = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
     }
 
 
+    function guardarRaza(){
+        var_dump($_POST);
+        $this->input->post();
+    }
+
+
 }
