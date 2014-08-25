@@ -401,6 +401,12 @@ class Admin_model extends CI_Model
         
     }
 
+    function deleteFotosContenido($contenidoID){
+        $this -> db -> where('contenidoID', $contenidoID);
+        $this -> db -> delete($this -> tablas['fotoscontenido']);
+        return true;
+    }
+
 
 
 

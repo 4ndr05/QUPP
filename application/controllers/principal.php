@@ -93,7 +93,9 @@ class Principal extends CI_Controller {
         $data['posicion'] = 1;
         $data['zona'] = 9;
         $data['carritoT'] = count ($this->admin_model->getCarrito($this->session->userdata('idUsuario')));
-
+        $data['contenidos'] = $this->admin_model->getContenidos(8);
+        $data['contenidosE'] = $this->admin_model->getContenidos(9);
+		$data['fotocontenido'] = $this->admin_model->getFotoContenido();
         
 
         //$data['preference'] = $preference;

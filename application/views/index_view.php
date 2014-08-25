@@ -1282,16 +1282,20 @@
             <p class="titulo_segunda_seccion"> LA RAZA DEL MES </p>
 
             <p>
-                El perro de raza labrador es el prototipo del perro de familia, ya que sue...
+                <?=substr($contenidos[0]->origenes,0,40)?>
             </p>
 
         </div>
         <div class="sub_imagenes_dos">
-
-            <img align="center" class="imagen_relleno" src="<?php echo base_url() ?>images/raza_mes/la_raza.png"
+			<?php 
+if($fotocontenido != null){
+foreach($fotocontenido as $foto){
+	if($foto->contenidoID == $contenidos[0]->contenidoID){?>
+ <img align="center" class="imagen_relleno" src="<?php echo base_url() ?>images/raza_mes/<?=$foto->foto;?>"
                  width="87" height="103"/>
-
-
+<?php }
+}
+}?>
             
         </div>
         <div id="ver_raza" class="ver_mas" style=" display:none;"> Ver más...</div>
@@ -1307,15 +1311,21 @@
         <div class="contenido_secciones">
             <p class="titulo_segunda_seccion"> EVENTOS DEL MES </p>
 
-            <p> Título: Expo Can México 2013.
-                Fecha del evento: Del 13 al 22 de...
+            <p> Título: <?=$contenidosE[0]->nombre?>
+                Fecha del evento: <?=$contenidosE[0]->fecha?>
             </p>
 
         </div>
         <div class="sub_imagenes_dos">
-            <img class="imagen_relleno" src="<?php echo base_url() ?>images/eventos/eventos_mes.jpg" width="144"
+         <?php if($fotocontenido != null){
+	 	foreach($fotocontenido as $p){
+			if($p->contenidoID == $contenidosE[0]->contenidoID){?>
+            <img class="imagen_relleno" src="<?php echo base_url() ?>images/eventos/<?=$p->foto?>" width="144"
                  height="110"/>
-
+ <?php }
+	}
+}?>
+            
             
         </div>
         <div id="ver_mes" class="ver_mas" style=" display:none;"> Ver más...</div>

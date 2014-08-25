@@ -17,7 +17,7 @@
    <script src="<?php echo base_url() ?>js/jquery-ui.js"></script>
    <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.cycle.all.js"></script>
    <script src="<?php echo base_url() ?>js/funciones_.js" type="text/javascript"></script>
-   <script src="<?php echo base_url() ?>js/funciones_indez.js" type="text/javascript"></script>
+   <script src="<?php echo base_url() ?>js/funciones_index.js" type="text/javascript"></script>
    <script src="<?php echo base_url() ?>js/funciones_raza.js"></script>
 
   
@@ -274,7 +274,7 @@ foreach($fotoscontenido as $foto){
 </div>
 
 
-<a href="#" style="text-decoration:none;color:#000;" onmouseover="muestra('ver_perdidos');oculta('ver_raza');oculta('ver_mes');oculta('ver_curiosos');" onclick="alert('ssssssssss');muestra(razaMes<?=$contenidos[0]->contenidoID?>);oculta(razaMes<?=$contenidos[1]->contenidoID?>);oculta(razaMes<?=$contenidos[2]->contenidoID?>);oculta(razaMes<?=$contenidos[3]->contenidoID?>);">
+<a href="#" style="text-decoration:none;color:#000;" onmouseover="muestra('ver_perdidos');oculta('ver_raza');oculta('ver_mes');oculta('ver_curiosos');" onclick="muestra(razaMes<?=$contenidos[0]->contenidoID?>);oculta(razaMes<?=$contenidos[1]->contenidoID?>);oculta(razaMes<?=$contenidos[2]->contenidoID?>);oculta(razaMes<?=$contenidos[3]->contenidoID?>);">
 <div  id="perros_perdidos" class="seccion_inferior_izquierda" >
 
 <div class="contenido_secciones">
@@ -301,7 +301,7 @@ foreach($fotocontenido as $foto){
 </a>
 <!-- End perros perdidos -->
 <!-- Raza del mes -->
-<a href="#" style="text-decoration:none; color:#000;" onmouseover="muestra('ver_raza'); oculta('ver_perdidos');oculta('ver_mes'); oculta('ver_curiosos')" onclick="alert('ssssssssss');muestra(razaMes<?=$contenidos[1]->contenidoID?>);oculta(razaMes<?=$contenidos[0]->contenidoID?>);oculta(razaMes<?=$contenidos[2]->contenidoID?>);oculta(razaMes<?=$contenidos[3]->contenidoID?>);">
+<a href="#" style="text-decoration:none; color:#000;" onmouseover="muestra('ver_raza'); oculta('ver_perdidos');oculta('ver_mes'); oculta('ver_curiosos')" onclick="muestra(razaMes<?=$contenidos[1]->contenidoID?>);oculta(razaMes<?=$contenidos[0]->contenidoID?>);oculta(razaMes<?=$contenidos[2]->contenidoID?>);oculta(razaMes<?=$contenidos[3]->contenidoID?>);">
 <div id="la_raza_mes" class="seccion_inferior_izquierda">
 <div class="contenido_secciones">
 <p class="titulo_segunda_seccion"><?=$contenidos[1]->mes?></p>
@@ -325,7 +325,7 @@ foreach($fotocontenido as $foto){
 <!-- End raza del mes -->
 
 <!-- Eventos del mes -->
-<a href="#" style="text-decoration:none; color:#000;" onmouseover="muestra('ver_mes');oculta('ver_raza'); oculta('ver_perdidos');oculta('ver_curiosos');" onclick="alert('ssssssssss');muestra(razaMes<?=$contenidos[2]->contenidoID?>);oculta(razaMes<?=$contenidos[0]->contenidoID?>);oculta(razaMes<?=$contenidos[1]->contenidoID?>);oculta(razaMes<?=$contenidos[3]->contenidoID?>);">
+<a href="#" style="text-decoration:none; color:#000;" onmouseover="muestra('ver_mes');oculta('ver_raza'); oculta('ver_perdidos');oculta('ver_curiosos');" onclick="muestra(razaMes<?=$contenidos[2]->contenidoID?>);oculta(razaMes<?=$contenidos[0]->contenidoID?>);oculta(razaMes<?=$contenidos[1]->contenidoID?>);oculta(razaMes<?=$contenidos[3]->contenidoID?>);">
 <div id="eventos_mes" class="seccion_inferior">
 <div class="contenido_secciones">
 <p class="titulo_segunda_seccion"><?=$contenidos[2]->mes?></p>
@@ -348,7 +348,7 @@ foreach($fotocontenido as $foto){
 </a>
 <!-- End eventos del mes -->
 <!-- Datos curiosos -->
-<a href="#" style="text-decoration:none; color:#000;" onmouseover="muestra('ver_curiosos');oculta('ver_raza'); oculta('ver_perdidos');oculta('ver_mes');"  onclick="alert('ssssssssss');muestra(razaMes<?=$contenidos[3]->contenidoID?>);oculta(razaMes<?=$contenidos[0]->contenidoID?>);oculta(razaMes<?=$contenidos[1]->contenidoID?>);oculta(razaMes<?=$contenidos[2]->contenidoID?>);">
+<a href="#" style="text-decoration:none; color:#000;" onmouseover="muestra('ver_curiosos');oculta('ver_raza'); oculta('ver_perdidos');oculta('ver_mes');"  onclick="muestra(razaMes<?=$contenidos[3]->contenidoID?>);oculta(razaMes<?=$contenidos[0]->contenidoID?>);oculta(razaMes<?=$contenidos[1]->contenidoID?>);oculta(razaMes<?=$contenidos[2]->contenidoID?>);">
 <div id="datos_curiosos" class="seccion_inferior_derecha">
 <div class="contenido_secciones">
 <p class="titulo_segunda_seccion"><?=$contenidos[3]->mes?></p>

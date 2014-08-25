@@ -400,7 +400,7 @@ $(document).ready(function()
 });
 </script>
     <p class="margen_15_left_mini contenedorFotos">
-    <label>Seleccione las imágenes para su anuncio</label>
+    <label>Reemplazar Imágenes</label>
          <div id="fileuploader" >Seleccionar Imagenes</div>
          
                             <div class="row-fluid">
@@ -669,6 +669,7 @@ TOTAL
 <input type="hidden" name="iva" id="iva" value=""/>
 <input type="hidden" name="total" id="total" value=""/>
 <input type="hidden" name="publicacionID" id="publicacionID" value=""/>
+<input type="hidden" name="exp" id="exp" value=""/>
 </th>
 </tr>
 </table>
@@ -678,7 +679,7 @@ TOTAL
 <div>
                             <ul class="boton_gris_perfil" id="btn_sig">
                                 <li class="sig_paso save">
-                                  <input type="submit" value="Publicar"/>
+                                  <input type="submit" value="Renovar"/>
                                 </li>
                             </ul>
               <br/>
@@ -802,8 +803,15 @@ TOTAL
             var paquete_val = $(this).data('paquete');
 			//DATOS DE LA PUBLICACION
 			var pubID = paquete_val.publicacionID;
+			var expirado = paquete_val.expirado;
 			$('#publicacionID').val(pubID);
-			
+			$('#exp').val(expirado);
+			if(expirado == false){
+			$('#descuentoCupon').html(0.00);
+            $('#totalConDescuento').html(0.00);
+            $('#total').val(0.00);
+			$('#iva').val(0.00);
+			}
 			
 			$.ajax({
                     url:'<?php echo base_url('usuario/cuenta/publicacion') ?>',

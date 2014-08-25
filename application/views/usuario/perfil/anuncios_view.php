@@ -52,13 +52,17 @@
             <td> <?php echo $anuncio->seccionNombre ?> </td>
             <td> <?php echo $anuncio->titulo ?> </td>
             <td>
-                <?php if ($anuncio->vigente == 1 && $anuncio->aprobada == 1) {?>
+                <?php if ($anuncio->vigente == 1 && $anuncio->aprobada == 1) {
+				echo '<input type="hidden" name="expirado" id="expirado" value="true"/>'?>
                 Activo
-                <?php } elseif($anuncio->vigente == 1 && $anuncio->aprobada == 0)  { ?>
+                <?php } elseif($anuncio->vigente == 1 && $anuncio->aprobada == 0)  {
+					echo '<input type="hidden" name="expirado" id="expirado" value="false"/>' ?>
                 Pendiente de Aprobacion
-                <?php } elseif($anuncio->vigente == 1 && $anuncio->aprobada == 2)  { ?>
+                <?php } elseif($anuncio->vigente == 1 && $anuncio->aprobada == 2)  {
+					echo '<input type="hidden" name="expirado" id="expirado" value="false"/>' ?>
                 Declinado
-                <?php } elseif($anuncio->vigente == 0) { ?>
+                <?php } elseif($anuncio->vigente == 0) { 
+				echo '<input type="hidden" name="expirado" id="expirado" value="true"/>'?>
                 Inactivo
                 <?php } ?>
 
@@ -66,14 +70,18 @@
             <td> <?php echo $anuncio->fechaVencimiento ?> </td>
             <td> <?php echo $anuncio->numeroVisitas ?> </td>
             <td> <ul class="boton_gris_perfil_tabla"> <li><a href="#"  class="paquete_renovar reset"
-   data-paquete='{"id":"<?php echo $anuncio->paqueteID ?>","nombre":"<?php echo $anuncio->NombrePaquete ?>","vigencia":"<?php echo $anuncio->vigencia ?>","precio":"<?php echo $anuncio->precio ?>","caracteres":"<?php echo $anuncio->caracteres ?>","cantFotos":"<?php echo $anuncio->cantFotos ?>","videos":"<?php echo $anuncio->videos ?>","cupones":"<?php echo $anuncio->cupones ?>","seccion":"<?php echo $anuncio->seccion?>","publicacionID":"<?php echo $anuncio->publicacionID?>"}'>Renovar</a></li> </ul> </td>
+   data-paquete='{"id":"<?php echo $anuncio->paqueteID ?>","nombre":"<?php echo $anuncio->NombrePaquete ?>","vigencia":"<?php echo $anuncio->vigencia ?>","precio":"<?php echo $anuncio->precio ?>","caracteres":"<?php echo $anuncio->caracteres ?>","cantFotos":"<?php echo $anuncio->cantFotos ?>","videos":"<?php echo $anuncio->videos ?>","cupones":"<?php echo $anuncio->cupones ?>","seccion":"<?php echo $anuncio->seccion?>","publicacionID":"<?php echo $anuncio->publicacionID?>","expirado":"<?php  if ($anuncio->vigente == 1 && $anuncio->aprobada == 1) {
+				echo 'false'; } elseif( $anuncio->vigente == 1 && $anuncio->aprobada == 0)  { echo 'false';} elseif($anuncio->vigente == 1 && $anuncio->aprobada == 2) {
+echo 'false'; } elseif($anuncio->vigente == 0) { echo 'true';}?>"}'>Renovar</a></li> </ul> </td>
     </tr>
   <?php } ?>
 
   <?php }?>
  </table>
 </div>
-
+<?php  if ($anuncio->vigente == 1 && $anuncio->aprobada == 1) {
+				echo 'false'; } elseif( $anuncio->vigente == 1 && $anuncio->aprobada == 0)  { echo 'false';} elseif($anuncio->vigente == 1 && $anuncio->aprobada == 2) {
+echo 'false'; } elseif($anuncio->vigente == 0) { echo 'true';}?>
 <div id="anunciosAct" style="display:none;"> 
   <table class="tabla_perfil" width="795" >
   <tr>
@@ -170,7 +178,7 @@
 
  </table>
  </div>
- </div>
+
  
  
  <!--EDICION DE ANUNCIO-->

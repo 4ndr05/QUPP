@@ -126,6 +126,8 @@ class Principal extends CI_Controller {
          $data['zonaT'] = $zona;
          $data['zonaNombre'] = $this->admin_model->getSingleItem('zonaID',$zona,'zonageografica');
          $data['seccionNombre'] = $this->admin_model->getSingleItem('seccionID',$seccion,'seccion');
+         $data['contenidos'] = $this->admin_model->getContenidos(9);
+         $data['fotoscontenido'] = $this->admin_model->getFotosContenido();
         $this->load->view('admin/pantalla_eventomes_view', $data);
     }
 
@@ -756,6 +758,169 @@ $mensaje = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
         }
 
         redirect('admin/principal/getRazaMes/8/'.$this->input->post('zonaRaza'));
+        
+    }
+
+    function editarRaza($contenidoID){
+        
+        $data = array(
+            'seccionID' => 8,
+            'seccionDetalle' => 'Raza del mes',
+            'fecha' => date('Y-m-d'),
+            'zonaID' => $this->input->post('zonaRaza'),
+            'nombre' => $this->input->post('nombre'),
+            'mes' => $this->input->post('mes'),
+            'origenes' => $this->input->post('origenes'),
+            'caracter' => $this->input->post('caracter'),
+            'cualidades' => $this->input->post('cualidades'),
+            'colores' => $this->input->post('colores'),
+            'acercaDe' => $this->input->post('acercaDe')
+        );
+        $this->admin_model->updateItem('contenidoID', $contenidoID, $data,'contenido');
+        //REGISTRO FOTOS
+        $imagen = $this->input->post('imagen');
+        $this->admin_model->deleteFotosContenido($contenidoID);
+                if( $imagen != null){
+                    for($i=0;$i<=count($imagen)-1;$i++){
+                        
+                        if($imagen[$i] != ''){
+                        $data = array(
+                            'foto' => $imagen[$i], 
+                            'contenidoID' => $contenidoID
+                        );
+
+                            $fotoID = $this->admin_model->insertItem('fotoscontenido',$data);
+                        }
+                    }
+                }
+
+        $this->load->library('upload'); 
+
+      
+        $config['upload_path'] = 'images/raza_mes';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '5120';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '768';
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_multi_upload("fotos")) { 
+            $imagenes = $this->upload->get_multi_upload_data(); 
+            foreach ($imagenes as $imagen) {
+               $data = array(
+                    'foto' => $imagen['file_name'], 
+                    'contenidoID' => $contenidoID
+                );
+
+                $fotoID = $this->admin_model->insertItem('fotoscontenido',$data);
+            }
+        }
+
+        redirect('admin/principal/getRazaMes/8/'.$this->input->post('zonaRaza'));
+        
+    }
+
+    function guardarEvento(){
+        $numRazas = count($this->admin_model->getContenidos(9));
+        if($numRazas == 4){
+            $razaAnterior = $this->admin_model->topContenido(9);
+            $eliminarRaza = $this->admin_model->deleteItem('contenidoID', $razaAnterior, 'contenido');
+            $eliminarFotos = $this->admin_model->deleteItem('contenidoID', $razaAnterior, 'fotoscontenido');
+        }
+        $data = array(
+            'seccionID' => 9,
+            'seccionDetalle' => 'Evento del mes',
+            'fecha' => $this->input->post('fecha'),
+            'zonaID' => $this->input->post('zonaRaza'),
+            'nombre' => $this->input->post('nombre'),
+            'lugar' => $this->input->post('lugar'),
+            'horario' => $this->input->post('horario'),
+            'domicilio' => $this->input->post('domicilio'),
+            'texto' => $this->input->post('texto')
+            
+        );
+        $contenidoID = $this->admin_model->insertItem('contenido',$data);
+        //REGISTRO FOTOS
+        $this->load->library('upload'); 
+
+      
+        $config['upload_path'] = 'images/eventos';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '5120';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '768';
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_multi_upload("fotos")) { 
+            $imagenes = $this->upload->get_multi_upload_data(); 
+            foreach ($imagenes as $imagen) {
+               $data = array(
+                    'foto' => $imagen['file_name'], 
+                    'contenidoID' => $contenidoID
+                );
+
+                $fotoID = $this->admin_model->insertItem('fotoscontenido',$data);
+            }
+        }
+
+        redirect('admin/principal/getEventoMes/9/'.$this->input->post('zonaRaza'));
+        
+    }
+
+    function editarEvento($contenidoID){
+        
+        $data = array(
+           'seccionID' => 9,
+            'seccionDetalle' => 'Evento del mes',
+            'fecha' => $this->input->post('fecha'),
+            'zonaID' => $this->input->post('zonaRaza'),
+            'nombre' => $this->input->post('nombre'),
+            'lugar' => $this->input->post('lugar'),
+            'horario' => $this->input->post('horario'),
+            'domicilio' => $this->input->post('domicilio'),
+            'texto' => $this->input->post('texto')
+        );
+        $this->admin_model->updateItem('contenidoID', $contenidoID, $data,'contenido');
+        //REGISTRO FOTOS
+        $imagen = $this->input->post('imagen');
+        $this->admin_model->deleteFotosContenido($contenidoID);
+                if( $imagen != null){
+                    for($i=0;$i<=count($imagen)-1;$i++){
+                        
+                        if($imagen[$i] != ''){
+                        $data = array(
+                            'foto' => $imagen[$i], 
+                            'contenidoID' => $contenidoID
+                        );
+
+                            $fotoID = $this->admin_model->insertItem('fotoscontenido',$data);
+                        }
+                    }
+                }
+
+        $this->load->library('upload'); 
+
+      
+        $config['upload_path'] = 'images/eventos';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '5120';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '768';
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_multi_upload("fotos")) { 
+            $imagenes = $this->upload->get_multi_upload_data(); 
+            foreach ($imagenes as $imagen) {
+               $data = array(
+                    'foto' => $imagen['file_name'], 
+                    'contenidoID' => $contenidoID
+                );
+
+                $fotoID = $this->admin_model->insertItem('fotoscontenido',$data);
+            }
+        }
+
+        redirect('admin/principal/getEventoMes/9/'.$this->input->post('zonaRaza'));
         
     }
 
