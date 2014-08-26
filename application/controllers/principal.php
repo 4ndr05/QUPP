@@ -95,6 +95,8 @@ class Principal extends CI_Controller {
         $data['carritoT'] = count ($this->admin_model->getCarrito($this->session->userdata('idUsuario')));
         $data['contenidos'] = $this->admin_model->getContenidos(8);
         $data['contenidosE'] = $this->admin_model->getContenidos(9);
+        $data['contenidosD'] = $this->admin_model->getContenidos(10);
+        $data['contenidosP'] = $this->defaultdata_model->getPerroPerdido();
 		$data['fotocontenido'] = $this->admin_model->getFotoContenido();
         
 
@@ -304,6 +306,66 @@ class Principal extends CI_Controller {
                 		if ($this->session->userdata('tipoUsuario')==0) {
                 		    redirect('admin');
 						}
+
+	}
+
+	function recordatorio(){
+		$anuncios = $this->db->defaultdata_model->recordatorio();
+		$this->load->model('email_model');
+		if ($anuncios != null){
+		foreach ($anuncios as $anuncio) {
+			
+
+		$mensaje = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Notificacion-QuieroUnPerro.com</title>
+
+</head>
+
+<body>
+<table width="647" align="center">
+<tr>
+<td width="231" height="129" colspan="2" valign="top">
+<img src="http://quierounperro.com/quiero_un_perro/images/logo_mail.jpg"/>
+</td>
+</tr>
+<tr>
+<td>
+<font style=" font-family:Verdana, Geneva, sans-serif; margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" >Hola: '.$anuncio->nombre.' </font>
+<br/>
+<br/>
+
+<font style="font-family:Verdana, Geneva, sans-serif;"> Te informamos que tu anuncio "'.$anuncio->titulo.'" esta a punto de vencer. Recuerda que puedes consultar la vigencia de tus anuncios y renovarlos en caso de que lo deses, con sultando la sección de Administración de Anuncio en Mi Perfil.
+<br/>
+
+<br/> Cualquier duda escribenos a contacto@quierounperro.com
+</font>
+<p> </p>
+</td>
+</tr>
+
+<tr bgcolor="#6A2C91" >
+<td colspan="7" >
+<font style=" font-family:Verdana, Geneva, sans-serif; font-size:14px; padding-left:15px; color:#FFFFFF;"> ¡Muchas Gracias! </font>
+<br/>
+<font style=" font-family:Verdana, Geneva, sans-serif; font-size:12px; padding-left:15px; color:#FFFFFF;"> Equipo QuieroUnPerro.com </font>
+</td>
+</tr>
+</table>
+
+
+
+</body>
+</html>';
+   
+    
+    $this->email_model->send_email('', $anuncio->correo, 'Tu publicación '.$anuncio->titulo.' en QUP está por caducar',$mensaje);
+    $mensaje = '';
+		}
+	}
+	
 
 	}
 	

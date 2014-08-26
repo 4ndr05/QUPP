@@ -1556,7 +1556,15 @@ function denunciar_pub() {
 $('.mas_anuncio').on('click', function(){
 
     var id = $(this).data('id');
-
+	$.ajax({
+                url: '<?php echo base_url('venta/click')?>',
+                data: 'id='+id,
+                dataType: 'html',
+                type: 'post',
+                success: function (data) {
+                   return true;
+                }
+     });
     buscar_detalles(id);
 });
 

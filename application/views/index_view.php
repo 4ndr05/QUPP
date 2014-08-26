@@ -1257,14 +1257,14 @@
         <div class="contenido_secciones">
             <p class="titulo_segunda_seccion"> PERROS PERDIDOS </p>
 
-            <p><strong> Nombre:</strong> Lazy
-                <strong>Raza:</strong> Akita
-                <strong>Caracteristicas:</strong> Akita de color blanco, con cafe...</p>
+            <p><strong> Nombre:</strong> <?=$contenidosP->titulo?>
+                <strong>Raza:</strong> <?=$contenidosP->raza?>
+                <strong>Caracteristicas:</strong> <?=substr($contenidosP->descripcion,0,20)?>...</p>
 
         </div>
         <div class="sub_imagenes_dos">
 
-            <img align="center" class="imagen_relleno" src="<?php echo base_url() ?>images/perros_perdidos/perro1.png"/>
+            <img align="center" class="imagen_relleno" src="<?php echo base_url() ?><?=$contenidosP->foto?>"/>
 
           
 
@@ -1311,8 +1311,8 @@ foreach($fotocontenido as $foto){
         <div class="contenido_secciones">
             <p class="titulo_segunda_seccion"> EVENTOS DEL MES </p>
 
-            <p> Título: <?=$contenidosE[0]->nombre?>
-                Fecha del evento: <?=$contenidosE[0]->fecha?>
+            <p> <strong>Título:</strong> <?=$contenidosE[0]->nombre?><br />
+                <strong>Fecha del evento:</strong> <?=$contenidosE[0]->fecha?>
             </p>
 
         </div>
@@ -1341,13 +1341,19 @@ foreach($fotocontenido as $foto){
             <p class="titulo_segunda_seccion"> DATOS CURIOSOS </p>
 
             <p>
-                La primera semana de vida del cachorro la pasa el 90% del tiempo dormido...
+                <?=substr($contenidosD[0]->texto,0,60)?>...
             </p>
 
         </div>
         <div class="sub_imagenes_dos">
-            <img class="imagen_relleno" src="<?php echo base_url() ?>images/curiosos/curiosos1.png" width="63"
+        	<?php if($fotocontenido != null){
+	 	foreach($fotocontenido as $p){
+			if($p->contenidoID == $contenidosD[0]->contenidoID){?>
+            <img class="imagen_relleno" src="<?php echo base_url() ?>images/datos_curiosos/<?=$p->foto?>" width="63"
                  height="119"/>
+ <?php }
+	}
+}?>
 
            
     </div>

@@ -48,7 +48,7 @@ class Venta extends CI_Controller {
         $data['paquetes'] = $this->defaultdata_model->getPaquetes();
         $data['razas'] = $this->defaultdata_model->getRazas();
         $data['giros'] = $this->defaultdata_model->getGiros();
-        $data['publicaciones'] = $this->venta_model->getAnuncios(self::$seccion);
+        $data['publicaciones'] = $this->venta_model->getAnuncios(2);
         $data['seccion'] = 2;
 
         $this->load->view('venta_view', $data);
@@ -793,6 +793,15 @@ class Venta extends CI_Controller {
 
          //echo json_encode($publicacionID);
         }
+    }
+
+    // Popularidad de anuncio
+    function click(){
+        $publicacionID = $this->input->post('id');
+        $visitas = $this->defaultdata_model->getVisitasP($publicacionID);
+        $numeroVisitas = $visitas->numeroVisitas + 1;
+        $this->defaultdata_model->updateItem('publicacionID', $publicacionID, $data = array('numeroVisitas' => $numeroVisitas), 'publicaciones');
+        return true;
     }
 
 
