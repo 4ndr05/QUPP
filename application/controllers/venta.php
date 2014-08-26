@@ -795,6 +795,15 @@ class Venta extends CI_Controller {
         }
     }
 
+    // Popularidad de anuncio
+    function click(){
+        $publicacionID = $this->input->post('id');
+        $visitas = $this->defaultdata_model->getVisitasP($publicacionID);
+        $numeroVisitas = $visitas->numeroVisitas + 1;
+        $this->defaultdata_model->updateItem('publicacionID', $publicacionID, $data = array('numeroVisitas' => $numeroVisitas), 'publicaciones');
+        return true;
+    }
+
 
 
 }

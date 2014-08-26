@@ -461,27 +461,56 @@ $this->email_model->send_email('', $datos->correo, 'Ha sido aprobado tu anuncio 
         $aprobar =  $this->admin_model->updateItem('publicacionID', $publicacionID, $data = array('aprobada' => 2), 'publicaciones');
         $datos = $this->admin_model->getDatosAnunciante($publicacionID);
 
-        $mensaje = '<link rel="stylesheet" href="'.base_url().'css/general.css" type="text/css" media="screen" /><table width="647" align="center"><tr>
-<td width="231" rowspan="2"><img src="'.base_url().'images/logo_mail.jpg"/></td>
-<td height="48" colspan="6" style="font-family: "titulos"; font-size:50px; color:#72A937; margin:0px; padding:0px; margin-bottom:-10px;">
-Bienvenido</td></tr>
-<tr style="font-size:14px; background-color:#72A937; color:#FFFFFF;" valign="top">
-<td width="60" height="23"><a> &nbsp;Inicio</a></td>
-<td width="57"><a>&nbsp;Venta</a></td>
-<td width="52"><a>&nbsp;Cruza</a></td>
-<td width="78"><a>&nbsp;Adopción</a></td>
-<td width="64"><a>&nbsp;Tienda</a></td>
-<td width="73"><a>&nbsp;Directorio</a></td>
+        $mensaje = '
+        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Notificacion-QuieroUnPerro.com</title>
+
+</head>
+
+<body>
+<table width="647" align="center">
+<tr>
+<td width="231" height="129" colspan="2" valign="top">
+<img src="http://quierounperro.com/quiero_un_perro/images/logo_mail.jpg"/>
+</td>
 </tr>
 <tr>
-<td colspan="7" ><p>&nbsp;  </p><font style="margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" >Hola: '.$datos->nombre.'!! </font>
-</br></br><font> Tu anuncio "'.$datos->titulo.'"" en Quierounperro.com ha sido declinado.</font>
+<td>
+<font style=" font-family:Verdana, Geneva, sans-serif; margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" >Hola: Marina</font>
 <br/>
-<p> Puedes revisar tu publicación en el perfil de tu cuenta</p>
-</td></tr><tr bgcolor="#6A2C91" ><td colspan="7" ><font style=" font-size:14px; padding-left:15px; color:#FFFFFF;"> Bienvenido </font>
-<br/><font style=" font-size:12px; padding-left:15px; color:#FFFFFF;"> Equipo QUP </font></td>
+<br/>
+
+<font style="font-family:Verdana, Geneva, sans-serif;">Tu anuncio "'.$datos->titulo.'"" en Quierounperro.com ha sido declinado.</font>
+<br/>
+<br/>
+<font style="font-family:Verdana, Geneva, sans-serif;"> Tu anuncio ha sido retirado temporalmente de la sección, pero tu paquete aún está vigente y podrás seguir utilizándolo, solo te pedimos vuelvas a crear tu anuncio en la sección Administrar anuncios de Mi Perfil. </font>
+<br/>
+<font style="font-family:Verdana, Geneva, sans-serif;"> El paquete que te informamos aparecera como disponible para edición da click en Edición 
+<br />
+<br/>
+El tiempo de vigencia de tu paquete sigue corriendo, así que te invitamos a que realices este cambio cuanto antes. Cualquier duda escribenos a contacto@quierounperro.com
+</font>
+<p> </p>
+</td>
 </tr>
-</table>';
+
+<tr bgcolor="#6A2C91" >
+<td colspan="7" >
+<font style=" font-family:Verdana, Geneva, sans-serif; font-size:14px; padding-left:15px; color:#FFFFFF;"> ¡Muchas Gracias! </font>
+<br/>
+<font style=" font-family:Verdana, Geneva, sans-serif; font-size:12px; padding-left:15px; color:#FFFFFF;"> Equipo QuieroUnperro.com </font>
+</td>
+</tr>
+</table>
+
+
+
+</body>
+</html>
+';
 $this->email_model->send_email('', $datos->correo, 'Ha sido declinado tu anuncio en QUP: '.$datos->titulo, $mensaje);
 
 

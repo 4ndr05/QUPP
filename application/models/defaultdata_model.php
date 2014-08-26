@@ -208,5 +208,25 @@ class Defaultdata_model extends CI_Model {
       $this->db->where('tipoUsuario',2);
       return $this->db->get($this->tablas['usuariodetalle'])->result();
     }
+
+    function getVisitasP($publicacionID){
+      $this->db->where('publicacionID',$publicacionID);
+      return $this->db->get($this->tablas['publicaciones'])->row();
+    }
+
+
+    function recordatorio(){
+      $query = $this->db->query('select usuario.*,`publicaciones`.`titulo`, publicaciones.`fechaVencimiento`,`publicaciones`.`servicioID` 
+from `publicaciones` 
+join `serviciocontratado` on `serviciocontratado`.`servicioID` = `publicaciones`.`servicioID` 
+left join usuario on usuario.`idUsuario` = `serviciocontratado`.`idUsuario`
+where `publicaciones`.`fechaVencimiento` = date_add(CURRENT_DATE(), INTERVAL 7 DAY)');
+      if ($query->num_rows() >= 1){
+            
+            return $query->result();
+         } else {
+            return null;
+         }
+    }
 }
 ?>
