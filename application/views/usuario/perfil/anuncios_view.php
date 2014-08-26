@@ -7,20 +7,16 @@
 </br>
 <ul class="menu_perfil_mini">
 <li class="icono_seleccion_mini">
-
-<div>
-<p style=" margin-top:3px; margin-left:5px;" onclick="oculta('anunciosAct'); oculta('anunciosInAct'); muestra('anuncios');"> Todos (<?php echo count($anuncios)?>) </p>
+<p style=" margin-top:3px; margin-left:5px;" onclick="muestra('anuncios'); oculta('anunciosAct'); oculta('anunciosInAct'); "> Todos (<?php echo count($anuncios)?>) </p>
 </li>
 <li>
-<p style=" margin-top:3px; margin-left:5px;" onclick=" oculta('anuncios'); oculta('anunciosInAct'); muestra('anunciosAct'); "> Activos (<?php echo count($anunciosAct)?>) </p>
+<p style=" margin-top:3px; margin-left:5px;" onclick="oculta('anuncios');muestra('anunciosAct');oculta('anunciosInAct');"> Activos (<?php echo count($anunciosAct)?>) </p>
 </li>
 <li>
-<p style=" margin-top:3px; margin-left:5px;" onclick="muestra(oculta('anuncios'); oculta('anunciosAct'); 'anunciosInAct');"> Expirados (<?php echo count($anunciosInAct)?>) </p>
+<p style=" margin-top:3px; margin-left:5px;" onclick="oculta('anuncios'); oculta('anunciosAct'); muestra('anunciosInAct');"> Expirados (<?php echo count($anunciosInAct)?>) </p>
 </li>
 </ul>
-   </br>
-  
-
+</br>
 <div id="anuncios" style="display:block;">
 <table class="tabla_perfil" width="795" >
   <tr>
@@ -53,16 +49,16 @@
             <td> <?php echo $anuncio->titulo ?> </td>
             <td>
                 <?php if ($anuncio->vigente == 1 && $anuncio->aprobada == 1) {
-				echo '<input type="hidden" name="expirado" id="expirado" value="true"/>'?>
+        echo '<input type="hidden" name="expirado" id="expirado" value="true"/>'?>
                 Activo
                 <?php } elseif($anuncio->vigente == 1 && $anuncio->aprobada == 0)  {
-					echo '<input type="hidden" name="expirado" id="expirado" value="false"/>' ?>
+          echo '<input type="hidden" name="expirado" id="expirado" value="false"/>' ?>
                 Pendiente de Aprobacion
                 <?php } elseif($anuncio->vigente == 1 && $anuncio->aprobada == 2)  {
-					echo '<input type="hidden" name="expirado" id="expirado" value="false"/>' ?>
+          echo '<input type="hidden" name="expirado" id="expirado" value="false"/>' ?>
                 Declinado
                 <?php } elseif($anuncio->vigente == 0) { 
-				echo '<input type="hidden" name="expirado" id="expirado" value="true"/>'?>
+        echo '<input type="hidden" name="expirado" id="expirado" value="true"/>'?>
                 Inactivo
                 <?php } ?>
 
@@ -71,7 +67,7 @@
             <td> <?php echo $anuncio->numeroVisitas ?> </td>
             <td> <ul class="boton_gris_perfil_tabla"> <li><a href="#"  class="paquete_renovar reset"
    data-paquete='{"id":"<?php echo $anuncio->paqueteID ?>","nombre":"<?php echo $anuncio->NombrePaquete ?>","vigencia":"<?php echo $anuncio->vigencia ?>","precio":"<?php echo $anuncio->precio ?>","caracteres":"<?php echo $anuncio->caracteres ?>","cantFotos":"<?php echo $anuncio->cantFotos ?>","videos":"<?php echo $anuncio->videos ?>","cupones":"<?php echo $anuncio->cupones ?>","seccion":"<?php echo $anuncio->seccion?>","publicacionID":"<?php echo $anuncio->publicacionID?>","expirado":"<?php  if ($anuncio->vigente == 1 && $anuncio->aprobada == 1) {
-				echo 'false'; } elseif( $anuncio->vigente == 1 && $anuncio->aprobada == 0)  { echo 'false';} elseif($anuncio->vigente == 1 && $anuncio->aprobada == 2) {
+        echo 'false'; } elseif( $anuncio->vigente == 1 && $anuncio->aprobada == 0)  { echo 'false';} elseif($anuncio->vigente == 1 && $anuncio->aprobada == 2) {
 echo 'false'; } elseif($anuncio->vigente == 0) { echo 'true';}?>"}'>Renovar</a></li> </ul> </td>
     </tr>
   <?php } ?>
@@ -79,9 +75,8 @@ echo 'false'; } elseif($anuncio->vigente == 0) { echo 'true';}?>"}'>Renovar</a><
   <?php }?>
  </table>
 </div>
-<?php  if ($anuncio->vigente == 1 && $anuncio->aprobada == 1) {
-				echo 'false'; } elseif( $anuncio->vigente == 1 && $anuncio->aprobada == 0)  { echo 'false';} elseif($anuncio->vigente == 1 && $anuncio->aprobada == 2) {
-echo 'false'; } elseif($anuncio->vigente == 0) { echo 'true';}?>
+
+
 <div id="anunciosAct" style="display:none;"> 
   <table class="tabla_perfil" width="795" >
   <tr>
@@ -130,7 +125,6 @@ echo 'false'; } elseif($anuncio->vigente == 0) { echo 'true';}?>
  </div>
 
 <div id="anunciosInAct" style="display:none;">  
-
   <table class="tabla_perfil" width="795" >
   <tr>
   <th width="76"> Paquete </th>
@@ -178,6 +172,9 @@ echo 'false'; } elseif($anuncio->vigente == 0) { echo 'true';}?>
 
  </table>
  </div>
+
+
+
 
  
  
