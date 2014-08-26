@@ -831,6 +831,7 @@ Directorio
 <div class="titulo_seccion">
 MI PERFIL
 </div>
+  <div class="info_user"><?php echo $this->session->flashdata('pago_directorio_exitoso'); ?></div>
 <div class="contenedor_menu_perfil">
 <ul class="menu_perfil">
 <li class="icono_seleccion mi_perfil">
