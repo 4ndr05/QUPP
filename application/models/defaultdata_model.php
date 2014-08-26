@@ -228,5 +228,21 @@ where `publicaciones`.`fechaVencimiento` = date_add(CURRENT_DATE(), INTERVAL 7 D
             return null;
          }
     }
+
+    function getPerroPerdido(){
+      $query = $this->db->query('select publicaciones.*, raza.raza, (select foto from fotospublicacion where fotospublicacion.publicacionID = publicaciones.publicacionID group by fotospublicacion.publicacionID limit 1) as foto
+                                from `publicaciones`
+                                join raza on raza.razaID = publicaciones.razaID
+                                where `publicaciones`.`seccion` = 7
+                                limit 1');
+      if ($query->num_rows() == 1){
+            return $query->row();
+         } else {
+            return null;
+         }
+    }
+
+
+
 }
 ?>

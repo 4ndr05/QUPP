@@ -95,6 +95,8 @@ class Principal extends CI_Controller {
         $data['carritoT'] = count ($this->admin_model->getCarrito($this->session->userdata('idUsuario')));
         $data['contenidos'] = $this->admin_model->getContenidos(8);
         $data['contenidosE'] = $this->admin_model->getContenidos(9);
+        $data['contenidosD'] = $this->admin_model->getContenidos(10);
+        $data['contenidosP'] = $this->defaultdata_model->getPerroPerdido();
 		$data['fotocontenido'] = $this->admin_model->getFotoContenido();
         
 
