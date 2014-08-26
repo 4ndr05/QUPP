@@ -532,7 +532,7 @@ Chica
 </td>
 <td>
 <img src="<?php echo base_url()?>images/baja_contenido.png" class="deleteContent" data-rel="<?=$productoID?>" />
-<a href="#" class="editarL" id="editarL" data-rel="<?=$productoID?>">Editar</a>
+<img src="<?=base_url()?>images/editar.png" class="editarL" id="editarL" data-rel="<?=$productoID?>"/>
 </td>
 
 </tr>

@@ -17,6 +17,7 @@ class Principal extends CI_Controller {
        
         $this->load->helper(array('form', 'url'));
         $this->load->model('defaultdata_model');
+        $this->load->model('usuario_model');
         $this->load->model('file_model');
         $this->load->model('email_model');
         $this->load->library('googlemaps');
@@ -571,6 +572,143 @@ Bienvenido</td></tr>
 
          echo json_encode('true');
 
+    }
+
+
+    // USUARIOS
+    function getUsuarios(){
+        $data['zonageografica'] = $this->admin_model->getZonasG();
+        $data['usuarios'] = $this->admin_model->getUsers();
+        $this->load->view('admin/admin_usuarios_view', $data);
+
+    }
+
+    function buscarUsuario(){
+        $tipoUsuario = $this->input->post('tipoUsuario');
+        $zona = $this->input->post('zona');
+        $data['usuarios'] = $this->admin_model->getUsuarios($tipoUsuario,$zona);
+        $this->load->view('admin/detalle_usuarios_view', $data);
+    }
+
+    function banear(){
+        $nombre = $this->input->post('nombreUB');
+        $apellido = $this->input->post('apellidoUB');
+        $correo = $this->input->post('correoUB');
+        $idUsuario = $this->input->post('usuarioUB');
+       
+        $status = $this -> usuario_model -> banearUser($idUsuario, 1);
+
+        /*$mensaje = '<link rel="stylesheet" href="'.base_url().'css/general.css" type="text/css" media="screen" /><table width="647" align="center"><tr>
+<td width="231" rowspan="2"><img src="'.base_url().'images/logo_mail.jpg"/></td>
+<td height="48" colspan="6" style="font-family: "titulos"; font-size:50px; color:#72A937; margin:0px; padding:0px; margin-bottom:-10px;">
+Bienvenido</td></tr>
+<tr style="font-size:14px; background-color:#72A937; color:#FFFFFF;" valign="top">
+<td width="60" height="23"><a> &nbsp;Inicio</a></td>
+<td width="57"><a>&nbsp;Venta</a></td>
+<td width="52"><a>&nbsp;Cruza</a></td>
+<td width="78"><a>&nbsp;Adopción</a></td>
+<td width="64"><a>&nbsp;Tienda</a></td>
+<td width="73"><a>&nbsp;Directorio</a></td>
+</tr>
+<tr>
+<td colspan="7" ><p>&nbsp;  </p><font style="margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" >Hola: '.$nombre.'!! </font>
+</br></br><font> Tu cuenta en QUP ha sido bloqueada.</font>
+<br/>
+<p> Para mayor informacion contacta al administrador</p>
+</td></tr><tr bgcolor="#6A2C91" ><td colspan="7" ><font style=" font-size:14px; padding-left:15px; color:#FFFFFF;"> Bienvenido </font>
+<br/><font style=" font-size:12px; padding-left:15px; color:#FFFFFF;"> Equipo QUP </font></td>
+</tr>
+</table>';*/
+//$this->email_model->send_email('', $correo, 'Tu cuenta en QUP ha sido bloqueada', $mensaje);
+
+        echo json_encode(true); 
+    }
+
+
+    function registrarAdmin(){
+        $emailUsuario = $this->input->post('correo');
+        $tipoUsuario = 0;
+        $nivel = 0;
+
+        $confirmationCode = $this->usuario_model->getNewConfirmationCode($emailUsuario);
+        $recepcionCorreo = 1;
+        
+        $dataRegister = array(
+                'nombre' => $this->input->post('nombre'),
+                'apellido' => $this->input->post('apellido'),
+                'telefono' => $this->input->post('telefono'),
+                'correo' => $this->input->post('correo'),
+                'contrasena' => $this->input->post('contrasena'),
+                'recepcionCorreo' => 1, //1 - recepción de correo activa\n 0 - recepción de correo inactiva',
+                'tipoUsuario' => 0, // '0 - Administrador\n1 - usuario normal\n2 - negocio\n3 - AC',
+                'status'  => 0, //'0 - no activado\n1 - activo',
+                'nivel' => $nivel,
+                'fechaRegistro' => date('Y-m-d H:i:s', time()),
+                'codigoConfirmacion' => $confirmationCode);
+
+        
+        $idUsuario = $this->usuario_model->registrarUsuario($dataRegister);
+$mensaje = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Notificacion-QuieroUnPerro.com</title>
+
+</head>
+
+<body>
+<table width="647" align="center">
+<tr>
+<td width="231" height="129" colspan="2" valign="top">
+<img src="http://quierounperro.com/quiero_un_perro/images/logo_mail.jpg"/>
+</td>
+</tr>
+<tr>
+<td>
+<font style=" font-family:Verdana, Geneva, sans-serif; margin-top:100px; font-size:19px; font-weight:bold; color:#72A937;" >Hola: '.$this->input->post('nombre').' </font>
+<br/>
+<br/>
+
+
+<font style="font-family:Verdana, Geneva, sans-serif;">Tu usuario '.$this->input->post('correo').' con la contraseña: '.$this->input->post('contrasena').' </br></br> ha sido registrado correctamente, solo falta un paso para completar tu registro. Haz clic en en el siguiente link:</font>
+</br>
+</br>
+<font style="font-family:Verdana, Geneva, sans-serif;" color="#000066"><a href="'.base_url().'registro/activar/'.$confirmationCode.'">Activar cuenta QUP</a> </font>
+<br/>
+
+<p>Recuerda cambiar tu contraseña al ingresar por primera vez, ya que tu cuenta fue registrada por un administrador.</p>
+</td>
+</tr>
+
+<tr bgcolor="#6A2C91" >
+<td colspan="7" >
+<font style=" font-family:Verdana, Geneva, sans-serif; font-size:14px; padding-left:15px; color:#FFFFFF;"> Bienvenido </font>
+<br/>
+<font style=" font-family:Verdana, Geneva, sans-serif; font-size:12px; padding-left:15px; color:#FFFFFF;"> Equipo QuieroUnPerro.com </font>
+</td>
+</tr>
+</table>
+
+
+
+</body>
+</html>';
+
+        if($this->email_model->send_email('', $this->input->post('correo'), 'Gracias por registrarte en QUP', $mensaje)){
+            $data['response'] = true;
+            $data['message'] = "Su registro se ha guardado con éxito, favor de revisar su correo para activar su usuario";
+        }
+        else{
+            $data['response'] = false;
+            $data['message'] = "Ocurrió un error intentelo nuevamente";
+        }
+        echo json_encode($data);
+    }
+
+
+    function guardarRaza(){
+        var_dump($_POST);
+        $this->input->post();
     }
 
 

@@ -48,7 +48,7 @@ class Venta extends CI_Controller {
         $data['razas'] = $this->defaultdata_model->getRazas();
         $data['giros'] = $this->defaultdata_model->getGiros();
         $data['publicaciones'] = $this->venta_model->getAnuncios(self::$seccion);
-        $data['seccion'] = self::$seccion;
+        $data['seccion'] = 2;
 
         $this->load->view('venta_view', $data);
     }
@@ -580,5 +580,217 @@ class Venta extends CI_Controller {
     function meh(){
         $this->load->view('partial/proceso_exitoso_view'); 
     }
+
+    function editAanuncio() {
+        $paqueteID = $this->input->post('paquete');
+        $publicacionID = $this->input->post('publicacionID');
+        $detallePaquete = $this->defaultdata_model->getPaquete($paqueteID);
+        $detallePublicacion = $this->admin_model->getPublicacion($publicacionID);
+        //SERVICIOS ADQUIRIDOS
+       
+        $servicioID = $detallePublicacion->servicioID;
+
+        $cupones = $this->defaultdata_model->getCuponesPaquete($paqueteID);
+        $fecha = date('Y-m-d');
+        $dias = 30;
+        $fechaCierre = strtotime ( '+'.$dias.' day' , strtotime($fecha)) ;
+        $fechaCierre = date ( 'Y-m-j' , $fechaCierre );
+
+        if ($cupones != null) {
+            foreach ($cupones as $cupon) {
+                $dataCupon = array(
+                    'descripcion' => $cupon->descripcion,
+                    'valor' => $cupon->valor,
+                    'tipoCupon' => $cupon->tipoCupon,
+                    'vigente' => 1,
+                    'vigencia' => $fechaCierre,
+                    'usado' => 0,
+                    'servicioID' => $servicioID,
+                    'detalleID' => $detallePaquete->detalleID,
+                    'paqueteID' => $paqueteID,
+                    'cuponDetalleID' => $cupon->cuponDetalleID,
+                    'cuponID' => $cupon->cuponID
+                );
+                //$idCuponAdquirido = $this->defaultdata_model->insertItem('cuponadquirido', $dataCupon);
+            }
+        }
+
+
+
+        //PUBLICACION      
+        $fecha = date('Y-m-d');
+        $dias = $this->input->post('vigencia_texto');
+        $fechaCierre = strtotime('+' . $dias . ' day', strtotime($fecha));
+        $fechaCierre = date('Y-m-j', $fechaCierre);
+        $dataPublicacion = array(
+            'seccion' => $this->input->post('seccion'),
+            'titulo' => $this->input->post('titulo'),
+            'vigente' => 1,
+            'fechaCreacion' => date('Y-m-d'),
+            'fechaVencimiento' => $fechaCierre,
+            'numeroVisitas' => 0,
+            'estadoID' => $this->input->post('estado'),
+            'ciudad' => $this->input->post('ciudad'),
+            'genero' => $this->input->post('genero'),
+            'razaID' => $this->input->post('raza'),
+            'precio' => $this->input->post('precio'),
+            'descripcion' => $this->input->post('descripcion'),
+            'muestraTelefono' => $this->input->post('mostrar_telefono'),
+            'aprobada' => 0,
+            'servicioID' => $servicioID,
+            'detalleID' => $detallePaquete->detalleID,
+            'paqueteID' => $paqueteID
+        );
+
+        //$publicacionID = $this->defaultdata_model->updateItem('publicaciones', $dataPublicacion);
+        $publicacionID = $this->defaultdata_model->updateItem('publicacionID', $publicacionID, $dataPublicacion);
+
+        //VIDEOS PUBLICACION 
+
+        
+          if(isset($_POST['url_video'])){
+          $videosExt = $this->defaultdata_model->getVideos($publicacionID);
+          $this->defaultdata_model->deleteVideos($publicacionID);
+             $video = $this->input->post('url_video');
+                if( $video != null){
+                    for($i=0;$i<=count($video);$i++){               
+                        if($video[$i] != '0'){
+                        $arrVideo= array(
+                            'paqueteID' => $paqueteID,
+                            'publicacionID'   => $publicacionID,
+                            'servicioID' => $servicioID,
+                            'detalleID' =>  $detallePaquete->detalleID,
+                            'link' =>$video[$i]
+                        );
+                            $video = $this->admin_model->insertItem('videos',$arrVideo);
+                        }
+                        $arrVideo = null;
+                    }
+                }
+            }
+
+        //IMAGENES
+         $name_logo_form = $this->input->post('name_logo_form');
+
+                if( $name_logo_form != null){
+                    $imgExt = $this->defaultdata_model->getImagenes($publicacionID);
+                    $this->defaultdata_model->deleteFotos($publicacionID);
+                    for($i=0;$i<=count($name_logo_form) -1;$i++){     
+                        //Se mueve la imagen de tmp a negocio_logo
+                        if($name_logo_form[$i] != null){
+                        $name_file = explode('/', $name_logo_form[$i]);                        
+                        if (!file_exists('images/anuncios/' . $name_file[2])) {
+                            rename($name_logo_form[$i], 'images/anuncios/' . $name_file[2]);
+                        }
+                        $logo_form = 'images/anuncios/' . $name_file[2];                   
+                        
+                        $arrFoto= array(
+                            'paqueteID' => $paqueteID,
+                            'publicacionID'   => $publicacionID,
+                            'servicioID' => $servicioID,
+                            'detalleID' =>  $detallePaquete->detalleID,
+                            'foto' =>$logo_form
+                        );
+                            $fotoID = $this->admin_model->insertItem('fotospublicacion',$arrFoto);
+                                                   
+                        $arrVideo = null;
+                        }
+                    }
+                }
+
+        
+
+         //COMPRA
+         $valorCupon = $this->input->post('radiog_dark');
+         $cuponID = $this->input->post('cuponUsado');
+         $precio_total = $detallePaquete->precio - ($detallePaquete->precio * ($valorCupon / 100));
+
+         if($cuponID != 0){
+            $this->defaultdata_model->updateItem('cuponID', $cuponID, $data = array('usado' => 1), 'cuponadquirido');
+         }
+        
+        $compra = array(
+            'descuento' => $valorCupon,
+            'fecha' => date('Y-m-d H:i:s'),
+            'idCuponAdquirido' => $cuponID,
+            'subtotal' => $detallePaquete->precio,
+            'total' => $precio_total,
+            'usuarioID' => $this->session->userdata('idUsuario'),
+            'pagado' => 0
+        );
+        $compraID = $this->defaultdata_model->insertItem('compra', $compra);
+
+        $compradetalle = array(
+            'cantidad' => 1,
+            'color' => '',
+            'talla' => '',
+            'compraID' => $compraID,
+            'nombre' => $detallePaquete->nombrePaquete,
+            'precio' => $detallePaquete->precio,
+            'productoID' => $publicacionID
+        );
+        $compraDetalle = $this->defaultdata_model->insertItem('compradetalle', $compradetalle);
+
+        if($precio_total <= 00.00){
+        $this->defaultdata_model->updateItem('compraID', $compraID, $data = array('pagado' => 1), 'compra');
+        $this->defaultdata_model->updateItem('servicioID', $servicioID, $data = array('pagado' => 1), 'serviciocontratado');
+           echo '<div class="registro_normal"> <!-- Contenedor morado registro -->
+
+                <div class="titulo_registro">GRACIAS</div>
+                </br>
+                <div class="imagen_confirmacion">
+                    <img src="'.base_url().'images/palomita.png"/>
+                </div>
+                <div class="contenido_confirmacion">
+                    <strong> Gracias por publicar en QUP </strong>
+                    </br></br>
+                    <div> Tu anuncio ha pasado a la sección de aprobación, pronto recibirás un correo con la confirmación de la publicación.</div>
+                    <div id="confirm">
+              </div>
+        
+                </div>
+            </div>
+
+            <a href="'.base_url().'principal/miPerfil" style="text-decoration:none; float:right;">Cerrar Proceso</a>
+                  ';
+
+        } else {
+           $preference_data = array(
+            "items" => array(
+                array(
+                    "title" => "Publicacion en Anuncios",
+                    "quantity" => 1,
+                    "currency_id" => "MXN",
+                    "unit_price" => floatval($precio_total)
+                )
+            ),
+            "payer" => array(
+                'name' => $this->session->userdata('nombre'),
+                'surname' => $this->session->userdata('apellido'),
+                'email' => $this->session->userdata('correo'),
+                'date_created' => date('Y-m-d')
+            ),
+            "back_urls" => array(
+                "success" => base_url().'venta/updateCompra/'.$compraID.'/1/'.$servicioID.'/'.$publicacionID,
+                "pending" => base_url().'venta/updateCompra/'.$compraID.'/1/'.$servicioID.'/'.$publicacionID,
+                "failure" => base_url().'venta/updateCompra/'.$compraID.'/0/'.$servicioID.'/'.$publicacionID
+            )
+        );
+
+        $preference = $this->mercadopago->create_preference($preference_data);
+         if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            echo 'rollback';
+            } else {
+            $this->db->trans_commit();
+            //TODO hay que cambiar a init_point
+           echo '<iframe src="' . $preference['response']['sandbox_init_point'] . '" name="MP-Checkout" width="740" height="600" frameborder="0"></iframe>';
+        }
+
+         //echo json_encode($publicacionID);
+        }
+    }
+
+
 
 }

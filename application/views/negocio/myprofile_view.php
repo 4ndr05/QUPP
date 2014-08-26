@@ -20,6 +20,7 @@ if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
      <script src="<?php echo base_url()?>js/funciones_venta.js"></script>
      <script src="<?php echo base_url()?>js/funciones_negocio.js"></script>
    <script src="<?php echo base_url()?>js/jquery-ui.js"></script>
+   <script src="<?php echo base_url()?>js/funciones_index.js"></script>
    <script type="text/javascript" src="<?php echo base_url()?>js/jquery.cycle.all.js"></script>
    <script src="<?php echo base_url()?>js/funciones_.js" type="text/javascript"></script>
   <link type="text/css" rel="stylesheet" href="<?php echo base_url()?>css/general.css" media="screen"></link>
@@ -36,7 +37,7 @@ if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
 </head>
 
 <body>
-  <?php
+<?php
   $contrasena = $this->session->userdata('recuperarusuario');
   ?> 
 <script type="text/javascript">
@@ -47,29 +48,29 @@ $(document).ready(function() {
         $('#contrasenaActual').attr('disabled', 'disabled');
         muestra('contenedor_cambiar_contrasena');
   <?php endif; ?>
-getView('<?=base_url()?>negocio/principal/miPerfil/');
+
+
+getView('<?=base_url()?>usuario/cuenta/miPerfil/');
  /****************************************/ 
                    $(".ajaxLink").live(
                        'click',
                         function(e){                            
                             e.preventDefault();
-                                var clase = $(this).attr('id');
-                                $(".icono_seleccion").removeClass("icono_seleccion");
+                             var clase = $(this).attr('id');
+                             $(".icono_seleccion").removeClass("icono_seleccion");
                                 $('.'+clase).addClass("icono_seleccion");                       
                                 var gotoURL = $(this).attr('href');
                                 $("#appSectionContainer").html();
-                                getView(gotoURL);
-                                
-                                                                                                                
+                                getView(gotoURL);                                                             
                         }
-                    );   
+                    );  
   
-  
-  
+
+
 $('#editarContrasena').submit(function(e) {
       e.preventDefault();
       $.ajax({
-        url : "<?=base_url()?>negocio/principal/editar_contrasena",
+        url : "<?=base_url()?>usuario/cuenta/editar_contrasena",
         type : 'POST',
         dataType : 'json',
         data : $(this).serialize(),
@@ -119,11 +120,11 @@ function getView(viewURL){
 <p> CAMBIAR CONTRASEÑA </p>
 </div>
 <div class="contenido_contrasena">
-<p> Contraseña actual:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"  class="background_morado validate[required]" name="contrasenaActual"/> </p>
+<p id="contrasenaActualP"> Contraseña actual:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"  class="background_morado validate[required]" name="contrasenaActual" id="contrasenaActual" /> </p>
 
 <p> Nueva contraseña:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" class="background_morado validate[required],maxSize[8]" name="contrasena1" id="contrasena1"/> </p>
 
-<p id="contrasenaActualP"> Contraseña actual:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"  class="background_morado validate[required]" name="contrasenaActual" id="contrasenaActual" /> </p>
+<p> Confirmar contraseña: <input type="password" class="background_morado validate[required,equals[contrasena1]],maxSize[8]" name="contrasena2"/> </p>
 
 
 </div>
@@ -182,7 +183,13 @@ Se ha enviado una copia al email: <?=$this->session->userdata('correo');?>
 </div>
 </div>
 
+
 <?php $this->load->view('general/menu_view'); ?>
+
+
+
+
+
 
 
 
@@ -794,8 +801,32 @@ Pagar
 </div>
 </div>
 </div> 
-<!-- Fin del contenedor publicar anucio fondo negro -->
+<!-- Fin del contenedor publicar anucio fondo negro 
 
+<div class="menu_principal" id="menu_principal" >
+<div id="contenedor_menu_principal" class="contenedor_menu_principal"> 
+<ul class="principal">
+<li>
+<a href="<?php echo base_url()?>"> Inicio </a>
+</li>
+<li>
+<a href="<?php echo base_url()?>"> Venta </a>
+</li>
+<li>
+Cruza
+</li>
+<li>
+Adopción
+</li>
+<li>
+<a href="<?=base_url()?>principal/tienda">Tienda</a>
+</li>
+<li>
+Directorio
+</li>
+</ul>
+</div>
+</div> -->
 
 <div class="titulo_seccion">
 MI PERFIL
@@ -803,26 +834,26 @@ MI PERFIL
   <div class="info_user"><?php echo $this->session->flashdata('pago_directorio_exitoso'); ?></div>
 <div class="contenedor_menu_perfil">
 <ul class="menu_perfil">
-<li class="icono_seleccion">
-<p style="margin-top:13px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>negocio/principal/miPerfil/" style="text-decoration:none;color:white;" class="ajaxLink">Mi Perfil</a></p>
+<li class="icono_seleccion mi_perfil">
+<p style="margin-top:13px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>usuario/cuenta/miPerfil/" style="text-decoration:none;color:white;" class="ajaxLink">Mi Perfil</a></p>
 </li>
-<li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>negocio/principal/anuncios/" style="text-decoration:none;color:white;" class="ajaxLink"> Admin. Anuncios</a> </p>
+<li class="anuncios">
+<p style="margin-top:5px; margin-left:10px;"><a id="anuncios" href="<?=base_url()?>usuario/cuenta/anuncios/" style="text-decoration:none;color:white;" class="ajaxLink"> Admin. Anuncios</a> </p>
 </li>
-<li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>negocio/principal/mensajes/" style="text-decoration:none;color:white;" class="ajaxLink"> Mensajes</a> </p>
+<li class="mensajes">
+<p style="margin-top:5px; margin-left:10px;"><a id="mensajes" href="<?=base_url()?>usuario/cuenta/mensajes/" style="text-decoration:none;color:white;" class="ajaxLink"> Mensajes</a> </p>
 </li>
-<li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>negocio/principal/cupones/" style="text-decoration:none;color:white;" class="ajaxLink"> Cupones</a> </p>
+<li class="cupones">
+<p style="margin-top:5px; margin-left:10px;"><a id="cupones" href="<?=base_url()?>usuario/cuenta/cupones/" style="text-decoration:none;color:white;" class="ajaxLink"> Cupones</a> </p>
 </li>
-<li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>negocio/principal/favoritos/" style="text-decoration:none;color:white;" class="ajaxLink">Favoritos</a> </p>
+<li class="favoritos">
+<p style="margin-top:5px; margin-left:10px;"><a id="favoritos" href="<?=base_url()?>usuario/cuenta/favoritos/" style="text-decoration:none;color:white;" class="ajaxLink">Favoritos</a> </p>
 </li>
-<li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>negocio/principal/soporte/" style="text-decoration:none;color:white;" class="ajaxLink">Soporte Tecnico</a> </p>
+<li class="soporte">
+<p style="margin-top:5px; margin-left:10px;"><a id="soporte" href="<?=base_url()?>usuario/cuenta/soporte/" style="text-decoration:none;color:white;" class="ajaxLink">Soporte Tecnico</a> </p>
 </li>
-<li>
-<p style="margin-top:5px; margin-left:10px;"><a id="mi_perfil" href="<?=base_url()?>negocio/principal/facturas/" style="text-decoration:none;color:white;" class="ajaxLink">Mis Facturas</a> </p>
+<li class="facturas">
+<p style="margin-top:5px; margin-left:10px;"><a id="facturas" href="<?=base_url()?>usuario/cuenta/facturas/" style="text-decoration:none;color:white;" class="ajaxLink">Mis Facturas</a> </p>
 </li>
 </ul>
 
@@ -866,60 +897,6 @@ MI PERFIL
   </div>
     
 <div class="division_menu_inferior"> </div>
-<div class="contenedor_menu_inferior" align="center"> 
+<?php $this->load->view('general/footer_view');?>
 
-<ul class="menu_inferior">
-<li>
-Acerca de Nosotros
-<ul>
-<li> - ¿Quiénes Somos? 
-</li>
-<li> - La comunidad QUP </li>
-</ul>
-</li>
-
-</ul>
-
-
-<ul class="menu_inferior">
-<li>
-Políticas
-<ul>
-<li> - Aviso de Privacidad </li>
-<li>  - Política de Provacidad </li>
-<li> - Términos y Condiciones </li>
-</ul>
-</li>
-
-</ul>
-
-
-<ul class="menu_inferior">
-<li>
-Contacto
-<ul>
-<li>- Tutorial</li>
-<li>- Publicidad </li>
-<li>- Soporte </li>
-<li>- Preguntas Frecuentes </li>
-</ul>
-</li>
-
-</ul>
-</div>
-    
-    
-<div class="footer">
-<img src="<?php echo base_url()?>images/perro_final.png" width="46" height="42"/>
-<a href="<?php echo base_url()?>#" ><img  src="<?php echo base_url()?>images/ico_fb.png" width="32" height="32" style="margin-top:10px;"/></a>
-<a href="<?php echo base_url()?>#" class="margen"><img src="<?php echo base_url()?>images/ico_tw.png" width="32" height="32" style="margin-top:10px;"/></a>
-</div>
-<div class="division_final">
-
-</div>
-<div class="pie_pagina">
-Copyright © 2014 QuieroUnPerro.com
-</div>
-
-</body>
 </html>

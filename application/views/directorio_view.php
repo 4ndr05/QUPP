@@ -283,52 +283,35 @@ $this->load->view('general/general_header_view', array('title' => 'Directorio',
     </div>
 </div>
 <div class="slideshow_tres" >
-    <img src="<?php echo base_url() ?>images/banner_inferior/1.png" width="638" height="93"/>
-    <img src="<?php echo base_url() ?>images/banner_inferior/2.png" width="638" height="93"/>
-    <img src="<?php echo base_url() ?>images/banner_inferior/3.png" width="638" height="93"/>
+     <?php $banner = $this->session->userdata('banner'); ?>
+                <?php
+                if (is_logged() && ($this->session->userdata('tipoUsuario') == 2 || $this->session->userdata('tipoUsuario') == 3)) {
+                    if ($banner != null) {
+
+                        foreach ($banner as $contenido) {
+                            if ($this->session->userdata('zonaID') == $contenido->zonaID && $contenido->posicion == 3 && $contenido->seccionID == $seccion) {
+                                ?>
+                                <img src="<?php echo base_url()?>images/<?php echo $contenido->imgbaner; ?>" width="638" height="93"/>
+                            <?php
+                            }
+                        }
+                    }
+                } else {
+
+                    if ($banner !== null && !empty($banner)) {
+                        foreach ($banner as $contenido) {
+                            if ($contenido->zonaID == 9 && $contenido->posicion == 3 && $contenido->seccionID == $seccion) {
+                                ?>
+                                <img src="<?php echo base_url()?>images/<?php echo $contenido->imgbaner; ?>" width="638" height="93"/>
+                            <?php
+                            }
+                        }
+                    }
+                }
+                ?>
 </div>
 <div class="division_menu_inferior"> </div>
-<div class="contenedor_menu_inferior" align="center">
-
-    <ul class="menu_inferior">
-        <li>
-            Acerca de Nosotros
-            <ul>
-                <li> - ¿Quiénes Somos?
-                </li>
-                <li> - La comunidad QUP </li>
-            </ul>
-        </li>
-
-    </ul>
-
-
-    <ul class="menu_inferior">
-        <li>
-            Políticas
-            <ul>
-                <li> - Aviso de Privacidad </li>
-                <li>  - Política de Provacidad </li>
-                <li> - Términos y Condiciones </li>
-            </ul>
-        </li>
-
-    </ul>
-
-
-    <ul class="menu_inferior">
-        <li>
-            Contacto
-            <ul>
-                <li>- Tutorial</li>
-                <li>- Publicidad </li>
-                <li>- Soporte </li>
-                <li>- Preguntas Frecuentes </li>
-            </ul>
-        </li>
-
-    </ul>
-</div>
+<?php $this->load->view('general/footer_view'); ?>
 
 <?php
 $this->load->view('partial/_pasos_anuncio', array('paquetes' => $paquetes,
@@ -337,17 +320,7 @@ $this->load->view('partial/_pasos_anuncio', array('paquetes' => $paquetes,
 
 <?php $this->load->view('partial/_pasos_anuncio_negocio'); ?>
 
-<div class="footer">
-    <img src="<?php echo base_url() ?>images/perro_final.png" width="46" height="42"/>
-    <a href="#" ><img  src="<?php echo base_url() ?>images/ico_fb.png" width="32" height="32" style="margin-top:10px;"/></a>
-    <a href="#" class="margen"><img src="<?php echo base_url() ?>images/ico_tw.png" width="32" height="32" style="margin-top:10px;"/></a>
-</div>
-<div class="division_final">
 
-</div>
-<div class="pie_pagina">
-    Copyright © 2014 QuieroUnPerro.com
-</div>
 <script>
     $(function() {
 
@@ -447,4 +420,7 @@ $this->load->view('partial/_pasos_anuncio', array('paquetes' => $paquetes,
 
     });
 </script>
-<?php $this->load->view('admin/footer_view'); ?>
+
+
+</body>
+</html>

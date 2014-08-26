@@ -56,47 +56,47 @@ getView('<?=base_url()?>usuario/cuenta/miPerfil/');
                        'click',
                         function(e){                            
                             e.preventDefault();
-							               var clase = $(this).attr('id');
-							               $(".icono_seleccion").removeClass("icono_seleccion");
+                             var clase = $(this).attr('id');
+                             $(".icono_seleccion").removeClass("icono_seleccion");
                                 $('.'+clase).addClass("icono_seleccion");                       
                                 var gotoURL = $(this).attr('href');
                                 $("#appSectionContainer").html();
                                 getView(gotoURL);                                                             
                         }
-                    );	
-	
+                    );  
+  
 
 
 $('#editarContrasena').submit(function(e) {
-			e.preventDefault();
-			$.ajax({
-				url : "<?=base_url()?>usuario/cuenta/editar_contrasena",
-				type : 'POST',
-				dataType : 'json',
-				data : $(this).serialize(),
-				success : function(data) {
-					console.log(data.response);
-					if(data.response==true){
-						oculta('contenedor_cambiar_contrasena');
-						muestra('contenedor_cambiar_contrasena_correcto');
-					}
-					else{
-						oculta('contenedor_cambiar_contrasena');
-						muestra('contenedor_cambiar_contrasena_error');
-					}
-				}
-			})
-		});
+      e.preventDefault();
+      $.ajax({
+        url : "<?=base_url()?>usuario/cuenta/editar_contrasena",
+        type : 'POST',
+        dataType : 'json',
+        data : $(this).serialize(),
+        success : function(data) {
+          console.log(data.response);
+          if(data.response==true){
+            oculta('contenedor_cambiar_contrasena');
+            muestra('contenedor_cambiar_contrasena_correcto');
+          }
+          else{
+            oculta('contenedor_cambiar_contrasena');
+            muestra('contenedor_cambiar_contrasena_error');
+          }
+        }
+      })
+    });
 });
 jQuery(document).ready(function(){
-	
-			// binds form submission and fields to the validation engine
-			jQuery("#editarContrasena").validationEngine({
-				promptPosition           : "topRight",
-				scroll                   : false,
-				ajaxFormValidation       : false,
-				ajaxFormValidationMethod : 'post'
-			});
+  
+      // binds form submission and fields to the validation engine
+      jQuery("#editarContrasena").validationEngine({
+        promptPosition           : "topRight",
+        scroll                   : false,
+        ajaxFormValidation       : false,
+        ajaxFormValidationMethod : 'post'
+      });
 
      
 });
@@ -110,7 +110,7 @@ function getView(viewURL){
                     });       
                 });
             }
-	
+  
 </script>
 <div id="contenedor_cambiar_contrasena" class="contenedor_anuncio_detalle" style="display:none;">
 <div class="cerrar_registro"> <img src="<?php echo base_url()?>images/cerrar.png" onclick="oculta('contenedor_cambiar_contrasena');"/> </div>
@@ -875,9 +875,9 @@ MI PERFIL
 <div id="appSectionContainer">
 </div>
 </div>
-	  
-	  
-	  <div class="seccion_derecha_paquetes">
+    
+    
+    <div class="seccion_derecha_paquetes">
 <ul class="aqui_crear_anuncio">
 <li onclick="muestra('contenedor_publicar_anuncio');">
 
@@ -893,63 +893,9 @@ MI PERFIL
 <img src="<?php echo base_url()?>images/banner_inferior/1.png" width="638" height="93"/>
 <img src="<?php echo base_url()?>images/banner_inferior/2.png" width="638" height="93"/>
 <img src="<?php echo base_url()?>images/banner_inferior/3.png" width="638" height="93"/>
-	</div>
+  </div>
     
 <div class="division_menu_inferior"> </div>
-<div class="contenedor_menu_inferior" align="center"> 
+<?php $this->load->view('general/footer_view');?>
 
-<ul class="menu_inferior">
-<li>
-Acerca de Nosotros
-<ul>
-<li> - ¿Quiénes Somos? 
-</li>
-<li> - La comunidad QUP </li>
-</ul>
-</li>
-
-</ul>
-
-
-<ul class="menu_inferior">
-<li>
-Políticas
-<ul>
-<li> - Aviso de Privacidad </li>
-<li>  - Política de Provacidad </li>
-<li> - Términos y Condiciones </li>
-</ul>
-</li>
-
-</ul>
-
-
-<ul class="menu_inferior">
-<li>
-Contacto
-<ul>
-<li>- Tutorial</li>
-<li>- Publicidad </li>
-<li>- Soporte </li>
-<li>- Preguntas Frecuentes </li>
-</ul>
-</li>
-
-</ul>
-</div>
-    
-    
-<div class="footer">
-<img src="<?php echo base_url()?>images/perro_final.png" width="46" height="42"/>
-<a href="<?php echo base_url()?>#" ><img  src="<?php echo base_url()?>images/ico_fb.png" width="32" height="32" style="margin-top:10px;"/></a>
-<a href="<?php echo base_url()?>#" class="margen"><img src="<?php echo base_url()?>images/ico_tw.png" width="32" height="32" style="margin-top:10px;"/></a>
-</div>
-<div class="division_final">
-
-</div>
-<div class="pie_pagina">
-Copyright © 2014 QuieroUnPerro.com
-</div>
-
-</body>
 </html>
