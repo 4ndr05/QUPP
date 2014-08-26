@@ -1289,17 +1289,17 @@ de que el nombre del criador esté en el certificado.
 
 <script>
 
+function obten_id(id) {
+    muestra('contenedor_contactar');
+    document.getElementById('enviando_id').value = id;
+
+}
+
     $(function () {
-
-        function obten_id(id) {
-            muestra('contenedor_contactar');
-            document.getElementById('enviando_id').value = id;
-
-        }
 
         function enviar_mail(id) {
             id = document.getElementById('enviando_id').value
-            alert(id);
+
 
             $.ajax({
                 url: '<?php echo base_url('venta/contactar/');?>/' + id,
@@ -1472,7 +1472,7 @@ function buscar_detalles(id) {
 
 function buscar_imagenes(id){
              id_anuncio="id_anuncio="+id;
-             alert('en funcion');
+
             $.ajax({
                 url: '<?php echo base_url('venta/fotos') ?>',
                 data: id_anuncio,
@@ -1481,7 +1481,7 @@ function buscar_imagenes(id){
                  success: function(result)
                 { 
                     $(".contenedor_galeria").empty().html('<div id="slideshow_publicar_anuncio_previo" class="picse"></div>');
-                   alert('correct');
+
                     var data = result.data;
 
                     if (result.count < 1) {

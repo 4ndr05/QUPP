@@ -28,6 +28,7 @@ class Asociacion extends CI_Controller {
         $data['giros'] = $this->defaultdata_model->getGiros();
         $data['seccion'] = 11;
         $data['directorios'] = $this->usuario_model->getDirectorios(3);
+        $data['planes'] = $this->defaultdata_model->getPaquetesCupon(2);
         $data['user'] = $this->usuario_model->myInfo($this->session->userdata('idUsuario'));
 
         $this->load->view('asociacion_view', $data);

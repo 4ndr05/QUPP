@@ -5,7 +5,18 @@ $this->load->view('general/general_header_view', array('title' => 'Asociaciones 
 ?>
 <?php $this->load->view('general/menu_view', array('seccion' => $seccion)) ?>
 <div class="titulo_seccion">
-    ASOCIACIONES PROTECTORAS
+    <span style="font-size: 40px;">ASOCIACIONES PROTECTORAS</span>
+    <div class="contenedor_anunciar_negocio" onclick="muestra('contenedor_publicar_anuncio_negocio');">
+        <div class="titulo_anunciate">
+            ANUNCIATE
+        </div>
+        <div class="descripcion_anunciar_negocio">
+            en nuestro Directorio
+        </div>
+        <div class="el_click">
+            <img src="<?php echo base_url() ?>images/click.png" width="60" height="60"/>
+        </div>
+    </div>
 </div>
 <div class="contenedor_buscador">
     <form id="filtro_asociacion">

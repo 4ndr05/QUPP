@@ -147,14 +147,20 @@
                         <div class="sub_instrucciones_pasos"> Datos de contacto </div>
                         <div class="contenido_indicacion_formulario" style="height: auto!important;">
                             <p class="margen_15_left" >
-                                <label>Nombre:</label><input name="nombre_negocio" value="<?php echo $user->nombre; ?>" type="text" class="background_morado_35 validate[required]" readonly="readonly" /> 
-                                <label>Apellido:</label><input name="apellido_negocio" value="<?php echo $user->apellido; ?>" type="text" class="background_morado_35 validate[required]" readonly="readonly" />  
-                                <label>Correo electrónico:</label><input name="email_negocio" value="<?php echo $user->correo; ?>" type="text" class="background_morado validate[required, custom[email]]" readonly="readonly" />
+                                <label>Nombre:</label><input required="required" name="nombre_negocio" value="<?php
+                                echo $user->nombre;
+                                ?>" type="text" class="background_morado_35 validate[required]" readonly="readonly" />
+                                <label>Apellido:</label><input required="required" name="apellido_negocio" value="<?php echo
+                                $user->apellido; ?>" type="text" class="background_morado_35 validate[required]" readonly="readonly" />
+                                <label>Correo electrónico:</label><input required="required" name="email_negocio" value="<?php echo
+                                $user->correo; ?>" type="text" class="background_morado validate[required, custom[email]]" readonly="readonly" />
                             </p>
                             <br/>
                             <p class="margen_15_left"> 
-                                <label>Teléfono:</label><input name="telefono_negocio" value="<?php echo $user->telefono; ?>" type="text" class="background_gris_35 validate[required, custom[phone]]"/> 
-                                <label>Mostrar teléfono en el anuncio:</label><select name="muestra_telefono_negocio" class="background_gris validate[required]">
+                                <label>Teléfono:</label><input required="required" name="telefono_negocio" value="<?php echo
+                                $user->telefono; ?>" type="text" class="background_gris_35 validate[required, custom[phone]]"/>
+                                <label>Mostrar teléfono en el anuncio:</label><select required="required"
+                                    name="muestra_telefono_negocio" class="background_gris validate[required]">
                                     <option value="0">--</option>
                                     <option value="1"> Si </option>
                                     <option value="0"> No </option>
@@ -164,7 +170,8 @@
                             <br/>
                             <p class="margen_15_left"> 
                                 <label>Nombre del negocio:</label>
-                                <input name="nombre_negocio_form" type="text" class="background_gris_55 validate[required]" value="<?php echo $user->nombreNegocio ?>"/>
+                                <input required="required" name="nombre_negocio_form" type="text" class="background_gris_55
+                                validate[required]" value="<?php echo $user->nombreNegocio ?>"/>
                             </p>
                             <br/>
                             <div class="sub_instrucciones_pasos"> Horarios atención </div>
@@ -176,32 +183,42 @@
                             <br/>
                             <div id="body_form_partial">
                                 <p class="margen_15_left">
-                                    <label>Estado:</label><select name="estado_negocio" class="background_gris_100 validate[required]">
+                                    <label>Estado:</label><select required="required" name="estado_negocio" class="background_gris_100
+                                    validate[required]">
                                         <option value=""> --- </option>
                                         <?php foreach ($estados as $edo) : ?>
                                             <option value="<?php echo $edo->estadoID ?>" <?php echo $user->estadoID === $edo->estadoID ? 'selected' : ''; ?>> <?php echo $edo->nombreEstado ?> </option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <label>Municipio:</label><input name="ciudad_negocio" value="<?php echo $user->municipio; ?>" class="background_gris_100 validate[required]"/>
-                                    <label>Colonia:</label><input name="colonia_negocio" value="<?php echo $user->colonia; ?>" type="text" class="background_gris validate[required]"/> </p>
+                                    <label>Municipio:</label><input required="required" name="ciudad_negocio" value="<?php echo
+                                    $user->municipio; ?>" class="background_gris_100 validate[required]"/>
+                                    <label>Colonia:</label><input required="required" name="colonia_negocio" value="<?php echo
+                                    $user->colonia; ?>" type="text" class="background_gris validate[required]"/> </p>
                                 <br/>
 
                                 <p class="margen_15_left"> 
-                                    <label>Calle:</label><input name="calle_negocio" type="text" value="<?php echo $user->calle; ?>" class="background_gris_55 validate[required]"  /> 
-                                    <label>Número:</label><input name="numero_negocio" type="text" value="<?php echo $user->noExterior; ?>" class="background_gris validate[required]" />
-                                    <label>Vencimiento:</label><input name="vencimiento_negocio" class="background_morado validate[required]" type="text" readonly/>
+                                    <label>Calle:</label><input required="required" name="calle_negocio" type="text" value="<?php echo
+                                    $user->calle; ?>" class="background_gris_55 validate[required]"  />
+                                    <label>Número:</label><input required="required" name="numero_negocio" type="text" value="<?php echo
+                                    $user->noExterior; ?>" class="background_gris validate[required]" />
+                                    <label>Vencimiento:</label><input required="required" name="vencimiento_negocio"
+                                                                       class="background_morado validate[required]" type="text" readonly/>
                                 </p>
                                 <br/>
 
                                 <p class="margen_15_left"> 
-                                    <label>CP:</label><input name="cp_negocio" value="<?php echo $user->cp; ?>" type="text" class="background_gris_55 validate[required,maxSize[5],minSize[5],custom[integer]]"/> 
-                                    <label>E-mail:</label><input name="email_negocio" type="text" value="<?php echo $user->correo; ?>" class="background_gris validate[required]"/>
-                                    <label>Pagina Web:</label><input name="pagina_web_negocio" value="<?php echo $user->paginaWeb; ?>" class="background_gris validate[required,custom[url]]" type="text"/>
+                                    <label>CP:</label><input required="required" name="cp_negocio" value="<?php echo $user->cp; ?>"
+                                                              type="text" class="background_gris_55 validate[required,maxSize[5],minSize[5],custom[integer]]"/>
+                                    <label>E-mail:</label><input required="required" name="email_negocio" type="text" value="<?php echo
+                                    $user->correo; ?>" class="background_gris validate[required]"/>
+                                    <label>Pagina Web:</label><input name="pagina_web_negocio" value="<?php echo
+                                    $user->paginaWeb; ?>" class="background_gris validate[required,custom[url]]" type="text"/>
                                 </p>
                             </div>
                             <br/>
                             <p class="margen_15_left">
-                                <label>Descripción:</label><textarea name="descripcion_negocio" class="background_gris validate[required]" cols="95" rows="3" ></textarea>
+                                <label>Descripción:</label><textarea required="required" name="descripcion_negocio"
+                                                                      class="background_gris validate[required]" cols="95" rows="3" ></textarea>
                             </p>
                             <br/>
                             <p class="margen_15_left">
@@ -346,7 +363,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <p>SUBTOTAL:</p>
+                                    <p>IVA:</p>
                                 </td>
                                 <td>
                                     <p id="subtotal" class="totales"> $435.00 </p>
@@ -513,7 +530,7 @@
                     sel_paso.addClass('numero_seccion view_step');
                     $('.instrucciones_pasos', form_negocio).text(sel_paso.data('titulo'));
                     $('#msj_paso').text("");
-                    //add_step_move();
+                    add_step_move();
                 }
             });
 
@@ -540,19 +557,19 @@
 
             function revision_step(element) {
                 if (element.prop('id') === 'paso_uno_negocio') {
-                    $('#msj_paso', form_negocio).text("Debe seleccionar una sección");
+                    $('#msj_paso', '#'+element.prop('id')).text("Debe seleccionar una sección");
                     $('.giro_form', form_negocio).validationEngine('validate');
                     return $('.giro_form:checked', form_negocio).val() === undefined ? false : true;
                 }
 
                 if (element.prop('id') === 'paso_dos_negocio') {
-                    $('#msj_paso', form_negocio).text("Debe seleccionar un paquete");
+                    $('#msj_paso',  '#'+element.prop('id')).text("Debe seleccionar un paquete");
                     $('[name=plan_form]').validationEngine('validate');
                     return $('input[name=plan_form]:checked', form_negocio).val() === undefined ? false : true;
                 }
 
                 if (element.prop('id') === 'paso_tres_negocio') {
-                    $('#msj_paso', form_negocio).text("Debe completar todos los campos requeridos");
+                    $('#msj_paso', '#'+element.prop('id')).text("Debe completar todos los campos requeridos");
                     var obj = $('#paso_tres_negocio [name]:required', form_negocio).serialize().split('&');
                     $('#paso_tres_negocio [name]:required', form_negocio).validationEngine('validate');
                     for (var i = 0; i < obj.length; i++) {
@@ -589,8 +606,8 @@
 
                 //totales, subtotal, total
                 var total_val = field.data('precio') - (field.data('precio') * (field.data('descuento') / 100));
-                $('#totales', form_negocio).text('$ ' + (total_val.toFixed(2)));
-                $('#subtotal', form_negocio).text('$ ' + (total_val.toFixed(2)));
+                $('#totales', form_negocio).text('$ ' + ((total_val*0.84).toFixed(2)));
+                $('#subtotal', form_negocio).text('$ ' + ((total_val*0.16).toFixed(2)));
                 $('#total', form_negocio).text('$ ' + (total_val.toFixed(2)));
 
             });
@@ -627,7 +644,6 @@
                     dataType: 'html',
                     data: form.serialize(),
                     success: function(data) {
-
                         $('#iframe').empty().append(data);
                     }
                 });

@@ -449,6 +449,9 @@ class Directorio extends CI_Controller {
     public function procesar_pago($compraID, $estado, $servicioID) {
         $this->defaultdata_model->updateItem('compraID', $compraID, array('pagado' => $estado), 'compra');
         $this->defaultdata_model->updateItem('servicioID', $servicioID, array('pagado' => $estado), 'serviciocontratado');
+        $this->session->set_flashdata('pago_directorio_exitoso', 'La publicacion en el directorio se realizo
+        correctamente, Ahora solamente falta que los apruebe personal de quierounperro.com. Para cualquier duda o
+        aclaracion favor de enviar un correo a '.$this->config->item('mail_system').".");
         redirect('principal/miPerfil');
     }
 
