@@ -52,5 +52,22 @@ class Curiosos extends CI_Controller
         }
         $this->load->view('curiosos_view',$data);
     }
+
+    function detalle($ID){
+       $data['ID'] = $ID;
+       $data['contenidos'] = $this->admin_model->getContenidos(10);
+       $data['fotoscontenido'] = $this->admin_model->getFotosContenido();
+       $data['fotocontenido'] = $this->admin_model->getFotoContenido();
+       $data['seccion'] = 10;
+       $data['banner'] = $this->defaultdata_model->getTable('banner');
+       $data['estados']     = $this->defaultdata_model->getEstados();
+       $data['paquetes'] = $this->defaultdata_model->getPaquetes();
+       $data['razas'] = $this->defaultdata_model->getRazas();
+       if(is_logged()){
+            $cupones = $this->usuario_model->getCuponesUsuario($this->session->userdata('idUsuario'));
+            $data['cupones'] = $cupones;
+        }
+        $this->load->view('curiosos_detalle_view',$data);
+    }
 }
  ?>

@@ -674,7 +674,7 @@ BP00003
 <td bgcolor="#E6E7E8">
 Banner Publicidad
 </td>
-<td bgcolor="#E6E7E8"> Inferior
+<td bgcolor="#E6E7E8"> Lateral
 </td>
 <td bgcolor="#E6E7E8">
 
