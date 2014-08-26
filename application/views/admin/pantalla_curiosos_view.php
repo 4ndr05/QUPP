@@ -1,5 +1,9 @@
 <?php $this -> load -> view('admin/menu_view.php') ?>
+<link rel="stylesheet" href="<?php echo base_url()?>css/validator/validationEngine.jquery.css" type="text/css"/>
+<script src="<?php echo base_url()?>js/funciones_.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo base_url()?>js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/validator/languages/jquery.validationEngine-es.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/validator/jquery.validationEngine.js"></script>
 <script>
 jQuery(document).ready(function(){
 	
@@ -108,7 +112,23 @@ if(seccion == 7 || seccion == 8 || seccion == 9 || seccion == 10) {
     }); 
 	
 	
-	
+	$(".agregarDato").click(function() {
+		 	
+            var zonaN = $("#zonaIDR").val();
+			$(".zonaRaza").val(zonaN);
+			 muestra('contenedor_agregar_dato');
+             //console.log(uno);
+     });
+	 $(".editDato").click(function() {
+		 	
+            var zonaN = $("#zonaIDR").val();
+			$(".zonaRaza").val(zonaN);
+     });
+	 
+	  $("body").on("click",".eliminar", function(e){
+            $(this).parent('p').remove(); 
+        return false;
+    });
 	
 	 $("#saveBanner").click(function() {
               zona = $("#zonaIDR").val();
@@ -137,6 +157,17 @@ if(seccion == 7 || seccion == 8 || seccion == 9 || seccion == 10) {
 
 
 	 
+});
+jQuery(document).ready(function(){
+			// binds form submission and fields to the validation engine
+			jQuery("form").validationEngine({
+				promptPosition           : "topRight",
+				scroll                   : false,
+				ajaxFormValidation       : false,
+				ajaxFormValidationMethod : 'post'
+			});
+
+     
 });
 
 function goToSearch(){
@@ -370,31 +401,45 @@ PANTALLAS- <label id="nombreSeccion"><label id="seccion"><?=$seccionNombre->secc
 ZONA- <label id="zonaNombre"><label id="nombreZona"><?=$zonaNombre->zona?></label></label>
 </div>
 
+
+<?php if($contenidos != null){
+	foreach($contenidos as $dce){?>
 <!--DATOS CURIOSOS CONTENEDOR -->
-<div class="contenedor_modificaciones" id="contenedor_agregar_dato" style="display:none"> <!-- Contenedor negro imagenes-->
-<div class="cerrar_modificaciones"> <img src="<?=base_url()?>images/cerrar.png" onclick="oculta('contenedor_agregar_dato');"/> </div>
+<div class="contenedor_modificaciones" id="contenedor_editar_dato<?=$dce->contenidoID?>" style="display:none"> <!-- Contenedor negro imagenes-->
+<div class="cerrar_modificaciones"> <img src="<?=base_url()?>images/cerrar.png" onclick="oculta('contenedor_editar_dato<?=$dce->contenidoID?>');"/> </div>
 
 
 <div class="modificaciones"> 
+<form action="<?=base_url()?>admin/principal/editarDato/<?=$dce->contenidoID?>" method="post" enctype="multipart/form-data">
 <div class="titulo_modificaciones"> 
-AGREGAR DATO
+EDITAR DATO
 </div>
-
+<br />
 <div class="contenido_intruciones">
 </br>
-
+<input type="hidden" name="zonaRaza" id="zonaRaza" class="zonaRaza" value="9" />
 <table > 
 <tr> 
 <td width="91"> Titulo: </td>
-<td width="317"> <input type="text"/> </td>
+<td width="317"> <input name="nombre" type="text" id="nombre" class="validate[required]" value="<?=$dce->nombre?>"/> </td>
 </tr>
 <tr> 
 <td> Imagen: </td>
-<td> <input type="file"/> </td>
+<td> <input name="fotos[]" type="file" id="fotos" class=""/> </td>
+</tr>
+<tr> 
+<td></td>
+<td><?php if($fotoscontenido != null){
+	foreach($fotoscontenido as $foto){
+		if($foto->contenidoID == $dce->contenidoID){?>
+ <p><img src="<?=base_url()?>images/datos_curiosos/<?=$foto->foto?>" width="40"/> <input type="hidden" id="imagen" name="imagen[]" value="<?=$foto->foto?>"/><a href="#" id="eliminar" class="eliminar" style="color:#fff; font-size:9px;">Eliminar</a></p>
+<?php }
+	}
+}?></td>
 </tr>
 <tr> 
 <td> Contenido: </td> 
-<td> <textarea></textarea> </td></tr>
+<td> <textarea name="texto" id="texto" class="validate[required]"><?=$dce->nombre?></textarea> </td></tr>
 </table>
 
 
@@ -402,10 +447,57 @@ AGREGAR DATO
 </div>
 <ul class="morado_reg">
 <li>
-Guardar
+<input type="submit"  value="Guardar"/>
 </li>
 </ul>
+</form>
+</div>
 
+</div> <!-- Fin contenedor negro imagenes -->
+<!--FIN DATOS CURIOSOS-->
+<?php }
+}?>
+
+
+
+
+<!--DATOS CURIOSOS CONTENEDOR -->
+<div class="contenedor_modificaciones" id="contenedor_agregar_dato" style="display:none"> <!-- Contenedor negro imagenes-->
+<div class="cerrar_modificaciones"> <img src="<?=base_url()?>images/cerrar.png" onclick="oculta('contenedor_agregar_dato');"/> </div>
+
+
+<div class="modificaciones"> 
+<form action="<?=base_url()?>admin/principal/guardarDato" method="post" enctype="multipart/form-data">
+<div class="titulo_modificaciones"> 
+AGREGAR DATO
+</div>
+<br />
+<div class="contenido_intruciones">
+</br>
+<input type="hidden" name="zonaRaza" id="zonaRaza" class="zonaRaza" value="9" />
+<table > 
+<tr> 
+<td width="91"> Titulo: </td>
+<td width="317"> <input name="nombre" type="text" id="nombre" class="validate[required]"/> </td>
+</tr>
+<tr> 
+<td> Imagen: </td>
+<td> <input name="fotos[]" type="file" id="fotos" class="validate[required]"/> </td>
+</tr>
+<tr> 
+<td> Contenido: </td> 
+<td> <textarea name="texto" id="texto" class="validate[required]"></textarea> </td></tr>
+</table>
+
+
+
+</div>
+<ul class="morado_reg">
+<li>
+<input type="submit"  value="Guardar"/>
+</li>
+</ul>
+</form>
 </div>
 
 </div> <!-- Fin contenedor negro imagenes -->
@@ -514,20 +606,31 @@ Imagen
 <th width="103"> </th>
 </tr>
 <tr> 
-<td height="74" bgcolor="#E6E7E8"> </td>
+<td height="74" bgcolor="#E6E7E8"></td>
 <td bgcolor="#E6E7E8"> </td>
 <td bgcolor="#E6E7E8"> </td>
 
-<td bgcolor="#E6E7E8"> <img src="<?=base_url()?>images/agregar.png" onclick="muestra('contenedor_agregar_dato');"/> </td>
+<td bgcolor="#E6E7E8"> <img src="<?=base_url()?>images/agregar.png" class="agregarDato"/> </td>
 </tr>
-
+<?php if($contenidos != null){
+		foreach($contenidos as $dc){?>
 <tr> 
-<td>Algunos consejos para el verano  </td>
-<td> <img src="<?=base_url()?>images/datos_curiosos/1.png" /> </td>
-<td>En esta época de calor es normal salir más y disfrutar al aire libre; es buen momento para aprovechar y divertirnos con nuestras mascotas. Pero a la hora de exponernos al Sol debemos tomar ciertas precauciones, especialmente si vivimos en sitios muy cálidos. Hay razas de perros que no necesitan protegerse del Sol más allá de lo que dicta el sentido común, porque tienen mucho pelo, éste es grueso, o su piel es oscura; pero existen otras razas que son más sensibles a las exposiciones prolongadas a los rayos del Sol. Debemos tener más cuidado si nuestro perro no tiene pelo, si lo tiene muy fino, si su piel es clara o, evidentemente, si es albino. También debemos tener más precaución si nuestro perro es aún un cachorrito o si es ya viejo, ya que en estos casos son más sensibles a las temperaturas extremas. Tampoco debe abusar del Sol veraniego una perrita que esté preñada. Tenemos que conocer cómo es la piel de nuestro perro, fijarnos si tienen la piel clara y qué partes tiene sin cubrir de pelo.
+<td><?=$dc->nombre?></td>
+<td>
+<?php if($fotoscontenido != null){
+	foreach($fotoscontenido as $f){
+		if($f->contenidoID == $dc->contenidoID){?>
+ <img src="<?=base_url()?>images/datos_curiosos/<?=$f->foto?>" /> 
+ <?php }
+ }
+ }?>
+ </td>
+<td><?=$dc->texto?>
 </td>
-<td> <img src="<?=base_url()?>images/editar.png" onclick="muestra('contenedor_agregar_dato');"/> </td>
+<td> <img src="<?=base_url()?>images/editar.png" class="editarDato" onclick="muestra('contenedor_editar_dato<?=$dc->contenidoID?>')"/> </td>
 </tr>
+<?php }
+}?>
 </table>
 <!--       CONTENIDO MEDIO CONTENIDO       -->
 

@@ -116,6 +116,8 @@ class Principal extends CI_Controller {
          $data['zonaT'] = $zona;
          $data['zonaNombre'] = $this->admin_model->getSingleItem('zonaID',$zona,'zonageografica');
          $data['seccionNombre'] = $this->admin_model->getSingleItem('seccionID',$seccion,'seccion');
+         $data['contenidos'] = $this->admin_model->getContenidos(10);
+         $data['fotoscontenido'] = $this->admin_model->getFotosContenido();
         $this->load->view('admin/pantalla_curiosos_view', $data);
     }
 
@@ -844,7 +846,7 @@ $mensaje = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
         $this->load->library('upload'); 
 
       
-        $config['upload_path'] = 'images/eventos';
+        $config['upload_path'] = 'images/curiosos';
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
         $config['max_size'] = '5120';
         $config['max_width'] = '1024';
@@ -863,7 +865,7 @@ $mensaje = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
             }
         }
 
-        redirect('admin/principal/getEventoMes/9/'.$this->input->post('zonaRaza'));
+        redirect('admin/principal/getDatosCuriosos/9/'.$this->input->post('zonaRaza'));
         
     }
 
@@ -921,6 +923,105 @@ $mensaje = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
         }
 
         redirect('admin/principal/getEventoMes/9/'.$this->input->post('zonaRaza'));
+        
+    }
+
+    function guardarDato(){
+        $numRazas = count($this->admin_model->getContenidos(10));
+        if($numRazas == 4){
+            $razaAnterior = $this->admin_model->topContenido(10);
+            $eliminarRaza = $this->admin_model->deleteItem('contenidoID', $razaAnterior, 'contenido');
+            $eliminarFotos = $this->admin_model->deleteItem('contenidoID', $razaAnterior, 'fotoscontenido');
+        }
+        $data = array(
+            'seccionID' => 10,
+            'seccionDetalle' => 'Dato Curioso',
+            'fecha' => $this->input->post('fecha'),
+            'zonaID' => $this->input->post('zonaRaza'),
+            'nombre' => $this->input->post('nombre'),
+            'texto' => $this->input->post('texto')
+            
+        );
+        $contenidoID = $this->admin_model->insertItem('contenido',$data);
+        //REGISTRO FOTOS
+        $this->load->library('upload'); 
+
+      
+        $config['upload_path'] = 'images/datos_curiosos';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '5120';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '768';
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_multi_upload("fotos")) { 
+            $imagenes = $this->upload->get_multi_upload_data(); 
+            foreach ($imagenes as $imagen) {
+               $data = array(
+                    'foto' => $imagen['file_name'], 
+                    'contenidoID' => $contenidoID
+                );
+
+                $fotoID = $this->admin_model->insertItem('fotoscontenido',$data);
+            }
+        }
+
+        redirect('admin/principal/getDatosCuriosos/9/'.$this->input->post('zonaRaza'));
+        
+    }
+
+    function editarDato($contenidoID){
+        
+        $data = array(
+            'seccionID' => 10,
+            'seccionDetalle' => 'Dato Curioso',
+            'fecha' => $this->input->post('fecha'),
+            'zonaID' => $this->input->post('zonaRaza'),
+            'nombre' => $this->input->post('nombre'),
+            'texto' => $this->input->post('texto')
+            
+        );
+        $this->admin_model->updateItem('contenidoID', $contenidoID, $data,'contenido');
+        //REGISTRO FOTOS
+        $imagen = $this->input->post('imagen');
+        $this->admin_model->deleteFotosContenido($contenidoID);
+                if( $imagen != null){
+                    for($i=0;$i<=count($imagen)-1;$i++){
+                        
+                        if($imagen[$i] != ''){
+                        $data = array(
+                            'foto' => $imagen[$i], 
+                            'contenidoID' => $contenidoID
+                        );
+
+                            $fotoID = $this->admin_model->insertItem('fotoscontenido',$data);
+                        }
+                    }
+                }
+
+        $this->load->library('upload'); 
+
+      
+        $config['upload_path'] = 'images/datos_curiosos';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '5120';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '768';
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_multi_upload("fotos")) { 
+            $imagenes = $this->upload->get_multi_upload_data(); 
+            foreach ($imagenes as $imagen) {
+               $data = array(
+                    'foto' => $imagen['file_name'], 
+                    'contenidoID' => $contenidoID
+                );
+
+                $fotoID = $this->admin_model->insertItem('fotoscontenido',$data);
+            }
+        }
+
+        redirect('admin/principal/getDatosCuriosos/9/'.$this->input->post('zonaRaza'));
         
     }
 
